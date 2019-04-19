@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    /*
+        创建一个元素节点
+            document.createElement('li')
+
+        添加元素(往元素的末尾添加元素):
+            parent.appendChild(child);
+
+            '<div></div>'
+
+        添加元素(往元素的首位添加元素);
+            parent.insertBefore(插入的元素,参照元素);
+
+        删除:
+            parent.removeChild(哪个元素)
+    */
+    let div = document.createElement('div');
+    let div2 = document.createElement('div');
+    let div3 = document.createElement('div');
+    div.innerHTML = '我是一娃';
+    div2.innerHTML = '我是二娃';
+
+    box.appendChild(div);
+    box.appendChild(div2);
+
+    div3.innerHTML = '我是插队生';
+
+    div3.onclick = function(){
+        // box.removeChild(this);
+        // this.remove(); //chrome中
+    }
+
+    box.insertBefore(div3,div2);
+
+
+    console.log(div);
+
+
+</script>
+</body>
+</html>

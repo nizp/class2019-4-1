@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*
+    函数调用
+        1.函数的定义
+            如果函数不带名字，那么属于匿名函数
+            直接写匿名函数是会报错的。
+
+            如何避免报错呢？
+                1.声明函数时要有名字
+                2.匿名函数要为一个表达式
+        2.函数的调用(只有函数才能调用，不然就报错)
+            函数名 + 括号
+            事件调用
+                一般是赋值一个匿名函数或者是赋值一个函数（名）地址
+
+            定时器调用
+                setTimeout(function(){},1000)
+                setInterval(function(){},1000)
+
+        
+
+    for循环
+*/
+
+    
+    // function fn(){
+    //     let a = 10;
+    //     console.log(a);
+    // }
+    // fn();
+
+    // console.log(fn)
+
+    document.onclick = fn;
+    
+    function fn(){
+        let a = 10;
+        console.log(a);
+    }; 
+
+    
+    
+
+    
+
+    
+
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <input type="text" id="txt" value="哈哈"> -->
+    <!-- <input type="button" id="btn" value="点我"> -->
+    <button id="btn1">点点点</button>
+    <div id="box">
+        <h1>呵呵呵</h1>
+        <p>哈哈哈</p>
+    </div>
+<script>
+    /*
+        属性操作:
+            一种是读:
+                obj.属性名 就能获取到值
+            一种是写（改）
+                obj.属性名 =  属性值
+
+        带有"" 或者 ''叫字符串。
+
+        ECMAscript中规定了6个数据类型
+
+        数据类型他们的功能不一样，运算的结果就不一样。
+
+        字符串（string）、数字（number）、布尔值（true（真）或者false（假））、
+        null、undefined、object
+
+        *** 在html中获取的文本都是字符串。
+
+        检测数据类型（最基本）:
+            typeof 结果为字符串的小写的数据类型
+
+        
+
+    */
+    // const txt = document.getElementById('txt');
+    // txt.value = "哈哈，我就是变了";
+    // console.log(typeof txt.value);
+
+
+    // const btn = document.getElementById('btn');
+    // btn.onclick = function(){
+    //     btn.value = '点你';
+    // }
+    
+    /*
+        innerText  元素文本  读操作，只能获得文本
+        innerHTML  元素结构  读操作，获取到某个元素下的所有内容（包括文本、标签）
+    */
+    const btn1 = document.getElementById('btn1');
+    const box = document.getElementById('box');
+    btn1.onclick = function(){
+        // btn1.innerText = '点的就是你';
+
+        // box.innerText = '<p>哈哈哈</p>';
+        // box.innerHTML = '<p>哈哈哈</p>';
+        console.log(box.innerHTML);
+    }
+    
+
+
+
+</script>
+</body>
+</html>

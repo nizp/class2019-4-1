@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li><a href="javascript:;" >隐藏1</a></li>
+        <li><a href="javascript:;" >隐藏2</a></li>
+        <li><a href="javascript:;" >隐藏3</a></li>
+        <li><a href="javascript:;">隐藏4</a></li>
+    </ul>
+<script>
+    const as = document.querySelectorAll('a');
+    const lis = document.querySelectorAll('li');
+
+
+    for(var i=0;i<as.length;i++){
+        as[i].onclick = function(){
+            // console.log(this.parentNode); //li
+            this.parentNode.style.display = 'none';
+            // console.log(this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode)
+        }
+    }
+
+
+
+    // for(var i=0;i<as.length;i++){
+    //     as[i].index = i;
+    //     as[i].onclick = function(){
+    //         // lis[i].style.display = 'none';
+    //         // alert(this.index);
+    //         lis[this.index].style.display = 'none';
+    //     }
+    // }
+
+</script>
+</body>
+</html>

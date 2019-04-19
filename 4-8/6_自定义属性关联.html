@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button >按钮一</button>
+    <button >按钮二</button>
+    <button >按钮三</button>
+    <div id="box"></div>
+<script>
+
+    /*
+        当需要操作一个元素的时候去对应另一个元素（数据）
+        那么z自定义属性）。
+    */
+
+    let arr = ['头条','新闻','体育'];
+
+    const btns = document.querySelectorAll('button');
+    /*
+        在打开页面的时候，还没来得及点按钮，循环就已经结束了，i为
+        3
+        当点击的时候，函数内是没有i的
+    
+    */
+    var i = 0;
+    for(;i<3;i++){
+        console.log(i);
+        btns[i].zdy = i;
+        // console.dir(btns[i])
+        btns[i].onclick = function (){
+            console.log(this.zdy);
+        }
+    }
+    // console.log(i);//3
+    
+
+    // for(var i = 0;i<3;i++){
+    //     // btns[0].index = 0;
+    //     // btns[1].index = 1;
+    //     // btns[2].index = 2;
+    //     //在循环的过程当中，给每个按钮加了一个自定义属性index，值就为当前循环的i值
+    //     btns[i].index = i;
+    //     btns[i].onclick = function (){
+    //         alert(this.index);
+    //         box.innerText = arr[this.index];
+    //         // console.log(arr[this.index]);
+    //     }
+    // }
+    // console.log(i);
+
+    
+
+
+</script>
+</body>
+</html>

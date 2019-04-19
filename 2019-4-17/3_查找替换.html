@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+span{
+    /* color:yellow; */
+    background:yellow;
+}
+</style>
+</head>
+<body>
+    <input type="text" id="txt"/>
+    <button id="btn">查找</button>
+    <div id="box">
+        一场大火烧痛了巴黎人的心。15日晚，800多年以来被巴黎城市地标和欧洲历史见证者存在的巴黎圣母院陷入火海。作为法国文化的象征，数百年来，巴黎圣母院一直是法国艺术品和文物的重要收藏地。据法媒消息，巴黎消防发言人普鲁斯16日凌晨宣布，圣母院的全部艺术珍品都被救出，包括荆棘冠和圣-路易的长袍。在这场大火中，有什么被烧毁了？
+    </div>
+<script>
+    /*
+        1.点击按钮，获取查找的文字
+        2.获取box中的所有内容，查看是否包含查询的文字
+        3.查到之后把查到的文字添加一个span标签
+
+        一场大火烧痛了巴黎人的心。
+
+        一场<span>大火</span>烧痛了巴黎人的心。
+
+        ['一场','烧痛了巴黎人的心。']
+
+        '一场'<span>大火</span>'烧痛了巴黎人的心。'
+
+        一场<span>大火</span>烧痛了巴黎人的心。
+
+
+    */
+    let boxVal = box.innerText;
+    btn.onclick = function(){
+        let val = txt.value;
+        if(boxVal.includes(val)){
+            //包含
+            box.innerHTML = boxVal.split(val).join('<span>'+ val +'</span>');
+        }else{
+            //不包含
+            alert('查无此字!');
+        }
+
+
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // var a = 10;
+    // alert(b); //报错
+    // alert('这里');
+</script>
+<script>
+    /*
+        1.全局作用域
+            执行栈，在script标签内第一层js代码
+
+            (1)如果当前script中的全局没有某个变量，
+            这个时候还会向上面的script中去查找（只会向上找，默认不会向下找）
+            有就输出，否则报错。
+
+            (2)如果有多个script标签，上面的script中的代码报错
+            是不会影响，下面script标签内的代码执行的。
+
+            (3)全局的this为window
+
+            (4)从作用域链的角度来说，最终会找到widnow下有没有某个属性(var的情况)
+
+
+            (5)多个script标签如果都用了let，那么同样走let特性(不能有重名变量)
+
+            (6)使用var的时候等同于在widnow下注册了一个属性，并且在没赋值之前为undefined
+               不过在chrome|FF下 在变量的上方打印window的时候会有属性值结果，要注意的是，显示出来的是
+               骗人的（跟undefined走）
+
+
+            (7)函数默认也是挂在window身上的
+
+            (8)变量必须加var或者let来声明,不然在变量没赋值之前访问这个变量就报错
+
+
+        2.私有作用域
+            在函数执行栈中运行代码，函数中的变量和参数
+            会默认处理在函数内部，不会被外界所干扰。
+
+            如果函数内的计算或者逻辑处理需要被外界所接受
+            一般使用return。
+
+            防止全局污染（封闭空间,教科书上说它就是闭包，但是，这样不一定是我们眼中的闭包）
+
+        3.块级作用域
+            {}
+
+            let、const 识别块级作用域
+            
+            var不识别
+
+            要小心function(){}
+
+
+        4.作用域链
+
+            1.当前域没有会去它的上级域查找，知道window结束，window都没有就报错
+
+            2.
+
+        5.箭头函数
+        6.this
+        7.arguments
+        8.闭包
+    */
+
+    // let b = 20;
+
+    // alert(a); //A:undefined B:报错 C:10  D:20
+
+    // A:报错  B:undefined  10  C:报错，10   D:20,10
+
+    // console.dir(window.a); //undefined
+    // var a = 30;
+    // console.dir(window); //window.a
+
+
+    
+
+    // function fn(){
+    //     console.log(this);//window
+    // }
+
+    // fn();
+    // console.log(this);
+
+
+    // a = 10;  
+    // console.dir(window);
+
+
+    
+    // let c = 5;
+    // let b = 9;
+    // function fn(b){
+    //     let c = 6;
+    //     console.log(b);
+    // }
+
+    // fn(7);
+
+
+    
+    /*
+        当在块级作用域下，如果声明了函数，那么声明函数
+        的上面块级中是访问不到函数的，值为undefined
+        但是只要在同域中（声明函数之下）访问函数还是代码块
+    */
+    // console.log(a);
+    // {
+    //     var a = 8;
+    //     {
+    //         function fx(){}
+    //     }     
+    // }
+
+
+    // var tmp = 50;
+    // function f() {
+    //     console.log(tmp);
+    //     if (false) {
+    //        let tmp = 'hello world';
+    //     }
+    // }
+    // f();
+
+   
+    // console.log(a);
+
+
+    
+
+
+
+</script>
+<!-- <script src="1.js"></script>
+<script src="2.js"></script> -->
+<script>
+    // a();
+</script>
+</body>
+</html>

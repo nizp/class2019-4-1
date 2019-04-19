@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: red;
+    border-radius: 50%;
+    position: absolute;
+    left:0;
+    top:0;
+    transition: .5s;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    box.onclick = function(){
+        fn();
+    }
+    // let num = 100;
+    // function fn(){
+    //     box.style.left  = num + 'px';
+    //     setTimeout(() => {
+    //         num += 100;
+    //         box.style.left  = num + 'px';
+    //         setTimeout(function(){
+    //             num += 100;
+    //             fn();
+    //         }, 1500);
+    //     }, 1500);
+    // }
+
+
+    let num = 0;
+    function fn(){
+        num += 100;
+        box.style.left  = num + 'px';
+        setTimeout(function(){
+            fn();
+        }, 1500);
+    }
+
+</script>
+</body>
+</html>

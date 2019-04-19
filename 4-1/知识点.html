@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+<script>
+/*
+    js的组成:
+        ECMAscript(语法、规则)
+        DOM 文档对象模型(暂时理解为页面的结构)
+        BOM 浏览器对象模型
+
+    js的使用方式:
+        1.行内 
+            <button onclick="alert(1)">  强烈不推荐使用
+        2.内嵌
+            在body结束标签的上方写script标签，script标签中写入js代码
+            <script>
+                js代码
+                // 单行注释
+                /星星/ 多行注释
+            script>
+            </body>
+            在课堂中基本采用内嵌
+        3.外链
+            <script src="js的路径">
+
+            注意:
+                使用src引入的script是不能直接在元素内
+                写js的，写了也出不来。
+
+                <script src="1.js">
+                    // alert(1); //调取浏览器的默认弹框
+                /script>
+
+                上面的代码，是弹不出1来的。
+                
+    通过id的方式去获取元素
+        document.getElementById('id')
+
+    onclick  点击行为（事件）
+    
+    把一个触发事件要做的事情放到function内
+
+    = function(){
+        alert('哈哈');
+    }
+
+
+    操作属性:
+        obj.属性名
+
+        读操作:
+            console.log(obj.属性名)
+        写操作:
+            obj.属性名 = 要设置的值
+
+        要操作元素的样式:
+            ele.style.某个样式 = '值';
+
+            ele.className 操作类名
+        
+        要操作元素内容:
+            input的内容: value
+                input.value = '哈哈';
+
+            操作别的元素的内容:
+                innerText  操作文本  读操作，只能获得文本
+                innerHTML  操作结构  读操作，获取到某个元素下的所有内容（包括文本、标签）
+
+    变量(let var):
+        可变的量，把数据存储到自定义的名字中，为了复用，只要使用这个名字，就对应到等号后面的值
+
+        let :
+            声明变量的时候名字不能重复
+            不能以数字开头
+            名字不能用关键字
+
+    常量(const)
+        不可变的量，把数据存储到自定义的名字中，为了复用，只要使用这个名字，就对应到等号后面的值
+        const:
+            声明变量的时候名字不能重复
+            不能以数字开头
+            名字不能用关键字
+
+    console.log  打印日志
+    console.dir  打印详细信息日志
+    alert        调用浏览器的默认弹框
+
+    数据类型:
+        6种，string(字符串)、number(数字)、boolean(布尔值)、
+        null(空)、undefined(未定义)、object(对象)
+
+        '' 或者 "" 是字符串
+        所有html中的获取的内容信息都是字符串
+        
+
+
+        
+
+    
+
+
+    
+            
+
+
+
+
+*/
+</script>
+</body>
+</html>

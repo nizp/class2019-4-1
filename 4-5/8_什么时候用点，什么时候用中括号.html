@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    属性:<input type="text" id="v1">
+    值:<input type="text" id="v2"/>
+    <button id="btn">生成</button>
+    <div id="box"></div>
+<script>
+    /*
+        凡是能用点的地方都能用[]
+        不过[]内要么是变量，要么是属性名(字符串)
+
+        点 -> 只有属性名才用.
+    */
+    btn.onclick = function(){
+        let val = v1['value'];
+        let val2 = v2['value'];
+        console['log'](val,val2); 
+        box['style'][val] = val2;
+    }
+</script>
+</body>
+</html>

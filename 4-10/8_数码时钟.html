@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    function fn(){
+        let d = new Date();
+        let iY = d.getFullYear();
+        let iM = d.getMonth() + 1;
+        let iDate = d.getDate();
+        let iH = d.getHours();
+        let iMi = d.getMinutes();
+        let iSe = d.getSeconds();
+
+        let str = iY + '年' + touD(iM) + '月' + touD(iDate) + '日' + touD(iH)+':'+touD(iMi)+':'+ touD(iSe);
+        console.log(str);
+        box.innerHTML = str;
+    }
+    fn();
+    setInterval(fn,1000);
+
+
+    function touD(n){
+        return n<10?'0'+n:''+n;
+    }
+
+</script>
+</body>
+</html>

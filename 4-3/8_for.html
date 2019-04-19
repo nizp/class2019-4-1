@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">点击变色</button>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+<script>
+    /*
+        循环:
+            批量生产某些事情。
+
+        let i = 0;
+        for(初始化;条件;设置下次循环的条件){
+            进循环体
+        }
+
+        1.变量初始化  let i = 0;  只需要初始化一次
+        2.进条件判断，如果条件成立进循环体，否则就结束循环 
+        3.进循环体（执行循环中的代码）
+        4.设置下次循环的条件
+
+        5.然后继续进2、3、4直到判断条件不成立为止
+
+
+    */
+    const lis = document.getElementsByTagName('li');
+    // btn.onclick = function(){
+    //     lis[0].style.background = 'red';
+    //     lis[1].style.background = 'red';
+    //     lis[2].style.background = 'red';
+    //     lis[3].style.background = 'red';
+    // }
+    /*
+        0%2 = 0
+        1%2 = 1
+        2%2 = 0
+        3%2 = 1
+        if(1){ 0->false
+            lis[i].style.background = 'green';
+        }else{
+            lis[i].style.background = 'red';
+        }
+    */
+
+    btn.onclick = function(){
+        for(var i=0;i<lis.length;i++){
+            if(i%2){
+                lis[i].style.background = 'yellowgreen';
+            }else{
+                lis[i].style.background = 'pink';
+            }
+            // if(i === 0){
+            //     lis[i].style.background = 'red';
+            // }
+            // if(i === 1){
+            //     lis[i].style.background = 'green';
+            // }
+            // console.log(i);
+        }
+        // console.log(i);
+    }
+
+   
+
+    /*
+        let i = 1;
+        for(;i<4;){ i<4 0<4 => true
+            lis[0].style.background = 'red';
+            i++;  //1
+        }
+
+        for(;i<4;){ i<4 1<4 => true
+            lis[1].style.background = 'red';
+            i++;  //2
+        }
+
+        for(;i<4;){ i<4 2<4 => true
+            lis[2].style.background = 'red';
+            i++;  //3
+        }
+
+        for(;i<4;){ i<4 3<4 => true
+            lis[3].style.background = 'red';
+            i++;  //4
+        }
+
+        for(;i<4;){ i<4 4<4 => false
+            lis[3].style.background = 'red';
+            i++;  //4
+        }
+    */
+    
+</script>
+</body>
+</html>

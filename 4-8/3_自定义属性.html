@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">按钮(0)</button>
+    <button id="btn2">按钮(0)</button>
+<script>
+    /*
+        obj.属性名 || obj['属性名']
+
+        let a = 10; 变量，前面没有.
+
+        obj = {
+            a:10
+        }
+        obj.a 属性，前面有.
+
+        function fn(){}  函数
+        fn()
+        
+        obj = {
+            fn:function(){}  方法
+        }
+        obj.fn()
+
+        this,在事件中，一般事件触发谁，this就是谁
+
+        自定义属性:
+            就是给某个对象（元素）加上一个自定义的“变量”
+            目的是为了让这个“变量”跟某个对象（元素）进行对应。
+
+    */
+    // let num = 0;
+    // let num2 = 0;
+
+    btn.num = 0; 
+    btn2.num = 0;
+    btn.onclick = fn;
+    btn2.onclick = fn;
+    // function(){
+    //     btn2.innerText = '按钮('+ (++num2) +')';
+    // }
+
+    function fn(){
+        this.innerText = '按钮('+ (++this.num) +')';
+        // console.dir(this.num); //这个
+    }
+
+</script>
+</body>
+</html>

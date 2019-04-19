@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        在定义函数的时候，自定义的参数名叫形参（形式上的）
+        **形参当做变量来看。
+
+        在调用函数的时候，括号中传的数据叫实参（实实际际的）
+
+        实参是可以为所有的数据类型。
+
+        参数与参数之间用逗号分隔，参数是可以为多个的
+
+        注意:
+            形参是对应实参的，他们的顺序也是要一一对应的
+            如果中间没有实参，那么必须占位。
+    */  
+    
+    // let a = 10;
+    // let s = '';
+    // let f = function(){}
+    // f();
+
+
+
+    // function fn(a,b,c,d,e,f,g){
+    //     b();
+    // }
+    
+    // fn(null,function(b){
+    //     console.log('马骅骏');
+    //     b();
+    // },{},'',[],20,true);//实参
+
+
+
+    
+    // function fn(b){
+    //     b(function(){
+    //         console.log('这是第二个函数');
+    //     });
+    //     // console.log(b);
+    // }
+    // fn(function(b){
+    //     // console.log(a);
+    //     b();
+    // });
+
+
+    function aaa(arg,fn){
+        // console.log(fn);
+        fn(function(k){
+            // console.log(k);
+            k(function(g){
+                // console.log('jjj')
+                g();
+            });
+        });
+    }
+    aaa(1,function (m){
+        // console.log(m);
+        m(function(j){
+            // console.log(j)
+            j(function(){
+                console.log('g')
+            });
+        });
+    });
+
+
+
+
+
+
+
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+git 版本控制工具
+
+github 程序员交友网站、存储代码、私有的域名空间
+
+
+SVN:集中式版本控制
+
+需要连网的，一旦网络中断是不能进行版本控制的
+
+基本上是公司内容才能访问的
+
+非常依赖于中央服务器，一旦服务器挂了所有资源都洗白白。
+
+
+GIT:
+分布式管理
+
+git本身最大的优势就在于不需要网络就能进行版本控制
+
+
+github算是一个大型的中央服务器，并且很健壮，可以进行代码的远程仓库管理，给你一个免费的域名可以使用静态的页面
+
+
+1.申请github账号
+
+2.每台计算机中有秘钥
+
+获取秘钥：
+ssh-keygen -t rsa -C "注册邮箱"
+
+上github->settings->SSH and GPG keys 进行绑定
+
+ssh -T git@github.com 有Hi....就说明绑定成功
+
+设置贡献者信息:
+	git config --global user.name "名字"
+
+	git config --global user.email "自己邮箱"
+
+	git config --list 查看配置
+
+
+如何创建项目(版本)
+
+1、git init(无网络的情况下)
+
+2、在github上创建项目（记得勾选 README）
+
+
+cd 路径就能进入目录
+
+cd ..回退上层目录
+
+克隆项目:
+	git clone 地址
+
+
+ls  || ll 查看下级目录有哪些
+
+查看状态:git status
+
+工作区到暂存区
+	git  add 文件名
+
+	批量:  git add .
+
+暂存区到版本区
+	git commit -m "注释"
+
+快速从工作区到版本区（要先走一遍工作区到暂存区再到版本区）
+	git commit -a -m "注释"
+
+查看版本:
+	git log
+	git reflog  操作的记录
+
+撤销:
+	git reset --hard 版本号
+
+退出 ：	q
+
+上下键去翻刚才输入的命令
+
+上传:
+	git push origin master  
+
+
+查看每个区域之间的差异:
+
+	工作区查暂存区
+		git diff
+
+	暂存区查版本区
+		git diff --cached
+
+	工作区查版本区
+		git diff master
+
+
+看课件:
+	先找到github的人名和项目，然后fork，再通过git clone 地址(第一次)
+
+	要fork的项目每天都会变，他的项目变，你的fork的项目也得变，这样才
+	
+	能达到项目更新。
+
+	
+	每天回去更新课件：
+		1.先把fork过的项目删除
+				进入到项目中点击settings，拉到最下面
+				点击Delete this repository按钮
+
+		2.重新fork项目
+
+
+		3.跑到之前克隆过的项目中，打开Git,输入git pull搞定。
+    
+
+
+	
+
+		
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+huoyatao
+Huoyt123213
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

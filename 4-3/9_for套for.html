@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        先执行大循环中的一次
+        如果里面有小循环，那么会把小循环执行完
+
+        注意:***
+            如果单纯的for嵌套for，变量初始化要用let或者变量名不要重复
+
+
+
+    */
+    // for(var i=0;i<3;i++){
+    //     alert('大循环'+i); //大循环的i=0
+    //     for(var j=0;j<4;j++){
+    //         alert('小循环'+j); //小循环的i=0 i=1 i=2 i=3
+    //     }
+    // }
+
+    // for(let i=0;i<3;i++){
+    //     alert('大循环'+i); //大循环的i=0
+    //     for(let i=0;i<4;i++){
+    //         alert('小循环'+i); //小循环的i=0 i=1 i=2 i=3
+    //     }
+    // }
+    // console.log(i);
+
+    // for(var i=0;i<5;i++){
+    //     alert('大循环'+i); //大循环0  大循环3
+    //     for(var i=0;i<2;i++){
+    //         alert('小循环'+i); //小循环0,1
+    //     }
+    // }
+
+    for(let i=0;i<5;i++){
+        alert('大循环'+i); //大循环0  大循环3
+        for(let i=0;i<2;i++){
+            alert('小循环'+i); //小循环0,1
+        }
+    }
+    
+</script>
+</body>
+</html>

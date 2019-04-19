@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:300px;
+    height:300px;
+    border:1px solid #000;
+}
+</style>
+</head>
+<body>
+    
+    <div id="box"></div>
+    <input type="text" id="txt" />
+    <button id="btn">发送</button>
+<script>
+    /*
+        需求:
+            点击按钮，把输入的内容放到box中
+    */
+
+    const btn = document.getElementById('btn');
+    const txt = document.getElementById('txt');
+    const box = document.getElementById('box');
+
+    btn.onclick = function(){
+        // console.log(txt.value);
+        box.innerText = txt.value;
+    }
+
+
+
+
+</script>
+</body>
+</html>

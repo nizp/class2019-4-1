@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        object（对象）
+            引用类型、复杂类型、复合类型
+        let obj = {
+            属性名:属性值，
+            length:0
+        }
+        new Object()
+
+        数组对象 -> []数组对象  new Array()
+
+        typeof 只能看{}、[]是否为对象类型，但是不知道
+        []是Array
+
+        请写一个判断数组的函数。
+
+        instanceof:
+            左值是不是右值构造出来的，是就为true，否则false
+            
+            右值是不是左值的老爹
+
+        Math、Date....
+
+        delete obj.age;  //删除某个属性就用delete
+        
+    */    
+//    console.log(typeof []);
+        
+    // let arr = [1,2,3];
+
+    // console.log(arr instanceof Object);
+
+//    console.log( Object.prototype.toString.call(arr) === '[object Array]' )
+
+    //  console.log(Array.isArray(arr));
+
+
+
+    let obj = {
+        name:'小红',
+        age:98
+    }
+    delete obj.age;  //删除某个属性就用delete
+    console.log(obj);
+
+
+</script>
+</body>
+</html>

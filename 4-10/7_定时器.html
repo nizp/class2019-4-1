@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+   
+    <button id="btn">炸弹</button>
+    <button id="btn2">拆弹专家</button>
+<script>
+
+    /*
+        (连续炸)
+        setInterval(函数,指定时间(毫秒),第一个函数的实参) 
+            每间隔一段指定时间，就执行一次函数
+            返回值为数字(即为定时器的编号)。
+
+            清除定时器:
+                clearInterval(编号)
+
+
+        (炸一次)
+        setTimeout(函数,指定时间(毫秒),第一个函数的实参)
+            当到指定的时间时，只执行一次函数
+            返回值为数字(即为定时器的编号)。
+
+        clearTimeout(编号);清除定时器
+
+    */    
+
+    let timer=null,timer2 = null;
+    btn.onclick = function(){
+        // timer = setTimeout(function(){
+        //     console.log('bong,bong');
+        // },2000);
+        timer2 = setInterval(function(){
+            console.log('bong,bong,就不信炸不死!');
+        },2000);
+
+    }
+
+    btn2.onclick = function(){
+        // console.log(timer,timer2);
+        // clearTimeout(timer);
+        clearInterval(timer2);
+    }
+
+</script>
+</body>
+</html>

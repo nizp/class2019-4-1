@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:200px;
+    height:50px;
+    border:1px solid #000;
+}
+#box div{
+    display: none;
+} 
+#box div.show{
+    display: block;
+}
+.active{
+    background: yellow;
+}
+
+</style>
+</head>
+<body>
+    <button class="active">按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+
+    <section id="box">
+        <div class="show">头条</div>
+        <div>体育</div>
+        <div>新闻</div>
+    </section>
+<script>
+    const btns = document.querySelectorAll('button');
+    //代码缓存->代码模块
+    const box = document.getElementById('box');
+    const divs = box.getElementsByTagName('div');
+
+    /*
+        1.循环每个按钮，添加点击
+        2.使用清除法，把所有的元素的class清空
+        3.把当前的按钮的class添加为active
+        4.把所有的div的class清空
+        5.把按钮对应的div的class添加为show
+    */
+
+    for(var i=0,len=btns.length;i<len;i++){
+        // alert(i);
+        btns[i].zdy = i; //添加自定义属性
+        btns[i].onclick = function(){
+            // btns[i].className = '';
+            // btns[0].className = '';
+            // btns[1].className = '';
+            // btns[2].className = '';
+            //j清空所有的className
+            for(var j=0;j<btns.length;j++){
+                btns[j].className = '';
+                divs[j].className = '';
+            }
+            this.className = 'active';
+            divs[this.zdy].className = 'show';
+            // alert(this.zdy); //此处的i是循环的结果3
+        }
+    }
+
+
+
+
+</script>
+</body>
+</html>

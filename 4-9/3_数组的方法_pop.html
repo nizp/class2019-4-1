@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        pop(传参都是唬人的) 
+            往数组的最后一位删除一个数据
+            返回值为:删除的那个
+    */
+
+    let arr = [1,2,3];
+
+    //找到数组的最后一个
+    // let last = arr[2]; //arr.length = 3-1 = 2
+    // arr.length = arr.length-1;
+
+    // arr.pop(2);
+    // console.log(last);
+    arr.push(5,arr.push(6),arr.pop(7),arr.push(arr.pop()));
+   
+    //[1,2,3]
+    // arr.push(6) -> 4
+    // [1,2,3,6]
+    //  arr.pop(7) -> 6
+    // [1,2,3]
+    // arr.push(arr.pop()) -> 3
+
+    // [1,2,3,5,4,6,3];
+    console.log(arr);
+
+</script>
+</body>
+</html>

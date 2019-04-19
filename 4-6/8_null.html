@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        null
+            空，代表空地址
+
+        
+        函数:  
+            function fn(){}
+        方法:
+            let obj = {
+                fn:function(){
+
+                }
+            }
+
+            fn();  函数前面没有主，没有点
+            obj.fn(); 方法前面有主，有.
+
+        1.元素没有获取到
+        2.在正则中搜索不到字符就会为null
+        3.原型链的末端
+
+    */    
+
+    function fn(){
+        console.log(this);
+    }
+
+    let obj = {
+        fn:function(){
+            console.log(this);
+        },
+        fn2:function(){
+
+        }
+    }
+
+    // fn(); //window
+    // obj.fn(); //obj，.前面的
+
+
+
+    // let box = document.getElementById('box');
+    // console.log( box );
+
+    let str = '2345ndsja';
+
+    // console.log(str.match(/a/));
+    // console.log(Object.prototype.__proto__);
+
+</script>
+</body>
+</html>

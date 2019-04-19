@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" v-for="data">
+        <div></div>
+        123456
+        <!-- <div>1234</div> -->
+    </div>
+<script>
+    /*
+        
+        标签:元素节点  数字1
+
+        属性节点: 数字2
+
+        文本节点: 数字3  文字、换行
+
+        注释节点: 数字 8
+
+        document :数字9
+
+        整个html中全是节点
+
+        属性:nodeType ->值是一个数字
+            去查看节点类型的
+
+        childNodes  子节点
+
+        nodeValue  查看节点内容
+
+        attributes
+
+    */
+    // console.log(box.nodeType);  //1元素节点
+    // console.log(document.nodeType); //9document
+
+    // console.log(box.childNodes[0].nodeType);
+
+    // console.log(box.childNodes[3].nodeValue);
+
+    // console.dir(document.getElementById('box').attributes[0].nodeType);//2
+
+    // console.dir(document.getElementById('box').attributes[1].value);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button>按钮一</button>
+    <button>按钮二</button>
+    <button>按钮三</button>
+<script>
+    /*
+        let 与 var 的区别
+        
+        1.let一个变量只能申明一次
+        2.声明之后才能使用（有暂存死区）
+        3.不做window映射
+        4.支持块级作用域
+
+        {
+
+        }
+        
+    */   
+    // console.log(a);
+
+    // let a = 10;
+    // {
+    //     let a = 20;
+    //     // console.log(a);     
+    // }
+    // console.log(a);  
+
+
+    // let a;
+
+    // console.log(window);
+    // var a = 10;
+    // var a = 20;
+
+    const btns = document.querySelectorAll('button');
+    //btns是集合，所以添加事件的时候要一个一个加
+    // console.log(btns);
+    // btns[0].onclick = function(){
+    //     alert(1);
+    // }
+    // btns[1].onclick = function(){
+    //     alert(1);
+    // }
+    // btns[2].onclick = function(){
+    //     alert(1);
+    // }
+
+    /*
+        btn = {
+            zdy:0
+        }
+        btn2 = {
+            zdy:1
+        }
+        btn3 = {
+            zdy:2
+        }
+    */
+
+    for(var i=0;i<btns.length;i++){
+        console.log(i);
+        // btns[0].zdy = 0;
+        // btns[1].zdy = 1;
+        // btns[2].zdy = 2;
+        btns[i].zdy = i;
+        btns[i].onclick = function(){
+            console.log(this.zdy);
+        }
+    }
+
+
+
+
+</script>
+</body>
+</html>

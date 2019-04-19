@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        if(){
+
+        }else{
+
+        }
+
+
+        switch (变量) {
+            case 2: （条件）
+                console.log('语句一')
+            break; （中断判断）
+
+            default:（默认）
+                break;
+        }  
+
+        注意:
+            break必须写，不然会穿透（当一个条件成立之后，还会执行下面的代码）
+        
+        能用switch一定能用if判断，能用if判断的地方不一定能用switch
+
+    */  
+    let a = 20;
+    // if(a === 20){
+    //     alert('就是20');
+    // }else if(a === 25){
+    //     alert('就是25');
+    // }else{
+    //     alert('就是不知道');
+    // }
+
+    switch(a){
+        case  20:
+            alert('就是20');
+        break;
+        case  25:
+            alert('就是25');
+        break;
+        default:
+            alert('就是不知道');
+        break;
+    }
+   
+</script>
+</body>
+</html>

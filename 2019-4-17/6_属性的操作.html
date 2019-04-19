@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" zdy="5" data-a="321312"></div>
+<script>
+    /*
+        let obj = {
+            name:value
+        }
+        obj.name
+
+        ele.href
+        ele.innerHTML
+        ele.value
+        ele.src
+        ele.id
+        ele.className
+        .....
+
+
+        box.属性有2种方式是可以直接获得到的
+            1.设置了一个
+                box.zdy = 0;
+                console.log(box.zdy)
+
+            2.元素对象默认的属性
+                box.id
+
+        在行间获取自定义属性
+            ele.getAttribute('属性名')
+
+
+        在行间设置自定义属性
+            ele.setAttribute('属性名','属性值')
+
+    */   
+   let box = document.getElementById('box');
+    
+    // console.log(box.getAttribute('zdy'))
+//    console.log(box.zdy); //0,undefined
+
+   box.setAttribute('zdy2',5);
+//    console.log(box.zdy2);
+
+  console.dir(box);
+    
+
+   
+
+
+
+
+
+//    box.style.width = '100px';
+//    box.id = 'aaa';  //此时id的变化了，标签也变化了
+    // box.zyd = 0;//这个自定义属性并不是box一生下来就自带的，
+    //所以不会在标签中显示，但是因为box是个对象，对象上是可以添加属性的，所以通过box.zdy是可以访问到0的
+   
+//    box.setAttribute('zdy',0);
+    // console.dir(box); 
+</script>
+</body>
+</html>

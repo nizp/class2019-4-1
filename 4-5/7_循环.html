@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ul"></ul>
+<script>
+    /*
+        for(let i=0;条件;i++){
+
+        }
+        1.变量初始化（只执行一次）
+        2.判断循环条件，成立就进循环体，不成立就不循环
+        3.进循环体
+        4.设置下次循环的条件
+
+        2->3->4  2->3->4 直到条件不成立。
+
+
+        while (条件) {  
+        
+        }
+
+        一般是不知道要循环多少次才使用while
+
+        1.判断条件
+        2.条件成立进循环体
+        3.设置下次循环的条件
+
+
+        for in循环
+            通过枚举对象身上的属性名，来做到循环的目的
+            循环的次数跟对象的属性的个数有关系
+
+        只要是遍历对象的情况下，使用for in循环
+
+
+    */  
+    
+    // let i = 0;
+    // while (i < 5) {
+    //     console.log(i);
+    //     i++;
+    // }
+
+    let obj = {
+        name:'小明',
+        age:18,
+        sex:'男',
+        job:'前端大拿'
+    }
+
+    
+    // console.log(obj['age']);
+    // console.log(obj['name']);
+    // console.log(obj['sex']);
+    // console.log(obj['job']);
+
+    // for(let i=0;i<obj.length;i++){
+    //     console.log(i);  //因为条件不成立，出不来的
+    // }
+    // console.log(obj.length)
+
+    // for(let attr in obj){
+    //     console.log(obj[attr]);
+    // }
+
+    let arr = [1,2,3,4,5];
+
+    for(let i in arr){
+        console.log(arr[i]);
+    }
+
+    
+
+    // for(let attr in obj){
+    //     ul.innerHTML += `
+    //         <li>属性名:${attr},属性值:${obj[attr]}</li>
+    //     `;
+    //     // console.log(obj[attr]);
+    // }
+
+
+
+
+
+
+   
+    
+</script>
+</body>
+</html>

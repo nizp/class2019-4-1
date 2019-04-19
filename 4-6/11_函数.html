@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>
+            <span>12.5</span>
+            <input type="button" value="-">
+            <span>0</span>
+            <input type="button" value="+">
+            <span>总价:</span>
+        </li>
+        <!-- <li>
+            <span>5</span>
+            <input type="button" value="-">
+            <span>0</span>
+            <input type="button" value="+">
+            <span>总价:</span>
+        </li> -->
+    </ul>
+<script>
+    /*
+        函数:
+            代码块，为了复用。
+
+        定义:
+            1.函数声明
+            2.函数表达式
+            3.类声明
+
+        调用:
+            函数名 + 括号  fn()
+            事件调用 onclick = function(){}
+            定时器调用  setTimeout(function(){},1000)
+
+        
+        定义函数的时候开辟了一个新的堆内存空间
+        把函数内的代码转成字符串，存到堆内存中
+        再把空间地址赋值给变量或者函数名
+
+
+        调用开辟一个执行栈，
+        把代码块中的代码复制到执行栈中执行
+        参数赋值，执行上下文直到销毁变量
+
+
+    函数参数:
+        function fn(a){}  a就为形参
+        fn(1)  1就是实参
+
+        实参能传所有类型的数据
+
+        return
+        
+        函数执行有两件大事莫忘:
+            1.执行函数
+            2.函数返回值
+
+            函数内有return返回值就为return后面的值
+            如果没有return就是undefined
+
+            不管是函数还是方法，都有返回值。
+
+            function fn(){
+                let a = 10;
+                return a;
+            }
+            console.log(fn());
+
+            return下面的代码会被中断
+            return也可以在函数中的循环下，终止循环
+
+            让函数外使用函数内的运算结果时，使用return。
+
+        alert(alert(5))  5 undefined
+
+
+    */    
+
+    const lis = document.querySelectorAll('li')[0];
+    const btns = lis.querySelectorAll('input');
+    const spans = lis.querySelectorAll('span');
+
+    let num = 0;
+    //++
+    btns[1].onclick = function(){
+        num ++;
+        fn();
+    }
+    //--
+    btns[0].onclick = function(){
+        num --;
+        if(num < 0){
+            num = 0;
+        }
+        fn()
+    }
+    function fn(){
+        spans[1].innerHTML = num;
+        spans[2].innerHTML = '总价:' + spans[0].innerHTML * num;
+    }
+
+
+    // let a = alert(5);
+    // alert(a);
+
+
+</script>
+</body>
+</html>

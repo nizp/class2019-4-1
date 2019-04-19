@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    /*
+        for(let i=0;i<6;i++){
+
+        }
+        1.let i=0 只走一次
+        2.判断条件 
+        3.进循环体
+        4.设置下次循环的条件
+
+        2->3->4 2->3->4
+
+        注意:
+            遇到for嵌套for的时候，里面的变量名不要和外面的变量名一样
+            或者使用let
+
+            大循环进一次，执行完小循环。
+
+
+        while循环:一般不知道要循环多少次才用
+
+        while(条件){
+
+        }
+
+        for in  对象使用for in枚举对象的属性来达到循环目的
+
+    */
+
+    //只有特殊的对象格式才能用for循环
+    // let obj = {
+    //     0:1,
+    //     1:2,
+    //     2:3,
+    //     length:3
+    // }
+    // for(let i=0;i<obj.length;i++){
+    //     console.log(i);
+    // }
+
+
+    let obj = {
+        width:'100px',
+        height:'200px',
+        background:'red',
+        border:'1px solid #000'
+    }
+
+    for(let attr in obj){
+        box.style[attr] = obj[attr];
+    }
+
+    
+
+
+</script>
+</body>
+</html>

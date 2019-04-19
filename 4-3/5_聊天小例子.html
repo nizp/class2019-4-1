@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style lang="">
+#box{
+    width:300px;
+    height: 300px;
+    border:1px solid #000;
+} 
+</style>
+</head>
+<body>
+    <div id="box"></div>
+    <input type="text" id="txt" />
+    <button id="btn">发送</button>
+<script>
+
+    /*
+        let a = 10;
+        a = a + 5;
+
+        a += 5;
+
+        在清除文本内容的时候一定要清楚元素的某个属性
+        不要清除变量。
+
+    */
+    // let a = 10;
+    // a += 5;
+    // console.log(a);
+
+    const box = document.getElementById('box');
+    const txt = document.getElementById('txt');
+    const btn = document.getElementById('btn');
+
+   
+    
+    //在点击按钮的时候才获取最新的内容
+    btn.onclick = function(){
+        let val = txt.value;
+        if(val === ''){
+            alert('哥们,下课别走!');
+        }else{
+            //'<p>'+ val +'</p>'
+            //把刚才的内容获取出来 加上 现在的 最后一起在赋值给box.innerHTML
+            // box.innerHTML = box.innerHTML + `<p>${val}</p>`; //'<p></p>'
+            box.innerHTML += `<p>${val}</p>`; //'<p></p>'
+        }
+        // console.log(val);
+        // val = ''; //?
+        // console.log(val);
+        // console.log( txt.value );
+        txt.value = '';
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        函数:
+            在js中属于代码块，函数内写功能的，目的为了复用。
+
+        函数主要由函数声明和函数调用两个部分组成。
+            三种声明方式:
+                函数声明:
+                    function 自定义函数名(){}
+
+                    调用的时候可以在声明之前调用。
+
+                函数表达式:
+                    let ff = function(){}
+
+                    调用的时候必须在声明之后调用，不然报错。
+
+                类声明:
+                    let f = new Function();
+
+                    内部要为字符串。
+
+            调用:
+                函数名 + 括号调用
+                事件调用
+                定时器调用
+
+        定义函数的原理:
+            当定义一个函数的时候开辟了一个新的堆内存
+            然后把函数中的代码转成字符串存到了堆内存中
+            最后把堆内存的地址，赋值给函数名或者变量
+
+        
+
+        函数调用:
+            在函数调用的时候，函数内形成一个执行栈
+            把函数代码块内的字符串代码拷贝一份放到执行栈中执行
+            参数赋值
+            执行上下文
+            预解析的机制
+            函数内的变量销毁
+
+        
+        返回值、函数传参（怕乱）
+    */   
+    
+    // wawawa();
+    function wawawa(){
+        let a = 10;
+        console.log(a);
+        // console.log('哈哈哈');
+    }
+    wawawa();
+    // wawawa();
+    // console.log(wawawa)
+
+
+
+    
+    // var wa = function(){
+    //     console.log('呵呵呵');
+    // }
+    // wa();
+    
+    
+    // let fn = new Function('','console.log(123)'); 
+    // fn();
+
+    // document.onclick = function(){
+    //     alert('1');
+    // }
+
+    
+</script>
+</body>
+</html>

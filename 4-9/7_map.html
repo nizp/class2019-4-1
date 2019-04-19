@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ul">
+        <li>1</li>
+    </ul>
+<script>
+    /*
+        map:
+            循环数组，它的返回值为新的数组
+
+            function(item,i,all){
+                return 新数组的每项
+            }
+    */    
+    let arr = [1,'你好','哈哈','呵呵'];
+
+    let newArr = arr.map(function(item,i,all){
+        // console.log(item,i,all)
+        return '<li>'+ item +'</li>'
+    });
+
+    console.log(newArr);
+    // console.log();
+    ul.innerHTML = newArr.join('');
+
+    
+
+
+
+
+</script>
+</body>
+</html>

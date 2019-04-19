@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    position: relative;
+}
+#box div{
+    width:50px;
+    height:50px;
+    position: absolute;
+    left:0;
+    top:0;
+    background:url('1.png') 0 0 no-repeat;
+    
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    /*
+        i 0 % 4 => 0
+    */
+    let arr = [];
+    let html = '';
+    // for(let i=0;i<10;i++){
+    //     html += '<div style="background:'+ arr[i%arr.length] +';left:'+(55*i)+'px"></div>';
+    // }
+
+
+    //循环10*10次，生成100个div，然后给div动态设置left和top值
+    for(let i=0;i<10;i++){
+        for(let j=0;j<10;j++){
+            html += '<div style="left:'+(55*j)+'px;top:'+(55*i)+'px"></div>';
+            // html += '<div style="background:'+ arr[j%arr.length] +';left:'+(55*j)+'px;top:'+(55*i)+'px"></div>';
+        }
+    }
+    box.innerHTML = html;
+
+    const divs = document.querySelectorAll('#box div');
+    for(let i=0;i<divs.length;i++){
+        //当鼠标移入方块的时候，把方块本身的left和top赋值给图片 -x轴 -y轴
+        divs[i].onmouseover = function(){
+            this.style.backgroundPosition = `-${this.style.left} -${this.style.top}`;
+        }
+    }
+
+    // console.dir(box.style)
+
+    
+</script>
+</body>
+</html>

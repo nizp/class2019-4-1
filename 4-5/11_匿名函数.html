@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // let fn = function (){
+
+    // }   
+    
+    /*
+        () 
+            提权:
+                (1+1)*2
+            括号中的就变成了表达式
+
+        匿名函数自执行
+
+        注意:
+            在匿名函数的前面加上分号，不然容易报错。
+    */
+    // (function (a){
+    //     console.log(a);
+    // })(1);
+
+    // !function (a){
+    //     console.log(a);
+    // }(2);
+    
+    // ~function (a){
+    //     console.log(a);
+    // }(2);
+
+    // !!!!!!function (a){
+    //     console.log(a);
+    // }(3);
+    
+    console.log(20);
+
+    ;(function(){
+        console.log(1);
+    })();
+
+
+
+   
+</script>
+</body>
+</html>

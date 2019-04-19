@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#txt{
+    display: none;
+}
+#box{
+    display: none;
+}
+</style>
+</head>
+<body>
+    <div>
+        <p id="p">珠峰培训</p>
+        <button id="update">修改</button>
+        <input type="text" id="txt" />
+    </div>
+    <div id="box">
+        <button id="y">确定</button>
+        <button id="n">取消</button>
+    </div>
+<script>
+    const update = document.getElementById('update');
+    const p = document.getElementById('p'); //获取P标签
+    const y = document.getElementById('y');
+    const n = document.getElementById('n');
+    const box = document.getElementById('box');
+    const txt = document.getElementById('txt');
+
+    //点击修改按钮
+    update.onclick = function(){
+        //把box打开
+        box.style.display = 'block'; 
+        //把p标签的内容赋值给input框的value
+        txt.value = p.innerHTML;
+        //把txt显示出来
+        txt.style.display = 'block';
+        //隐藏修改按钮
+        update.style.display = 'none';
+    }
+
+    //点击取消
+    n.onclick = function(){
+        box.style.display = 'none'; 
+        txt.style.display = 'none';
+        update.style.display = 'block';
+    }
+
+    //点击确定修改
+    //!val   //没有的意思,val是个空字符
+    y.onclick = function(){
+        let val = txt.value;
+        if(val){//如果有内容 
+            p.innerHTML = val;
+        }
+        box.style.display = 'none'; 
+        txt.style.display = 'none';
+        update.style.display = 'block';
+    }
+
+
+</script>
+</body>
+</html>

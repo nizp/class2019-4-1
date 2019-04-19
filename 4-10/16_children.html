@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+<script>
+    /*
+        children  不是标准，但是所有浏览器都支持
+
+        children -> 子级元素节点
+
+        firstElementChild
+
+        lastElementChild
+    */
+    const ul = document.getElementById('ul');
+
+    // console.log(ul.firstElementChild);
+    console.log(ul.lastElementChild);
+
+
+
+    // let li = ul.children;//ul.childNodes;
+    // console.log(li.length);
+    // for(let i=0;i<li.length;i++){
+    //     //只有元素节点才能变红
+    //     // if(li[i].nodeType === 1){
+    //         li[i].style.background = 'red';
+    //     // }
+    // }
+
+</script>
+</body>
+</html>

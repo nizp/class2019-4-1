@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn" >按钮(0)</button>
+    <button id="btn2" >按钮(0)</button>
+    <button id="btn3" >按钮(0)</button>
+    <button id="btn4" >按钮(0)</button>
+<script>
+    //disabled 就是阻止按钮点击
+
+    const btns = document.querySelectorAll('button');
+
+    // btns[0].onclick = function(){
+
+    // }
+    // btns[1].onclick = function(){
+        
+    // }
+
+    for(let i=0;i<btns.length;i++){
+        // btns[0].num = 0;
+        // btns[1].num = 0;
+        // btns[2].num = 0;
+        // btns[3].num = 0;
+        btns[i].num = 0;
+        btns[i].onclick = function(){
+            if(this.num < 2){
+            this.num ++;
+            this.innerText = `按钮(${this.num})`;
+            if(this.num === 2){
+                this.disabled = true;
+            }
+        }
+            // alert(1);
+            // console.dir(this);
+        }
+    }
+
+
+    // let num = 0;
+    // btn.onclick = function(){
+    //     // this.disabled = true;
+    //     if(num < 2){
+    //         num ++;
+    //         this.innerText = `按钮(${num})`;
+    //         if(num === 2){
+    //             this.disabled = true;
+    //         }
+    //     }
+    // }
+</script>
+</body>
+</html>

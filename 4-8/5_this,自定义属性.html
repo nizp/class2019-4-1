@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <button id="btn2">按钮</button>
+<script>
+    /*
+        this
+            事件触发的时候，this就是触发的元素
+
+        onclick  点击
+        onmouseover  移入
+
+        {
+            key:value
+        }
+    */
+
+    // let obj = {
+    //     name:'晓溪'
+    // }
+
+    // obj.age = 18;
+    // console.log(obj.age);
+
+
+    // btn.num = 0;
+    // btn.onclick = function(){
+    //     this.num ++;
+    //     console.log(this.num);
+    // }
+    const btns = document.querySelectorAll('button');
+    for(let i=0;i<btns.length;i++){
+        //在循环的时候，给每个按钮添加一个自定义属性num值为0
+        btns[i].num = 0;
+        btns[i].onclick = function(){
+            this.num ++;
+            alert(this.num);
+        }
+    }
+
+
+
+</script>
+</body>
+</html>

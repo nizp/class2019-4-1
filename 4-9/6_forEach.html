@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        forEach
+            专门用来循环数组的。
+
+        两个参数:
+            第一个参数:
+                函数-> function(){}
+
+                function(数组中的每个值,索引值,整个数组){
+
+                }
+
+            第二个参数:
+                改变this指向,写啥是啥（如果写个null,undefined还是为window）
+        
+    */    
+   let arr = [true,'haha',10,{},[1,2,3]];
+
+    arr.forEach(function(item,i,all){
+        // console.log(item);//数组中的每项
+        // console.log(i); //索引
+        // console.log(this);
+    },arr);
+    
+
+    
+
+
+
+
+</script>
+</body>
+</html>

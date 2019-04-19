@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width: 200px;
+    height: 200px;
+    border:1px solid #000;
+    word-wrap:break-word;
+}
+</style>
+</head>
+<body>
+    <textarea name="" id="txt" cols="30" rows="10"></textarea>
+
+    <div id="box"></div>
+    <button id="btn">按钮</button>
+<script>
+    /*
+        '12345'
+
+        '2345'
+        '345'
+
+
+        ''
+        '1'    str[0]
+        '12'
+
+    */
+    let timer = null;
+    btn.onclick = function(){
+        // txt.value
+        //12345
+        let html = '';
+        timer = setInterval(function(){
+            let val = txt.value[0];
+            if(val === undefined){
+                clearInterval(timer);
+            }else{
+                txt.value = txt.value.substring(1);
+                html += val;
+                box.innerHTML = html;
+                console.log(html);
+            }
+        },26.7);
+    }
+
+
+    /*
+        1.先拿到想要的字符
+        2.把拿到的变为大写
+        3.大写拼小写 Z + hu = Zhu
+    */
+    let str = 'zhufeng'; //ZhuFeng
+
+    let s = str[0].toUpperCase() + str.substring(1,3) + str[3].toUpperCase() + str.substring(4);
+
+    console.log(s);
+
+
+
+
+
+</script>
+</body>
+</html>

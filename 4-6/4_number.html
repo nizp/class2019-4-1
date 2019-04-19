@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="v1"> + <input type="text" id="v2">
+    <button id="btn">求和</button>
+<script>
+    /*
+        Number：
+            10
+        强制类型转换:
+            把数据转成数字 :Number()
+
+            能转长得像数字的字符串
+            空字符串为0
+            空白数组为0
+            布尔值：true:1,false:0
+            null:0
+
+            别的都是NaN
+
+            parseInt(字符串,进制数):把字符串转成整数10进制的数字
+
+            parseInt转数组时，数组中第一位长得像数字，能转第一位
+
+            parseFloat(字符串):把字符串转成数字，并且保留小数
+
+            NaN -> not a number  只要是非法的数学运算就会出现NaN
+            isNaN -> 是NaN返回true，否则false
+                isNaN('') -> Number('') -> 0 -> false
+
+        toFixed：返回结果是一个字符串
+            保留几位小数，会四舍五入保留位数+1的数字
+
+            比如：
+                10.322 -> 保留2位 -> 10.32
+                10.325 -> 保留2位 -> 10.33
+
+        隐式类型转换:
+            数字 + 字符串 = 字符串
+            数字 （-*除%） 字符串 = 数字
+
+
+
+
+    */
+
+    // console.log(Number('65432px')); 
+    // console.log(Number(false)); 
+    // console.log(Number(null));
+
+//    console.log( parseInt(null) );
+
+        // console.log(isNaN(''))
+
+
+    // console.log(parseInt('1010',2)) 
+    // console.log(parseFloat(10.999));
+
+    // btn.onclick = function(){
+    //     // console.log(+v1.value + (+v2.value));
+    //     // console.log(Number(v1.value) + Number(v2.value))
+    // }
+
+    let num = 10.324745387;
+
+    console.log(num.toFixed(2)); //返回值为字符串
+
+
+
+
+
+</script>
+</body>
+</html>

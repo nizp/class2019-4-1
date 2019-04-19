@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        return会终止后面的代码执行，return下面的代码都不会执行。
+
+        如果函数中使用循环，并且也使用了return那么会终止循环.
+
+        如果有return，但是后面没有值，也是undefined。
+    */
+    // function fn(){
+    //     alert(1);
+    //     return 5;
+    //     alert(2);
+    // }    
+    // fn();
+    
+    function fn() {
+        for(let i=0;i<5;i++){
+            if(i === 3){
+                return i;
+            }
+            alert(i); //当i等于3的时候就终止了循环。
+        }
+    }
+    console.log(fn());
+
+
+</script>
+</body>
+</html>

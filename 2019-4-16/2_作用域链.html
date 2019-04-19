@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        1.当前域没有会去它的上级域查找，
+        知道window结束，window都没有就报错.
+
+        2.变量提升
+            当代码在执行前会把var和function提前进行解析
+
+            并且变量赋值为undefined，函数赋值代码块.
+
+        3.执行上下文
+            我只看等号赋值
+
+        
+        4.如果在函数中，参数赋值比执行上下文要提前(也可以理解为，函数比正常执行多了一个参数赋值)
+
+
+        5.赋值参数问题
+            如果实参是简单类型，函数内再怎么搞都不会影响原值
+            如果实参是个引用类型，函数内*直接改形参的&&值&&*那么会影响原值，
+            但是如果在函数内赋值了一个新的对象，那么此时赋值之后再怎么改参数，
+            都不会影响原值
+
+            
+
+
+    */
+
+    // let a = 5;
+    // function fn(a){
+    //     alert(a);
+    //     // var a = 20;
+    //     a = 30;
+    //     alert(a);
+    // }
+    // fn(a);
+    // console.log(a);
+
+
+    let a = {
+        name:5
+    };
+    function fn(a){
+        console.log(a); //name:5
+        a = {
+            name:'008'
+        }
+        console.log(a); //008的对象
+        a.name = '666'; //008中的name
+        console.log(a);//008的对象
+    }
+    fn(a);
+    console.log(a);
+
+
+
+
+    /*
+        
+        a = function a(){
+            console.log(123);
+        }
+
+        a = 10;
+    */
+
+
+
+    /*
+
+        a = function a(){
+            console.log(2113456);
+        }
+
+        a = 10;
+
+    */
+    // alert(a);
+    // a();
+    // var a = 10;
+    // function a(){
+    //     console.log(123);
+    // }
+    // alert(a);//10
+    // a();//报错
+    // function a(){
+    //     console.log(2113456);
+    // }
+    // a();
+    // var a = 50;
+    // a();
+
+
+    // alert(a);
+    // var a = 10;
+    // alert(a);
+    // function a(){
+    //     console.log(123);
+    // }
+    // a();
+
+
+    // var a = 5;
+    // function fn(){
+    //     var a = 10;
+    //     alert(a);
+    // }    
+    // fn();
+    // console.log(a);
+</script>
+</body>
+</html>

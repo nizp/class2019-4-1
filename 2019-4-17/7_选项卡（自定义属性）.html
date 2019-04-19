@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:200px;
+    height:50px;
+    border:1px solid #000;
+}
+#box div{
+    display: none;
+} 
+#box div.show{
+    display: block;
+}
+.active{
+    background: yellow;
+}
+
+</style>
+</head>
+<body>
+    <button class="active">按钮1</button>
+    <button >按钮2</button>
+    <button>按钮3</button>
+
+    <section id="box">
+        <div class="show">头条</div>
+        <div>体育</div>
+        <div>新闻</div>
+    </section>
+<script>
+    const btns = document.querySelectorAll('button');
+    const divs = document.querySelectorAll('div');
+
+    /*
+        定点清除法
+        大清洗
+    */
+    let btn = btns[0];//第一个·
+
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].index = i;
+        btns[i].onclick = function(){
+            //把上一个按钮的class清掉
+            btn.className = '';
+            divs[btn.index].className = '';
+            //把当前的class加上
+            this.className = 'active';
+            divs[i].className = 'show';
+            /*
+                把这次的按钮，变成下次的上一个
+            */
+            btn = this;
+        }   
+    }
+
+
+    // for (let i = 0; i < btns.length; i++) {
+    //     btns[i].setAttribute('index',i);
+    //     // btns[i].index = i;
+    //     btns[i].onclick = function(){
+    //         // console.log();
+    //         for(let i = 0; i < btns.length; i++){
+    //             btns[i].className = '';
+    //             divs[i].className = '';
+    //         }
+    //         this.className = 'active';
+    //         divs[this.getAttribute('index')].className = 'show';
+    //     }   
+    // }
+
+</script>
+</body>
+</html>

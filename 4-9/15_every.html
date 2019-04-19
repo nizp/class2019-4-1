@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    /*
+        every
+            判断数组中是不是每一项都符合某个条件
+            全部都符合返回true，只要有一项不符合就返回false
+
+            参数:
+                function (item,i,all){
+
+                }
+    */
+
+    //就想知道，这个数组中是否所有项都为true
+    let arr = [true,true,true,true,false];
+    let a = arr.every(function(item){
+        return item;
+    })
+    console.log(a);
+
+    // alert(arr.every(function(item){return item})?'都是true':'有内鬼');
+
+    // let len = arr.length;
+    // let num = 0;
+    // for(let i=0;i<len;i++){
+    //     if(arr[i]){
+    //         num ++;
+    //     }
+    // }
+    // if(num === len){
+    //     alert('都是true');
+    // }else{
+    //     alert('有内鬼');
+    // }
+
+
+    
+    
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        数组的方法:
+            push
+            pop
+            shift
+            unshift
+            splice
+            join
+            reverse
+            forEach
+            map
+            filter
+            every
+            some
+            sort  排序
+            concat() 
+                链接一个或者多个数组
+                返回值为新的数组
+                就算是没有数组链接
+                比如：
+                    arr.concat() -> 克隆一份数组
+
+            
+
+    */    
+
+    //sort默认排序是按照unicode编码来排序的  
+    //也可以使用自定义排序
+    //sort中需要传入一个函数，让a,b  
+    //这个函数*必须*返回一个数字
+    //是正数就交换位置，是负数就不交换位置
+    //a-b就是从小到大排序
+    //b-a就是从大到小排序
+    let arr = ['2px',3,4,7,1,6,12];
+
+    arr.sort(function(a,b){
+        return parseInt(a)-parseInt(b);
+    });
+
+    console.log(arr);
+
+
+    let arr2 = [1,2,3];
+
+    let arr3 = [4,5,6];
+
+    console.log(arr2.concat(arr3,[7,8,9]));
+
+
+
+
+
+</script>
+</body>
+</html>

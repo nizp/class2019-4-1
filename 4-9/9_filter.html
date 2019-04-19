@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        filter过滤条件成立的值
+            参数:
+                function(item,i,all){
+                    return 条件成立的某项
+                }
+    */    
+
+    //过滤大于28的数字
+    let arr = [18,28,38,48,26];
+
+    let arr2 = arr.filter(function(item,i){
+        if(item > 20 && item <= 28){
+            return item;
+        }
+        // return item > 20 && item <= 28;
+    });
+
+    // let arr3 = arr.filter(e=>e > 20 && e <= 28);
+
+    console.log(arr3);
+
+    
+
+
+
+</script>
+</body>
+</html>

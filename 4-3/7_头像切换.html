@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <img src="lico.png" id="img">
+<script>
+    //rico.png
+    //lico.png
+    /*
+        逻辑:
+            如果是妹纸图就切换到男孩图
+            如果是男孩图就切换到妹纸图
+
+        img的src，a的href不能用来直接判断
+    */
+    // let mz = 'lico.png';
+    // let nh = 'rico.png';
+
+    let onOff = true; //lico为true
+
+    img.onclick = function(){
+        // alert(1)
+        // console.log(img.src)
+        if(onOff){
+            // alert(1);
+            img.src = 'rico.png';
+            onOff = false;
+        }else{
+            img.src = 'lico.png';
+            onOff = true;
+        }
+    }
+
+
+</script>
+</body>
+</html>

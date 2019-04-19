@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        + - * / %
+
+        逻辑运算符:
+            || 或者
+                A || B
+                1.在if中使用||如果A不成立那么会去找B,如果2个都不成立那么就为false
+                2.从顺序上来来说，如果A成立就不会去B了,如果A不成立那么会去找B。
+
+            && 并且
+                A && B
+                1.在if中使用 && 的含义 A要成立，B也要成立
+                2.从顺序的角度上来说，A需要成立才会找B，如果A不成立就是A
+
+
+            三元（三目运算符）
+                一元 -> typeof a;
+                二元 -> 1 + 1
+                a?a:b
+                判断a是否成立,如果成立就走a否则走b
+    */    
+
+    // console.log(20 || 1);
+
+    // console.log(0 || false || 3 || true);
+
+    //在if中使用 && 的含义 A要成立，B也要成立
+    // if(1 && false){
+    //     console.log('成功');
+    // }else{
+    //     console.log('失败');
+    // }
+
+    // //A成立结果就B
+    // console.log( 0 && 2 );
+    
+    // let a = 0;
+    // let b = 1;
+
+    // if(a === 0){
+    //     if(b === 1){
+    //         alert('都成立')
+    //     }
+    // }
+
+    // if(a===0 && b===1){
+    //     alert('都成立');
+    // }
+
+    // if(true)alert(1);
+
+    // alert((1===1) && 1);
+
+
+// let a = true && '' || false && 8 || 'px'*6 && (function(){}) || 0;
+
+// console.log(a);//0
+
+
+// let a = true && '' || null && 8 && 'px'*6 && (function(){}) && 0 || true && ('1+1') || 10/2 || [];
+
+// console.log(a);//2  true  0  2 true  true
+
+// var a = true && 0 || 0 && false && '' || 1;
+
+// let a = '' && NaN || null && undefined;
+
+// const a = 1 && 'qwe' && [] || 44 && '00' || [1] || 1;
+
+// let b = false || 0; //0
+
+// let c = false || 0 || 1;   //1
+
+// let a = true && '' && null && 8 || 'px' * 6 && (function () { }) || 0 || true || ('1+1') || 10 / 2 || [] && 1 || 0 && trun || [] && 2 || false && 2 || 2;
+
+// let a = false && 5 || true && '' || '5'+ '1px' && null || '45' && 65 || true && 0;
+
+// console.log(b,c);
+// console.log(a);
+
+    let a = 7;
+    // if(a > 9){
+    //     alert(''+a);
+    // }else{
+    //     alert('0'+a);
+    // }
+    alert(a > 9?''+a:'0'+a);
+
+</script>
+</body>
+</html>

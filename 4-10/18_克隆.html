@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: red;
+}
+#box2{
+    width:100px;
+    height:100px;
+    background: skyblue;
+}
+</style>
+</head>
+<body id="body">
+    <div id="box">
+        <p>1234556788</p>
+    </div>
+    <hr />
+    <div id="box2"></div>
+<script>
+    /*
+        cloneNode(true) 克隆元素
+            如果添加了true，不但能克隆元素本身，还克隆子级
+
+            注意:
+                在chrome的73.0.3683.103中多次克隆报错
+    */
+    // box.onclick = function(){
+    //     alert(1);
+    // }
+    document.onclick = function(){
+        // console.log(box.cloneNode);
+        let red = box.cloneNode(true);
+        body.appendChild(red);
+    }
+</script>
+</body>
+</html>

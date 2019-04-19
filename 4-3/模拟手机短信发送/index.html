@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模拟手机短信发送</title>
+	<style>
+	*{
+		margin:0;
+		padding:0;
+		font-family: '微软雅黑';
+	}
+	html,body{ height: 100%; }
+	a{ 
+		text-decoration: none;
+	 }
+	body{
+		background: #3385ff;
+	}
+	#centerBox{
+		width:375px;
+		height: 588px;
+		background: #e8e7ef;
+		position: fixed;
+		left:50%;
+		top:50%;
+		margin-left:-170px;
+		margin-top:-325px;
+		border-radius: 16px;
+
+	}
+	.line{
+		width:375px;
+		height:64px;
+		background: url('./img/img_07.gif') no-repeat;
+	}
+	
+	.log{
+		bottom:14px;
+		left:150px;
+		position: absolute;
+	}
+	.centerBox-m{
+		width:375px;
+		height: 534px;
+		overflow-x:hidden;
+	}
+	#messageBody{
+		
+		height: 476px;
+		overflow: auto;
+	}
+	#messageBody span{
+		max-width:196px;
+		padding:7px 10px 4px 14px;
+		border-radius: 15px;
+		position: relative;
+		font-size: 12px;
+		line-height: 24px;
+		word-break: break-all;
+	}
+	#messageBody div{
+		width:350px;
+		margin-top: 18px;
+	}
+	.right,.left{
+		width:275px;
+	}
+	.right,.left,.right img,.right span,.left img,.left span{
+		float: left;
+		margin-left:10px;
+		min-height: 24px;
+	}
+	.right img,.right span{
+		float: right;
+	}
+	.right img{
+		margin-top:4px;
+	}
+	.left span{
+		background: #0088ff;
+		color: #fff;
+	}
+	.right span{
+		color: #000;
+		background: #d5d5d5;
+	}
+	#messageBody section{
+		text-align: right
+	}
+	#send{
+		height: 57px;
+		background: url('./img/img_26.jpg') no-repeat;
+	}
+	#send img{
+		float: left;
+		margin:4px 0 0 45px;
+	}
+	#text{
+		float: left;
+		width: 175px;
+		height: 23px;
+		line-height: 30px;
+		background: #fff;
+		padding: 5px 10px;
+		font-size: 14px;
+		color: #000;
+		border: none;
+		outline: none;
+		margin: 7px 0 0 19px;
+		border-radius: 5px;
+	}
+	#submit{
+		float: left;
+		width:58px;
+		font-size: 16px;
+		margin-top:4px;
+		margin-left: 8px;
+		text-align: center;
+		color: #e27089;
+		height: 40px;
+		line-height: 40px;
+		border:none;
+		background: none;
+		cursor: pointer;
+		outline: none;
+		background: url('./img/发送.png') center center no-repeat;
+	}
+	#logo {
+		width: 220px;
+		height:82px;
+		margin: 0 auto;
+	}
+	</style>
+</head>
+<body>
+	<div id="logo">
+		<img src="./img/logo.png" alt="">
+	</div>
+	<div id="centerBox">
+		<div class="line"></div>
+		<div class="centerBox-m">
+			<div id="messageBody">
+				<!-- <div class="right">
+					<img src="img/lico.png"/>
+					<span>说：老师今天讲什么内容呀？<section>23:00</section></span>					
+				</div>
+				<div class="left">
+					<img src="img/rico.png"/>
+					<span>说：今天我们讲在很久,很久很久~很久...以前....<section>23:01</section></span>					
+				</div>
+				<div class="left">
+						<img src="img/rico.png"/>
+						<span>说：今天我们讲在很久,很久很久~很久...以前....<section>23:01</section></span>					
+					</div> -->
+			</div>
+			<div id="send">
+				<img src="img/lico.png" id='img' />
+				<input type="text" placeholder="请输入" id="text" />
+				<button id="submit"></button>
+			</div>
+		</div>
+	</div>
+<script>
+
+</script>
+</body>
+</html>

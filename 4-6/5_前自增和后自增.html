@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">点击添加</button>
+    <ul id="ul"></ul>
+<script>
+    let num = 0;
+
+    // num++;  后自增
+    // ++ num; 前自增
+    // console.log(num);
+
+    /*
+        当输出或者比较某个变量的时候
+
+        是变量与变量进行比较
+
+        前自增，在找到变量之前就被处理过了，找到变量是被处理过后的变量
+        后自增，在找到变量之前什么事儿都没发生，找到的变量就为非处理过的值
+
+
+    */
+
+    // alert( num ++); //1
+    // alert(++ num); //2
+
+    // console.log(num++ ==  ++num ); //1 3 false
+    // console.log(++ num == num++);//2 2 true
+    // console.log(num);
+
+    btn.onclick = function(){
+        ul.innerHTML += '<li>'+ (++num) +'</li>';
+    }
+
+</script>
+</body>
+</html>

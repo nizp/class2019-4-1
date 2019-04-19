@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script>
+    /*
+        window.onload:
+            当页面加载完成执行函数内的代码。
+
+        null为空指针
+
+        一般在学习、开发中遇到null的情况基本上是元素没有获取到
+    */
+    window.onload = function(){
+        const box = document.getElementById('box');
+        console.log(box.style);
+    }
+
+    // console.log(Object.prototype.__proto__);
+    
+</script>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>

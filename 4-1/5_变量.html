@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: red;
+    display: none;
+}
+</style>
+</head>
+<body>
+    <button id="btn">点击显示</button>
+    <div id="box" class="active">哈哈哈</div>
+<script>
+    /*
+        变量:(let var)
+            把js中的数据存储到一个自定义的名字中。
+            可变
+            目的:为了复用
+
+        常量:(const)
+            把js中的数据存储到一个自定义的名字中。
+            不可变
+            一般在获取元素的时候会用
+            目的:为了复用
+
+        let box = document.getElementById('box');
+
+        *变量名不能重复
+        *不能以数字开头
+        *名字不能用关键字(是js使用的名字)
+        
+
+        一般变量取名字用小驼峰命名法:
+            开头小写，字母与字母之间的开头大写
+
+        getElementById
+
+
+    */
+    //把box的元素赋值给box这个变量
+    let box = document.getElementById('box');
+    let btn = document.getElementById('btn');
+    //Identifier 'box' has already been declared 变量名重复
+    // let box = 1;
+    // let 李永梅 = 10;// 可以使用中文命名，但是最好不要
+    // 李永梅 = 20;
+    // console.log(李永梅);
+    // const haha = 5;
+    // haha = 10;
+    // console.log(haha);
+
+
+    btn.onclick = function(){
+        box.style.display = 'block';
+        box.style.backgroundColor = 'green';
+        box.style.fontSize = '50px';
+        // document.getElementById('box').style.border = '5px solid yellow';
+    }
+</script>
+</body>
+</html>

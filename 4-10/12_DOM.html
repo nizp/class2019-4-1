@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    /*
+        DOM：
+            Document  Object  Model
+            文档对象模型
+
+        通过document提供了一些api，能够赋予开发者操作页面的能力
+
+        当通过document提供的api获取到元素的时候，获取到的元素是个对象
+        它跟页面的标签是相映射的关系，也就是说，通过操作对象的属性
+        能够操作标签。
+
+        document.getElementById('box')
+
+        DOM树 -> 由节点组成。
+
+        难点关系:
+            父子关系
+                parentNode  父节点
+                childNodes  所有子节点（包括元素节点、文本节点、注释节点）
+                children  获取某个元素下的元素子节点。
+            祖孙关系
+            兄弟关系
+                previousElementSibling上一个兄弟节点
+                nextElementSibling 下一个兄弟节点
+
+            第一个娃
+                firstElementChild
+            最后一个娃
+                lastElementChild
+
+        重点:
+            缕清关系、把单词背下来
+
+    */
+    console.dir(document.getElementById('box'))
+</script>
+</body>
+</html>

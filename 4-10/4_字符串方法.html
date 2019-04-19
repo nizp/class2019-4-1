@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:400px;
+    border:1px solid #000;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <p id="p">allback用来测试数组的每个元素的函数。返回true 表示该元素通过测试，保留该元素，false 则不保留。它接受一下三个参数：
+        element
+        数组中当前正在处理的元素。
+        index可选
+        正在处理的元素在数组中的索引。
+        array可选
+        调用了 filter 的数组本身。
+        thisArg可选
+        执行 callback 时，用于 this 的值。</p>
+        <a href="javascript:;" id="btn">收缩</a>
+    </div>
+<script>
+    /*
+        字符串:
+            '' "" ``
+            页面中获取出来的内容都是字符串
+                value
+                innerHTML
+                inerText
+                href
+                src
+                className
+                id
+                width
+                ...
+
+        new String('123')
+
+        字符串的length只可读不可写
+
+        字符串的方法基本上是不改变原字符串的。
+
+        截取类:
+            substring(0,0)
+            从哪里开始截取，到哪里结束，但不包含结束位置
+
+            如果你只传一个参数，那么就是从哪开始，截取到字符串的最后
+
+            substr(0,0)
+                从哪开始截取几个
+
+
+    */   
+    
+    // let str = new String('123');
+    // console.log(str);
+    // let str = 'dsjdsadsandkjwyque01k';
+    // str.length = 1;
+    // console.log(str.length);
+    // console.dir(str);
+    // console.log(str.substring(3,9));//dsadsa
+
+
+    
+
+
+
+    let str = p.innerText;
+    console.log(str.substr(7,2));
+
+    btn.onoff = true; //收缩
+    btn.onclick = function(){
+        if(this.onoff){
+            p.innerText = str.substring(0,29);
+            this.innerText = '展开';
+        }else{
+            p.innerText = str;
+            this.innerText = '收缩';
+        }
+        this.onoff = !this.onoff;
+    }
+
+
+    
+</script>
+</body>
+</html>

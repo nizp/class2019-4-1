@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt"/><button id="btn">添加</button>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>文字</th>
+                <th>移动上</th>
+                <th>移动下</th>
+                <th>删除</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <!-- <tr>
+                <td>1</td>
+                <td>312321321</td>
+                <td><button>上移</button></td>
+                <td><button>下移</button></td>
+                <td><button>删除</button></td>
+            </tr> -->
+            
+        </tbody>
+    </table>
+<script>
+    let arr = [
+        {
+            id:0,
+            txt:'好好好'
+        },
+        {
+            id:1,
+            txt:'没问题'
+        },
+        {
+            id:2,
+            txt:'就爱前端'
+        }
+    ];
+
+    /*
+        
+        拿到时间戳
+            Date.now() 
+            new Date().getTime();
+            +new Date
+
+        1.把数据变成DOM
+        2.添加功能
+            点击添加按钮的时候，创建一个新的对象
+            并且把这个对象放入到数组的最后一位
+            {
+                id:时间戳,
+                txt:输入的内容
+            }
+
+            1,arr.push({})
+            2,arr.splice(arr.length,0,{})
+            都可以
+
+            如果让到第一位:
+                arr.unshift({})
+                arr.splice(0,0,{})
+
+        3.删除功能
+            点击删除，删除数组中*对应*的数据
+            0,1,2,321321
+
+            在循环的过程当中给删除按钮添加一个自定义属性
+            能够对应对象的id ->nid
+                <button nid="0">删除</button>
+                <button nid="1">删除</button>
+                <button nid="321321">删除</button>
+
+            比如:
+                点击最后一个，获取到nid为321321
+                就通过nid去找数组中对应数据的下标
+
+                循环一遍数组，去判断哪个对象的id等于nid
+                如果等于，i值就是数组的那一位
+                找到了那一位，就删除它
+
+
+            
+
+
+
+
+
+
+
+
+    */
+
+    function render(arr){
+        let html = '';
+        arr.forEach(function(item){
+            html += `
+                <tr>
+                    <td>${item.id}</td>
+                    <td>${item.txt}</td>
+                    <td><button>上移</button></td>
+                    <td><button>下移</button></td>
+                    <td><button class="rm">删除</button></td>
+                </tr>
+            `
+        });
+        tbody.innerHTML = html;
+
+        let rm = document.querySelectorAll('.rm');
+        for(let i=0;i<rm.length;i++){
+             /*
+                一个按钮就对应着一个id
+             */ 
+            rm[i].nid = arr[i].id;
+            rm[i].onclick = function(){
+            //    alert(this.nid);
+               //循环整个数组，找到数组中对应this.nid的数据的位置，然后将其删除
+                for(let i=0;i<arr.length;i++){
+                    //当数组中的某个数据的id等于点击删除的nid
+                    if(arr[i].id === this.nid){
+                        //就删除这个数据
+                        arr.splice(i,1);
+                        //根据最新的数据渲染页面
+                        render(arr);
+                    }
+                }
+            }
+        }
+    }
+
+    render(arr);
+
+    
+    
+
+
+    //添加
+    btn.onclick = function(){
+        arr.splice(arr.length,0,{
+            id:+new Date,
+            txt:txt.value
+        });
+        render(arr);
+        // console.log(arr);
+    }
+
+    //删除
+
+
+
+</script>
+</body>
+</html>

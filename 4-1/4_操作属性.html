@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: red;
+    display: none;
+}
+.active{
+    border: 10px solid #000;
+}
+</style>
+</head>
+<body>
+    <button id="btn">点击显示</button>
+    <div id="box" class="active">哈哈哈</div>
+    <!-- <img src="1.png" id="img"/>
+    <a href=""></a> -->
+<script>
+    /*
+        属性：
+            属性是属于对象下的一个小分类。
+        . 的
+        class 类 
+        关键字:是js中已经使用的名字
+
+        设置元素的样式:
+            .style.height
+            .style.width
+            .style.border = '1px solid #000';
+
+        注意:
+            使用js去设置元素的样式，都是加在行间，所以它的优先级就是最高的。
+
+        document.getElementById('box').onclick
+
+        复合样式:
+            background-color:red
+            去掉-开头字母要大写
+            backgroundColor:red
+
+            font-size:50px
+
+            fontSize = '50px';
+
+
+        遇到出不来效果，一定要打开调试工具来看 90%以上的错误都能在控制台打印出来。
+    */
+// console.log(document.getElementById('box').className);
+    // console.log(document.getElementById('img').src);
+   
+
+    //把100px的值赋给box的样式的高度
+    // document.getElementById('box').style.height = '100px';
+    // document.getElementById('box').style.border = '5px solid #000';
+    // document.getElementById('box').style.background = 'green';
+
+
+    /*
+        需求分析:
+            点击按钮，让box显示 
+    */
+    // document.getElementById('btn').onclick = function(){
+    //     // alert(1);
+    //     document.getElementById('box').style.display = 'block';
+    // }
+
+
+    //演示下错误
+    document.getElementById('btn').onclick = function(){
+        document.getElementById('box').style.display = 'block';
+        document.getElementById('box').style.backgroundColor = 'green';
+        document.getElementById('box').style.fontSize = '50px';
+        // document.getElementById('box').style.border = '5px solid yellow';
+    }
+
+
+
+
+
+</script>
+</body>
+</html>

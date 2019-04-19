@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    /*
+        倒计时:
+            未来的时间 -  现在的时间 = 剩下的时间
+
+            12:30      -       12:10 = 20
+
+        january 一月 简称 Jan
+
+        February 二月 简称 Feb
+
+        March 三月 简称 Mar
+
+        April 四月 简称 Apr
+
+        May 五月 简称 May
+
+        June 六月 简称 Jun
+
+        July 七月 简称 Jul
+
+        August 八月 简称 Aug
+
+        Septemper 九月 简称 Sep
+
+        October 十月 简称 Oct
+
+        November 十一 月 简称 Nov
+
+        December 十二月 简称 Dec
+
+
+        Math.floor(11.638683333) -> 11  向下取整
+        Math.ceil(11.638683333) -> 12   向上取整
+
+        let s = (d - d2)/1000;
+
+        天：Math.floor(s/86400)
+            s%=86400
+        时:Math.floor(s/3600)
+            s %= 3600
+        
+        分:Math.floor(s/60)
+            s %= 60
+
+        秒: s
+
+
+        第一种公式：
+	
+			天：86400 = 60*60*24  : Math.floor(t/86400)
+			
+			小时：Math.floor(t%86400/3600)
+			
+			分钟：Math.floor(t%86400%3600/60)
+			
+			秒：Math.floor(t%60)
+	
+		第二种公式：
+			天	Math.floor(t/86400);
+				t%=86400;
+			小时	var h=Math.floor(t/3600);
+				t%=3600;
+			分钟	var m=Math.floor(t/60);
+			秒	t%=60;
+
+    常用的取整公式
+        x ~ y : Math.round(Math.random()*(y-x) + x)
+        0 ~ x : Math.round(Math.random()*x)
+        1 ~ x : Math.ceil(Math.random()*x)||1
+        0 ~ x-1 : Math.floor(Math.random()*x) 
+        
+    */    
+
+    //时间对象中可以放数字，月份以当前月份 - 1
+    let d = new Date(2019,3,10,12,30); //未来的时间
+
+   function fn(){
+    let d2 = new Date(); //当前的时间
+    // console.log(d - d2); //毫秒来计算的
+    // 848206 
+    let s = (d - d2)/1000;
+
+    let m = Math.floor(s/60)
+
+    box.innerHTML = m+'分'+Math.floor(s%60) +'秒';
+    // console.log();
+   }
+
+   fn();
+   setInterval(fn,1000);
+
+
+
+
+</script>
+</body>
+</html>

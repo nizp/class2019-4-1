@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        render不明白
+        点击之后的代码
+
+        filter
+            filter过滤条件成立的值
+            参数:
+                function(item,i,all){
+                    return 条件成立的某项
+                }
+        在回调函数中，只有条件成立的结果才会被放到数组中。
+        return的值，必须为true.
+
+        返回的是一个新的数组，这个新数组跟原数组是不一样的数组
+    */    
+    
+    let arr = [true,true,true,false];
+    
+    // let arr2 = arr.filter(function(item,i){
+    //     if(item === true){
+    //         return item;
+    //     }
+    // });
+
+    // let arr2 = arr.filter(function(item,i){
+    //     return item === false;
+    // });
+    
+    // let arr2 = [];
+    // arr.map(function(item,i){
+    //     if(item === false){
+    //         arr2.push(item);
+    //     } 
+    // });
+
+    // console.log(arr2); //[fasle]
+
+
+
+
+</script>
+</body>
+</html>

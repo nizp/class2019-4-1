@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <ul id="ul">
+        <li></li>
+    </ul>
+<script>
+    /*
+        函数内的参数或者变量默认是不能被外界所访问的。
+        函数内如果没有某个变量或者参数，会去函数外查找，直到window结束。
+
+
+        当一个函数在调用（函数名+括号）的时候，做了两件事。
+        1.执行函数内的代码
+        2.函数返回值
+            默认(没有写return)的返回值为undefined
+            通过return去设置函数返回值,return后面是什么，返回的结果就是什么。
+
+
+    */ 
+    // let a = 10;
+    // function fn(){
+    //     let b = 20;
+    //     // console.log(a);
+    //     return b;
+    // }   
+    // let b = fn();
+    // console.log( fn() );
+    // alert(fn());
+
+
+
+    // function sum(a,b){
+    //     console.log(a+b);
+    //     return a+b;
+    // }
+    // let x = sum(1,6);
+    // console.log(x);//undefined   7
+
+
+
+    // function fn(a,b){
+    //     return function(){
+    //         console.log(a+b);
+    //     }
+    // }
+
+    // let x = fn(1,6);
+    // x();
+    // console.log(x); //undefined,a+b,return的那个函数,7
+
+
+
+
+    // function fn(a){
+    //     console.log(a);
+    //     return 100;
+    // }
+    // let f = fn(1);
+    // console.log(f);
+
+
+    // const box = document.getElementById('box');
+    // const ul = document.getElementById('ul');
+
+    function byId(id){
+        return document.getElementById(id);
+    }
+
+    let box = byId('box');
+    let ul = byId('ul');
+    console.log(ul);
+
+
+    // 传入一个小于10的，那么前面就补0
+
+    // 00   09  
+
+    function touD(num){
+        if(num < 10){
+          return  '0' + num;
+        }else{
+          return  '' + num;
+        }
+    }
+    console.log( touD(10) ); //-> 00 
+
+
+
+    
+
+
+
+    
+
+
+
+
+
+
+</script>
+</body>
+</html>
