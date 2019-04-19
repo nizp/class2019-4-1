@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin: 0;
+    padding:0;
+    list-style: none;
+}
+ul li{
+    float: left;
+}
+</style>
+</head>
+<body>
+    <ul>
+        <li>
+            <img src="./img/0.png" alt="" srcset="">
+            <img src="./img/0.png" alt="" srcset="">
+        </li>
+        <li>
+            <img src="./img/second1.png" alt="" srcset="">
+        </li>
+        <li>
+            <img src="./img/0.png" alt="" srcset="">
+            <img src="./img/0.png" alt="" srcset="">
+        </li>
+        <li>
+            <img src="./img/second1.png" alt="" srcset="">
+        </li>
+        <li>
+                <img src="./img/0.png" alt="" srcset="">
+                <img src="./img/0.png" alt="" srcset="">
+            </li>
+    </ul>
+<script>
+    // let newTime = new Date(2019,3,19,18);
+    let newTime = new Date('2019-4-19 18:00'); //未来的时间
+
+    // let timer = null;
+
+    let imgs = document.querySelectorAll('img');
+
+
+
+    let timer = setInterval(()=>{
+        let oldTime = new Date();
+        let s = Math.floor((newTime - oldTime) / 1000);
+        let h = Math.floor(s/3600);
+        s %= 3600;
+        let m = Math.floor(s/60);  //65 1分5  65/60 1  5
+        s %= 60;
+        let str = toDou(h) +':'+toDou(m)+':'+toDou(s);
+
+        for(let i=0;i<str.length;i++){
+            //如果i不是:那么就改变图片
+            if(i!==2 && i!==5){
+                imgs[i].src = './img/'+ str[i] +'.png';
+            }
+        }
+
+        console.log(str);
+    },1000);
+
+    function toDou(n){
+        return n<10?'0'+n:''+n;
+    }
+    
+    console.log(newTime)
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+span{
+    /* color:yellow; */
+    background:yellow;
+}
+</style>
+</head>
+<body>
+    <input type="text" id="txt"/>
+    <button id="btn">查找</button>
+    <hr />
+    <input type="text" id="txt2"/>
+    <input type="text" id="txt3"/>
+    <button id="btn2">替换</button>
+    <hr />
+
+    <div id="box">
+        一场大火烧痛了巴黎人的心。15日晚，800多年以来被巴黎城市地标和欧洲历史见证者存在的巴黎圣母院陷入火海。作为法国文化的象征，数百年来，巴黎圣母院一直是法国艺术品和文物的重要收藏地。据法媒消息，巴黎消防发言人普鲁斯16日凌晨宣布，圣母院的全部艺术珍品都被救出，包括荆棘冠和圣-路易的长袍。在这场大火中，有什么被烧毁了？
+    </div>
+<script>
+    /*
+        1.点击按钮，获取查找的文字
+        2.获取box中的所有内容，查看是否包含查询的文字
+        3.查到之后把查到的文字添加一个span标签
+
+        一场大火烧痛了巴黎人的心。
+
+        一场<span>大火</span>烧痛了巴黎人的心。
+
+        ['一场','烧痛了巴黎人的心。']
+
+        '一场'<span>大火</span>'烧痛了巴黎人的心。'
+
+        一场<span>大火</span>烧痛了巴黎人的心。
+
+
+    */
+    let boxVal = box.innerText;
+    btn.onclick = function(){
+        let val = txt.value;
+        if(boxVal.includes(val)){
+            //包含
+            box.innerHTML = boxVal.split(val).join('<span>'+ val +'</span>');
+        }else{
+            //不包含
+            alert('查无此字!');
+        }
+        txt.value = '';
+    }
+
+
+    /*
+        替换:
+            1.判断2边的input中都得有值
+            2.判断第一个input的值有没有在box的内容中
+            3.有就替换，那第一个input中的内容切，拼成第二个input中的值
+    */
+    btn2.onclick = function(){
+        let val1 = txt2.value;
+        let val2 = txt3.value;
+        //当2个input中都有值
+        if(val1 && val2){
+            if(boxVal.includes(val1)){
+                // alert('有')
+                box.innerHTML = boxVal.split(val1).join('<span>'+val2+'</span>')
+                //每一次替换操作，都把最新的值给boxVal,以便于查找的时候能直接找到最新文字
+                boxVal = boxVal.split(val1).join(val2);
+                // console.log(boxVal.split(val1).join('<span>'+val2+'</span>'));
+            }else{
+                alert('查无此字');
+            }
+        }else{
+            alert('请输入内容')
+        }
+        txt2.value = txt3.value = '';
+
+    };
+</script>
+</body>
+</html>
