@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        把相同的事务抽象出来归为一类，把描述它具体特征的属性或者方法
+        挂在这个类的原型上的一种编程方式。
+
+
+        实例上如果没有某个属性或者方法,还会到构造函数的原型下
+        去查找
+
+
+        原型:
+            只要是个函数，函数下都有一个叫prototype的属性
+            值为对象，这个原型下的方法或者属性只有2种方式可以
+            获取
+            1.obj.prototype.xx();
+            2.new obj().xx()
+
+        原型链: __proto__
+            实例上一定有原型链
+
+        ****
+        实例化对象上的原型链 === 构造函数的原型
+
+        对象.__proto__ === 函数.prototype
+
+
+        对象上有原型链 -> 指向构造函数的原型
+
+    */
+
+    function Gui(name){
+        this.name = name;
+        this.jiao = '4只';
+        this.keer = '椭圆壳儿';
+        this.zishi = '爬';
+    }
+
+    // Gui.prototype.shi = function(食物){
+    //     console.log(this.name+'吃'+食物);
+    // }
+
+    // Object.prototype.shi = function(){
+    //     console.log(this.name+'喝水');
+    // };
+
+    let g1 = new Gui('草龟');//墨
+    let g2 = new Gui('鳄龟');
+
+    // console.log(g1.__proto__ === Gui.prototype);
+
+
+
+    // g1.shi('啥都吃');
+    // g2.shi('泥鳅');
+
+
+    console.dir(g1);
+    console.log(Object.prototype.__proto__);
+    // console.log(g1.shi === g2.shi);
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
