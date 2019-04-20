@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        使用原型的目的:
+
+        当构造函数中添加方法的时候，每new一次就生成一个同类
+        方，这些方法虽然同类但是各自不相等，这就导致如果new若干次，
+        那么就会生成若干个一摸一样的方法，这样对性能是不友好的
+        所以我们要使用原型的方式去把方法挂在原型上。
+
+
+        原型：
+            当定义一个函数的时候,这个函数自身有一些属性
+            或者方法，其中有一个属性叫做prototype,这个
+            属性就叫原型
+
+            **** prototype它是一个对象
+
+            它的用处是如果实例化对象上没有某个属性或者方法
+            还会去这个实例化对象的构造函数中的原型下去查找
+            该属性或者方法.
+
+            如果构造函数的原型上没有这个方法，那么还会去
+            原型下的原型链（__proto__）中查找，找到Object.prototype
+
+            {
+                prototype:{
+
+                }
+            }
+
+
+        换言之:
+            ****构造函数的原型下的方法只给它的实例化对象使用
+
+        class 类
+
+
+        以构造函数模式 + 原型模式 = js面向对象模式
+
+
+        创建一个警察类
+            function Police(name,id){
+                this.name = name;
+                this.job = '警察';
+                this.uniform = '警服';
+                this.id = id;
+                this.zongzhi = '为人民服务'
+            }
+
+            Police.prototype.wq = function(){
+                console.log('带枪');
+            }
+            Police.prototype.wg = function(){
+                console.log('胸口碎大石');
+            }
+            Police.prototype.cadd = function(){
+                console.log('抓贼');
+            }
+
+
+
+        实例化一个黑猫警长
+
+            let p1 = new Police('黑猫警长',001);
+            let p2 = new Police('x战警',002);
+            p1.cadd();
+            p1.wq();
+            p1.wg();
+
+            p2.cadd();
+
+            [].push
+            [].push
+
+    */
+
+
+
+
+    function Fn(name,age){
+        this.name = name;
+        this.age = age;
+        // this.say = function(){
+        //     console.log(this.name);
+        // }
+    }
+
+
+    Fn.prototype.say =  function(){
+        console.log(this.name,'111');
+    }
+    //什么时候才能调用function(){console.log(this.name);}
+   
+    //1.Fn.prototype.say()
+    //2.new Fn().say();
+
+    // Fn.prototype.haha = '哈哈哈';
+    // Object.prototype.haha = '对象的哈哈';
+
+
+    // console.dir(typeof Fn.prototype);
+
+    let Person = new Fn('李永梅',18);
+    let Person2 = new Fn('马骅骏',21);
+
+    // console.log(Person2.haha);
+    // console.log(Fn.prototype)
+
+    // Fn.prototype.say()
+    Person.say();
+    Person2.say();
+
+    let arr = [];
+    let arr2 = [];
+
+    // Array.prototype.push = function(){
+    //     alert('哈哈,我把你改了');
+    // }
+
+    // arr.push();
+    // arr2.push();
+
+
+    // console.log(arr.push == arr2.push);
+    // console.log(Person.say == Person2.say);
+    
+
+    // let obj = {
+    //     prototype:{
+    //         say:function(){
+    //             console.log(this);
+    //         }
+    //     },
+    //     say:function(){
+    //         console.log(this);
+    //     }
+    // }
+    //this只看方法前面的.
+    // obj.say();  
+    // obj.prototype.say();
+    // console.log()
+
+
+</script>
+</body>
+</html>

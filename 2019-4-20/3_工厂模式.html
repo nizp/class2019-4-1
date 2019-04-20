@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        工厂模式:
+            目的是批量生成多个实例,
+            通过传参去描述具体的实例,
+            把生产后的对象返回到外界使用。
+
+    */
+
+    function fn(name,age){
+        let obj = {}; //原材料
+        //加工
+        obj.name = name;
+        obj.age = age;
+        //出厂
+        return obj;
+    }
+
+    let 机器人1号 = fn('李永梅',8);
+    let 机器人2号 = fn('席超',8);
+
+    console.log(机器人1号);
+    console.log(机器人2号)
+
+</script>
+</body>
+</html>

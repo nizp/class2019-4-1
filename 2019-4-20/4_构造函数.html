@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    /*
+        构造函数:
+            把属性或者方法挂在this上，然后去new这个函数
+            浅规则是构造函数首字母大写。
+        
+        new 是一元运算符 -> *专门*运算*函数*的
+
+        1.执行函数,不使用()调用也是可以执行函数的，此时的()只是为了传参
+    
+        2.构造函数(fn)中的this指向了当前实例。
+            跟普通函数比较把默认的window转成当前实例
+            function Fn(){}  构造函数
+            fn{}  实例化对象
+
+        3.return 的结果默认指向当前实例this,
+        有return 如果后面跟着的是一个基本类型
+        结果依然是实例,如果后面跟着的是一个引用
+        类型，那么结果就是这个return后的引用类型
+
+
+    面向对象编程:
+        把描述相同的事务抽象出来，归为一类，把描述这个类的
+        属性和方法挂在这个类的原型(prototype)上的一种编程方式就叫面向对象
+
+    
+        抽象:
+            抽离出长的相像的部分。
+
+        js的面向对象有特征:
+            抽象
+            封装
+            继承
+            多态
+
+
+        类 -> 构造函数 -> 把相同的代码抽离出来归纳在一个函数中
+
+        人类 （有思想，会创新，会使用工具...）
+        鸟类 （能飞,有翅膀，有毛）
+        我跟他不是一类人 （我的行为方式和他的行为方式）
+
+    */
+
+    // function fn(a){
+    //     // console.log(this);
+    //     // return 1;  //还是实例
+    //     return {name:1}
+    // }
+    // // fn();
+    // // new fn(1);
+    // // new fn(1);
+    // console.log( new fn() );
+
+    // let d = new Date;
+    // console.log(d);
+
+    //类
+    function Fn(name,age){
+        // let obj = {}; //原材料  this//Fn{}
+        //加工
+        // obj.name = name;
+        // obj.age = age;
+        this.name = name;
+        this.age = age; 
+        //出厂
+        // return obj;
+    }
+
+    //实例
+    let 机器人1号 = new Fn('李永梅',8);
+
+    console.log(机器人1号);
+    // console.log(Array);
+
+
+    /*
+       {} => new Object()
+       [] => new Array 
+    */
+</script>
+</body>
+</html>
