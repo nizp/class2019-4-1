@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function fn(name){
+        this.name = name;
+        // this.say = function(){
+        //     console.log(this.name);
+        // }
+    }
+    fn.prototype.say = function(){
+        console.log('原型下的'); 
+    }
+    Object.prototype.say = function(){
+        console.log('对象的'); 
+    }
+    // fn.say = function(){
+    //     console.log('fn的')
+    // }
+    //fn.say()
+    // Object.say = 'objectsay';
+    //Object.say
+    // Function.say = 'Funsay';
+    //Function.say
+    Function.prototype.say = function(){
+        console.log('Func');
+    }
+    // fn.say();
+    // Function.say()
+    // new Function().say();
+    /*
+        fn.say -> fn.__proto__ -> Function.prototype
+        Function.say -> Function.__proto__ -> Function.prototype
+        new Function().say -> 
+    */
+
+    let f = new fn();
+    // f.say = function(){
+    //     console.log('自己的');
+    // }    
+
+    /*
+        new fn().say() -> 
+            this.say = function(){
+                console.log(this.name);
+            }
+    */
+
+    // fn.say();
+
+    // fn.prototype.say();
+    // f.say();
+
+    // console.log(Object.say)
+</script>
+</body>
+</html>

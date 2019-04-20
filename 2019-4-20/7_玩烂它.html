@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        1.先看对象自身有没有这个属性或者方法  
+            有就不找了
+            没有的话就接着找
+
+        2.通过对象的原型链找构造函数的原型
+            有就不找了
+            没有的话就接着找
+
+        3.因为函数的原型是个对象，对象身上有原型链，通过原型链又去找构造函数原型
+            有就不找了
+            没有的话就接着找
+
+
+    */
+    function fn(name){
+        this.name = name;
+        this.say = function(){
+            console.log(this.name);//16  错了
+        }
+    }
+    // fn.prototype.say = function(){
+    //     console.log('原型下的'); //8
+    // }
+    Object.prototype.say = function(){
+        console.log('对象的'); //
+    }
+    // fn.say = function(){
+    //     console.log('fn的')
+    // }
+    Function.prototype.say = function(){
+        console.log('Func');//0 √
+    }
+
+    let f = new fn();
+    f.say = function(){
+        console.log('自己的');//0
+    }
+
+    /*
+        new Function -> function.say
+
+        fn.prototyoe.say -> new fn
+        Function.prototype.say -> new Function -> function
+
+        实例是new构造函数出来的
+
+        [] -> new Array
+        function fn(){} -> new Function
+
+        所以说，函数即是函数，又是对象(它是Function的实例化对象)
+        函数即有原型，也有原型链，函数的原型上的属性或者方法只给它的
+        实例化对象使用。
+
+        fn.say->__proto__ Function.prototype
+
+        new fn -> fn.prototype
+
+
+        Function.say -> Function.__proto__ -> Function.prototype
+
+        Object.prototype
+
+    */
+    // Function.say();
+    // fn.say();
+
+    // f.say();
+
+    console.dir(Function);
+</script>
+</body>
+</html>
