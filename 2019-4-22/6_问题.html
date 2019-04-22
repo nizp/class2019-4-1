@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*
+    1. function Fn(name){
+        this.name = name;
+        this.say = function(){
+            console.log(this.name);//16  错了
+        }
+    }
+    Fn.prototype.say = function(){
+        console.log('原型下的'); //8
+    }
+    Object.prototype.say = function(){
+        console.log('对象的'); //
+    }
+    // fn.say = function(){
+    //     console.log('fn的')
+    // }
+    Function.prototype.say = function(){
+        console.log('Func');//0 √
+    }
+    Fn.say();
+
+    在一个函数中，包了一个点击事件，这个事件函数中的this是谁
+
+    document.onclick = function(){
+        new fn()
+    }
+    function fn(){
+        console.log(this);
+    }
+
+    this的问题
+
+    结构中有很多的li元素，想点击li每个li是先加点击还是先循环？
+
+        ele.getElementsByTagName('li')  类数组
+
+        ele.querySelectorAll('li') 类数组
+
+        先循环后添加
+
+        lis[i].onclick = function(){}
+
+        lis.onclick   [li,li,li]
+
+
+    就想把change给被点击的按钮。（每个按钮都有change方法）
+
+
+    Function 和 Object 的关系
+
+    Object -> function Object(){}
+
+    function Object(){} -> new Function的实例
+
+
+    Object.prototype.__proto__ = null
+
+    new Object
+
+
+    方法之间的关联
+
+
+    原型链（控制台）  今天某个地方不明白
+
+    Function它是谁，它干嘛的
+
+        内置类
+            function Function(){} -Function
+
+            Function.say -> Function.prototype.say
+
+            function fn(){}
+
+            fn.prototype.say
+
+            fn.say -> Function.prototype
+
+    this控制
+
+
+    闭包的使用
+
+        1.代码不跟外界起用途
+            (function(){})()
+        2.一般都是为了存值
+
+    querySeleAll
+    getTagName
+
+    box.getTagName('box li')
+
+    执行:
+        什么时候会影响之前的变量，var的情况
+        有块级左右域的时候，会不会影响变量
+        私有作用域
+
+    做题的思路
+
+    构造函数的原型
+
+    that
+
+*/   
+
+    // console.log(Function instanceof Function);
+    
+    /*
+        
+        实例身上没有就去找构造函数的原型
+
+        实例.__proto__ === 构造函数的原型
+    
+        Fn -> new Function()
+
+        let fn = new Function()
+        let fn = function(){}
+        function fn(){}
+
+
+        
+        Fn.say -> Fn.__proto__ -> Fn.prototype.say
+        f.say
+
+        Fn.prototype只给它的实例化对象使用
+        new Fn
+
+
+
+        Fn.prototype.say()
+        new Fn().say()
+
+
+        function Fn(){}
+
+       
+
+
+    */
+    
+
+    // 实例.__proto__ === 构造函数的原型
+    // 构造函数原型下的方法只给它的实例化对象使用
+
+    // function Fn(name){
+    //     this.name = name;
+    //     // this.say = function(){
+    //     //     console.log(this.name);//16  错了
+    //     // }
+    // }
+    // // Fn.prototype.say = function(){
+    // //     console.log('原型下的'); //8
+    // // }
+    // // Object.prototype.say = function(){
+    // //     console.log('对象的');
+    // // }
+    // let fn = new Fn;
+    // // fn.say = function(){
+    // //     console.log('fn的')
+    // // }
+    // Function.prototype.say = function(){
+    //     console.log('Func');//0 √
+    // }
+
+
+    /*
+        fn.say -> 去fn的构造函数下的原型去找
+
+        fn -> function Fn()
+
+        Fn.prototype.say -> Fn.prototype.__proto__
+
+        Object.prototype.say
+
+        Object.prototype.__proto__ = null
+
+    */
+    // fn.say(); 
+
+    // Fn.prototype.say();
+
+    /*
+        Fn.say -> {
+            1.__proto__ -> Fn.say
+
+            Fn.__proto__ ->  Function.prototype
+
+            2.prototype -> new Fn().say
+        }
+    */
+
+
+    // function fn(name){
+    //     this.name = name;
+    //     this.say = function(){console.log(this.name);}
+    // }
+    // fn.prototype.say = function(){
+    //     console.log('原型下的'); 
+    // }
+    // Object.prototype.say = function(){
+    //     console.log('对象的');
+    // }
+    // Function.prototype.say = function(){
+    //     console.log('Func');//
+    // }
+    // let f = new fn();
+    // f.say = function(){
+    //     console.log('自己的');//0
+    // }
+    // Function.say();
+
+    /*
+        Function.say
+            Function.__proto__
+
+            Function.prototype
+    */
+
+
+    /*
+        fn.say = function(){}
+
+        fn.__proto__ -> Function.prototype
+
+        fn.prototype
+    */
+
+    // function Fn2(){
+
+    // }
+    // let f2 = new Fn2;
+    // f2.name = '小渣渣';
+    // console.dir(f2);
+
+
+   
+   
+    // for(var i=0;i<10;i++){
+    //     function fn(a){
+    //         setTimeout(function(){
+    //             console.log(a);
+    //         },0);
+    //     }
+    //     fn(i);
+    // }
+
+    // var a = 10;
+
+    // function fn(){
+    //     {
+    //         a = 20;
+    //     }
+    // }
+    // fn();
+    // console.log(a);
+    
+
+   
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

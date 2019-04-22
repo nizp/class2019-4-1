@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        林同贺 20遍
+        王世琦 10遍
+        刘鑫  10遍
+        廖一庭 10遍
+        李永梅 10遍
+        赵志强 10遍
+        王权士 10遍
+
+
+        window:
+            1.直接在全局输出this
+            2.函数打印this,并且直接调用
+            3.定时器中普通函数this为window
+            4.匿名函数自执行
+
+        事件中的this:
+            哪个对象触发，this就是那个对象
+
+        实例:
+            new 构造函数 -> this就是实例
+
+        箭头函数:
+            this就走定义箭头函数的域
+            箭头函数不能new，一new就报错
+            箭头函数也没有arguments
+
+        对象中的this
+           let obj = {fn:function(){console.log(this)}}
+    */
+
+    // document.onclick = new new fn;
+    // function fn(){
+    //     console.log(this); //fn{}
+    //     return function(){
+    //         console.log(this); //{}
+    //     }
+    // };
+    
+    // document.onclick = new new new fn();
+    // function fn(){
+    //     console.log(this);//fn{}
+    //     return function(){
+    //         console.log(this);//{}
+    //         //new {}
+    //     }
+    // };
+
+    // document.onclick = function(){
+    //     setTimeout(function(){
+    //         console.log(this);//document
+    //         new fn;
+    //     }, 1000);
+    // };
+
+    // function fn(){
+    //     console.log(this);//实例
+    // }
+
+
+    function fn(){
+        // return function(){
+        //     console.log(3);
+        // }
+    }
+    fn.prototype.say = function(){
+        console.log(2);
+    }
+    Function.prototype.say = function(){
+        console.log(4);
+    }
+    fn.say = function(){
+        console.log(1);
+    }
+    /*
+        new fn().say() -> f.say()
+
+        new fn.say -> new fn.say  
+
+        function fn(){
+            console.log(1)
+        }
+
+        new fn
+
+        function fn(){
+            console.log(this) //fn{}
+            return function(){
+                console.log(this) {}
+            }
+           
+        }
+        new new fn
+
+         
+        function fn(){
+            var say = function(){
+                //
+            }
+            say();
+            console.log(this)
+        }
+        fn()
+     
+    */
+    new fn.say(); //4
+
+    // let f = new fn;
+    // console.log(f);
+    // f.say();
+
+
+
+
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // console.log(this);//window
+    // function fn(){
+    //     console.log(this);
+    // } 
+    // fn();
+
+    // setTimeout(function(){
+    //     console.log(this);
+    // }, 1000);
+
+    
+    // function Fn(){
+    //     console.log(this); //Fn{}
+    // }
+    // new Fn(); 
+
+    // let fn = () => {
+    //     console.log(this);
+    // }
+    // fn();
+
+
+   
+
+
+    // document.onclick = function(){
+    //     // console.log(this);
+    //     let fn = () => {
+    //         console.log(this);
+    //     }
+    //     fn();
+    // }    
+
+
+    // document.onclick = function(){
+    //     let obj = {
+    //         fn:()=>{
+    //             console.log(this);
+    //         }
+    //     }
+    //     obj.fn();
+    // }
+    
+    // let f = obj.fn;
+    // f();
+</script>
+</body>
+</html>

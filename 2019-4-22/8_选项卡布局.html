@@ -22,17 +22,52 @@
 </style>
 </head>
 <body>
-    <button class="active">按钮1</button>
-    <button>按钮2</button>
-    <button>按钮3</button>
-
-    <section id="box">
-        <div class="show">头条</div>
-        <div>体育</div>
-        <div>新闻</div>
-    </section>
+    <div id="warp">
+            <button class="active">按钮1</button>
+            <button>按钮2</button>
+            <button>按钮3</button>
+        
+            <section id="box">
+                <div class="show">头条</div>
+                <div>体育</div>
+                <div>新闻</div>
+            </section>
+    </div>
 <script>
+    function Tab(id){
+        this.warp = document.getElementById(id);
+        this.btns = this.warp.getElementsByTagName('button');
+        this.divs = this.warp.getElementsByTagName('div');
+    }
+    Tab.prototype.events = function(evName){
+        for(let i=0;i<this.btns.length;i++){
+            //给每个btns都加上this.change
+            this.btns[i].change = this.change;
+            this.btns[i].onclick = function(){
+                //按钮
+                this.change();
+            }
+        }
+    }
 
+    Tab.prototype.change = function(){
+        // console.log(this)
+        let btns = this.parentNode.getElementsByTagName('button');
+        //通过父级找box下的div
+        let divs = this.parentNode.lastElementChild.getElementsByTagName('div');
+        // console.log(divs);
+
+        for(let i=0;i<btns.length;i++){
+            btns[i].className = '';
+            divs[i].className = '';
+            btns[i].index = i;
+        }
+        this.className = 'active';
+        divs[this.index].className = 'show';
+    }
+
+    new Tab('warp').events();
+    
 </script>
 </body>
 </html>
