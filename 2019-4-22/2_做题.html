@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    /*
+        实例找链 -> 函数找原型
+
+        xx.x -> xx的构造函数上的原型 -> xx的构造函数上的原型.原型链
+    */
+
+    function Fn(name){
+        this.name = name;
+        var name = 20;
+    }    
+    Fn.prototype.say = function(){
+        console.log(5);
+    }
+    // Fn.prototype.say = function(){
+    //     console.log(11);
+    // }
+    Function.prototype.say = function(){
+        alert(8);
+    }
+    Function.say = function(){
+        alert(9);
+    }
+    //Function.__proto__ -> Function.prototype
+    Function.__proto__.say = function(){
+        alert(10);
+    }    
+    let oo = new Fn;
+    /*
+        oo.__proto__ -> Fn.prototype  6
+    */
+    // console.log(Fn.prototype === oo.__proto__)
+    oo.__proto__.say = function(){
+        console.log(6);
+    }
+
+    /*
+        oo.__proto__.__proto__
+
+        oo.__proto__ === Fn.prototype
+
+        Fn.prototype.__proto__ === Object.prototype
+
+    */
+    
+    oo.__proto__.__proto__.say = function(){
+        console.log(7);
+    }
+
+    // console.log(oo.__proto__.__proto__ === Object.prototype)
+
+    // console.dir(oo.__proto__.__proto__);
+    console.dir(Object);
+    // console.dir(oo)
+
+    oo.say();//6
+
+    /*
+        oo.say 
+
+            oo.say = function(){}
+            function Fn(){
+                this.say = function(){}
+            }
+        
+        Fn.prototype.say = function(){
+            console.log(5);
+        }
+
+        
+
+    */
+
+</script>
+</body>
+</html>

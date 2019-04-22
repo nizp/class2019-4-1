@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:200px;
+    height:50px;
+    border:1px solid #000;
+}
+#box div{
+    display: none;
+} 
+#box div.show{
+    display: block;
+}
+.active{
+    background: yellow;
+}
+
+</style>
+</head>
+<body>
+    <button class="active">按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+
+    <section id="box">
+        <div class="show">头条</div>
+        <div>体育</div>
+        <div>新闻</div>
+    </section>
+<script>
+    /*
+        把具有相同特征的事务抽离出来归为一类
+    */
+
+    function Tab(){
+        this.btns = document.querySelectorAll('button');
+        this.divs = document.querySelectorAll('#box div');
+    }
+
+    //给按钮加事件
+    Tab.prototype.events = function(){
+       
+        let that = this;//这个this是实例化对象
+        //  console.log(that);
+        for(let i=0;i<this.btns.length;i++){
+            this.btns[i].onclick = function(){
+                // alert(i);
+                // this.change();
+                // console.log(that);
+                that.change(i);
+                // console.log(this);//这里的this是按钮
+                //按钮是没有change方法的，所以说，我们需要
+                //把This指向实例，因为实例上能调用到change
+                //方法
+            }
+        }
+    }
+
+    //切换
+    Tab.prototype.change = function(index){
+        for(let i=0;i<this.btns.length;i++){
+            this.btns[i].className = '';
+            this.divs[i].className = '';
+        }
+        this.btns[index].className = 'active';
+        this.divs[index].className = 'show';
+    }
+
+
+    let t = new Tab;
+    t.events();
+
+
+
+
+</script>
+</body>
+</html>

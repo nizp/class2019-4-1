@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box,#box2{
+    width:200px;
+    height:50px;
+    border:1px solid #000;
+}
+#box div,#box2 div{
+    display: none;
+} 
+#box div.show,#box2 div.show{
+    display: block;
+}
+.active{
+    background: yellow;
+}
+
+</style>
+</head>
+<body>
+    <div id="warp">
+        <button class="active">按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+    
+        <section id="box">
+            <div class="show">头条</div>
+            <div>体育</div>
+            <div>新闻</div>
+        </section>
+    </div>
+    <div id="warp2">
+        <button class="active">按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+    
+        <section id="box2">
+            <div class="show">头条</div>
+            <div>体育</div>
+            <div>新闻</div>
+        </section>
+    </div>
+<script>
+    function Tab(id){
+        this.warp = document.getElementById(id);
+        this.btns = this.warp.getElementsByTagName('button');
+        this.divs = this.warp.getElementsByTagName('div');
+    }
+    Tab.prototype.events = function(evName){
+        let that = this;
+        for(let i=0;i<this.btns.length;i++){
+            this.btns[i][evName] = function(){
+                that.change(i);
+            }
+        }
+    }
+    Tab.prototype.change = function(index){
+        for(let i=0;i<this.btns.length;i++){
+            this.btns[i].className = '';
+            this.divs[i].className = '';
+        }
+        this.btns[index].className = 'active';
+        this.divs[index].className = 'show';
+    }
+
+    Tab.prototype.play = function(){
+        let num = 0;
+        setInterval(() => {
+            num++;
+            if(num > this.btns.length-1){
+                num = 0;
+            }
+            this.change(num);
+        }, 500);
+    }
+
+
+    let t1 = new Tab('warp');
+    let t2 = new Tab('warp2');
+    t1.events('onclick');
+    t2.events('onmouseover');
+    t2.play();
+
+</script>
+</body>
+</html>

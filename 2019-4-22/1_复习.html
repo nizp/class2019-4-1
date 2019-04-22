@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        原型：
+            prototype为 一个函数天生自带的属性，它的值是一个对象
+
+            为了优化性能的，prototype只给它的实例化对象使用
+
+            如果在相同的类中去new多个实例，它们的方法是相等的
+
+        原型链
+            一种是__proto__:
+                实例上才有__proto__
+
+                实例对象.__proto__ === 构造函数下的原型
+
+            另一种是查找规律:
+
+                实例化对象上有或者没有怎么看？（某个属性或者方法）
+                
+                如果它是构造函数:
+                    function Fn(name){
+                        this.name = name
+                    }
+                    new Fn
+                    Fn{name:1}
+
+                    let fn = new Fn
+                    fn{name:1}
+                    
+
+                如果它是对象:
+                    {name:1}
+
+                f = new Fn
+                f.say = function(){}
+
+            如果说实例化对象上没有怎么办?
+                构造函数.原型
+
+            如果说构造函数.原型下没有怎么办？
+                
+                构造函数.原型.__proto__ 
+
+
+
+        function的三种形态
+            普通函数
+                function fn(){}
+            构造函数（类）构造对象的函数 得使用new
+                function Fn(name){
+                    this.name = name;
+                }
+            实例化对象  new Function的实例化对象
+                let fn = new Function();
+
+
+
+
+
+    */
+    // function Fn(){
+        
+    // }
+    // Fn.prototype.say = function(){
+    //     alert(1);
+    // }
+    // Function.prototype.say = function(){
+    //     alert(2);
+    // }
+    // let f = new Fn;
+
+    // console.log(f);
+
+    // let f2 = new Fn;
+
+    // Fn.say();//实例化对象  Fn.__proto__ === Function.prototype
+
+    // f.say()
+    // console.dir(f.say);
+//    console.log(f.say == f2.say);
+
+    // let obj = {name:'1'};
+    // console.log(f);
+
+
+</script>
+</body>
+</html>

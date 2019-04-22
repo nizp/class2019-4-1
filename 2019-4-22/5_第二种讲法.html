@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:200px;
+    height:50px;
+    border:1px solid #000;
+}
+#box div{
+    display: none;
+} 
+#box div.show{
+    display: block;
+}
+.active{
+    background: yellow;
+}
+
+</style>
+</head>
+<body>
+    <div id="warp">
+        <button class="active">按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+    
+        <section id="box">
+            <div class="show">头条</div>
+            <div>体育</div>
+            <div>新闻</div>
+        </section>
+    </div>
+<script>
+    function Tab(id){
+       this.warp = document.getElementById(id);
+       this.btns = warp.getElementsByTagName('button');
+       this.divs = warp.getElementsByTagName('div');
+    }
+
+    Tab.prototype.events = function(){
+        // console.log(this.btns);
+        let that = this;
+        for(let i=0;i<this.btns.length;i++){
+            this.btns[i].onclick = function(){
+                that.change(this);
+            }
+        }
+    }
+    
+    Tab.prototype.change = function(that){
+        // console.log(this,that);
+        for(let i=0;i<this.btns.length;i++){
+            this.btns[i].className = '';
+            this.divs[i].className = '';
+            this.btns[i].index = i;
+        }
+        that.className = 'active';
+        this.divs[that.index].className = 'show';
+    }
+
+    new Tab('warp').events();
+
+</script>
+</body>
+</html>
