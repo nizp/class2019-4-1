@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box,#box2{
+    width:200px;
+    height:50px;
+    border:1px solid #000;
+}
+#box div,#box2 div{
+    display: none;
+} 
+#box div.show,#box2 div.show{
+    display: block;
+}
+.active{
+    background: yellow;
+}
+
+</style>
+</head>
+<body>
+    <div id="warp">
+        <button class="active">按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+        <section id="box">
+            <div class="show">头条</div>
+            <div>体育</div>
+            <div>新闻</div>
+        </section>
+    </div>
+
+    <div id="warp2">
+            <button class="active">按钮1</button>
+            <button>按钮2</button>
+            <button>按钮3</button>
+            <section id="box2">
+                <div class="show">头条</div>
+                <div>体育</div>
+                <div>新闻</div>
+            </section>
+        </div>
+
+        <button id="btn1">按钮一</button>
+        <button id="btn2">按钮二</button>
+        <button id="btn3">按钮三</button>
+<script>
+    /*
+        第2个warp自动播放
+        第1个warp自动播放
+        反向启动
+
+    */
+
+    function tab(id,onoff){
+        let warp = document.getElementById(id);
+        let btns = warp.querySelectorAll('button');
+        let divs = warp.querySelectorAll('div');
+        let timer = null;
+        let num = 0;
+        for(let i=0;i<btns.length;i++){
+            btns[i].onclick = function() {
+                for(let i=0;i<btns.length;i++){
+                    btns[i].className = '';
+                    divs[i].className = '';
+                }
+                btns[i].className = 'active';
+                divs[i].className = 'show';
+            }
+        }
+
+        if(onoff){
+            timer = setInterval(function(){
+                num++;
+                if(num > btns.length-1){
+                    num = 0;
+                }
+                for(let i=0;i<btns.length;i++){
+                    btns[i].className = '';
+                    divs[i].className = '';
+                }
+                btns[num].className = 'active';
+                divs[num].className = 'show';
+            },1000);
+        }
+
+        btn1.onclick = function(){
+            clearInterval(timer);
+            tab('warp2');
+        }
+
+        btn2.onclick = function(){
+            tab('warp',true);
+        }
+        
+    }
+
+
+    tab('warp');
+    tab('warp2',true);
+
+</script>
+</body>
+</html>

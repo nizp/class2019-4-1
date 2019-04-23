@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        继承:
+            子类继承了父类的一些特征，然后自己还有一套自己的特征
+            
+
+        为什么要继承:
+            就是为了代码能够更好复用，组合起来生成一个新的类别
+        
+        属性继承:
+            类式继承(构造函数继承)
+                把父类看做一个函数，调用这个父类并且通过call去
+                改变this指向，把指向改为子类。
+
+        方法继承:
+            扩展式继承
+                {...父类原型}
+
+            拷贝继承
+                for in
+                child.prototype = deepClone(parent.prototype)
+
+        原型继承
+
+
+        对象继承 -> 寄生式组合继承 ->  {...对象}
+
+        
+        coder
+
+        [1,2,4] 
+    */ 
+   
+    function Person(name,age){
+        this.name = name;
+        this.age = age;
+        // console.log(this);
+    }
+    Person.prototype.say = function(){
+        alert('我叫'+this.name);
+    }
+    function Coder(name,age,job){
+        // this.name = name;
+        // this.age = age;
+        // console.log(this);
+        Person.call(this,name,age);
+        this.job = job;
+    }
+
+    // Coder.prototype = {...Person.prototype};
+
+    Coder.prototype = deepClone(Person.prototype);
+
+
+
+
+    Coder.prototype.say = function(){
+        alert('我叫'+this.name+'是一个代码传说');
+    }
+    
+    // Coder.prototype.coding = function(){
+    //     console.log('会敲代码');
+    // }
+
+    let p = new Person('盘古','好几千年');//Person{}
+    let c = new Coder('吕阔',20,'码农');
+
+    // console.log(c);
+
+    c.say();
+    p.say();
+
+    // c.coding();
+   
+
+    function deepClone(obj){
+        //先声明一个数组，去存克隆出来的内容
+        //判断obj是否为数组，是数组就o就为[],否则为{}
+        let o = obj.push?[]:{};
+        //循环传进来的对象
+        for(let attr in obj){
+        // for(let i=0;i<arr.length;i++){
+            //判断对象中的某个值是否为引用类型
+            //如果是，就继续调用deepClone把引用值传到函数中
+            if(typeof obj[attr] === 'object'){
+                o[attr] = deepClone(obj[attr])
+            }else{
+                //如果是简单类型就直接赋值
+                o[attr] = obj[attr];
+            }
+        }
+        return o;
+    }
+
+    
+
+    
+
+
+    
+</script>
+</body>
+</html>

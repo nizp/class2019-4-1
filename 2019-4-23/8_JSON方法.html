@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt">
+    <button id="btn">按钮</button>
+<script>
+    /*
+        JSON
+            '{
+                name:'小明',
+                age:18
+            }'
+            '[]'
+        
+        对象:
+            {
+                name:'小明',
+                age:18
+            }
+
+        xml:
+            <person>
+                <name>小明</name>
+                <age>18</age>
+            </person>
+
+        JSON -> [] | {}
+
+            JSON.parse() 
+                能够把json转成对象或者数组
+
+                json必须是一个标准格式的json,不然转不出来
+
+                json中不能放函数、不能为undefined
+
+                '{"name":12,"nn":"ds"}'
+
+            JSON.stringify()
+                把对象或者数组转成json
+                对象中不能放函数、不能为undefined
+
+            
+            低版本可以使用json2.js
+
+            eval 能够把字符串尽量转成js能执行的代码。
+
+            new Function('','console.log()')
+            
+    */   
+   
+
+    //[1,2,3]
+    // btn.onclick = function(){
+    //     let arr = eval(txt.value);
+    //     console.log(arr);
+    // }
+
+    // let obj = {
+    //     id:1234,
+    //     // fn:function(){},
+    //     // nu:undefined
+    // }
+
+    // console.log(JSON.stringify(obj))
+
+
+
+    let json = '{"id":1234,txt:"今天321321早上吃包纸!"}';
+        
+    let fn = new Function('','return'+json)();
+
+    // console.log(fn);
+
+    // console.log(eval('('+ json +')'));
+
+    // (function (){})()
+   
+
+    
+    // let arr = json.split('"');
+
+    // console.log(JSON.parse(json));
+    
+    // console.log(arr[arr.length-2]);
+
+    /*
+            indexOf(找谁,从哪里开始找)
+    */
+    // let i = 0; //索引值从0开始
+    // let num = 0;//为了计数，5就说明到了要截取的地方
+    // while(json.indexOf('"',i) != -1){//不等于-1说明有"
+    //     if(num === 5){break;}
+    //     i = json.indexOf('"',i)+1;
+    //     num ++;
+    // }
+    // console.log(json.substring(i,json.indexOf('"',i+1)));
+    // console.log(json.substring(i,))
+    // console.log(json.indexOf('"'))
+
+
+
+</script>
+</body>
+</html>

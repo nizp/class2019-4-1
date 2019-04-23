@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        1.对象没有属性的时候
+        2.函数没有返回值
+        3.形参没有实参
+        4.变量没有赋值
+        5.简单类型的自定义属性
+
+
+        **只有在引用类型下才能添加属性或者方法  
+
+        包装对象:
+            当简单类型去使用某个属性或者方法的时候，
+            内部会偷偷地转成对象(new 内置类)把属性
+            或者方法提供使用者，然后再悄悄地销毁
+            这个过程就叫包装对象。
+
+            红领巾 | 活雷锋
+
+    */
+   let obj = {};
+   obj.num = 0;
+   obj.num ++;
+//    console.log(obj.num);
+
+    let str = '1234567';
+    //str.num = 0;
+    // str.num++;
+    // console.log(str.num);
+
+    let str2 = new String('1234567');
+    // console.log(typeof str2); //object
+
+    // str2.length = 1;
+    // console.dir(str2.length);  不能写的
+
+    // str2.num = 10;
+    // console.log(str2.num);
+
+    // console.log(str.length);
+    // console.log(str.substr(2));
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">点击开说</button>
+    <div id="box"></div>
+<script>
+    /*
+        setInterval(function,1000,函数的参数)
+
+        遇到定时器，一定要想着怎么关闭。
+    */
+    let arr = ['哈哈','哼哼','呼呼','呵呵','嘻嘻','嘿嘿'];
+    let timer = null;
+    let num = 0;
+    let onOff = false;
+    btn.onclick = function(){
+        // timer = setInterval(function(a,b){
+        //     console.log(a,b);
+        // },1000,1,2)
+        //把上次定时器关闭，再开新的。
+        // clearInterval(timer);
+        if(onOff)return;
+        onOff = true;
+        timer = setInterval(function(a,b){
+            box.innerHTML = arr[num];
+            num++;
+            num %= arr.length;
+        },1000);
+    }
+
+</script>
+</body>
+</html>

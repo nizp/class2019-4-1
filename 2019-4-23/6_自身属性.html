@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    /*
+        for in不但会枚举本对象，还会枚举原型，此时就会多出来一些莫名其妙的东西
+
+        但是我们不想要那么不是对象上的东西.
+
+
+        obj.hasOwnProperty('属性名')
+            查看某个属性是不是对象自身的
+
+        返回值:
+            布尔值，是就为true，不是就为false
+
+    */
+
+    Object.prototype.say = function(){
+        console.log('咩');
+    }
+    let obj = {
+        name:'小马',
+        age:16,
+        job:'前端'
+    }
+    for(let attr in obj){
+        if(obj.hasOwnProperty(attr)){
+            console.log(attr);//obj[attr]
+        }
+    }
+    console.dir(obj);
+</script>
+</body>
+</html>

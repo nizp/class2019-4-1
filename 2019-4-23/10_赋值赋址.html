@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // let obj = {
+    //     say:1
+    // }    
+    // let obj2 = {...obj};
+    // obj2.say = 2;
+    // console.log(obj.say);
+    // console.log(obj2.say);
+
+    /*
+        因为赋值的时候第一层为简单类型，简单类型的
+        赋值就是赋值，如果第一层有引用类型，
+        那么引用类型的赋值为赋址。
+
+        如果是引用类型，就把引用类型中的值取出来
+        如果值还是为引用类型，那么继续循环取值
+        直到全部都为简单类型为止
+
+        deepclone -> 深度克隆（深拷贝）
+    */
+    let arr = [1,2,3,4,[5,{ary:[{name:'小强'}]}]];
+
+    // function deepClone(arr){
+    //     //先声明一个数组，去存克隆出来的内容
+    //     let arr2 = [];
+    //     //循环传进来的对象
+    //     for(let i=0;i<arr.length;i++){
+    //         //判断对象中的某个值是否为引用类型
+    //         //如果是，就继续调用deepClone把引用值传到函数中
+    //         if(typeof arr[i] === 'object'){
+    //             arr2[i] = deepClone(arr[i])
+    //         }else{
+    //             //如果是简单类型就直接赋值
+    //             arr2[i] = arr[i];
+    //         }
+    //     }
+    //     return arr2;
+    // }
+
+    Object.prototype.xxoo = '哈哈';
+
+    function deepClone(obj){
+        //先声明一个数组，去存克隆出来的内容
+        //判断obj是否为数组，是数组就o就为[],否则为{}
+        let o = obj.push?[]:{};
+        //循环传进来的对象
+        for(let attr in obj){
+        // for(let i=0;i<arr.length;i++){
+            //判断对象中的某个值是否为引用类型
+            //如果是，就继续调用deepClone把引用值传到函数中
+            if(obj.hasOwnProperty(attr)){
+                if(typeof obj[attr] === 'object'){
+                    o[attr] = deepClone(obj[attr])
+                }else{
+                    //如果是简单类型就直接赋值
+                    o[attr] = obj[attr];
+                }
+            }
+        }
+        return o;
+    }
+
+    let arr2 = deepClone(arr);
+
+    // let arr2 = JSON.parse(JSON.stringify(arr));
+
+    // [1,2,3,4,[5,{ary:[{name:'小强'}]}]];
+
+    arr2[4][1].ary[0].name = '小弓';
+
+    
+    // let arr2 = [...arr];
+
+    arr2[4].push(6);
+
+    console.log(arr2)
+
+
+
+
+</script>
+</body>
+</html>

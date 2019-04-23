@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:200px;
+    height:50px;
+    border:1px solid #000;
+}
+#box div{
+    display: none;
+} 
+#box div.show{
+    display: block;
+}
+.active{
+    background: yellow;
+}
+
+</style>
+</head>
+<body>
+    <div id="warp">
+        <button class="active">按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+        <section id="box">
+            <div class="show">头条</div>
+            <div>体育</div>
+            <div>新闻</div>
+        </section>
+    </div>
+<script>
+
+    /*
+        面向对象思想主要为谁来做
+            它的代码越写会越简单，越写思路会越清晰
+
+        面向过程思想主要为怎么做
+            它的代码越写会越复杂，越写思路越乱
+    */
+
+    function Tab(id){
+        this.warp = document.getElementById(id);
+        this.btns = this.warp.querySelectorAll('button');
+        this.divs =  this.warp.querySelectorAll('div');
+    }
+
+    Tab.prototype.events = function(){
+        let that = this;
+        for(let i=0;i<this.btns.length;i++){
+            // this.btns[i].onclick = () => {
+            //     this.change(i);
+            //     console.log(this);
+            // }
+            this.btns[i].onclick = function() {
+                that.change(i);
+                // console.log(this);
+            }
+        }
+    }
+    Tab.prototype.change = function(index){
+        for(let i=0;i<this.btns.length;i++){
+            this.btns[i].className = '';
+            this.divs[i].className = '';
+        }
+        this.btns[index].className = 'active';
+        this.divs[index].className = 'show';
+    }
+
+    let t = new Tab('warp');
+    t.events();
+
+
+
+
+</script>
+</body>
+</html>

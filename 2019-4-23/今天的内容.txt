@@ -1,0 +1,10 @@
+面向过程 VS 面向对象
+
+包装对象
+
+hasOwnProperty
+
+
+call，apply
+
+继承

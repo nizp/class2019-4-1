@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+<script>
+    /*
+        forEach(callback,this)
+
+        callback(item,i,all)
+
+        一个函数，天生就自带一些属性和方法
+
+        其中有：
+            apply()
+            call()
+            bind()
+        他们都能改变this指向
+
+
+        call:
+            有无数个参数
+            第一个参数:
+                改变this指向（写啥是啥）
+                    null和undefined为window
+            第二个参数之后:
+                就是实参
+
+        apply:
+            有2个参数
+            第一个参数:
+                改变this指向（写啥是啥）
+                    null和undefined为window
+            第二个参数:
+                数组[1,2,3]
+                数组中放参数
+
+        bind:
+            有无数个参数
+            第一个参数:
+                改变this指向（写啥是啥）
+                    null和undefined为window
+            第二个参数之后:
+                就是实参
+
+        使用bind不能立马执行函数，会返回一个新函数，这个函数
+        的this是改变了的，得执行这个新函数才能输出代码。
+
+    */    
+
+
+    // function fn(a,b,c){
+    //     console.log(this,a,b,c);
+    // }
+
+    // // fn.call(false,1,2,3);
+    // fn.apply(true,[1,2,3]);
+
+    // console.dir(fn);
+
+
+    /*
+        如何判断一个变量为数组？
+
+        Array.isArray(arr) -> true
+        arr instanceof Array -> true
+        Object.prototype.toString.call(arr) === '[object Array]'
+
+        [1,2,3] -> '1,2,3'
+        1 -> '1'
+        {} -> '[object Object]'
+
+        -> [object String]
+
+
+        Object.prototype.toString.call(arr)
+        每个数据类型都有自己的toString方法
+        每个toString方法都不一样
+
+        正好Object的toString方法能够显示当前的数据类型
+
+        Object.prototype.toString = function(){
+            this 处理Object
+            return 结果
+        }
+
+        Object.prototype.toString.call(arr) 
+
+        '[object Array]'
+
+        类数组转数组的方法:
+            Array.prototype.slice.call(arr);
+            Array.form(arr);
+
+        取数组大小值:
+            console.log(Math.max.apply(null,ary));
+            console.log(Math.max(...ary))
+
+        
+    
+
+    */
+
+    // alert({});
+
+    // let arr = [];
+    // let str = '';
+    
+    // console.log(Object.prototype.toString.call(arr) === '[object Array]')
+
+
+    // let lis = document.getElementsByTagName('li');
+    
+    // let arr = [1,2,3];
+   
+    // console.log( arr.slice() );
+
+    // lis = Array.prototype.slice.call(lis);
+
+    // Array.prototype.myslice = function(start,end){
+    //     let arr = [];
+    //     for(let i=0;i<this.length;i++){
+    //         if(arguments.length === 0){
+    //             arr.push(this[i]);
+    //         }
+    //         if(i >= start && i < end){
+    //             arr.push(this[i])
+    //         }
+    //     }
+    //     return arr;
+    // }
+
+    // console.log( Array.prototype.myslice.call(lis) );
+
+    // console.log( arr.myslice() );
+
+
+
+
+
+
+    // lis = Array.from(lis);
+
+    // console.log(Array.isArray(lis));
+
+    // lis.forEach((ele,i)=>{
+    //     ele.onclick = function(){
+    //         alert(i);
+    //     }
+    // });
+
+    // for(var i=0;i<lis.length;i++){
+    //     lis[i].index = i;
+    //     lis[i].onclick = function(){
+    //         alert(this.index);
+    //     }
+    // }
+
+    // let ary = [9,56,65,2,5,7,7,65];
+
+    // let obj = {
+    //     name:1
+    // }
+    // console.log(obj === {...obj});
+    // console.log({...obj});
+    // console.log([...new Set(ary)]);
+
+    // console.log(ary.sort((a,b)=>a-b)[ary.length-1])
+
+    // let min = -Infinity; //负无穷大
+    // ary.forEach(item=>{
+    //     if(item > min){
+    //         min = item;
+    //     } 
+    // });
+    // console.log(min);
+
+    // console.log(Math.max.apply(null,ary));
+    
+    // console.log(Math.max(...ary));
+
+    // console.log(...ary);
+
+
+    // function fn(a,b){
+    //     console.log(this,a,b);
+    // }
+    // let f = fn.bind(document,1,2);
+    // f();
+    // console.dir(f);
+
+    document.onclick = fn.bind('哈哈');
+    function fn(){
+        console.log(this);
+    }
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
