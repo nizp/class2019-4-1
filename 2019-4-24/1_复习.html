@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        1.Math.max.apply(null,[])
+        2.递归判断has
+        3.JSON
+        4.方法继承
+            扩展式
+            拷贝
+            原型继承
+
+        Math.max = function(){
+
+        }
+        Math.max(1,2,3,4)
+        Array.isArray
+        Array.from
+
+
+
+
+        arr.push()   [].push()
+    */  
+   
+    // let arr = [1,5,8,65,2,56];
+    
+    // Math.max2 = function(){
+    //     let max = -Infinity;
+    //     console.log(arguments);
+    //     for(let i=0;i<arguments.length;i++){
+    //         if(arguments[i] > max){
+    //             max = arguments[i];
+    //         }
+    //     }
+    //     return max;
+    // }
+
+    // console.log(Math.max2(1,2,3,4));
+
+    // console.log(Math.max2.apply(null,arr));
+
+    // console.dir(Math);
+
+    //0,1,2,3  4次  每次都++
+    // let i = 0;
+    // function fn(){
+    //     console.log(i);
+    //     i++;
+    //     if(i>3) return;
+    //     fn();
+    // }
+    // fn();
+
+
+
+    /*
+        JSON只是一种数据格式
+        '{}' | '[]'
+
+        JSON.parse() -> {}
+        JSON.stringify() - > {} -> '{}'
+
+        JSON.parse(JSON.stringify(arr));
+
+        {} -> '{}' -> {} 
+
+
+    */
+
+
+
+
+
+    /*
+        赋值
+            赋值  简单数据类型
+            赋址  引用数据类型
+            看看等号右边是不是一个函数调用，是函数调用直接看return
+        表达式
+        
+    */
+
+    let arr = [1,5,8,65,2,56,[5,{name:'小雨'}]];
+
+    // let arr2 = arr;
+
+    Object.prototype.xx = '就看看你';
+   
+    function deepClone(obj){
+        let o = obj.push?[]:{};
+        for(let attr in obj){
+            if(obj.hasOwnProperty(attr)){
+                if(typeof obj[attr] === 'object'){
+                    o[attr] = deepClone(obj[attr])
+                }else{
+                    o[attr] = obj[attr];
+                }
+            }
+        }
+        return o;
+    }
+
+    // let arr2 = deepClone(arr);
+
+    let arr2 = JSON.parse(JSON.stringify(arr));
+
+    // arr2[5] = 65;
+
+    arr2[6].push(6);
+
+    console.log(arr2);
+
+
+
+</script>
+</body>
+</html>

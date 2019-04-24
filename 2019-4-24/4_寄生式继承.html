@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        {...}
+
+        Object.create({})
+
+        就是把对象中的方法挂在新对象的原型链上，括号中的对象
+        变成了新的对象，而这个对象的原型链指向构造函数的原型
+        这个构造函数是传递进来的那个。
+        
+    */    
+    function Person(name,age){
+        this.name = name;
+        this.age = age;
+    }
+
+    Person.prototype.say = function(){
+        alert(this.name+'会说话');
+    }
+
+    function Coder(name,age,job) {
+        Person.call(this,name,age);
+        this.job = job;
+    }
+
+    Coder.prototype = Object.create(Person.prototype);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    Coder.prototype.say = function(){
+        alert('哈哈');
+    }
+
+
+    /*
+        p.say -> Coder.prototype -> {}
+
+        {}.__proto__ = 
+    */
+
+    // let o = Object.create({name:'haha'});
+    // let p = new Coder('xx',20);
+    // p.say();
+    // new Person('oo',28).say();
+
+    
+    // console.log(Object.create(Person.prototype));
+    // console.log(new Person)
+
+
+       
+</script>
+</body>
+</html>

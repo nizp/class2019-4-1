@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        constructor 
+            实例下的constructor == 实例的构造函数
+
+            但是这个constructor是随时随地随便可以修改的
+            constructor只能当做实例中指向构造函数的一种参考物
+            并不是能够左右实例的构造函数真相。
+
+        constructor什么时候会被修改呢？
+            给构造函数的原型赋址对象的时候会变
+
+        解决:
+            手动修正constructor指向
+            {
+                constructor:构造函数
+            }
+
+        
+    */
+    function Yuan(mao){
+        this.go = '直立行走';
+        this.mao = mao || '浑身是毛';
+    }
+    Yuan.prototype.pa = '爬树';
+
+    function CodeYuan(mao){
+        Yuan.call(this);
+    }
+
+    /*
+        {}.constructor -> new Object
+    */
+    // CodeYuan.prototype = {...Yuan.prototype};
+
+    // CodeYuan.prototype.pa = '爬天台';
+
+    // CodeYuan.prototype.熬 = function(){
+    //     alert('熬熬熬!');
+    // }
+
+    CodeYuan.prototype = {
+        constructor:CodeYuan,
+        ...Yuan.prototype,
+        pa:'爬天台',
+        熬:function(){
+            alert('熬熬熬!');
+        }
+    }
+
+
+
+    let cy = new CodeYuan('地中海');
+    let y = new Yuan;
+
+    console.dir(cy.constructor);
+    // cy.熬();
+
+    console.log(cy.pa,y.pa);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

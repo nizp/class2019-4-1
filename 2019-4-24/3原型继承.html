@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function Fruit(name){
+        this.name = name;
+        console.log(1);
+    }    
+    Fruit.prototype.chi = function(){
+        console.log(this.name + '能吃');
+    }
+    Fruit.prototype.卖钱 = function(){
+        console.log('能卖钱');
+    }
+
+
+    let apple = new Fruit('苹果');
+
+    //椰汁
+
+    function Yezhi(name){
+        Fruit.call(this,name);
+        this.baoz = '包装加工';
+    }
+
+
+    function p(){
+        function Ph(){}
+        Ph.prototype = Fruit.prototype;
+        return new Ph;
+    }
+    Yezhi.prototype = p();
+    // Yezhi.prototype = new Fruit;
+    
+    /*
+        实例的方法:
+            this.xx
+            p = new PH
+            p.xx
+
+            let p2 = new PH
+    */
+
+    // Yezhi.prototype = new Ph;
+
+    
+
+    /*
+        yz.chi -> yz.__proto__ -> Yezhi.prototype
+
+        Yezhi.prototype -> p -> p.__proto__
+
+        Ph.prototype = Fruit.prototype
+
+    */
+
+
+    Yezhi.prototype.he = function(){
+        console.log('每天一杯白白壮壮');
+    }
+
+    Yezhi.prototype.chi = function(){
+        console.log('吃椰肉');
+    }
+
+
+    let yz = new Yezhi('椰子');
+
+
+
+
+    yz.he();
+    yz.卖钱();
+
+    yz.chi();
+    apple.chi();
+
+
+
+
+
+
+</script>
+</body>
+</html>
