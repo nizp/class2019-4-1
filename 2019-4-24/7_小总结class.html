@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    class Animal {
+        constructor(name) {
+            this.name = name;
+        }
+
+        //设置静态方法
+        static shui(){
+            console.log('睡觉');
+        }
+
+        shui(){
+            
+        }
+
+        chi(){
+            console.log('会吃');
+        }
+
+        runing(){
+            console.log('跑');
+        }
+    }   
+    
+    // Animal.prototype.runing = function(){
+    //     console.log('跑');
+    // }
+
+    /*
+        不允许把一个新地址给类的原型
+    */
+    // Animal.prototype = {
+    //     runing(){
+    //         console.log(111);
+    //     }
+    // }
+
+    class Cat extends Animal{
+        constructor(name) { 
+            super(name);
+            this.jiao = '喵喵';
+            this.ming = '九条命';
+        }
+        skill(){
+            console.log('抓老鼠');
+        }
+
+        chi(){
+            console.log('吃鱼');
+        }
+    }
+
+    class WhiteCat extends Cat {
+        constructor(name) {
+            super(name);
+            this.color = '白色';
+        }
+    }
+
+    new WhiteCat('小白').chi();
+
+    let a = new Animal('高级');
+    a.runing(); //动态方法  arr.push
+
+    Animal.shui();
+
+    //Array.from  isArray() 静态方法
+
+    // console.dir(a);
+    
+</script>
+</body>
+</html>

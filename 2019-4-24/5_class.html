@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    
+    /*
+        class (类) 保留字
+
+        let   关键字
+
+        class是ES6才出来的新语法，优势就是写起来方便
+        它其实还是之前构造函数的语法糖 
+
+        https://segmentfault.com/a/1190000010159725
+
+
+        class 类名 {
+
+        }
+
+        使用constructor去接收参数
+            constructor(a,b){
+
+            }
+
+        写方法:
+            直接在类中
+                方法名 () {
+
+                }
+    
+
+    */
+
+    // function Fn(name,age){
+    //     this.name = name;
+    //     this.age = age;
+    // }
+
+    class Fn {
+        constructor(name,age){
+            this.name = name;
+            this.age = age;
+        }
+
+        //方法:  方法名 () {}
+        say(){
+            console.log(1);
+        }    
+    }
+
+    // let obj = {
+    //     // fn:function(){
+    //     //     console.log(2);
+    //     // }
+    //     //下面这种写法等同于上面这种写法
+    //     fn(){
+    //         console.log(2);
+    //     }
+    // }
+    // obj.fn();
+
+
+
+
+    let f = new Fn('刘泉',18);
+    f.say();
+    console.log(f);
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

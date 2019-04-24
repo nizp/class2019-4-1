@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    
+    class Animal {
+        constructor(name) {
+           this.name = name;
+        }
+        chi(){
+            console.log('就吃');
+        }
+    }
+
+    class Cat extends Animal {
+        constructor() {
+            /*
+                super下面才能写this，不然就报错
+            */
+        //    console.log(arguments);
+            super(...arguments); //super括号中传入父类使用的参数
+            this.jiao = '喵喵';
+            this.ming = '九条命';
+            
+        }
+        skill(){
+            console.log('抓老鼠');
+        }
+
+        chi(){
+            console.log('吃鱼');
+        }
+    }
+
+    let tom = new Cat('汤姆');
+    tom.chi();
+    new Animal().chi()
+    console.log(tom);
+
+
+
+
+    
+    
+</script>
+</body>
+</html>

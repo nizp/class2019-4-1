@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        对象的属性只能有一个，如果写多个，下面的会把上面的覆盖
+
+
+        Object.assign(对象1,对象2,对象3....)
+
+
+        从后往前合并，改变第一个对象，第一个对象可以为{}
+
+        Child.prototype = Object.assign({},parent.prototype)
+
+    */
+    let obj = {
+        name:'王权士',
+        age:88
+    }
+    let obj2 = {
+        name:'马骅骏'
+    }
+
+    let obj3 = {
+        name:'张欢'
+    }
+
+    // for(let attr in obj2){
+    //     obj[attr] = obj2[attr];
+    // }
+
+    // {name:'马骅骏',age:88}
+
+    // console.log(obj);
+    // Object.assign({},obj,obj2,obj3);
+
+    console.log(Object.assign({},obj,obj2,obj3));
+    console.log(obj2,obj3,obj);
+    
+    
+</script>
+</body>
+</html>

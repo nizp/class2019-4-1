@@ -10,10 +10,10 @@
         {...}
 
         Object.create({})
+            必须传入一个对象
 
-        就是把对象中的方法挂在新对象的原型链上，括号中的对象
-        变成了新的对象，而这个对象的原型链指向构造函数的原型
-        这个构造函数是传递进来的那个。
+            返回值为一个新的对象，这个对象的原型链指向
+            传入的参数
         
     */    
     function Person(name,age){
@@ -25,102 +25,28 @@
         alert(this.name+'会说话');
     }
 
+
     function Coder(name,age,job) {
-        Person.call(this,name,age);
+        Person.call(this,name,age); //属性继承
         this.job = job;
     }
 
-    Coder.prototype = Object.create(Person.prototype);
+    //方法继承
 
+    function create(obj){
+        function ph(){}
+        let o = new ph;
+        o.__proto__ = obj;
+        return o;
+    }
 
 
+    Coder.prototype = create(Person.prototype);//Object.create(Person.prototype);
+    //手动修正指向
+    Coder.prototype.constructor = Coder;
 
+    // console.log(Object.create(Person.prototype))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     Coder.prototype.say = function(){
         alert('哈哈');
     }
@@ -132,8 +58,12 @@
         {}.__proto__ = 
     */
 
-    // let o = Object.create({name:'haha'});
-    // let p = new Coder('xx',20);
+    let o = Object.create({name:'haha'});
+    let p = new Coder('xx',20);
+
+    // console.log(p.constructor);
+    // console.log(p  instanceof  Coder);
+
     // p.say();
     // new Person('oo',28).say();
 

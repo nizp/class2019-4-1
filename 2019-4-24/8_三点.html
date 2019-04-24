@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        ... 
+            1.扩展运算符
+
+            2.剩余运算符
+    */    
+
+    let arr = [1,2,3,4];
+
+    // console.log(...arr);
+
+    //扩展运算符
+    // function fn(){
+    //     // console.log(arguments); //...[]
+    //     function f(a,b){
+    //         console.log(a,b);
+    //     }
+    //     f(...arguments);
+    // }
+
+    // fn(1,2);
+
+
+    // 剩余运算符
+    //...c 是个数组
+    // function fn(a,...c){
+    //     console.log(a,c);
+    // }
+
+    // fn(1,2,3,4,5);
+
+
+    class Person {
+        constructor(name,age) {
+            this.name = name;
+            this.age = age;
+        }
+    }
+
+    class Women extends Person {
+        //剩余运算符
+        constructor(fs,...arg) {
+            //扩展运算符
+            super(...arg);
+            // console.log(arg)
+            this.sex = '女';
+            this.fushi = fs;
+        }
+    }
+
+    let w = new Women('爱穿裙子','马骅骏',18);
+    console.log(w);
+
+
+
+
+
+</script>
+</body>
+</html>
