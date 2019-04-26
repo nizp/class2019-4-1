@@ -111,11 +111,19 @@
         fn()
      
     */
-    new fn.say(); //4
+    // new fn.say(); //4
 
     // let f = new fn;
     // console.log(f);
     // f.say();
+
+    let obj = {
+        fn:function(){
+            console.log(this);
+        }
+    }
+    obj.fn();
+    console.log(obj);
 
 
 
