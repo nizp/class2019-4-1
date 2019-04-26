@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        [].push() 
+            这个方法是什么 （Array的方法）
+            有什么用，（用来向数组的最后一为添加一个或者多个数据）
+            参数传的是什么(至少是一个数据，也可以是多个数据)
+            返回值是什么(新数组的长度)
+
+        []
+            在中括号中任意选择一个字符
+            比如:
+                [12345] 可以为1也可以为2也可以为3...
+
+            也可以简写为[1-5],因为 - 是1到5的意思
+            为什么能那么写呢？
+                因为顺序是按照unicode编码来的
+        数字是:[0-9]
+        小写英文:[a-z]
+        大写英文:[A-Z]
+
+        从大A到小z:  [A-z] 不行的;  [A-Za-z]
+
+
+        18-108岁人能看
+
+      
+
+
+    
+
+
+    */
+
+    // let str = 'a1ca2ca3ca4c';
+    // console.log(str.match(/a(1|2|3|4)c/g));
+    // console.log(str.match(/a[1-4]c/g));
+
+    // let str = 'A1zA2bA3^A4Z';
+
+    // console.log(str.match(/A\d[A-z]/g));
+    // console.log(str.match(/A\d[A-Za-z]/g));
+
+    /*
+        18  19  20  21  
+
+        18-19 -> 1[89]
+        20-99 -> [2-9][0-9]
+        100-108 10[0-8]
+
+
+        ^ 开头
+        $ 结尾
+
+        let str = '180';
+        str.match(/^1[89]$/)
+
+        *整段字符串*是否都满足正则的规则，
+        而不是字符串中有一段匹配正则的规则就返回
+
+
+        16-26
+
+        1[6-9]|2[0-6]
+
+    */
+    
+    // let str = '99';
+    //1088里面有没有108,但是我们的要求是str是否为18-108
+    // console.log(/1[89]|[2-9][0-9]|10[0-8]/.exec(str));
+    
+    // console.log(str.match(/^1[89]$/));
+
+    // console.log(/^1[89]$|^[2-9][0-9]$|^10[0-8]$/.exec(str));
+
+    // console.log(/^(1[89]|[2-9][0-9]|10[0-8])$/.exec(str));
+
+
+    /*
+        计算下面字符串中的字节长度，假设一个英文字节为1，一个中文为2
+
+        [\u4e00-\u9fa5] 中文区间范围 
+    */
+    let str = 'hello!~张欢,您老贵庚?'; //21
+    let num = 0;
+    for(let i=0;i<str.length;i++){
+        if(/[\u4e00-\u9fa5]/.test(str[i])){
+            num += 2;
+        }else{
+            num ++
+        }
+    }
+
+   console.log(num);
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

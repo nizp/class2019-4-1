@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        子项重复项:
+            \ + 数字
+
+            比如:
+                /(d1)c1(b1)\1\2/
+                当前有2个子项，一个是d1另一个是b1
+                \1就代表第一个子项，\2就代表第二个子项
+
+    */
+    // let str = 'd1c1b1d1b1b1b1b1';
+
+    // console.log(/(d1)c1(b1)\1\2/.test(str))
+
+    // console.log(/(d1)c1(b1)\1\2+/.exec(str));
+
+    /*
+        哪个最多，它是几?
+        {
+           '4':2,
+           '3':1 
+        }
+
+    */
+    let str = '437826357384623537463363726573384633278467382';
+
+    // let obj = {};
+
+    // for(let i=0;i<str.length;i++){
+    //     if(!obj[str[i]]){
+    //         obj[str[i]] = 1;
+    //     }else{
+    //         obj[str[i]] ++ ;
+    //     }
+    // }
+
+    let min = -Infinity;
+    let i;
+    // for(let attr in obj){
+    //     if(obj[attr] > min){
+    //         min = obj[attr]; //求出多少次
+    //         i = attr; // 它是谁
+    //     }
+    // }
+
+    // console.log(min,i);
+    
+    //把字符串变成有序的
+    str = str.split('').sort().join('');
+    // console.log(str);
+
+    //比较大小  $0就是当前匹配的 , $1 子项
+    str.replace(/(\d)\1+/g,($0,$1)=>{
+        if(min < $0.length){
+            min = $0.length;
+            i = $1;
+        }
+    });
+
+    console.log(min,i);
+
+</script>
+</body>
+</html>
