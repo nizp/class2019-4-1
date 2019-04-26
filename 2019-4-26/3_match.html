@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        match
+
+        str.match(/正则/)
+            找到正则中所有匹配的字符且放到数组中。
+
+            没匹配到就是null
+
+        str.match()
+
+        修饰符:
+            g  - >  global  全局
+            i  ->   ignore  忽略
+
+        量词:
+            +  最少1个最多无限
+    */    
+
+    let str = 'x1j89321Xeu218nX2d32';
+    //全局查找整个字符串，把为数字的存在数组中
+    // console.log(str.match(/\d/g));  
+
+    // 全局查找整个字符串，把一个数字或者连续多个数字的存在数组中
+    // console.log(str.match(/\d+/g)); 
+    
+    console.log(str.match(/x/ig));
+
+
+
+
+</script>
+</body>
+</html>

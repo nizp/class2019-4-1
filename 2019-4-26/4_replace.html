@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        **** replace  替换
+
+        string.replace(要替换的字符串||正则,替换成什么||函数);
+
+        当第二个参数为函数的时候
+
+        默认情况:
+            函数的第一个参数就是每次匹配到的结果
+            函数的第二个参数index
+            函数的第三个参数input
+            函数的第四个（及以后）参数undefined
+
+
+
+        此函数必须要有return，不然默认为undefined
+
+
+
+
+        返回值为新的字符串
+
+        | 或者
+
+    */
+//    let str = '王权士姓马';
+
+//    console.log(str.replace('王权士','马骅骏'));
+
+    let str = '艹,你在干嘛,练法轮功呢?';   // 艹 靠 尼玛....  &*&#
+
+    // console.log(str.replace(/艹|法轮功/g,'*'));
+
+    let s = str.replace(/艹|法轮功/g,function($0,$1,$2,$3){
+        // console.log($3);
+        let temp = '';
+        for(let i=0;i<$0.length;i++){
+            temp += '*';
+        }
+        return temp;
+    })
+    console.log(s);
+
+
+
+
+
+</script>
+</body>
+</html>

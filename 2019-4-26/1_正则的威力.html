@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        把下列字符串为数字的找出来，并且存到一个数组中？
+    */
+    // let str = 'y28nu82u3l8rixmir4d83f2x';
+
+    // let arr = str.split('').filter(item=>{
+    //     return !isNaN(parseInt(item)) 
+    // });
+
+    // let ary = [];
+    // for(let i=0;i<str.length;i++){
+    //     if(!isNaN(parseInt(str[i]))){
+    //         ary.push(str[i]);
+    //     }
+    // }
+
+    // console.log(ary);
+    /*
+        把下列字符串为数字的找出来（包括连续的），并且存到一个数组中？
+        let str = 'y28nu82u3l8rixmir4d83f2x';
+
+        28,82,3,8,4,83,2
+
+        temp = '';
+        
+        temp += 2  -> '2'
+        temp += 8  -> '28'
+
+        arr.push(temp);
+        temp = '';
+
+
+
+
+
+    */
+    let str = 'y28nu82u3l8rixmir4d83f2x';
+    let ary = [];
+    let temp = '';
+    for(let i=0;i<str.length;i++){
+        if(!isNaN(parseInt(str[i]))){
+            temp += str[i];
+        }else{
+            if(temp){
+                ary.push(temp);
+                temp = '';
+            }
+        }
+    }
+    // console.log(ary);
+
+    console.log(str.match(/\d+/g));
+    
+
+
+</script>
+</body>
+</html>

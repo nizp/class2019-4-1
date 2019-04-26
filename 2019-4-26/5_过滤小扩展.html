@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+   <div>
+        <h2>给运营用的</h2>
+        <input type="text" id="t1">
+        <button id="btn">添加</button>
+        <ul id="ul">
+            <li>我擦</li>
+        </ul>
+   </div>
+   <div>
+        <h2>给自己用的</h2>
+        <input type="text" id="t2">
+        <button id="btn2">发送</button>
+        <p id="p1"></p>
+   </div>
+<script>
+    /*
+        艹|尼玛
+
+        new RegExp('')
+
+        arr = ['艹','尼玛'] -> join('|') -> '艹|尼玛'
+    */
+
+    let sql = ['艹','尼玛','卧槽','菜鸡','辣鸡','傻X'];
+
+    btn.onclick = function(){
+        let v1 = t1.value;
+        if(v1){
+            if(!sql.some(item=>item===v1)){
+                sql.push(v1);
+                render(sql);
+            }else{
+                alert('已存在,我深深的脑海里')
+            }
+        }
+        t1.value = '';
+    }
+
+    render(sql);
+    function render(arr){
+        let html = "";
+        arr.forEach(item=>html+='<li>'+item+'</li>');
+        ul.innerHTML = html;
+    }
+
+    btn2.onclick = function(){
+        let v2 = t2.value;
+        let re = new RegExp(sql.join('|'),'g');
+        let fu = '$%#^*@~';
+        let s = v2.replace(re,function($0){
+            let temp = '';
+            for(let i=0;i<$0.length;i++){
+                temp += fu[Math.floor(Math.random()*fu.length)]
+            }
+            return temp;
+        });
+        p1.innerHTML = s;
+        // console.log(re);
+    }
+
+
+
+
+
+
+</script>
+</body>
+</html>
