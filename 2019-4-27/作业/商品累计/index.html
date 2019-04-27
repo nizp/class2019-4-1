@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="price.css" />
+	</head>
+
+	<body onselectstart="return false;">
+		<div class="wrap">
+			<div class="box">
+				<ul class="list" id="list">
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>12.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>10.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>8.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>8元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>14.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+				</ul>
+				<div class="info">
+					<span>商品公合计：<em>0</em>件</span>
+					<span>共花费了：<em>0</em>元</span>
+					<br />
+					<br />
+					<span>其中最贵的商品单价是：<em>0</em>元</span>
+				</div>
+			</div>
+		</div>
+<script>
+	// let arr = [
+	// 	{
+	// 		num:0,
+	// 		pirce:12.5,
+	// 		xj:0
+	// 	}
+	// ];
+
+	const lis = document.querySelectorAll('li');
+	const ems = list.getElementsByTagName('em');
+	const ems2 = document.querySelectorAll('.info em');
+	let ghf = 0;
+
+	function zjNum(){
+		let num = 0
+		for(let i=0;i<ems.length;i++){
+			num += ems[i].innerHTML * 1;
+		}
+		return num;
+	}
+
+	
+
+
+	for(let i=0;i<lis.length;i++){
+		fn(i);
+	}
+
+
+	function getZuigui(){
+		let min = 0;
+		for(let i=0;i<lis.length;i++){
+			let em = lis[i].getElementsByTagName('em')[0];
+			let strong = lis[i].getElementsByTagName('strong')[0];
+			//数量不为0
+			if(em.innerHTML !== '0'){
+				// parseFloat(strong.innerHTML) 单价
+				let price = parseFloat(strong.innerHTML);
+				if(min < price){
+					min = price;
+				}
+			}
+		}
+		return min;
+		// console.log(min);
+	}
+	
+	function fn(i){
+		let li = lis[i];
+		let is = li.getElementsByTagName('i');
+		let em = li.getElementsByTagName('em')[0];
+		let strong = li.getElementsByTagName('strong')[1];
+		let price = li.getElementsByTagName('strong')[0];
+		let prev = is[0];
+		let next = is[1];
+
+		next.onclick = function(){
+			let num = em.innerHTML * 1;
+			em.innerHTML = ++ num;
+			let xj = num * parseFloat(price.innerHTML);
+			strong.innerHTML = xj + '元';
+			ems2[0].innerHTML = zjNum();
+			ghf += parseFloat(price.innerHTML);
+			ems2[1].innerHTML = ghf;
+			ems2[2].innerHTML = getZuigui();
+		}
+		prev.onclick = function(){
+			let num = em.innerHTML * 1;
+			if(num<=0)return;
+			em.innerHTML = -- num;
+			strong.innerHTML = num * parseFloat(price.innerHTML) + '元';
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+
+</html>

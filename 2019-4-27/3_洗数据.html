@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+   
+    let str = `
+        <div id="job-container" class="tempWrap">
+        <div class="tempWrap" style="overflow:hidden; position:relative; height:700px"><ul class="grid infoList" id="infoList" style="height: 2800px; position: relative; padding: 0px; margin: 0px; top: -650px;"><li class="clone" style="height: 50px;">
+            <span>高*</span>           
+            <span>河南农业大学</span>           
+            <span>生物工程</span>           
+            <span>阿里巴巴</span>
+            <span class="money"><i>18000/月</i></span>
+            <span>杭州</span>
+          </li>
+          <li style="height: 50px;">
+            <span>刘*</span>           
+            <span>宝鸡文理学院</span>           
+            <span>电子信息</span>           
+            <span></span>
+            <span class="money"><i>30000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>申*</span>           
+            <span>南京信息工程大学</span>           
+            <span>电子科技与技术</span>           
+            <span>亚信科技</span>
+            <span class="money"><i>27000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>宋*磊</span>           
+            <span>大连海事大学</span>           
+            <span>轮机工程</span>           
+            <span>美团</span>
+            <span class="money"><i>25000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>刘*亚</span>           
+            <span>苏州科技学院天平学院</span>           
+            <span>计算机科学与技术</span>           
+            <span>在江苏就业</span>
+            <span class="money"><i>22000/月</i></span>
+            <span>苏州</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>龚**</span>           
+            <span>武汉理工大学</span>           
+            <span>控制工程</span>           
+            <span>神玉科技</span>
+            <span class="money"><i>21000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>单**</span>           
+            <span>北京石油化工学院</span>           
+            <span>油气储运</span>           
+            <span>58同城</span>
+            <span class="money"><i>21000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>李**</span>           
+            <span>郑州航空工业管理学院</span>           
+            <span>土木工程</span>           
+            <span>好未来</span>
+            <span class="money"><i>20000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>童**</span>           
+            <span>南京信息工程大学</span>           
+            <span>电子信息</span>           
+            <span>上海hello单车</span>
+            <span class="money"><i>20000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>李*</span>           
+            <span>郑大西亚斯国际学院</span>           
+            <span>软件开发</span>           
+            <span>瓜子二手车</span>
+            <span class="money"><i>20000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>李*嵩</span>           
+            <span>北京建筑工程学院</span>           
+            <span>给水排水工程</span>           
+            <span>易车</span>
+            <span class="money"><i>19000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>康*</span>           
+            <span>荆楚理工学院</span>           
+            <span>工业设计</span>           
+            <span>高思教育</span>
+            <span class="money"><i>19000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>宋*斌</span>           
+            <span>陕西科技大学</span>           
+            <span>计算机科学与技术</span>           
+            <span>小米</span>
+            <span class="money"><i>19000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>许泽*</span>           
+            <span>华东理工大学</span>           
+            <span>安全工程</span>           
+            <span>哗啦啦</span>
+            <span class="money"><i>19000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>袁**</span>           
+            <span>江西理工</span>           
+            <span>软件工程</span>           
+            <span>去哪儿</span>
+            <span class="money"><i>19000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>高*</span>           
+            <span>河南农业大学</span>           
+            <span>生物工程</span>           
+            <span>杭州互联网公司</span>
+            <span class="money"><i>18500/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>李瑞*</span>           
+            <span>大连海事大学</span>           
+            <span>轮机工程</span>           
+            <span>face++</span>
+            <span class="money"><i>18000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>金*莹</span>           
+            <span>合肥学院</span>           
+            <span>生物</span>           
+            <span>美团</span>
+            <span class="money"><i>18000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>王*</span>           
+            <span>中北大学</span>           
+            <span>工业工程</span>           
+            <span>京东</span>
+            <span class="money"><i>18000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>张*滔</span>           
+            <span>北京矿业大学</span>           
+            <span>建筑学</span>           
+            <span>数美科技</span>
+            <span class="money"><i>18000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>景*</span>           
+            <span>北京航空航天大学</span>           
+            <span>机械工程</span>           
+            <span>小米</span>
+            <span class="money"><i>18000/月(期权)</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>王*昊</span>           
+            <span>北京建筑大学</span>           
+            <span>土木工程</span>           
+            <span>新氧</span>
+            <span class="money"><i>17000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>刘向*</span>           
+            <span>天津大学</span>           
+            <span>自动化</span>           
+            <span>链家</span>
+            <span class="money"><i>17000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>程书*</span>           
+            <span>河南理工大学</span>           
+            <span>计算机多媒体技术</span>           
+            <span>上海公司</span>
+            <span class="money"><i>16500/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>张*</span>           
+            <span>平顶山工业职业技术学院</span>           
+            <span>矿井通风与安全</span>           
+            <span>思维实创</span>
+            <span class="money"><i>16500/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>胡*</span>           
+            <span>北京建筑大学</span>           
+            <span>土木工程</span>           
+            <span>云拓锐联</span>
+            <span class="money"><i>16000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>赵*</span>           
+            <span>华北科技学院</span>           
+            <span>计算机科学与技术</span>           
+            <span>用友</span>
+            <span class="money"><i>16500/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>原*</span>           
+            <span>北京吉利大学</span>           
+            <span>数字媒体与网站设计</span>           
+            <span>思源</span>
+            <span class="money"><i>15000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>张*</span>           
+            <span>国家开放大学</span>           
+            <span>行政管理</span>           
+            <span>极*学*</span>
+            <span class="money"><i>15000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>常哲*</span>           
+            <span>燕山大学里仁学院</span>           
+            <span>机械设计制造及其自动化</span>           
+            <span>用友</span>
+            <span class="money"><i>15000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>任丽*</span>           
+            <span>邢台职业技术学院</span>           
+            <span>服装设计与加工</span>           
+            <span>达飞云贷APP</span>
+            <span class="money"><i>15000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>成**</span>           
+            <span>太原工业大学</span>           
+            <span>信息与计算科学</span>           
+            <span>京东</span>
+            <span class="money"><i>15000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>叶**</span>           
+            <span>兰州工业学院</span>           
+            <span>电子信息</span>           
+            <span>牛链科技</span>
+            <span class="money"><i>15000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>庄*红</span>           
+            <span>山东师范大学</span>           
+            <span>电子科学与技术</span>           
+            <span>中国经济网</span>
+            <span class="money"><i>15000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>亓*</span>           
+            <span>哈尔滨理工大学</span>           
+            <span>电子科学与技术</span>           
+            <span>哗啦啦</span>
+            <span class="money"><i>14000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>史**</span>           
+            <span>淄博职业学院</span>           
+            <span>化工</span>           
+            <span>软通动力</span>
+            <span class="money"><i>14000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>朱**</span>           
+            <span>池州学院</span>           
+            <span>光电子技术科学</span>           
+            <span>阿里外包</span>
+            <span class="money"><i>13000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>吴**</span>           
+            <span>安徽省合肥市信息技术学院</span>           
+            <span>会计</span>           
+            <span>百度</span>
+            <span class="money"><i>13000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>贾**</span>           
+            <span>邯郸学院</span>           
+            <span>计算机网络技术</span>           
+            <span>大云科技</span>
+            <span class="money"><i>12000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>刘**</span>           
+            <span>高中</span>           
+            <span></span>           
+            <span>慕课网</span>
+            <span class="money"><i>11000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>许*文</span>           
+            <span>宁波工程学院</span>           
+            <span>信息与计算科学</span>           
+            <span>奇点云</span>
+            <span class="money"><i>8000/月</i></span>
+            <span>北京</span>
+          </li>
+      
+          <li style="height: 50px;">
+            <span>高*</span>           
+            <span>河南农业大学</span>           
+            <span>生物工程</span>           
+            <span>阿里巴巴</span>
+            <span class="money"><i>18000/月</i></span>
+            <span>杭州</span>
+          </li>
+      <li class="clone" style="height: 50px;">
+            <span>刘*</span>           
+            <span>宝鸡文理学院</span>           
+            <span>电子信息</span>           
+            <span></span>
+            <span class="money"><i>30000/月</i></span>
+            <span>北京</span>
+          </li><li class="clone" style="height: 50px;">
+            <span>申*</span>           
+            <span>南京信息工程大学</span>           
+            <span>电子科技与技术</span>           
+            <span>亚信科技</span>
+            <span class="money"><i>27000/月</i></span>
+            <span>北京</span>
+          </li><li class="clone" style="height: 50px;">
+            <span>宋*磊</span>           
+            <span>大连海事大学</span>           
+            <span>轮机工程</span>           
+            <span>美团</span>
+            <span class="money"><i>25000/月</i></span>
+            <span>北京</span>
+          </li><li class="clone" style="height: 50px;">
+            <span>刘*亚</span>           
+            <span>苏州科技学院天平学院</span>           
+            <span>计算机科学与技术</span>           
+            <span>在江苏就业</span>
+            <span class="money"><i>22000/月</i></span>
+            <span>苏州</span>
+          </li><li class="clone" style="height: 50px;">
+            <span>龚**</span>           
+            <span>武汉理工大学</span>           
+            <span>控制工程</span>           
+            <span>神玉科技</span>
+            <span class="money"><i>21000/月</i></span>
+            <span>北京</span>
+          </li><li class="clone" style="height: 50px;">
+            <span>单**</span>           
+            <span>北京石油化工学院</span>           
+            <span>油气储运</span>           
+            <span>58同城</span>
+            <span class="money"><i>21000/月</i></span>
+            <span>北京</span>
+          </li><li class="clone" style="height: 50px;">
+            <span>李**</span>           
+            <span>郑州航空工业管理学院</span>           
+            <span>土木工程</span>           
+            <span>好未来</span>
+            <span class="money"><i>20000/月</i></span>
+            <span>北京</span>
+          </li><li class="clone" style="height: 50px;">
+            <span>童**</span>           
+            <span>南京信息工程大学</span>           
+            <span>电子信息</span>           
+            <span>上海hello单车</span>
+            <span class="money"><i>20000/月</i></span>
+            <span>北京</span>
+          </li><li class="clone" style="height: 50px;">
+            <span>李*</span>           
+            <span>郑大西亚斯国际学院</span>           
+            <span>软件开发</span>           
+            <span>瓜子二手车</span>
+            <span class="money"><i>20000/月</i></span>
+            <span>北京</span>
+          </li><li class="clone" style="height: 50px;">
+            <span>李*嵩</span>           
+            <span>北京建筑工程学院</span>           
+            <span>给水排水工程</span>           
+            <span>易车</span>
+            <span class="money"><i>19000/月</i></span>
+            <span>北京</span>
+          </li><li class="clone" style="height: 50px;">
+            <span>康*</span>           
+            <span>荆楚理工学院</span>           
+            <span>工业设计</span>           
+            <span>高思教育</span>
+            <span class="money"><i>19000/月</i></span>
+            <span>北京</span>
+          </li><li class="clone" style="height: 50px;">
+            <span>宋*斌</span>           
+            <span>陕西科技大学</span>           
+            <span>计算机科学与技术</span>           
+            <span>小米</span>
+            <span class="money"><i>19000/月</i></span>
+            <span>北京</span>
+          </li><li class="clone" style="height: 50px;">
+            <span>许泽*</span>           
+            <span>华东理工大学</span>           
+            <span>安全工程</span>           
+            <span>哗啦啦</span>
+            <span class="money"><i>19000/月</i></span>
+            <span>北京</span>
+          </li><li class="clone" style="height: 50px;">
+            <span>袁**</span>           
+            <span>江西理工</span>           
+            <span>软件工程</span>           
+            <span>去哪儿</span>
+            <span class="money"><i>19000/月</i></span>
+            <span>北京</span>
+            </li></ul></div>  </div>
+    `;
+    
+    /*
+        <div  class="money" index="1">19999/月</div>
+
+        目的:
+            拿到所有的标签，然后把它过滤掉。只剩下内容
+
+        /<[^>]+/
+            尖尖加上排除多个不是尖尖的字符，也就是
+            <div class="money" index="1"
+        /<[^>]+>/也就是
+            <div class="money" index="1">或者</div>
+
+        let s = str.replace(/<[^>]+>/g,''); 把标签清掉
+    */
+    let s = str.replace(/<[^>]+>/g,''); //s是已经过滤掉标签的内容
+    console.log(s);
+
+    let ary = []; //获取内容中所有的数字
+
+    let arr = s.replace(/(\d+)\/月/g,($0,$1)=>{
+        // console.log($1);
+        //找到所有的数字+/月的内容
+        //获取第一个子项既数字，不过数字还是为字符串（一会要拿这些数字进行运算）
+        //所以要把字符串*1转成数字
+        ary.push($1*1); //'18000'*1 -> 18000
+    });
+
+    console.log(ary);
+
+    //num计算总价格
+    let num = 0;
+    ary.forEach(item=>{
+        num += item;
+    })
+
+    console.log(num);
+
+    console.log(num/ary.length); //求平均数
+    console.log(Math.max(...ary));//找最大值
+    // console.log(ary)
+
+
+
+</script>
+</body>
+</html>

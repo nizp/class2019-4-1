@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        
+        \r\n 回车并换行 
+        . 任意一个字符，除回车
+
+    修饰符:
+        m 多行匹配 
+
+
+    正则的特征:
+        懒惰性:
+            \d  让它找一个它一定不会找第二个
+        贪婪性:
+            \d+ 有多少就尽量匹配多少
+
+        /<[^>]+>/
+
+        (\d)\1+
+    
+
+    */
+    
+    // var regx=/^b./mg; 
+    // var regx=/f\s+/mg; 
+    // var str="ret76 dfsdf \r\nbjfsdfs dffs \r\nb76dsf sdfsdf \r\nb 6"; 
+    // var rs=str.match(regx); 
+    // console.log(str);
+    // console.log(rs);
+
+    let str = `i猜不猜8
+        i猜7
+        1111猜\r
+    `;
+    console.log(str.match(/猜.$/mg));
+    
+</script>
+</body>
+</html>

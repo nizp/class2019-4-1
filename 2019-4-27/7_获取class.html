@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ul">
+        <li class="li">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li class="  li      li2 li3">4</li>
+    </ul>
+<script>
+    /*
+        getElementById
+        getElementsByTagName
+
+        1.先拿到所有的元素
+        2.从这些元素中找到和传参的class一致的元素
+        3.把匹配的元素存到一个数组中
+        4.把筛选好的元素返回给外面使用
+
+    */
+
+    function getByClass(sClass){
+        //获取页面中所有的元素
+        var aEle = document.getElementsByTagName('*');
+        //为了存筛选好的元素
+        var arr = [];
+
+        //循环所有的元素，把和传进来的className名相等的元素push到数组中
+        for(var i=0;i<aEle.length;i++){
+            /*
+                'li li1' === 'li'  不成立
+
+                'li li1'.split(' ') -> ['li','li1']
+
+                循环['li','li1']，数组的每项再和传进来的参数进行比较
+
+
+                用正则:
+                    'li li1'
+
+                    \b + sClass + \b
+
+                    |li|
+                
+            */
+            // if(aEle[i].className === sClass){
+            //     arr.push(aEle[i]);
+            // }
+            let re = new RegExp('\\b'+ sClass +'\\b');
+            // console.log(re);
+            // return
+            if(re.test(aEle[i].className)){
+                arr.push(aEle[i]);
+            }
+
+            // console.log(aEle[i].className);
+        }
+        //返回筛选好的数组给外界用
+        return arr;
+        //console.log(aEle)
+    }
+
+    let lis = getByClass('li');
+
+    console.log(lis);
+
+    for(let i=0;i<lis.length;i++){
+        lis[i].style.background = 'red';
+    }
+
+
+
+</script>
+</body>
+</html>

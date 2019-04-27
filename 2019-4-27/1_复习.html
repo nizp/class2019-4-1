@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        1.专门用来检索模糊范围字符串的一种规则叫正则。
+            /不带引号的字符串/ - > /a/ 找字符串'a'
+            new RegExp(''|//,'') -> new RegExp('a','i') /a/i
+        2.正则的方法
+            re.exec() 捕获一项
+            re.test() 验证字符串是否匹配正则 返回布尔值
+        
+        3.字符串能正则的方法
+            string.match 捕获一项或者多项
+            string.replace(''|/()/,''|fn)
+
+            有子项，从第二个参数起就一一对应子项
+
+        4. () 提权 、子项
+
+        (\d)+ -> 最后一个   2019 -> 9
+        (\d)\1(\D)\2
+        
+        \2(\d)\1(\D)
+
+        
+        5.[]
+            数字[0-9]
+            英文[A-Za-z]
+            中文[\u4e00-\u9fa5]
+        
+        6.^ $ 开头和结尾
+
+        7.量词
+            +  1-无限
+
+        8.修饰符:
+            i  忽略大小写
+            g  全局
+
+           
+
+
+
+
+    */
+
+    let str = 'bdscdbg';
+    console.log(str.match(/(b)(d)sc\2\1g/))
+</script>
+</body>
+</html>

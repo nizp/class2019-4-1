@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        \d 一个数字
+        \D 一个非数字
+        \n 换行
+        \s 一个空格
+        \S 一个非空格
+        \w 一个数字字母下划线
+        \W 一个非数字字母下划线
+        \b 一个边界符
+        \B 一个非边界符
+
+        getElementsByClassName
+        querySelectorAll
+
+        修饰符:
+            m
+    */
+
+    let str = '           a  b       ';
+    //^\s+|\s+$
+    // console.log(/a\sb/.test(str));
+
+    //a  b       
+    //a  b
+
+    // for(var i=0;i<str.length;i++){
+    //     if(str[i] !== ' '){
+    //         break;
+    //     }
+    // }
+    // str = str.substring(i);
+
+    // console.log(str);
+
+    // for(var i=str.length-1;i>0;i--){
+    //     if(str[i] !== ' '){
+    //         // console.log(str[i])
+    //         console.log(str.substring(0,str.indexOf(str[i])+1));
+    //         break;
+    //     }
+    // }
+    // console.log(i);
+
+    
+    // console.log(str.replace(/^\s+|\s+$/g,''));
+    
+    
+    //6~18个字符，可使用字母、数字、下划线，需以字母开头
+    let str2 = 'a231_';
+
+    // console.log(str2.match(/\w+/));
+
+    // console.log(/^[A-Za-z]\w{5,17}$/);
+
+    /*
+        class="a"
+        class="a"
+        class="a b"
+    */
+
+    let str3 = 'hello world'; 
+
+    console.log(str3.replace(/\b/g,'|'));
+
+
+    // console.log(str);
+
+</script>
+</body>
+</html>
