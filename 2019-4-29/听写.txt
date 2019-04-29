@@ -1,0 +1,123 @@
+1.什么是闭包
+
+函数套函数，子函数引用父函数的参数或者变量，并且子函数还被外界引用，此时父函数形成闭包环境，父函数的参数或者变量不被浏览器垃圾回收机制回收，打印父函数的返回值有个scopes下有个closure，closure就是闭包
+
+2.什么是面向对象
+
+把相同的事务抽象出来归为一类，把描述这个类的属性或者方法挂在类的原型下的一种编程思想。
+
+3.什么是原型、原型链，他们的关系是什么
+
+原型是函数的一个属性prototype（当声明一个函数的时候自身带有的一个属性，这个属性一般只给它的实例化对象使用）
+
+原型链，实例身上都有的一个属性 __proto__ ,这个属性指向构造函数的原型
+
+构造函数的原型 === 实例对象的原型链
+
+实例对象上没有，就会通过原型链找到构造函数的原型
+
+构造函数的原型又是一个对象，如果在这个对象下还没有
+
+还会通过构造函数的原型的原型链进行查找，最后直到找到Oject.prototype为止。
+
+
+
+4.new之后发生了什么
+
+1.函数是可以不用调用就能执行  new Fn
+2.默认return实例
+3.构造函数内的this指向实例
+4.如果return为引用类型，那么返回值就为引用类型
+
+
+
+
+5.继承的方式有哪些并写出代码
+
+扩展式
+child.prototype = {...Parent.prototype}
+
+原型式
+
+function paohui(){}
+paohui.prototype = parent.prototype
+child.prototype = new paohui
+
+拷贝:
+child.prototype = deepclone(parent.prototype)
+
+child.prototype = Object.assgin(parent.prototype)
+
+寄生:
+
+child.prototype = Object.create(parent.prototype)
+
+类式
+function Child(){
+   Parent.call(this)
+}
+
+class式
+class Child extends Parent {}
+
+
+
+6.什么是浅拷贝，什么是深拷贝,deepClone的原理
+
+浅拷贝：
+
+let obj  = {age:18}
+
+let obj2 = {age:18} 
+一个引用类型赋值的时候，只赋值第一层的简单类型，这样
+两个空间地址不一样，改变一个空间的属性是不会影响另一个空间地址的属性的
+
+把一个对象中的第一层的简单类型赋值给另一个对象
+
+let obj2 = Object.assgin(obj)
+
+let obj2 = {...obj}
+
+for(let attr in obj){
+
+	obj2[attr] = obj[attr];
+}
+
+
+
+
+深拷贝:
+
+把一个对象中的第一层有引用类型，那么赋值的时候改变一个会影响另一个（因为赋值的过程还是赋值地址），需要只要发现引用类型就深入到内部去找简单类型，直到对象中的所有属性都是简单类型为止。
+
+function deepclone(obj){
+	let o = obj.push?[]:{};
+	for(let attr in obj){
+	  
+           if(obj.hasOwnProperty(attr)){
+		if(typeof obj[attr] === 'object'){
+
+		   o[attr] = deepclone(obj[attr])
+
+		}else{
+		   o[attr] = obj[attr]
+		}
+
+
+	    }
+
+	   
+	}
+
+	return o;
+}
+
+JSON.parse(JSON.stringify(obj))
+
+
+
+
+
+
+
+

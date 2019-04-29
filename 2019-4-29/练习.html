@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // console.log(a);
+        // var a = 12;
+        // function fn() {
+        //     console.log(a);
+        //     var a = 13;
+        // }
+        // fn();
+        // console.log(a);   
+
+        // console.log(a);
+        // var a = 12;
+        // function fn() {
+        //     console.log(a);
+        //     // a = 13;
+        // }
+        // fn();
+        // console.log(a);
+
+
+        // console.log(a);
+        // a = 12;
+        // console.log(a);
+
+        // function fn() {
+        //     console.log(a);
+        //     a = 13;
+        // }
+        // fn();
+        // console.log(a);
+
+
+        // var foo = 1;
+        // function bar() {
+        //     console.log(foo)//undefined
+        //     if (!foo) {
+        //         var foo = 10;
+
+        //     }
+        //     console.log(foo);//10
+
+        // }
+        // bar();
+
+        // var n = 0;
+        // function a() {
+        //     var n = 10;
+        //     function b() {
+        //         n++;
+        //         console.log(n); //11 12
+        //     }
+        //     b();
+        //     return b;
+        // }
+        // var c = a();
+        // c();
+        // console.log(n);//0
+
+
+        // function fn(a,b){
+        //     console.log(a+b);
+        // }
+
+        // let c = fn(1,2);
+        // console.log(c); //fn(1,2)
+
+
+        // var a = 10, b = 11, c = 12;
+        // function test(a) {
+        //     a = 1;
+        //     var b = 2;
+        //     c = 3;
+        // }
+        // test(8);
+        // console.log(a);
+        // console.log(b);
+        // console.log(c);
+
+        
+
+        // if (!("a" in window)) {
+        //     var a = 1;
+        // }
+        // console.log(a);//undefined
+
+
+        // var a = 4;
+        // function b(x, y, a) {
+        //     console.log(a);//3
+        //     arguments[2] = 10;
+        //     console.log(a);//10
+        // }
+        // a = b(1, 2, 3);
+        // console.log(a); //undefined
+
+        // var foo = 'hello';
+        // (function (foo) {
+        //     console.log(foo);//'hello'
+        //     var foo = foo || 'world';
+        //     console.log(foo);//'hello'
+        // })(foo);
+        // console.log(foo);//'hello'
+
+
+        // var a = 9;
+        // function fn() {
+        //     a = 0;
+        //     return function (b) {
+        //         return b + a++;
+        //     }
+        // }
+        // var f = fn(); //window.a = 0
+        // console.log(f(5));//5  window.a = 1
+        
+        // console.log(fn()(5));//5  window.a = 1
+        // console.log(f(5));//6 window.a = 2
+        // console.log(a);//2
+
+
+        // var ary = [1, 2, 3, 4];
+        // function fn(ary) {
+        //     ary[0] = 0;//[0, 2, 3, 4]
+        //     ary = [0];
+        //     ary[0] = 100;
+        //     return ary;  //[100]
+        // }
+        // var res = fn(ary);
+        // console.log(ary);
+        // console.log(res);
+
+        // function fn(i) {
+        //     return function (n) {
+        //         console.log(n + (i++));   
+        //     }
+        // }
+        // var f = fn(10);
+        // f(20);//(20+10)++  30 i=11
+        // fn(20)(40);//20+40 = 60
+        // fn(30)(50);//30+50=80
+        // f(30);//30+11=41   i=12
+
+
+        // var i = 10;
+        // function fn() {
+        //     return function (n) {
+        //         console.log(n + (++i));
+        //     }
+        // }
+        // var f = fn();
+        // f(20);//31
+        // fn()(20);//32
+        // fn()(30);//43
+        // f(30);//44
+
+        // var num = 10;
+        // var obj = {num: 20};
+        // obj.fn = (function (num) {
+        //     //window.num = num * 3=>20*3= 60
+        //     this.num = num * 3;
+        //     num++;//21
+        //     return function (n) {
+        //         this.num += n;
+        //         //windiw.num += n -> window.num=65
+        //         //obj.num += n -> 20 += 10 -> obj.num=30
+        //         num++; //22  23
+        //         console.log(num); //22  23
+        //     }
+        // })(obj.num);
+        // var fn = obj.fn;
+        // fn(5);
+        // obj.fn(10);
+        // // console.dir(fn);
+        // console.log(num, obj.num);//65  30
+
+
+
+        // function Fn() {
+        //     this.x = 100;
+        //     this.y = 200;
+        //     this.getX = function () {
+        //         console.log(this.x);
+        //     }
+        // }
+        // Fn.prototype.getX = function () {
+        //     console.log(this.x);
+        // };
+        // Fn.prototype.getY = function () {
+        //     console.log(this.y);
+        // };
+        
+        // var f1 = new Fn;
+        // var f2 = new Fn;
+        // console.log(f2.getX);//this.getX
+
+        // console.log(f1.getX === f2.getX);//false
+        
+        // console.log(f1.getY === f2.getY);//true
+
+        // console.log(f1.__proto__.getY === Fn.prototype.getY); //true
+        
+        // console.log(f1.__proto__.getX === f2.getX);//false
+
+        // console.log(f1.getX === Fn.prototype.getX);//false
+        // console.log(f1.constructor);//Fn
+        // console.log(Fn.prototype.__proto__.constructor);//Object
+        // f1.getX();//100
+        // f1.__proto__.getX(); //undefined
+        // f2.getY();//200
+        // Fn.prototype.getY();//undefined
+
+
+        // function Foo() {
+        //     getName = function () {
+        //         console.log(1);
+        //     };
+        //     return this;
+        // }
+        // Foo.getName = function () {
+        //     console.log(2);
+        // };
+        // Foo.prototype.getName = function () {
+        //     console.log(3);
+        // };
+
+        // /*
+            
+           
+        //     window.getName = function () {
+        //         console.log(1);
+        //     };
+        // */
+        // // getName();
+        // var getName = function () {
+        //     console.log(4);
+        // };
+        // function getName() {
+        //     console.log(5);
+        // }
+        // Foo.getName();//2
+        // getName();//4
+        // Foo().getName();//1
+        // getName();//1
+        // new Foo.getName();//2
+        // new Foo().getName();//3
+        /*
+            new Foo() -> 实例
+            new Foo().getName = Foo.prototype.getName;
+
+            new Foo.prototype.getName
+
+        */
+        // new new Foo().getName();//3
+
+
+    // var fullName='language';
+    // var obj = {
+    //     fullName:'javascript',
+    //     prop:{
+    //         getFullName:function(){
+    //             return this.fullName;
+    //         }
+    //     }
+    // };
+    // console.log(obj.prop.getFullName());//undefined
+    // var test = obj.prop.getFullName;
+    // console.log(test());//language
+
+
+    // var name='window';
+    // var Tom={
+    //     name:"Tom",
+    //     show:function(){
+    //         console.log(this.name);
+    //     },
+    //     wait:function(){
+    //         var fun=this.show;
+    //         fun();
+    //     }
+    // };
+    // Tom.wait();//window
+
+
+    // function fun(){
+    //     this.a=0;
+    //     this.b=function(){
+    //         alert(this.a);
+    //     }
+    // }
+    // fun.prototype = {
+    //     b:function(){
+    //         this.a=20;
+    //         alert(this.a);
+    //     },
+    //     c:function(){
+    //         this.a=30;
+    //         alert(this.a)
+    //     }
+    // }
+    // var my_fun=new fun();
+
+
+    // my_fun.b();//0
+
+    // my_fun.c();//30
+
+        
+
+
+        // function fn2(){
+        //     console.log(1);
+        // }
+        // function fn(){
+        //     var fn2 = 5; 
+        //     function fn3(){
+        //         fn2 = function(){
+        //             console.log(this);
+        //         }
+        //     }
+        //     fn3()
+        // }
+        // fn2();
+        // fn();
+        // fn2();
+
+        // function fn3(){
+        //     fn2 = function(){
+        //         console.log(this);
+        //     }
+        // }
+
+        // console.log()
+        // fn();
+        
+
+    </script>
+</body>
+
+</html>
