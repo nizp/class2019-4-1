@@ -1,0 +1,30 @@
+//数据
+[
+    {
+        num:0,
+        pirce:12.5,
+        xj:0
+    },
+    {
+        num:0,
+        pirce:10.5,
+        xj:0
+    },
+    {
+        num:0,
+        pirce:8.5,
+        xj:0
+    },
+    {
+        num:0,
+        pirce:8,
+        xj:0
+    },
+    {
+        num:0,
+        pirce:14.5,
+        xj:0
+    }
+]
+
+

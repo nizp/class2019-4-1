@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				font-family: "微软雅黑";
+				
+			}
+		    .bg{
+		    	width:871px;
+		    	height: 553px;
+		    	background: url(img/bg.jpg) no-repeat;
+		    	margin: 0 auto;
+		    }
+		    #oDiv1{
+		    	position:relative;
+		    	top: 128px;
+		    	left: 45px;
+		    	width: 447px;
+		    	height: 295px;
+		    	float: left;
+		    }
+		    span{
+		    	position: absolute;
+		    	left: -11px;
+		    	bottom: 5px;
+		    	
+		    }
+		    #oDiv1 img{
+		    	width:447px ;
+		    	height: 245px;
+		    	position: absolute;
+		    	display: none;
+		    	
+		    }
+		    p{
+		    	position: absolute;
+		    	top: 86%;
+		    	left: 35%;
+		    }
+		    #oDiv2{
+		    	height: 295px;
+		    	width: 248px;
+		    	position:relative;
+		    	top:128px;
+		    	left:115px ;
+		    	float: left;
+		    }
+		    #oDiv2 img{
+		    	width: 248px;
+		    	height: 245px;
+		    	position: absolute;
+		    	left: 0;
+		    	top:0;
+		    	display: none;
+		    }
+		    #pre{
+		    	position: absolute;
+		    	top: 102px;
+		    	left:288px;
+		    }
+		    #next{
+		    	position: absolute;
+		    	top:103px;
+		    	left:345px;
+		    }
+		    a{
+		    	width: 60px;
+		    	height: 60px;
+		    	background-color: #fff;
+		    	opacity: 0.3;
+		    	display: block;
+		    	color: #000;
+		    	font-size: 48px;
+		    	line-height: 60px;
+		    	position: absolute;
+		    	top: 33%;
+		    	text-align: center;
+		    	
+		    }
+		    #before1,#before2{
+		    	left: 0px;
+		    }
+		    #after1,#after2{
+		    	right: 0px;
+		    }
+		    a:link,a:active,a:visited{
+		    	text-decoration: none;
+		    	
+		    }
+		    a:hover{
+		    	opacity: 0.7;
+		    }
+		</style>
+	</head>
+	<body>
+		<div class='bg'>
+			<button id="pre">上一组</button>
+			<button id="next">下一组</button>
+			<div id="oDiv1">
+			    <!-- <img style="display:block" src="img/1.jpg" alt=""  />
+		    	<img src="img/2.jpg" alt="" />
+		    	<img src="img/3.jpg" alt="" />
+		    	<img src="img/4.jpg" alt="" />
+			    <span id='span1'>1/4</span>
+				<p id="p1">这是第1张图片</p>
+				<a href="javascript:;" id="before1"><</a>
+				<a href="javascript:;" id="after1">></a> -->
+			</div>
+			<div id="oDiv2">
+				<!-- <img style="display:block" src="img/01.jpg" />
+				<img src="img/02.jpg" />
+				<img src="img/03.jpg" />
+			    <span id='span2'>1/3</span>
+				<p id="p2">这是第1张图片</p>
+				<a href="javascript:;" id="before2"><</a>
+				<a href="javascript:;" id="after2">></a> -->
+			</div>
+		</div>
+
+<script>
+
+	/*
+		<img style="display:block" src="img/1.jpg" alt=""  />
+		<img src="img/2.jpg" alt="" />
+		<img src="img/3.jpg" alt="" />
+		<img src="img/4.jpg" alt="" />
+		<span id='span1'>1/4</span>
+		<p id="p1">这是第1张图片</p>
+		<a href="javascript:;" id="before1"><</a>
+		<a href="javascript:;" id="after1">></a>
+	*/
+	class PicChange {
+		constructor(id,arr) {
+			this.box = document.getElementById(id);
+			this.arr = arr;
+			this.num = 0;
+		}
+		createImg(){
+			let html = '';
+			this.arr.forEach((item,i)=>{
+				if(i===0){
+					html += `<img style="display:block" src="${item}"/>`
+				}else{
+					html += `<img  src="${item}"/>`
+				}
+				
+			});
+			return html;
+		}
+		createDOMs(prev,next){
+			let that = this;
+			this.span = document.createElement('span');
+			this.span.innerHTML = '1/'+this.arr.length;
+			this.p = document.createElement('p');
+			this.p.innerHTML = '这是第1张图片';
+			this.prev = document.createElement('a');
+			this.prev.id = prev;
+			this.next = document.createElement('a');
+			this.next.onclick = function(){
+				that.nextFn();
+			}
+			this.prev.onclick = function(){
+				that.prevFn();
+			}
+
+			this.next.id = next;
+			this.prev.href = this.next.href = 'javascript:;';
+			this.prev.innerHTML = '<';
+			this.next.innerHTML = '>';
+		}
+
+		change(){
+			//切换图片，切换文字和数字
+			this.imgs = Array.from(this.box.getElementsByTagName('img'));
+			this.imgs.forEach(ele=>ele.style.display = 'none');
+			this.imgs[this.num].style.display = 'block';
+
+			this.span.innerHTML = (this.num+1) + '/'+this.arr.length;
+			
+			this.p.innerHTML = '这是第'+ (this.num+1) +'张图片';
+		}
+		
+		nextFn(){
+			this.num ++;
+			this.num %= this.arr.length;
+			this.change();
+		}
+		prevFn(){
+			this.num --;
+			if(this.num < 0){
+				this.num = this.arr.length-1;
+			}
+			this.change();
+		}
+
+		render(prev,next){
+			this.box.innerHTML = this.createImg();
+			this.createDOMs(prev,next);
+			this.box.appendChild(this.span);
+			this.box.appendChild(this.p);
+			this.box.appendChild(this.prev);
+			this.box.appendChild(this.next);
+			// console.log(this.span)
+			// this.box.appendChild(this.p);
+			// this.box.appendChild(this.prev);
+		}
+	}
+
+	fetch('data.json')
+	.then(e=>e.json())
+	.then(data=>{
+		console.log(data);
+		let c1 = new PicChange('oDiv1',data.data1)
+		c1.render('before1','after1');
+		let c2 = new PicChange('oDiv2',data.data2)
+		c2.render('before2','after2');
+
+		next.onclick = function(){
+			c1.nextFn();
+			c2.nextFn();
+		}
+	})
+</script>
+</body>
+</html>

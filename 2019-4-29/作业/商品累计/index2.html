@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="price.css" />
+	</head>
+
+	<body onselectstart="return false;">
+		<div class="wrap">
+			<div class="box">
+				<ul class="list" id="list">
+					<!-- <li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>12.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>10.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>8.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>8元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>14.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li> -->
+				</ul>
+				<div class="info">
+					<span>商品公合计：<em>0</em>件</span>
+					<span>共花费了：<em>0</em>元</span>
+					<br />
+					<br />
+					<span>其中最贵的商品单价是：<em>0</em>元</span>
+				</div>
+			</div>
+		</div>
+
+<!-- <script src="data.js"></script> -->
+<script>
+
+	/*
+		//请求
+		fetch(url) url-> 文件路径
+		.then(d=>d.text())
+		.then(arr=>{
+			console.log(arr);
+		})
+	*/
+
+	//累计
+	function sumNum(arr,attr){
+		let num = 0;
+		arr.forEach(e=>{
+			num += e[attr];
+		});
+		return num;
+	}
+
+	function zuigui(arr){
+		let ary = arr.filter(item=>{
+			return item.num>0;
+		}).map(e=>e.pirce);
+		// Math.max()
+		return Math.max(...ary);
+	}
+
+	const ems = document.querySelectorAll('.info em');
+
+	fetch('./data.js')
+	.then(e=>e.text())
+	.then(arr=>{
+		// console.log(typeof arr); //string
+		arr = eval('('+arr+')');
+		// console.log(arr);
+		
+		/*
+			<li>
+				<i></i>
+				<em>0</em>
+				<i></i>
+				<span>
+					单价：<strong>12.5元 </strong> 小计：<strong>0元</strong>
+				</span>
+			</li>
+		*/
+
+
+		arr.forEach(item=>{
+			// console.log(item)
+			let li = document.createElement('li');
+			let prev = document.createElement('i');
+			let count = document.createElement('em');
+			let next = document.createElement('i');
+			let span = document.createElement('span');
+			count.innerHTML = item.num; 
+			span.innerHTML = `单价：<strong>${item.pirce}元 </strong> 小计：<strong>${item.xj}元</strong>`;
+			const xj = span.children[1];
+
+			next.onclick = function(){
+				//个数相加
+				item.num += 1;
+				item.xj = item.num * item.pirce;
+				count.innerHTML = item.num;
+				xj.innerHTML = item.xj;
+				ems[0].innerHTML = sumNum(arr,'num');
+				ems[1].innerHTML = sumNum(arr,'xj');
+
+				
+				ems[2].innerHTML = zuigui(arr);
+			}
+			prev.onclick = function(){
+				//个数相减
+				item.num -= 1;
+				if(item.num < 0){
+					item.num = 0;
+				}
+				item.xj = item.num * item.pirce;
+				count.innerHTML = item.num;
+				xj.innerHTML = item.xj + '元';
+				ems[0].innerHTML = sumNum(arr,'num');
+				ems[1].innerHTML = sumNum(arr,'xj');
+				ems[2].innerHTML = zuigui(arr);
+			}
+
+			li.appendChild(prev);
+			li.appendChild(count);
+			li.appendChild(next);
+			li.appendChild(span);
+
+			list.appendChild(li);
+		
+		});
+
+	});
+
+
+	
+
+
+
+
+	
+	
+
+</script>
+</body>
+
+</html>
