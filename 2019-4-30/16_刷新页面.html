@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    border: 1px solid #000;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+    <button id="btn">刷新</button>
+<script>
+    /*
+        刷新页面
+        window.location.reload()
+    */    
+    let ary = ['red','yellow','blue','green'];
+    let num = 0;
+    box.onclick = function(){
+        num ++;
+        num%=ary.length;
+        box.style.background = ary[num];
+    }
+
+    btn.onclick = function(){
+        window.location.reload();
+    }
+
+</script>
+</body>
+</html>

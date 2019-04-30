@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        hash: ""  浏览器hash信息 #之后的信息，更换这个信息是不会刷新页面的
+
+        window.location.hash 即能读也能写
+
+        host: ""  ip地址 + 端口号
+        hostname: "" ip地址
+        href: ""  url
+        origin: "file://"
+        port: "" 端口
+        protocol: "file:"  协议
+        reload: ƒ reload()   刷新页面
+        replace: ƒ () 替换页面
+        search: ""  查询信息
+    */   
+//    console.dir(window.location); 
+
+    document.onclick = function(){
+        window.location.hash = 'a=3';
+        console.log(window.location.hash);
+    }
+
+    //当hash值发生变化的时候就触发
+    window.onhashchange = function(){
+        alert('触发');
+    }
+
+</script>
+</body>
+</html>

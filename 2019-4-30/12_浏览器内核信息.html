@@ -3,17 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+}
+</style>
 </head>
 <body>
+    <div id="box"></div>
 <script>
     /*
+        window.navigator.userAgent，查看用户的浏览器内核信息
+
+        注意:
+            使用的时候判断的字符串有可能会被模拟。
+    
         Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36
 
         操作系统的版本，位数
 
         WebKit
+
+        Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; rv:11.0) like Gecko
+        Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E)
+        Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E)
+
+
+        window.location.href   在当前页面中跳转页面
     */
-    console.log(window.navigator.userAgent)
+    var str = window.navigator.userAgent;
+    // if(/chrome/i.test(str)){
+    //     console.log('chrome');
+    // }else{
+    //     console.log('不是chrome');
+    // }
+
+    // if(/chrome/i.test(str)){
+    //     box.style.background = 'skyblue';
+    // }else if(/firefox/i.test(str)){
+    //     box.style.background = 'blue';
+    // }else if(/msie 9.0/i.test(str)){
+    //     box.style.background = 'red';
+    // }else{
+    //     box.style.background = 'green';
+    // }
+
+
+    // console.log(window.navigator.userAgent);
+
+    // if(/iphone/i.test(str)){
+    //     window.location.href = 'http://www.baidu.com';
+    // }else if(/android/i.test(str)){
+    //     window.location.href = 'http://www.sogou.com';
+    // }else{
+    //     window.location.href = 'http://www.zhufengpeixun.cn';
+    // }
+    
+
 </script>
 </body>
 </html>

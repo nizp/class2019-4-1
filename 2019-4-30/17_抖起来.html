@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: skyblue;
+    position:absolute;
+    top:0;
+    left:300px;  
+}
+#box2{
+    width:100px;
+    height:100px;
+    background:pink;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <div id="box2"></div>
+    </div>
+<script>
+    let ary = [10,-10,8,-8,6,-6,4,-4,2,-2,0];
+    let num = 0;
+    let timer = null;
+    box.onclick = function(){
+        let l = this.offsetLeft;
+        timer = setInterval(() => {
+            num++;
+            this.style.left = l + ary[num] + 'px';
+            if(num == ary.length){
+                clearInterval(timer);
+                // console.log(1);
+                box2.style.transition = '0.5s';
+                box2.style.transform = 'scale(.5)';
+                num=0;
+            };
+            
+        }, 16.7);
+    }
+
+
+</script>
+</body>
+</html>

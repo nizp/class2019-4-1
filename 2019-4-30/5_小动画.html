@@ -17,6 +17,13 @@
 <body>
     <div id="box"></div>
 <script>
+    /*
+        渲染帧是指浏览器一次完整绘制过程，
+        帧之间的时间间隔是DOM视图更新的最小间隔。 
+        由于主流的屏幕刷新率都在60hz，
+        因此渲染一帧的事件就必须控制在16.7ms内才能保证不掉帧。
+        也就是说每一次渲染都要在 16.7ms 内页面才够流畅不会有卡顿感。
+    */
     let timer = null;
     box.onclick = function(){
         timer = setInterval(() => {

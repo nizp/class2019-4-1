@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: skyblue;
+        }
+
+        ul {
+            width: 1000px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        li {
+            list-style: none;
+            float: left;
+        }
+
+        #main ul {
+            margin-top: 140px
+        }
+
+        #main li {
+            height: 400px;
+            width: 230px;
+            margin-right: 20px;
+            float: left;
+            background: #fff;
+            position: relative;
+        }
+
+        ul div {
+            height: 40px;
+            background: #171717;
+        }
+
+        ul li div input {
+            border: none;
+            background: none;
+            color: #D94C69;
+            font-size: 14px;
+            margin-top: 10px;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .inputdate {
+            border-bottom: 2px solid #88404e;
+            height: 20px;
+            width: 160px;
+            text-align: center;
+        }
+
+        p {
+            margin-top: 20px;
+            text-align: center;
+            line-height: 30px;
+            color: #aaaaaa;
+            font-size: 12px;
+        }
+
+        p span {
+            display: inline-block;
+            height: 30px;
+            width: 20px;
+            background: #de4a64;
+            border-radius: 5px;
+            color: #fff;
+            text-align: center;
+        }
+
+        strong {
+            color: #de4a64;        
+        }
+
+        img {
+            margin: 20px 0px 0px 24px;
+            height: 180px;
+            width: 180px;
+        }
+
+        h5 {
+            text-align: center;
+            height: 20px;
+        }
+
+        .list {
+            width: 1000px;
+            line-height: 40px;
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        .list li {
+            background: #171717;
+            height: 40px;
+        }
+
+        .li1 {
+            padding-left: 20px;
+            width: 306px;
+        }
+
+        .li2 {
+            width: 166px;
+            padding-left: 160px;
+        }
+
+        .li3 {
+            padding-left: 20px;
+            width: 306px;
+        }
+
+        .li3 img {
+            float: right;
+            height: 60px;
+            width: 60px;
+            margin-top: 10px;
+            margin-right: 20px;
+        }
+
+        .price {
+            color: #de4a64;
+            margin: 0;
+        }
+
+        .big-c {
+            border-radius: 50%;
+            border: 4px solid #D94C69;
+            position: absolute;
+            top: 120px;
+            left: 30px;
+            height: 150px;
+            width: 150px;
+            background: none;
+            transform: scale(3);
+            transition: 0.3s;
+            z-index: 2;
+            visibility: hidden;
+        }
+
+        .med-c {
+            border-radius: 50%;
+            border: 2px solid #D94C69;
+            position: absolute;
+            top: 13px;
+            left: 13px;
+            height: 120px;
+            width: 120px;
+            background: none;
+            transform: rotate(-30deg);
+        }
+
+        .med-c span,
+        .half1,
+        .half2 {
+            color: #D94C69;
+            position: absolute;
+            background: none;
+        }
+
+        .half1 span:nth-child(1) {
+            left: 20px;
+            top: 20px
+        }
+
+        .half1 span:nth-child(2) {
+            left: 50px;
+            top: 10px
+        }
+
+        .half1 span:nth-child(3) {
+            left: 80px;
+            top: 20px
+        }
+
+        .med-c p {
+            height: 20px;
+            top: 30px;
+            position: absolute;
+            left: 20px;
+            font-size: 16px;
+            color: #D94C69;
+        }
+
+        .half2 span:nth-child(1) {
+            left: 20px;
+            top: 80px
+        }
+
+        .half2 span:nth-child(2) {
+            left: 50px;
+            top: 90px
+        }
+
+        .half2 span:nth-child(3) {
+            left: 80px;
+            top: 80px
+        }
+
+        .style1 li {
+            height: 80px;
+            background: #fff;
+            line-height: 80px;
+        }
+
+        .style2 li {
+            height: 80px;
+            background: #f5f5f5;
+            line-height: 80px;
+        }
+
+        .bg {
+            position: absolute;
+            opacity: 0.7;
+            background: #000;
+            width: 100%;
+            height: 100%;
+            display: none;
+            transition: 0.5s;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="main">
+        <ul>
+            <li>
+                <div class="bg"></div>
+                <div>
+                    <input class="inputdate" type="text" value="2017/12/07 17:00:00">
+                    <input type="button" value="确认">
+                </div>
+                <p class="times">剩余
+                    <span>0</span>
+                    <span>0</span>
+                    <strong>:</strong>
+                    <span>0</span>
+                    <span>0</span>
+                    <strong>:</strong>
+                    <span>0</span>
+                    <span>0</span>
+                </p>
+                <img src="img/1.jpg">
+                <h5>iphone7s plus 炫酷手机</h5>
+                <p>抢购价：
+                    <strong class="price">¥8888</strong>
+                </p>
+
+                <div class="big-c">
+                    <div class="med-c">
+                        <div class="half1">
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                        </div>
+                        <P>商品已下架</P>
+                        <div class="half2">
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="bg"></div>
+                <div>
+                    <input class="inputdate" type="text" value="2017/12/07 17:00:00">
+                    <input type="button" value="确认">
+                </div>
+                <p class="times">剩余
+                    <span>0</span>
+                    <span>0</span>
+                    <strong>:</strong>
+                    <span>0</span>
+                    <span>0</span>
+                    <strong>:</strong>
+                    <span>0</span>
+                    <span>0</span>
+                </p>
+                <img src="img/2.jpg">
+                <h5>27 英寸配置 Retina 5K显示屏</h5>
+                <p>抢购价：
+                    <strong class="price">¥15999</strong>
+                </p>
+                <div class="big-c">
+                    <div class="med-c">
+                        <div class="half1">
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                        </div>
+                        <P>商品已下架</P>
+                        <div class="half2">
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="bg"></div>
+                <div>
+                    <input class="inputdate" type="text" value="2017/12/07 17:00:00">
+                    <input type="button" value="确认">
+                </div>
+                <p class="times">剩余
+                    <span>0</span>
+                    <span>0</span>
+                    <strong>:</strong>
+                    <span>0</span>
+                    <span>0</span>
+                    <strong>:</strong>
+                    <span>0</span>
+                    <span>0</span>
+                </p>
+                <img src="img/3.jpg">
+                <h5>魅族、锥子、小米 “集”群</h5>
+                <p>抢购价：
+                    <strong class="price">¥20000</strong>
+                </p>
+                <div class="big-c">
+                    <div class="med-c">
+                        <div class="half1">
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                        </div>
+                        <P>商品已下架</P>
+                        <div class="half2">
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="bg"></div>
+                <div>
+                    <input class="inputdate" type="text" value="2017/12/07 17:00:00">
+                    <input type="button" value="确认">
+                </div>
+                <p class="times">剩余
+                    <span>0</span>
+                    <span>0</span>
+                    <strong>:</strong>
+                    <span>0</span>
+                    <span>0</span>
+                    <strong>:</strong>
+                    <span>0</span>
+                    <span>0</span>
+                </p>
+                <img src="img/4.jpg">
+                <h5>iWatch 智能手表不智能</h5>
+                <p>抢购价：
+                    <strong class="price">¥5000</strong>
+                </p>
+                <div class="big-c">
+                    <div class="med-c">
+                        <div class="half1">
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                        </div>
+                        <P>商品已下架</P>
+                        <div class="half2">
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div id="footer">
+        <ul class="list">
+            <li class="li1">商品</li>
+            <li class="li2">价钱</li>
+            <li class="li3"></li>
+        </ul>
+        <ul class="style2">
+            <li class="li1"></li>
+            <li class="li2"></li>
+            <li class="li3"></li>
+        </ul>
+
+    </div>
+    <script>
+        /*
+            1.可以动态设置时间
+            2.点击确定开始倒计时
+            3.时间到之后big-c 缩放到1的位置visibly，记得加遮罩bg dispaly
+            4.把商品名，价格，图片，放到页脚处
+            5.累积价格
+        */
+      
+    </script>
+</body>
+
+</html>

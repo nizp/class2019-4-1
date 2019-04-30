@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        window.location.href
+
+        window.location.search 
+            ?到#号之间的信息
+            即可读也可写，只不过写的时候会刷新页面
+
+        http://www.zhufengpeixun.cn?num=1#page=0
+
+    */  
+
+    console.log(window.location.search);
+
+    document.onclick = function(){
+        window.location.search = 'code=1';
+    }
+     
+</script>
+</body>
+</html>
