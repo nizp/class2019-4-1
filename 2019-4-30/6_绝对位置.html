@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    div{
+        padding:100px;
+    }
+    #box1{
+        background:tomato;
+        position: relative;
+        margin-top: 100px;
+    }
+    #box2{
+        background:gold;
+        position: relative;
+        border:10px solid #000;
+    }
+    #box3{
+        background:firebrick;
+        position: absolute;
+        border:10px solid #000;
+        margin-top:50px;
+    }
+    
+</style>
+</head>
+<body>
+    <div id="box1">
+        <div id="box2">
+            <div id="box3"></div>
+        </div>
+    </div>
+<script>
+    /*
+        绝对位置：
+            当前元素到页面顶端的位置。
+
+        clientLeft/clientTop 边框尺寸
+
+        getComputedStyle(box3).borderTopWidth 边框尺寸
+
+        getBoundingClientRect() 当前元素到页面可视区的尺寸、距离
+
+        注意:
+            **是跟滚动条走的。
+        width/height/left/right/top/bottom/x/y
+
+            
+    */
+    
+    let obj = box3;
+    let t = 0;
+    let l = box3.clientTop;//parseInt(getComputedStyle(box3).borderTopWidth)
+    // console.log(box3.clientTop);
+    //判断当前obj是否不为null
+
+    //box3 -> box2 -> box1 -> 
+    while(obj){
+        // t = 当前元素的上外边距 + 当前元素上边框
+        t += obj.offsetTop + obj.clientTop;
+        //重新设置Obj是谁，让obj变为当前的定位父级
+        obj = obj.offsetParent;
+    }
+    console.log(t-l);
+
+    console.log(document.body.offsetParent);
+
+
+    class Tools {
+        position(ele){ 
+            let left = 0;
+            let top = 0;
+            let obj = ele;
+            
+            while(obj){
+                left += obj.offsetLeft + obj.clientLeft;
+                top += obj.offsetTop + obj.clientTop;
+                obj = obj.offsetParent;
+            }
+            left -= ele.clientLeft;
+            top -= ele.clientTop;
+            return {
+                left,
+                top
+            }
+            //如果对象中的key值和value值一样，那么可以简写为一个
+            // return {
+            //     left:left,
+            //     top:top
+            // }
+        }
+    }
+
+    let t1 = new Tools;
+    console.log(t1.position(box3).top);
+
+    // console.log(box3.getBoundingClientRect().right);
+    console.log(box3.getBoundingClientRect())
+
+   
+
+
+
+
+</script>
+</body>
+</html>

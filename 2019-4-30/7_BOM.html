@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+</style>
+</head>
+<body style="height:3000px">
+
+    <a href="http://www.baidu.com" target="_blank">走百度</a>
+<script>
+    /*
+        BOM:
+            Borwser Object Model
+            浏览器对象模型
+
+        获取浏览器的尺寸
+            window.innerWidth/window.innerHeight
+
+            注意:
+                window.innerWidth||window.innerHeight如果有滚动条，是忽略了滚动条的尺寸的
+                1280
+            document.body.clientWidth(浏览器的尺寸,排除滚动条的)
+            使用的时候把默认样式清除
+                1263
+
+            window.open(url)
+                打开新的窗口
+                注意：
+                    需要用户主动触发才不会被拦截
+            比如：
+                window.open('http://www.baidu.com')
+
+            window.close();
+                关闭浏览器窗口
+                最好也是用户主动触发体验才好
+
+
+
+
+
+
+
+        
+    */  
+//    console.log(window.innerWidth);
+//    console.log(document.body.clientWidth)
+
+
+    // window.close();
+    // document.onclick = function(){
+    //     // window.open('http://www.baidu.com');
+    //     window.close();
+    // }
+</script>
+</body>
+</html>

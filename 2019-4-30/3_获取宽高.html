@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin: 0;
+    padding:0;
+}
+#box{
+    /* background: #000; */
+    width:200px;
+    /* height:100px; */
+    /* padding:100px; */
+    border:10px solid skyblue;
+    overflow: hidden;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        ele.clientWidth/ele.clientHeight  
+        支持padding,不包含边框
+            元素可视区宽度  不带单位的数字   
+        ele.offsetWidth/ele.offsetHeight
+        支持padding,也包含边框,不带单位的数字
+        ele.clientWidth/ele.clientHeight  
+        支持padding,不包含边框
+            元素可视区宽度  不带单位的数字   
+        ele.offsetWidth/ele.offsetHeight
+        支持padding,也包含边框,不带单位的数字
+    </div>
+<script>
+    /*
+        
+        ele.clientWidth/ele.clientHeight  
+        支持padding,不包含边框
+            元素可视区宽度  不带单位的数字
+            
+            
+        ele.offsetWidth/ele.offsetHeight
+        支持padding,也包含边框,不带单位的数字
+
+        上面这2个，如果设置一个固定值，就以固定值为依据显示
+        不会以被内容撑开显示
+        
+
+        ele.scrollHeight/ele.scrollWidth
+        被内容撑开的高度（不包含边框）
+
+        不管设不设置固定样式，都以被内容撑开为显示结果。
+
+
+
+
+        
+    */
+    document.onclick = function(){
+        // console.log(box.clientHeight);
+        // console.log(box.offsetHeight)
+        console.log(box.scrollHeight);
+    }
+</script>
+</body>
+</html>

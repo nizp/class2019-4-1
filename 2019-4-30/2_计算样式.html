@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    background: #000;
+    width:200px;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    /*
+        obj = {
+            style:{
+                height:'100px'
+                width:''
+            }
+        }
+
+        元素的style下的属性，默认为空字符串。
+
+        计算后的样式:
+            getComputedStyle(element).属性
+
+            获取到的结果为**带单位**的字符串
+                比如:100px
+            
+    */
+    document.onclick = function(){
+        box.style.height = '100px';
+        //获取box的宽度
+
+        // console.log(box.style.width);
+
+        // console.log(getComputedStyle(box).width);
+
+        let w = parseInt(getComputedStyle(box).width);
+        console.log( w -= 5 );
+
+    }
+</script>
+</body>
+</html>

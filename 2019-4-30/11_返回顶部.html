@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+#box{
+    width:100px;
+    height:50px;
+    font-size:20px;
+    text-align: center;
+    line-height: 50px;
+    color:#fff;
+    background: red;
+    cursor: pointer;
+    position:fixed;
+    bottom:0;
+    right:0;
+    display: none;
+}
+body,html{
+    height:3000px;
+}
+</style>
+</head>
+<body>
+    <div id="box">返回顶部</div>
+<script>
+    window.onscroll = function(){
+        // console.log(window.pageYOffset);
+        if(window.pageYOffset >= 600){
+            box.style.display = 'block';
+        }else{
+            box.style.display = 'none';
+        }
+    }
+
+    let timer = null;
+    box.onclick = function(){
+        let t = window.pageYOffset;
+        timer = setInterval(() => {
+            t-=100;
+            if(t <= 0){
+                t = 0;
+                clearInterval(timer);
+            }
+            window.scrollTo(0,t);
+        }, 16.7);
+        
+    }
+</script>
+</body>
+</html>

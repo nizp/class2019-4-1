@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body style="height:3000px">
+<script>    
+    /*
+        滚动条的距离，只能读不能写
+        window.pageYOffset/window.pageXOffset
+
+        window.scrollTo(x,y) 专门用来写滚动条距离的
+
+        //滚动条的距离，既能读也能写
+        document.documentElement.scrollTop
+        
+    */
+    document.onclick = function(){
+        // console.log(window.pageYOffset)
+        // console.log(document.documentElement.scrollTop)
+        // document.documentElement.scrollTop = 0;
+
+        window.scrollTo(0,0);
+    }
+</script>
+</body>
+</html>

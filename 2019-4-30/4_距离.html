@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+div{
+    padding:100px;
+}
+#box1{
+    background:tomato;
+    position: relative;
+}
+#box2{
+    background:gold;
+    position: relative;
+    border:10px solid #000;
+}
+#box3{
+    background:firebrick;
+    position: absolute;
+    border:10px solid #000;
+}
+
+</style>
+</head>
+<body>
+    <div id="box1">
+        <div id="box2">
+            <div id="box3"></div>
+        </div>
+    </div>
+<script>
+    /*
+        offsetParent
+            定位父级
+
+            没有定位父级走body
+    
+        offsetLeft
+            当前元素（左外边框）到定位父级的（左内边框）距离
+
+        offsetTop
+            当前元素（上外边框）到定位父级的（上内边框）距离
+
+        获取的是不带单位的数字。
+        
+        如果要使用上面的属性，一定要做到以下几点
+        1.子级有绝对定位
+        2.定位父级也一定要有定位
+        3.子级和父级都要有宽高（触发haslayout，zoom:1）
+    */
+
+    // console.log(box3.offsetParent);
+    console.log(box3.offsetLeft);
+</script>
+</body>
+</html>
