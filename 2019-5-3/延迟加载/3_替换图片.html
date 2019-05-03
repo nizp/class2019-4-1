@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <img src="./img/1.x.jpg" alt="haha" id="img"/>
+
+<script>
+
+    /*
+        onload  图片加载成功的时候触发
+        onerror 图片加载失败的时候触发
+
+        如果发现某张图是坏图，那么在onerror中重新赋值一个好的(预备)图片即可
+    */
+    // let timg = document.createElement('img');
+
+    let timg = new Image;
+
+    timg.src = './img/1.jpg';
+
+    timg.onload = function(){
+        // alert('好图');
+        img.src = './img/1.jpg';
+    }
+    timg.onerror = function(){
+        // alert('坏');
+        img.src = './img/timg.jpg';
+    }
+
+</script>
+</body>
+</html>

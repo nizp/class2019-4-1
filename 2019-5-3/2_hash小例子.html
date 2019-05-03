@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="prev">上一张</button>
+    <button id="next">下一张</button>
+    <img src="img/1.jpg" id="img"/>
+<script>
+    let arr = ['img/1.jpg','img/2.jpg','img/3.jpg','img/4.jpg'];    
+
+    let num = 0;
+
+    /*
+        一上来看看有没有hash，
+        没有hash默认为1
+
+        有hash就通过读取hash，设置图片
+    */
+
+    let hash = window.location.hash; //打开页面的时候获取hash值
+
+    //看看有没有hash值
+    if(hash){
+        //获取hash值，把hash值设置为num
+        num = hash.split('=')[1]*1;  //'[#a,1]'
+    }else{
+        window.location.hash = 'page=0'; //没有默认0
+    }
+    // console.log(num);
+
+    img.src = arr[num]; 
+
+
+    window.onhashchange = function(){
+        hash = window.location.hash;
+        if(hash){
+            num = hash.split('=')[1]*1;
+        }
+        img.src = arr[num];
+        console.log(num);
+    }
+
+    next.onclick = function(){
+        num ++;
+        num %= arr.length;
+        window.location.hash = 'page='+num;
+    }
+    prev.onclick = function(){
+        num --;
+        if(num < 0){
+            num = arr.length-1;
+        }
+        window.location.hash = 'page='+num;
+    }
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">发送</button>
+    <button id="btn2">发送</button>
+<script>
+    /*
+        hash
+            window.location.hash
+
+            #之后的字符
+
+            使用的时候可以把它当做索引、信息存储,传递信息
+
+            onhashchang  只要hash值改变就触发
+
+            一般使用的时候一开始没有存储hash，在用户操作浏览器的时候，把hash存起来
+            存起来做为时光穿梭(前进后退)
+
+            A页面  B页面  C页面(A-C一个元素颜色红色，B-C绿色)
+
+        定时器设置2次，把第一次清了（对象）
+
+    */
+
+    // console.log(window.location.hash);
+    //btn.timer  btn2.timer
+
+    //60s以后重新发送验证码
+
+    // let timer = null;
+    // let num = 5;
+    btn.onclick = function(){
+        this.disabled = true;
+        go.call(this);
+    }
+
+    btn2.onclick = function(){
+        this.disabled = true;
+        go.call(this); 
+    }
+
+
+//    ;(function(){
+//         let timer = null;
+//         btn2.onclick = function(){
+           
+//         }
+//    })();
+
+
+   function go(){
+    //    console.log(this);
+        this.num = 10;
+        // clearInterval(this.timer);
+        this.timer = setInterval(()=>{
+            this.num --;
+            if(this.num < 0){
+                this.num = 0;
+                clearInterval(this.timer);
+                
+            }
+            this.innerHTML = this.num +'s以后重新发送验证码';
+            if(this.num === 0){
+                this.innerHTML = '发送';
+                this.disabled = false;
+            }
+            console.log('大哥')
+        },500);
+    }
+
+
+</script>
+</body>
+</html>

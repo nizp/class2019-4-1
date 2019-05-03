@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <link rel="stylesheet" href="css/index.css">
+<style>
+/* #list img{
+    opacity: 0;
+    transition: 1s;
+} */
+</style>
+</head>
+<body>
+<div class="content">
+    <div class="header">
+        <span>排序</span>
+        <a href="javascript:;" kk="time">上架时间
+            <i class="up"></i>
+            <i class="down"></i>
+        </a>
+        <a href="javascript:;" kk="hot">热度
+            <i class="up"></i>
+            <i class="down"></i>
+        </a>
+        <a href="javascript:;" kk="price">价格
+            <i class="up"></i>
+            <i class="down"></i>
+        </a>
+    </div>
+    <ul id="list">
+        <!-- <li>
+            <img src="img/1.jpg" alt="">
+            <span>华为畅享7（香槟金）</span>
+            <span>2018-01-01</span>
+            <span>1</span>
+            <span>992</span>
+        </li> -->
+    </ul>
+</div>
+<!-- <script src="json/product.json"></script> -->
+<script>
+    /*
+        渲染结构
+        http://127.0.0.1:5500/img/1.jpg
+        ./img/1x.jpg    
+    */
+   fetch('./json/product.json')
+   .then(e=>e.json())
+   .then(data=>{
+       //添加多个数据30个
+       data.push(...data,...data);
+       //渲染页面
+        let html = '';
+        data.forEach(item=>{
+            html += `
+                <li>
+                    <img pic="./${item.img}" alt="">
+                    <span>${item.title}</span>
+                    <span>${item.time}</span>
+                    <span>${item.id}</span>
+                    <span>${item.price}</span>
+                </li>
+            `;
+        });
+
+        list.innerHTML = html;
+
+        //工具中的绝对位置
+        class Tools {
+            po(ele){
+                let obj = ele,
+                top = 0,left = 0;
+                while(obj){
+                    top += obj.offsetTop;
+                    left += obj.offsetLeft;
+                    obj = obj.offsetParent;
+                }
+                top -= ele.clientTop;
+                left -= ele.clientLeft;
+
+                //new Tools().po(ele).l
+                return {
+                    top,
+                    left
+                }
+            }
+        }
+        //实例化Tools
+        let t = new Tools();
+        //可视区的高度
+        let winH = window.innerHeight;
+        //获取页面中所有li和img
+        let lis = document.querySelectorAll('li');
+        let img = document.querySelectorAll('img');
+
+        //当滚轮的时候触发
+        window.onscroll = function(){
+            //滚轮事件
+            //拿到滚动条的距离
+            let scrollT = window.pageYOffset;
+            //循环每个li。
+            //看一看滚动条的距离 + 可视区的高度
+            //是否大于等于每个li的绝对Top位置
+            for(let i=0;i<lis.length;i++){
+                if(scrollT + winH >= t.po(lis[i]).top){
+                    //如果是那么就把图片的pic中的路径取出来
+                    //赋值给img的src
+                    // console.log(img);
+                    img[i].src = img[i].getAttribute('pic');
+                }
+            }
+
+            // console.log(scrollT + winH,t.po(lis[6]).top);
+
+        }
+
+
+
+   });
+</script>
+</body>
+</html>
