@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" class="bg"></div>
+<script>
+    /*
+        元素身上有个classList对象
+
+        add(类名)  添加类名
+        remove(类名) 删除类名
+        replace(替换谁，替换成什么)替换
+        contains(类名) 布尔值
+        toggle(类名) 切换  返回值还是布尔值
+    */
+    document.onclick = function(){
+        // addClass(box,'red');
+        // box.classList.add('red');
+        // box.classList.replace('bg','red');
+        // console.log(box.classList.contains('bg'))
+        console.log(box.classList.toggle('bg'));
+        console.log(box.classList);
+    }
+
+    function addClass(obj,cname){
+        let cn = obj.className;
+        if(!cn.split(' ').includes(cname)){
+            cn += ' red';
+            obj.className =  cn;
+        };
+    }
+
+</script>
+</body>
+</html>

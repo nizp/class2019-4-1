@@ -4,8 +4,8 @@ let tools = (function(){
         let obj = ele,
         top = 0,left = 0;
         while(obj){
-            top += obj.offsetTop;
-            left += obj.offsetLeft;
+            top += obj.offsetTop + obj.clientTop;
+            left += obj.offsetLeft + obj.clientLeft;
             obj = obj.offsetParent;
         }
         top -= ele.clientTop;

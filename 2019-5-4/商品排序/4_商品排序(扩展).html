@@ -43,7 +43,10 @@
         </select>
         <input type="text" id="txt"/>
         <button id="search">搜索</button>
-
+        <div id="qj">
+            <span>1-999</span>
+            <span>1000-1999</span>
+        </div>
     </div>
     <ul id="list">
         <!-- <li>
@@ -85,7 +88,7 @@
 
         //获取按钮
         const as = document.querySelectorAll('.header a');
-        // const sele = document.querySelector('#sele');
+        const sele = document.querySelector('#sele');
        
 
         
@@ -132,9 +135,45 @@
             }
         });
 
+        //华为|HUAWEI|hw
 
+        search.onclick = function(){
+            let val = txt.value;
+            let ary = null;
+            let re = /huawei|华为|hw/i;
+           
+            if(re.test(val)){
+                ary = cloneAry.filter(item=>{
+                    return re.test(item[sele.value])
+                });
+            }else{
+                ary = cloneAry.filter(item=>{
+                    return new RegExp(val).test(item[sele.value])
+                });
+            }
+            render(ary);
+        }
+
+
+        btn.onclick = function(){
+            render(data);
+            let is = Array.from(document.getElementsByTagName('i'));
+            is.forEach(ele=>ele.classList.remove('red'));
+        }
         // console.dir(as);
+
+
+        const span = document.querySelectorAll('#qj span');
+        span.forEach(ele=>{
+            ele.onclick = function(){
+                let arr = ele.innerHTML.split('-');
+                render(cloneAry.filter(item=>item['price'] >= arr[0] && item['price'] <= arr[1]));
+            }
+        });
     });
+    
+
+   
 
 </script>
 </body>
