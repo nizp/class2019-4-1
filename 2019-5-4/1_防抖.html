@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body style="height:3000px">
+<script>
+    /*
+        防抖:
+            当用户频繁触发某个事件的时候就不执行函数，当用户停下来的时候再执行函数
+    */  
+    let timer = null;  
+    window.onscroll = function(){
+        // console.log(1);
+
+        clearInterval(timer);
+        timer = setTimeout(() => {
+            console.log(1);
+        }, 100);
+
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:200px;
+    background: red;
+    opacity:.5;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script src="./tools2.js"></script>
+<script>
+    // class Tools{}
+    // new Tools  
+
+    // let obj = {}
+
+    // //高级单例模式
+    // let obj2 = (function(){
+    //     let a = 0;
+    //     function fn(){
+    //         console.log(a);
+    //     }
+
+    //     return {
+    //         a,
+    //         fn
+    //     }
+    // })();
+
+    // obj2.fn();
+
+    // let arr = [1,2,3,4,5];
+
+    let arr = [{num:1,price:10},{num:2,price:20}]
+
+    // console.log(tools.sumNum(arr,'num'))
+
+    // tools.countDown('2019-5-4 11:10',function(time){
+    //     console.log(time.split('天')[1]);
+    // });
+
+    let box = document.querySelector('#box');
+    // console.log(tools.getCss(box,'height'));
+
+    // console.log(tools.getCss('#box2','opacity'));
+
+    //如果是数字就把单位告诉我，如果是字符串就直接带单位
+    /*
+        {
+            dw:'%',
+            set:100
+        }
+    */
+    // tools.setCss('#box','opacity',.3);
+    // tools.setCss(box,'width',{num:80,dw:"%"});
+
+    tools.setCss('#box',{
+        width:{
+            num:80,
+            dw:'%'
+        },
+        opacity:.3,
+        height:'300px',
+        background:'green'
+    })
+    
+
+   
+
+
+
+</script>
+</body>
+</html>

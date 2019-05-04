@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <link rel="stylesheet" href="css/index.css">
+<style>
+/* #list img{
+    opacity: 0;
+    transition: 1s;
+} */
+</style>
+</head>
+<body>
+<div class="content">
+    <div class="header">
+        <span>排序</span>
+        <a href="javascript:;" kk="time">上架时间
+            <i class="up"></i>
+            <i class="down"></i>
+        </a>
+        <a href="javascript:;" kk="hot">热度
+            <i class="up"></i>
+            <i class="down"></i>
+        </a>
+        <a href="javascript:;" kk="price">价格
+            <i class="up"></i>
+            <i class="down"></i>
+        </a>
+    </div>
+    <ul id="list">
+        <!-- <li>
+            <img src="img/1.jpg" alt="">
+            <span>华为畅享7（香槟金）</span>
+            <span>2018-01-01</span>
+            <span>1</span>
+            <span>992</span>
+        </li> -->
+    </ul>
+</div>
+<script>
+    /*
+        1.先请求数据，渲染页面
+        2.排序
+    */
+
+    fetch('./json/product.json')
+    .then(e=>e.json())
+    .then(data=>{
+        function render(data){
+            let html = '';
+            data.forEach(e=>{
+                html += `
+                        <li>
+                        <img src="${e.img}" alt="">
+                        <span>${e.title}</span>
+                        <span>${e.time}</span>
+                        <span>${e.hot}</span>
+                        <span>${e.price}</span>
+                    </li>
+                `;
+            });
+            list.innerHTML = html;
+        }
+        render(data);
+
+        let cloneAry = data.concat(); //克隆了一份数组
+
+        //获取按钮
+
+        const as = document.querySelectorAll('.header a');
+        let ary = ['time','hot','price'];
+        as.forEach((e,i)=>{
+            e.onOff = true; 
+            e.onclick = function(){
+                //如果onOff为true就向上排序，否则向下排序
+                if(this.onOff){
+                    cloneAry.sort((a,b)=>{
+                        // console.log(a);
+                        if(ary[i] === 'time'){
+                            //a[ary[i]] = > 2019-1-12
+                            a = a[ary[i]].split('-').join('');
+                            b = b[ary[i]].split('-').join('');
+                        }else{
+                            a = a[ary[i]];
+                            b = b[ary[i]];
+                        }
+                        return  a - b;
+                    });
+
+                    render(cloneAry);
+                    console.log(cloneAry);
+                }else{
+                    cloneAry.sort((a,b)=>{
+                        // console.log(a);
+                        if(ary[i] === 'time'){
+                            //a[ary[i]] = > 2019-1-12
+                            a = a[ary[i]].split('-').join('');
+                            b = b[ary[i]].split('-').join('');
+                        }else{
+                            a = a[ary[i]];
+                            b = b[ary[i]];
+                        }
+                        return  b - a;
+                    });
+                    render(cloneAry);
+                }
+                this.onOff = !this.onOff;
+            }
+        });
+
+        console.dir(as);
+    });
+
+</script>
+</body>
+</html>
