@@ -13,7 +13,7 @@
 
 var Tween = {
 	linear: function (t, b, c, d){  //匀速
-		return c*t/d + b;
+		return c*(t/d) + b;
 	},
 	easeIn: function(t, b, c, d){  //加速曲线
 		return c*(t/=d)*t + b;
@@ -57,6 +57,7 @@ var Tween = {
 		}
 		return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
 	},
+	//弹性运动
 	elasticOut: function(t, b, c, d, a, p){    //正弦增强曲线（弹动渐出）
 		if (t === 0) {
 			return b;
@@ -122,7 +123,8 @@ var Tween = {
 	},
 	bounceIn: function(t, b, c, d){    //弹球减振（弹球渐出）
 		return c - Tween['bounceOut'](d-t, 0, c, d) + b;
-	},       
+	},     
+	//自由落体  
 	bounceOut: function(t, b, c, d){
 		if ((t/=d) < (1/2.75)) {
 			return c*(7.5625*t*t) + b;

@@ -17,7 +17,3 @@
 
 
 
- * t : time 已过时间
- * b : begin 起始值
- * c : count 总的运动值
- * d : duration 持续时间

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#box{
+    width:50px;
+    height:50px;
+    background: sandybrown;
+    position: absolute;
+    left:100px;
+    top:0;
+    /* transition:1s; */
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script src="./tween.js"></script>
+<script>
+    /*
+        tween
+
+        ActionScript  -> AS
+        JavaScript ->  JS
+
+        ECMAscript
+
+        速度版运动
+
+        时间版运动
+            t : time 已过时间
+            b : begin 起始值
+            c : count 总的运动值
+            d : duration 持续时间
+
+        动画帧:
+            requestAnimationFrame(函数)
+            返回值为number（编号）
+
+        关闭动画帧
+            cancelAnimationFrame(编号)
+    
+        匀速运动:
+            b + c * (t/d)  
+    */
+
+    box.onclick = function(){
+        startMove();
+    }    
+
+    function startMove(){
+        let d = 10000;//总时间
+        let c = window.innerHeight - box.clientHeight;//500;//目标点
+        let t = 0;
+        let b = parseFloat(getComputedStyle(box).top);
+        c = c - b;//目标点-初始距离 = 实际运动的距离
+
+        (function move(){
+            let timer = requestAnimationFrame(move);
+            t += 16.7;
+            if(t >= d)t=d;
+            box.style.top = Tween.bounceOut(t, b, c, d) + 'px';
+            // box.style.left = c * (t/d) + b + 'px';
+            if(t===d){
+                cancelAnimationFrame(timer);
+            }
+        })();
+    }
+
+
+    
+</script>
+</body>
+</html>

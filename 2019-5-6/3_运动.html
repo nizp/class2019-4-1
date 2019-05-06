@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#box{
+    width:50px;
+    height:50px;
+    background: sandybrown;
+    position: absolute;
+    left:100px;
+    top:0;
+    /* transition:1s; */
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    /*
+        tween
+
+        ActionScript  -> AS
+        JavaScript ->  JS
+
+        ECMAscript
+
+        速度版运动
+
+        时间版运动
+            t : time 已过时间
+            b : begin 起始值
+            c : count 总的运动值
+            d : duration 持续时间
+
+        动画帧:
+            requestAnimationFrame(函数)
+            返回值为number（编号）
+
+        关闭动画帧
+            cancelAnimationFrame(编号)
+    
+        匀速运动:
+            b + c * (t/d)  
+    */
+
+    
+
+    let d = 10000;//总时间
+    let c = 500;//目标点
+    let t = 0;
+    let b = parseFloat(getComputedStyle(box).left);
+    c = c - b; //目标点 - 元素本身的距离 = 应该运动多少才到目标点
+    box.onclick = function(){
+        // let oldDate = new Date;
+        let timer = setInterval(function(){
+            // let newDate = new Date;
+            // console.log(newDate - oldDate);
+            // oldDate = newDate;
+            t += 16.7;
+            if(t >= d)t = d;
+            
+            box.style.left = b + c * (t/d) + 'px';
+            //已过时间 等于 总时间就把运动停止
+            if(t === d){
+                clearInterval(timer);
+            }
+            // console.log(t);
+        },16.7);
+    }
+
+    
+    // requestAnimationFrame(fn);
+    // requestAnimationFrame(fn);
+    // requestAnimationFrame(fn);
+    // let num2 = 0;
+    // function fn(){
+    //     num2 += 16.7;
+    //     console.log(num2);
+    // }
+
+    let num2 = 0;
+    let timer = null;
+    (function move(){
+        timer = requestAnimationFrame(move);
+        num2 += 16.7;
+        if(num2 >= 10000){
+            cancelAnimationFrame(timer);
+        }
+        console.log(num2);
+    })();
+
+
+    // box.onclick = function(){
+    //     let timer = setInterval(()=>{
+    //         box.style.left = box.offsetLeft + 100 + 'px';
+    //     },16.7);
+    // }
+</script>
+</body>
+</html>
