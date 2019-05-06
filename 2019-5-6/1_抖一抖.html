@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background:skyblue;
+    position: absolute;
+    left:50px;
+    top:0;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+    <button id="btn">按钮2</button>
+<script>
+    /*
+        {
+            age:xxx
+            name1:xx,
+        }
+        对象的属性不需要位置
+        
+    */
+    // let arr = [10,-10,8,-8,6,-6,4,-4,2,-2,0];
+    
+    
+    box.onclick = function(){
+        shake(box,'left',10,function(){
+            console.log('马某在跳跃');
+        });
+    }
+
+    //函数的参数是可以设置默认值的，如果有实参就走实参，没有走默认。
+    function shake(obj,attr,endNum=10,callback){
+       let num = 0;
+       let begin = parseFloat(getComputedStyle(obj)[attr]);
+       let arr = [];
+       for(let i=endNum;i>0;i-=2){
+            arr.push(i,-i);
+       }
+       arr.push(0);
+    //    console.log(arr);
+
+    //    return;
+       clearInterval(obj.timer);
+       obj.timer = setInterval(() => {
+            obj.style[attr] = begin + arr[num] + 'px';
+            num ++;
+            if(num === arr.length){
+                num = 0;
+                clearTimeout(obj.timer);
+                //当运动完成之后再执行callback这个函数
+                callback && callback();
+                // console.log('马某在跳跃');
+            }
+       }, 16.7);
+    }
+
+    btn.onclick = function(){
+        shake(box,'left',10,function(){
+            console.log('马骅骏背锅');
+            box.style.background = 'yellow';
+        }); //马骅骏背锅
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <link rel="stylesheet" href="css/index.css">
+<style>
+#list img{
+    opacity: 0;
+    transition: 1s;
+}
+.header a i.up.red{
+    border-bottom-color: red;
+}
+.header a i.down.red{
+    border-top-color: red;
+}
+
+</style>
+</head>
+<body>
+<div class="content">
+    <div class="header">
+        <span>排序</span>
+        <a href="javascript:;" kk="time">上架时间
+            <i class="up"></i>
+            <i class="down"></i>
+        </a>
+        <a href="javascript:;" kk="hot">热度
+            <i class="up"></i>
+            <i class="down"></i>
+        </a>
+        <a href="javascript:;" kk="price">价格
+            <i class="up"></i>
+            <i class="down"></i>
+        </a>
+        <button id="btn">还原</button>
+        <select name="" id="sele">
+            <option value="title">商品文字搜索</option>
+            <option value="price">商品价格搜索</option>
+            <option value="hot">商品热度搜索</option>
+        </select>
+        <input type="text" id="txt"/>
+        <button id="search">搜索</button>
+
+    </div>
+    <ul id="list">
+        <!-- <li>
+            <img src="img/1.jpg" alt="">
+            <span>华为畅享7（香槟金）</span>
+            <span>2018-01-01</span>
+            <span>1</span>
+            <span>992</span>
+        </li> -->
+    </ul>
+</div>
+<script>
+    /*
+       1.先延迟加载
+            拿到数据，结构的渲染
+
+            延迟加载的判断
+                1.getBoundingClientRect().top  当前元素到可视区顶部的距离
+
+
+       2.商品排序
+
+
+    */
+
+    class YCJZ {
+        constructor(id) {
+            // this.data = [];
+            this.ul = document.getElementById(id);
+            this.lis = null;
+            this.btns = document.querySelectorAll('.header a');
+            this.ary = ['time','hot','price'];
+        }
+
+        render(data){
+            let html = '';
+            data.forEach(e=>{
+                html += `
+                        <li>
+                        <img pic="${e.img}" >
+                        <span>${e.title}</span>
+                        <span>${e.time}</span>
+                        <span>${e.hot}</span>
+                        <span>${e.price}</span>
+                    </li>
+                `;
+            });
+            this.ul.innerHTML = html;
+            this.lis = this.ul.children;
+        }
+
+        sort(data,cb){
+            data = JSON.parse(JSON.stringify(data));
+            this.btns.forEach((ele,i)=>{
+                ele.onoff = true;
+                let that = this;
+                ele.onclick = function(){
+                    if(this.onoff){
+                        data.sort((a,b)=>{
+                            if(that.ary[i] === 'time'){
+                                a = a[that.ary[i]].split('-').join('');
+                                b = b[that.ary[i]].split('-').join('');
+                            }else{
+                                a = a[that.ary[i]];
+                                b = b[that.ary[i]];
+                            }
+                            return  a - b;
+                        });
+                    }else{
+                        data.sort((a,b)=>{
+                            if(that.ary[i] === 'time'){
+                            
+                                a = a[that.ary[i]].split('-').join('');
+                                b = b[that.ary[i]].split('-').join('');
+                            }else{
+                                a = a[that.ary[i]];
+                                b = b[that.ary[i]];
+                            }
+                            return  b-a;
+                        });
+                    }
+
+                    this.onoff = !this.onoff;
+                    that.render(data);
+                    //当重新渲染之后，然后执行一个函数。
+                    cb && cb();
+                }
+            });
+        }
+
+        scrollPic(){
+            console.log(this.lis);
+            //延迟加载
+           // console.log(that.lis[0].getBoundingClientRect().top);
+                    // console.log('可视区的高度',this.innerHeight);
+            
+            for(let i=0;i<this.lis.length;i++){
+                let iTop = this.lis[i].getBoundingClientRect().top;
+                //如果某个li的高度小于可视区顶部的距离就加载
+                if(iTop <= this.iH){
+                    let img = this.lis[i].children[0];
+                    if(!img.src){
+                        img.src = img.getAttribute('pic');
+                        setTimeout(()=>{
+                            img.style.opacity = 1;
+                            img.removeAttribute('pic');
+                        },100);
+                    }
+                }
+            }
+        }
+
+        getDate(cb){
+            fetch('./json/product.json')
+            .then(e=>e.json())
+            .then(data=>{
+                data.push(...data,...data);
+                this.render(data);
+                // this.lis = this.ul.children;
+                this.iH = window.innerHeight;
+                //当所有数据都请求回来，如果有回调函数就调用回调函数
+                
+                cb && cb(data); //钩子函数，回调函数
+                window.onscroll = this.scrollPic.bind(this);
+            });
+        }
+    }
+
+    //可以继承
+    // class Sort extends YCJZ {
+    //     constructor(id) {
+    //         super(id);
+            
+    //     }
+    // }
+
+    let yc = new YCJZ('list');
+    yc.getDate(function(data){
+        //当数据获取出来之后调用延迟加载
+        yc.scrollPic();
+        yc.sort(data,function(){
+            //当排好序，渲染完成之后，在调用延迟加载
+            yc.scrollPic();
+        });
+    });
+    
+   
+    
+   
+   
+
+
+    // fetch('./json/product.json')
+    // .then(e=>e.json())
+    // .then(data=>{
+    //     function render(data){
+    //         let html = '';
+    //         data.forEach(e=>{
+               
+    //         });
+            
+    //     }
+    //     render(data);
+
+    //     let cloneAry = [...data];//data.concat(); //克隆了一份数组
+
+    //     //获取按钮
+    //     const as = document.querySelectorAll('.header a');
+    //     // const sele = document.querySelector('#sele');
+       
+
+        
+    //     let ary = ['time','hot','price'];
+    //     as.forEach((e,i)=>{
+    //         e.onOff = true; 
+    //         e.onclick = function(){
+    //             //如果onOff为true就向上排序，否则向下排序
+    //             if(this.onOff){
+    //                 cloneAry.sort((a,b)=>{
+    //                     // console.log(a);
+    //                     
+    //                 });
+
+    //                 this.children[0].className = 'up red';
+    //                 this.children[1].className = 'down';
+    //             }else{
+    //                 cloneAry.sort((a,b)=>{
+    //                     // console.log(a);
+    //                     if(ary[i] === 'time'){
+    //                         //a[ary[i]] = > 2019-1-12
+    //                         a = a[ary[i]].split('-').join('');
+    //                         b = b[ary[i]].split('-').join('');
+    //                     }else{
+    //                         a = a[ary[i]];
+    //                         b = b[ary[i]];
+    //                     }
+    //                     return  b - a;
+    //                 });
+                    
+    //                 this.children[0].className = 'up';
+    //                 this.children[1].className = 'down red';
+    //             }
+    //             render(cloneAry);
+    //             this.onOff = !this.onOff;
+    //         }
+    //     });
+
+
+    //     // console.dir(as);
+    // });
+
+</script>
+</body>
+</html>

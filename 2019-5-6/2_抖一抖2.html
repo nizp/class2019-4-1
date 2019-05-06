@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background:skyblue;
+    position: absolute;
+    left:50px;
+    top:0;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+    <button id="btn">按钮2</button>
+<script>
+    /*
+        {
+            age:xxx
+            name1:王某,
+        }
+        对象的属性不需要位置
+        {
+            name1:马某
+        }
+
+        Object.assign(obj,obj2)
+        
+    */
+    // let arr = [10,-10,8,-8,6,-6,4,-4,2,-2,0];
+    
+    
+    box.onclick = function(){
+        // shake(box,'left',10,function(){
+        //     console.log('马某在跳跃');
+        // });
+
+        shake({
+            // cb:1,
+            // cb(){
+            //     console.log('回调了');
+            // },
+            //下面的代码等同于上面这个
+            // cb:function(){
+
+            // },
+            obj:box,
+            cb(){
+                console.log('回调了');
+            },
+        });
+    }
+
+    //函数的参数是可以设置默认值的，如果有实参就走实参，没有走默认。
+    function shake(opt){
+        //默认配置
+        //为什么要用默认配置？
+        //是因为有些参数不想传
+        let opts = {
+            obj:null,
+            attr:'left',
+            endNum:10,
+            cb:function(){}
+        }
+        
+        //有配置走配置，没配置走默认
+        Object.assign(opts,opt);
+
+        //如果传了一个cb的属性,还要判断是否为函数，因为只有函数才能调用。
+        if(opt.cb && typeof opt.cb !== 'function'){
+            opts.cb = function(){}
+        }
+
+        // console.log(opts)
+
+        // return;
+
+       let num = 0;
+       let begin = parseFloat(getComputedStyle(opts.obj)[opts.attr]);
+       let arr = [];
+       for(let i=opts.endNum;i>0;i-=2){
+            arr.push(i,-i);
+       }
+       arr.push(0);
+    //    console.log(arr);
+
+    //    return;
+       clearInterval(opts.obj.timer);
+        opts.obj.timer = setInterval(() => {
+            opts.obj.style[opts.attr] = begin + arr[num] + 'px';
+            num ++;
+            if(num === arr.length){
+                num = 0;
+                clearTimeout(opts.obj.timer);
+                //当运动完成之后再执行cb这个函数
+                opts.cb();
+                // console.log('马某在跳跃');
+            }
+       }, 16.7);
+    }
+
+    // btn.onclick = function(){
+    //     shake(box,'left',10,function(){
+    //         console.log('马骅骏背锅');
+    //         box.style.background = 'yellow';
+    //     }); //马骅骏背锅
+    // }
+
+</script>
+</body>
+</html>
