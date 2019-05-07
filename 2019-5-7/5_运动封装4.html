@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background:salmon;
+    position: absolute;
+    left:0;
+    top:0;
+}
+</style>
+</head>
+<body>
+    <div id="box">3213213213</div>
+<script src="tween.js"></script>
+<script>
+    /*
+        起始位置  begin
+        目标点    count
+        总时间    durtion
+        已过时间  time
+
+        b + c*(t/d)  匀速
+
+        requestAnimationFrame
+        
+        cancelAnimationFrame
+    */
+
+    
+    box.onclick = function(){
+        // startMove(this,'left',500,1000,()=>{
+        //     // startMove(this,'top',300,1000,'','bounceOut');
+        // },'bounceOut');
+
+
+        startMove(this,{
+            "left":500,
+            "top":300,
+            "width":{
+                c:300,
+                fx:'elasticOut'
+            },
+            "fontSize":50,
+            "opacity":.3
+        },1000,'','bounceOut')
+
+        // startMove(this,{"width":300},1000,'','elasticOut')
+
+
+        // startMove(this,'top',300,1000,'','bounceOut')
+        // startMove(this,'width',300,1000,'','elasticOut')
+        // startMove(this,'fontSize',50,1000,'','bounceOut')
+        
+    }
+
+
+    /*
+        1.参数为对象
+        2.多方位
+        3.透明度  √
+
+        j = {
+            left:{
+                begin:0,
+                count:500,
+                fx:'elasticOut'
+            },
+            width:{
+                begin:100,
+                count:200
+            }
+        }
+
+
+        json = {}
+
+        {}.__proto__ -> Object.prototype
+
+
+    */
+
+    Object.prototype.sx = '250';
+
+    function startMove(obj,json,durtion,cb,fx){
+        //存储每个属性的初始值和目标点
+        let j = {};
+
+        //枚举整个json,把每个属性赋值为对象，在对象下又有初始值和目标点
+        for(let attr in json){
+            if(json.hasOwnProperty(attr)){
+                //获取到每个属性的初始值
+                let b = parseFloat(getComputedStyle(obj)[attr]);
+                //获取到每个属性的目标点
+                let c = json[attr];
+                //目标点-初始值 = 最终运动的值。
+                c = c - b;
+               
+                j[attr] = {
+                    b,
+                    c
+                };
+            }
+        }
+
+        // console.log(j);
+
+
+        // return ;
+        
+       
+        let d = durtion;
+        let t = 0;
+
+       
+        (function move(){
+            let timer = requestAnimationFrame(move);
+            t += 16.7;
+            if(t >= d)t=d;
+
+            for(let attr in j){
+                //如果是opacity就不加单位
+                if(attr === 'opacity'){
+                    obj.style[attr] = Tween[fx](t, j[attr].b,j[attr].c, d);
+                }else{
+                    obj.style[attr] = Tween[fx](t, j[attr].b,j[attr].c, d) + 'px';
+                }
+            }
+           
+            // obj.style[attr] = Tween[fx](t, b, c, d);
+            // }else{
+            //     obj.style[attr] = Tween[fx](t, b, c, d) + 'px';
+            // }
+            
+            // obj.style[attr] = b + c * (t/d) + 'px';
+            if(t === d){
+                cancelAnimationFrame(timer);
+
+                cb && cb();
+                // if(cb){
+                //     cb();
+                // }
+               
+            }
+        })();
+    }
+
+
+
+
+</script>
+</body>
+</html>

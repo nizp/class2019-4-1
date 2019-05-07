@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background:salmon;
+    position: absolute;
+    left:0;
+    top:0;
+}
+</style>
+</head>
+<body>
+    <div id="box">3213213213</div>
+<script src="tween.js"></script>
+<script>
+    /*
+        起始位置  b
+        目标点    c
+        总时间    d
+        已过时间  t
+
+        b + c*(t/d)  匀速
+
+        requestAnimationFrame
+        
+        cancelAnimationFrame
+    */
+
+    // (function t(){
+    //     requestAnimationFrame(t);
+    //     box.innerHTML = new Date().getSeconds()
+    //     // console.log();
+    // })()
+
+    //  let old = new Date;
+    //  (function t(){
+    //     requestAnimationFrame(t);
+    //     let n = new Date
+    //         console.log(n- old);
+    //     old = n;
+    //     // console.time('计时器');
+    //     // console.log();
+    //     // console.timeEnd('计时器');
+    // })()
+
+
+
+
+
+    box.onclick = function(){
+        startMove(this,'left',500,1000,()=>{
+            // startMove(this,'top',300,1000,'','bounceOut');
+        },'bounceOut');
+
+        startMove(this,'top',300,1000,'','bounceOut')
+        startMove(this,'width',300,1000,'','elasticOut')
+        startMove(this,'fontSize',50,1000,'','bounceOut')
+        
+    }
+
+
+    /*
+        1.参数为对象
+        2.多方位
+        3.透明度  √
+    */
+
+    function startMove(obj,attr,count,durtion,cb,fx){
+        let b = parseFloat(getComputedStyle(obj)[attr]);
+        let c = count - b;
+        let d = durtion;
+        let t = 0;
+
+       
+        (function move(){
+            let timer = requestAnimationFrame(move);
+            t += 16.7;
+            if(t >= d)t=d;
+            //如果是opacity就不加单位
+            if(attr === 'opacity'){
+                obj.style[attr] = Tween[fx](t, b, c, d);
+            }else{
+                obj.style[attr] = Tween[fx](t, b, c, d) + 'px';
+            }
+            
+            // obj.style[attr] = b + c * (t/d) + 'px';
+            if(t === d){
+                cancelAnimationFrame(timer);
+
+                cb && cb();
+                // if(cb){
+                //     cb();
+                // }
+               
+            }
+        })();
+    }
+
+
+
+
+</script>
+</body>
+</html>

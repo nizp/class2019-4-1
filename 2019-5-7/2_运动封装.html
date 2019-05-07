@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background:salmon;
+    position: absolute;
+    left:0;
+    top:0;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script src="tween.js"></script>
+<script>
+    /*
+        起始位置  b
+        目标点    c
+        总时间    d
+        已过时间  t
+
+        b + c*(t/d)  匀速
+
+        requstAnimationFrame
+        cancelAnimationFrame
+    */
+
+
+    box.onclick = function(){
+        startMove(this,'left',500,1000,'','bounceOut');
+    }
+
+
+    function startMove(obj,attr,count,durtion,cb,fx){
+        let b = parseFloat(getComputedStyle(obj)[attr]);
+        let c = count - b;
+        let d = durtion;
+        let t = 0;
+
+        (function move(){
+            let timer = requestAnimationFrame(move);
+            t += 16.7;
+            if(t >= d)t=d;
+            obj.style[attr] = Tween[fx](t, b, c, d) + 'px';
+            // obj.style[attr] = b + c * (t/d) + 'px';
+            if(t === d){
+                cancelAnimationFrame(timer);
+
+                cb && cb();
+                // if(cb){
+                //     cb();
+                // }
+               
+            }
+        })();
+    }
+
+
+
+
+</script>
+</body>
+</html>
