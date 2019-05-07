@@ -29,6 +29,7 @@
     let timer = null;
     box.onclick = function(){
         let l = this.offsetLeft;
+        clearInterval(timer);
         timer = setInterval(() => {
             num++;
             this.style.left = l + ary[num] + 'px';

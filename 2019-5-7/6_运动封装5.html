@@ -43,8 +43,7 @@
             "top":300,
             "width":{
                 c:300,
-                fx:'elasticOut',
-                d:500
+                fx:'elasticOut'
             },
             "fontSize":50,
             "opacity":.3
@@ -98,7 +97,7 @@
                 //获取到每个属性的初始值
                 let b = parseFloat(getComputedStyle(obj)[attr]);
                 let c = 0;
-                //获取到每个属性的目标点
+                //获取到每个属性的目标点 类似于{width:{fx:'exx',d:500}}
                 if(typeof json[attr] === 'object'){
                     j[attr] = {b}
                     for(let attr2 in json[attr]){
@@ -177,6 +176,7 @@
             // }
             
             // obj.style[attr] = b + c * (t/d) + 'px';
+            // console.log(d)
             if(t === d){
                 cancelAnimationFrame(timer);
 

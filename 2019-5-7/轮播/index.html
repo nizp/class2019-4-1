@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/index.css">
+<style>
+#mask{
+    width:1000px;
+    height: 300px;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 2;
+    font-size:0;
+}
+#prev,#next{
+    width:50%;
+    height:300px;
+    display: inline-block;
+}
+
+#prev::after{
+    content: "";
+    width:28px;
+    height: 45px;
+    background:url('./img/pre.png') 0 0 no-repeat;
+    position:absolute;
+    left:0;
+    top:128px;
+    opacity: 0;
+    transition: 1s;
+    cursor: pointer;
+}
+#next::after{
+    content: "";
+    width:28px;
+    height: 45px;
+    background:url('./img/pre.png') -50px 0 no-repeat;
+    position:absolute;
+    right:0;
+    top:128px;
+    opacity: 0;
+    transition: 1s;
+    cursor: pointer;
+}
+#prev:hover::after,#next:hover::after{
+    opacity: 1;
+}
+
+
+</style>
+</head>
+<body>
+<div id="outer">
+    <div id="mask">
+        <div id="prev"></div>
+        <div id="next"></div>
+    </div>
+    <div id="swiper">
+        <!-- <div><img src="img/banner1.jpg" alt=""></div>
+        <div><img src="img/banner2.jpg" alt=""></div> -->
+    </div>
+    <ul id="focus1">
+        <!-- <li class="select"></li>
+        <li></li>
+        <li></li>
+        <li></li> -->
+    </ul>
+</div>
+<script src="./json/banner.js"></script>
+<script src="../tween.js"></script>
+<script>
+    let html = '',
+    iW = outer.clientWidth,
+    num = 0,
+    len = banner.length; //存了一下len
+    //赋值一份数据
+    banner.push(...banner);
+    banner.forEach(item => {
+        html += `<div><img src="${item.img}" alt=""></div>`;
+    });
+    swiper.innerHTML = html;
+
+    //生成点点
+
+    for(let i=0;i<len;i++){
+        let li = document.createElement('li');
+        li.onclick = function(){
+            //让num=i值为了点击运动和下一次num运算
+            num = i;
+            nextFn();
+        }
+        if(i === 0)li.className = 'select';
+        focus1.appendChild(li);
+    }
+
+    let lis = document.querySelectorAll('#focus1 li');
+
+    next.onclick = function(){
+        num ++;
+        nextFn();
+    }
+
+    let timer = setInterval(()=>{
+        num ++;
+        nextFn()
+    },3000);
+
+    //移入关闭定时器
+    outer.onmouseover = function(){
+        clearInterval(timer);
+        timer = null;
+    }
+    //移出开始定时器
+    outer.onmouseout = function(){
+        timer = setInterval(()=>{
+            num ++;
+            nextFn()
+        },3000);
+    }
+
+    function nextFn(){
+        //大清洗
+        lis.forEach(e=>e.className = '');
+        lis[num%len].className = 'select';
+
+        //运动
+        startMove({
+            obj:swiper,
+            json:{
+                left:- iW * num
+            },
+            durtion:200,
+            cb(){
+                //当最后一张图片运动完的时候，瞬间把swiper
+                //拉到数组一半的最后一张
+                if(num === banner.length-1){
+                    // console.log('最后')
+                    num = banner.length/2-1;
+                    swiper.style.left = - num * iW + 'px';
+                }
+            }
+        })
+    }
+
+</script>
+</body>
+</html>

@@ -13,7 +13,7 @@
 
 var Tween = {
 	linear: function (t, b, c, d){  //匀速
-		return c*(t/d) + b;
+		return c*t/d + b;
 	},
 	easeIn: function(t, b, c, d){  //加速曲线
 		return c*(t/=d)*t + b;
@@ -57,7 +57,6 @@ var Tween = {
 		}
 		return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
 	},
-	//弹性运动
 	elasticOut: function(t, b, c, d, a, p){    //正弦增强曲线（弹动渐出）
 		if (t === 0) {
 			return b;
@@ -123,8 +122,7 @@ var Tween = {
 	},
 	bounceIn: function(t, b, c, d){    //弹球减振（弹球渐出）
 		return c - Tween['bounceOut'](d-t, 0, c, d) + b;
-	},     
-	//自由落体  
+	},       
 	bounceOut: function(t, b, c, d){
 		if ((t/=d) < (1/2.75)) {
 			return c*(7.5625*t*t) + b;
@@ -143,75 +141,55 @@ var Tween = {
 	}
 }
 
-function startMove(opts){
+function move(obj){
+	//默认配置
 	let opt = {
-		obj:null,
-		json:{},
-		durtion:1000,
-		cb:function(){},
+		ele:null,
+		attrs:{},
+		time:1000,
+		callback:function(){},
 		fx:'linear'
 	}
+	let j = {}, 
+		b = 0,
+		oldDate = new Date;
 
 	//有配置走配置，没配置走默认
-	Object.assign(opt,opts);
-	if(opts.cb && typeof opts.cb !== 'function'){
-		opt.cb = function(){}
-	}
-
-	let f = opt.fx;
-	//存储每个属性的初始值和目标点
-	let j = {};
-	// 枚举整个json,把每个属性赋值为对象，在对象下又有初始值和目标点
-	for(let attr in opt.json){
-		if(opt.json.hasOwnProperty(attr)){
-			//获取到每个属性的初始值
-			let b = parseFloat(getComputedStyle(opt.obj)[attr]);
-			let c = 0;
-			//获取到每个属性的目标点 类似于{width:{fx:'exx',d:500}}
-			if(typeof opt.json[attr] === 'object'){
-				j[attr] = {b}
-				for(let attr2 in opt.json[attr]){
-					j[attr][attr2] = opt.json[attr][attr2];
-				}
-
-				j[attr].c = j[attr].c - j[attr].b;
-			}else{
-				c = opt.json[attr];
-				c = c - b;
-				j[attr] = {
-					b,
-					c
-				};
-			}
+	Object.assign(opt,obj);
+	
+	//计算c和b
+	for(let i in opt.attrs){
+		b = parseFloat(getComputedStyle(opt.ele)[i])
+		j[i] = {
+			b,
+			c:opt.attrs[i] - b
 		}
 	}
-   
-	let d = opt.durtion;
-	let t = 0;
-
-   
-	(function move(){
-		opt.obj.timer = requestAnimationFrame(move);
-		t += 16.7;
-		if(t >= d)t=d;
-
+	
+	(function animate(){
+		opt.ele.timer = requestAnimationFrame(animate);
+		let t = new Date - oldDate;
+		
+		if(t >= opt.time){
+			t = opt.time;
+		}
+		// Tween[fx](t, b, c, d);
 		for(let attr in j){
-			//把默认值赋值给fx，不然都覆盖了
-			opt.fx = f;
-			opt.fx = j[attr].fx || opt.fx;
-			//如果是opacity就不加单位
+			let v = Tween[opt.fx](t,j[attr].b,j[attr].c,opt.time);
 			if(attr === 'opacity'){
-				opt.obj.style[attr] = Tween[opt.fx](t, j[attr].b,j[attr].c, d);
+				opt.ele.style[attr] = v;
 			}else{
-				opt.obj.style[attr] = Tween[opt.fx](t, j[attr].b,j[attr].c, d) + 'px';
+				opt.ele.style[attr] = v + 'px';
 			}
 		}
-	   
-		if(t === d){
-			cancelAnimationFrame(opt.obj.timer);
-			opt.cb();
+		
+		if(t === opt.time){
+			cancelAnimationFrame(opt.ele.timer);
+			opt.callback();
 		}
+
 	})();
+
 }
 
 
