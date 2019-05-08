@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">按钮</button>
+<script>
+    /*
+        事件:
+            onclick
+            onmouseover
+            onmouseout
+            onmousedown
+            onmouseup
+            onscroll
+            onload
+            onerror
+            onhashchange
+            onresize
+
+        每个元素天生都有很多属性、方法及事件，如果没有事件函数
+        赋值此时事件的默认值为null
+
+        如果有系统内置的事件默认值为null
+        自定义的事件为undefined
+
+        btn.onbieshuijiao
+
+        当用户操作浏览器的时候，用户被当做被监听者，浏览器一直
+        监听者用户的操作，会触发若干个事件，如果某个事件上有事件
+        函数，那么就被执行
+
+        给某个元素的事件绑定事件函数
+
+
+        on事件 + 事件函数为原始的事件绑定方式   DOM0级事件
+
+        解除事件将某个元素的事件赋值为null
+            ele.事件 = null 
+
+
+        1级DOM--(为什么没有1级DOM)
+
+        DOM级别1于1998年10月1日成为W3C推荐标准。
+        1级DOM标准中并没有定义事件相关的内容，
+        所以没有所谓的1级DOM事件模型。
+        在2级DOM中除了定义了一些DOM相关的操作之外还定义了一个事件模型 ，
+        这个标准下的事件模型就是我们所说的2级DOM事件模型 
+
+        DOM2级事件
+            事件绑定:
+                ele.addEventListener('不带on的事件名',函数,是否捕获)
+
+            事件解除:(重要的是解除绑定)
+                ele.removeEventListener('不带on的事件名',有名函数(和绑定函数一个地址),是否捕获)
+
+
+            btn.addEventListener('click',c.bind(this));
+
+            function c(){
+                alert(1);
+                //绑定和解除绑定不是同一地址，所以解除不了
+                btn.removeEventListener('click',c);
+            }
+
+            
+
+    */
+
+    // console.dir(btn);
+    
+    // .onclick = function(){
+    //     alert(1);
+    // }
+
+    // let a = 10;
+
+    // a = 20;
+
+    // btn.onclick = function(){
+    //     alert(1);
+    //     btn.onclick = null;
+    // }
+
+    // btn.onclick = function(){
+    //     alert(2);
+    // }
+
+    let cc = c.bind(this) 
+    btn.addEventListener('click',cc);
+
+
+    function c(){
+        alert(1);
+        btn.removeEventListener('click',cc);
+    }
+
+    // btn.addEventListener('click',function(){
+    //     alert(2);
+    // });
+
+</script>
+</body>
+</html>

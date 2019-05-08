@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:150px;
+    height:150px;
+    border:1px solid firebrick;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <button id="btn">按钮</button>
+    </div>
+<script>
+
+    /*
+        在点击按钮的时候，不但弹出了2也弹出1
+        这是因为元素的事件基本上都遵循事件模型机制。
+
+
+        <div>
+            <div>
+                <div>
+                    <div>1</div>    
+                </div>    
+            </div>
+        </div>
+
+        <div></div>
+    */
+
+    box.onclick = function(){
+        alert(1);
+    }
+
+    btn.onclick = function(){
+        alert(2);
+    }
+</script>
+</body>
+</html>
