@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+ul{
+    margin: 0 auto;
+    width:100px;
+    border:2px solid fuchsia;
+}
+li{
+    width:50px;
+    height: 50px;
+    border:1px solid #000;
+}
+</style>
+</head>
+<body>
+    <ul id="ul">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+<script>
+
+    /*
+        ev.target  目标点(事件源)
+
+        在嵌套关系中，给上层元素绑定事件，可以通过
+        事件源查到事件触发的对象(元素)
+
+        tagName 查看标签名  注意：大写
+
+        jq中有个delegate原理就是事件委托。
+
+
+    */
+    // const lis = document.querySelectorAll('li');
+    // lis.forEach(e=>{
+    //     e.onclick = function(){
+    //         this.style.background = 'green';
+    //     }
+    // });
+
+    ul.onclick = function(ev){
+        // console.log(ev.target)
+        if(ev.target.tagName === 'LI'){
+            console.log(ev.target.parentNode.children)
+            let lis = ev.target.parentNode.children;
+            for(let i=0;i<lis.length;i++){
+                console.log(lis[i]===ev.target,lis[i],i);
+                if(lis[i] !== ev.target){
+                    lis[i].style.background = '';
+                }else{
+                    ev.target.style.background = 'green';
+                }
+            }
+        }
+        // console.log(ev.target.tagName)
+    }
+
+</script>
+</body>
+</html>

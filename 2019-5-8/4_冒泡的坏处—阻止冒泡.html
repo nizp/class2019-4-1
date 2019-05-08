@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: red;
+    display: none;
+}
+</style>
+</head>
+<body>
+    <button id="btn">打开</button>
+    <div id="box"></div>
+<script>
+
+    /*
+        
+        事件函数中的第一个参数，默认为事件对象
+
+        事件对象:
+            当用户触发某个事件的时候，记录用户操作页面的一些细节信息
+
+
+        chrome/IE
+            window中都有一个event
+
+        FF中是没有event对象的 *
+
+        阻止冒泡:(目的是为了不让自己冒泡触发祖先级的同一事件)
+            ev.cancelBubble = true;  它不是一个标准，但是所有浏览器都支持
+            ev.stopPropagation(); 它是标准，但是在低版本IE下是不兼容的
+    */
+
+    
+
+    let onoff = true;
+    btn.onclick = function(ev){
+        if(onoff){
+            box.style.display = 'block';
+            btn.innerHTML = '隐藏'
+        }else{
+            box.style.display = 'none';
+            btn.innerHTML = '打开'
+        }
+        onoff = !onoff;
+        // alert(1);
+        // ev.cancelBubble = true;
+        ev.stopPropagation();
+        
+        // console.log(ev)
+    }
+
+    document.onclick = function(){
+        box.style.display = 'none';
+        onoff = true;
+        btn.innerHTML = '打开'
+    }
+</script>
+</body>
+</html>

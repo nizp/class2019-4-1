@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+div{
+    padding:100px;
+}
+#box1{
+    background: red;
+}
+#box2{
+    background: green;
+}
+#box3{
+    background: yellow;
+}
+</style>
+</head>
+<body>
+    <div id="box1">
+        <div id="box2">
+            <div id="box3">
+                <button id="btn">按钮</button>
+            </div>
+        </div>
+    </div>
+<script>
+    /*
+        从捕获阶段 到 目标阶段 再到 冒泡阶段 的过程称为事件流。
+
+        先执行捕获再执行冒泡
+
+        如果事件绑定的是目标元素，
+        那么是按照绑定事件函数的先后顺序来依次执行（跟捕获冒泡没关系）
+        
+        从window 到 目标点的阶段 叫捕获阶段 
+        在捕获的过程中 
+        如果上级和下级(祖先级关系)绑定同一事件函数 
+        那么先触发上级的在触发下级的
+
+                
+        从目标点由下而上 直到window 叫做冒泡阶段 
+        在这个过程中，如果上级和下级同理有祖先关系 
+        绑定同一事件函数 先触发目标 再触发目标的上级
+        这整个过程叫做事件流 事件模型
+
+
+        祖先级关系 是套个多层 
+
+        DOM0捕获不到捕获阶段，只有冒泡阶段.
+
+        box1.addEventListener(不带on的事件名,function(){
+            alert('red');
+        },是否捕获);  
+
+        捕获就为: true
+        冒泡就为:false  （默认）
+
+
+    */
+
+    // window.onclick = function(){
+    //     alert('window');
+    // }
+    // box1.onclick = function(){
+    //     alert('red');
+    // }
+    // box2.onclick = function(){
+    //     alert('green');
+    // }
+    // box3.onclick = function(){
+    //     alert('yellow');
+    // }
+    // btn.onclick = function(){
+    //     alert('btn');
+    // }
+
+    
+   
+    
+        /*
+            yellow、btn1、btn捕获、btn冒泡、green、red、btn1
+
+            yellow、btn1、btn1、btn捕获、btn冒泡、btn1、green、red
+
+            yellow、btn1、btn捕获、btn冒泡、btn1、green、red
+
+
+            {
+                click:[]
+            }
+
+
+        */
+    function fn(){alert('btn1');}
+    
+    btn.addEventListener('click',fn,true);
+    // box1.addEventListener('click',function(){alert('red');});
+
+    btn.addEventListener('click',function(){
+        alert(1);
+    },true);
+    btn.addEventListener('click',function(){
+        alert(2);
+    },true);
+
+    btn.addEventListener('click',fn,true);
+    // box3.addEventListener('click',function(){alert('yellow');},true);
+    // box2.addEventListener('click',function(){ alert('green');});
+    // btn.addEventListener('click',function(){alert('btn捕获');},true);
+    // btn.addEventListener('click',function(){alert('btn冒泡');});
+    // btn.addEventListener('click',fn,false);
+    
+
+
+    
+
+
+
+</script>
+</body>
+</html>

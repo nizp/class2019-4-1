@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:150px;
+    height:150px;
+    background: pink;
+}
+#box1{
+    width:50px;
+    height:50px;
+    background:salmon;
+}
+
+</style>
+</head>
+<body>
+    <div id="box">
+        <div id="box1"></div>
+    </div>
+<script>
+    /*
+        onmouseenter 移入
+
+        onmouseleave 移出
+
+        没有冒泡的，也可以阻止穿透。
+
+    */
+    // box.onmouseover = function(){
+    //     alert('box移入')
+    // }
+    box.onmouseenter = function(){
+        alert('box移入')
+    }
+    box.onmouseleave = function(){
+        alert('boxout')
+    }
+
+    box1.onmouseenter = function(){
+        alert('box2移入')
+    }
+
+</script>
+</body>
+</html>
