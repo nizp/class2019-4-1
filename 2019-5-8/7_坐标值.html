@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    position: absolute;
+    top:0;
+    left:0;
+    background: red;
+}
+</style>
+</head>
+<body _style="height:3000px">
+    <div id="box"></div>
+<script>
+    /*
+        onclick
+        onmouseover
+        onmouseout
+
+        onmouseenter
+        onmouseleave
+
+        onmousedown
+        onmouseup
+        onmousemove  移动
+
+        onscroll
+        onresize
+        onload
+        onerror
+        onhashchange
+
+        基于浏览器可视区的顶端---
+        ev.clientX  横轴  数字类型
+        ev.clientY  纵轴
+
+        ev.pageX   横轴     基于body的
+        ev.pageY   纵轴     基于body的
+
+    */
+
+    document.onmousemove = function(ev){
+        // console.log(ev.clientX);
+        // console.log(ev.clientY);
+
+        // console.log(ev.clientY);
+        let l = ev.pageX - box.clientWidth/2;
+        let t = ev.pageY - box.clientHeight/2;
+
+        console.log(l);
+
+        if(l < 0){
+            l = 0;
+        }else if(l > document.documentElement.clientWidth - box.clientWidth){
+            l = document.documentElement.clientWidth - box.clientWidth;
+        }
+        if(t < 100){ //吸顶
+            t = 0;
+        }else if(t > document.documentElement.clientHeight - box.clientHeight){
+            t = document.documentElement.clientHeight - box.clientHeight;
+        }
+
+        console.log(document.documentElement.clientWidth - box.clientWidth)
+        box.style.left = l + 'px' ;
+        box.style.top = t + 'px';
+
+        // box.style.left = window.pageXOffset + ev.clientX - box.clientWidth/2 + 'px';
+        // box.style.top =  window.pageYOffset + ev.clientY - box.clientHeight/2 + 'px';
+    }
+
+</script>
+</body>
+</html>

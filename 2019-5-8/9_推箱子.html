@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    position: absolute;
+    top:0;
+    left:0;
+    background: red;
+}
+</style>
+</head>
+<body>
+   <div id="box"></div>
+<script>
+    /*
+        当按键的时候会停顿一下，这个停顿有助于提高用户体验
+        避免重复输入
+
+        作业:
+            按两个方向键就斜着跑。
+
+    */
+    let numL = 0;
+    let numT = 0;
+    let timer = null;
+    document.onkeydown = function(ev){
+        clearInterval(timer);
+        timer = setInterval(() => {
+            switch(ev.keyCode){
+                case 39: //右
+                    numL+=10;
+                    box.style.left = numL + 'px';
+                break;
+                case 40: //下
+                    numT+=10;
+                    box.style.top = numT + 'px';
+                break;
+                case 37: //左
+                    numL-=10;
+                    box.style.left = numL + 'px';
+                break;
+                case 38: //上
+                    numT-=10;
+                    box.style.top = numT + 'px';
+                break;
+            }
+        },22);
+    }
+
+    document.onkeyup = function(){
+        clearInterval(timer);
+    }
+
+
+    //测试停顿的时间
+    // let old = new Date;
+    // document.onkeydown = function(){
+    //     let newd = new Date;
+
+    //     console.log(newd - old)
+
+    //     old = newd;
+    // }
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt">
+    <ul id="ul"></ul>
+<script>
+    /*
+        onkeydown  键盘按下 ,获取不到最新的value值
+
+        onkeyup    键盘抬起 ,可以获取到最新的value值
+
+
+        ev.keyCode   键码  获取的值为数字类型
+
+        37-40  键盘的左上右下
+        空格 32
+
+        特殊按键:
+            ev.ctrlKey
+            ev.shiftKey
+            ev.altKey
+
+            只要按住就为true，否则false
+
+        
+    */
+
+    // txt.onkeydown = function(){
+    //    console.log(this.value);
+    // }
+    
+
+    //第一种2个键值写法
+    // let code = false;
+    // txt.onkeydown = function(ev){
+    //     if(ev.keyCode === 17){
+    //         code = true;
+    //         console.log(code);
+    //     }
+    // }
+    // txt.onkeyup = function(ev){
+    //     if(ev.keyCode === 13 && code){
+    //         console.log('bong');
+    //     }
+    //     if(ev.keyCode === 17){
+    //         code = false;
+    //     }
+    // }
+
+
+
+
+
+    //第二种2个键值写法。
+    txt.onkeyup = function(ev){
+        // console.log(ev.ctrlKey)
+        if(ev.keyCode === 13 && ev.shiftKey){
+            let li = document.createElement('li');
+            li.innerHTML = this.value;
+            // if(ul.children.length){
+            //     ul.insertBefore(li,ul.children[0]);
+            // }else{
+            //     ul.appendChild(li);
+            // }   
+            
+            //下面这种写法和上面这种写法结果一样
+            ul.insertBefore(li,ul.children[0]);
+            // console.log(this.value);
+            txt.value = '';
+        }
+    }
+
+</script>
+</body>
+</html>
