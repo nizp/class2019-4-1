@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <textarea id="txt"></textarea><span id="size">0字</span>
+<script>
+
+    /*
+        oninput:
+            改变输入框的内容就触发
+    */
+
+    txt.oninput = function(){
+        size.innerHTML = this.value.length + '字';
+    }
+
+    // txt.onkeyup = function(){
+    //     // console.log(this.value);
+    //     size.innerHTML = this.value.length + '字';
+    // }
+
+    // let timer = null;
+    // txt.onkeydown = function(){
+    //     clearInterval(timer);
+    //     timer = setInterval(()=>{
+    //         size.innerHTML = txt.value.length + '字';
+    //         console.log(1);
+    //     },16.7);
+    // }
+    // txt.onkeyup = function(){
+    //     clearInterval(timer);
+    // }
+
+
+
+   
+</script>   
+</body>
+</html>

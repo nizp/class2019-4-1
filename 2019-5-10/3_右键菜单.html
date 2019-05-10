@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    list-style: none;
+    font-size:12px;
+}
+ul{
+    width:80px;
+    border: 1px dotted darkorange;
+    border-bottom: none;
+    position:absolute;
+    left:0;
+    top:0;
+    display: none;
+}
+ul li{
+    width:80px;
+    height:30px;
+    line-height: 30px;
+    text-align: center;
+    border-bottom: 1px dotted darkorange;
+}
+ul li:hover{
+    background:chartreuse;
+    color:crimson;
+}
+
+
+</style>
+</head>
+<body>
+    <ul id="ul">
+        <li>进入游戏</li>
+        <li>进入下一关</li>
+        <li>帮助</li>
+        <li>充值</li>
+        <li>重载游戏</li>
+        <li>退出游戏</li>
+    </ul>
+
+<script>
+    /*
+        oncontextmenu 事件可以阻止右键菜单
+    */
+    // document.onmousedown = function(ev){
+    //     // console.log(1);
+    //     ev.returnValue = false;
+    // }  
+    document.oncontextmenu = function(ev){
+        console.log(1);
+        ul.style.display = 'block';
+        ul.style.left = ev.clientX + 'px';
+        ul.style.top = ev.clientY + 'px';
+
+        ev.returnValue = false;
+    }  
+
+    ul.onclick = function(ev){
+        ev.cancelBubble = true;
+    }
+
+    document.onclick = function(){
+        ul.style.display = 'none';
+    }  
+</script>
+</body>
+</html>

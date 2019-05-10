@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt">
+    <button id="btn">复制代码</button>
+    <select name="" id="sele">
+        <option value="0">北京</option>
+        <option value="1">上海</option>
+        <option value="2">珠峰</option>
+    </select>
+    <div id="div">1</div>
+    <!-- <input type="text" id="txt2"> -->
+<script>
+    /*
+        焦点事件
+            onfocus()
+        失去焦点事件
+            onblur()
+
+        自动聚焦:
+            ele.focus()
+
+        select() 选中文本框的内容 （它也有聚焦的功能）
+
+
+        onchange  内容改变的时候触发(内容一定要不一致才触发)
+
+
+        
+    */   
+
+    let arr = ['0.jpg','1.jpg','2.jpg']
+    sele.onchange = function(){
+        // console.log(this.value);
+        div.innerHTML = arr[this.value];
+    }
+   
+    // txt.onfocus = function(){
+    //     console.log('聚焦');
+    // }
+
+    // // txt.focus();
+
+    // txt.select();
+
+    // btn.onclick = function(){
+    //     txt.select();
+    // }
+
+    // txt.onblur = function(){
+    //     console.log('失焦');
+    // }
+
+</script>
+</body>
+</html>

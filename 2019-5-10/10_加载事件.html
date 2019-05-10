@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557487279131&di=dbc383af67b8bede18ecfc7222e5d447&imgtype=0&src=http%3A%2F%2Fimg8.zol.com.cn%2Fbbs%2Fupload%2F19133%2F19132899.jpg" alt="">
+    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557487735281&di=3777744a4280e19bc7ca5ecd6d57f090&imgtype=0&src=http%3A%2F%2Ff.01ny.cn%2Fforum%2F201207%2F12%2F1849367v70u5vvf6r6frrv.jpg" alt="" srcset="">
+    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557487735279&di=2fc458000f96b83dc1251fe5e47b724c&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F0139f7579874550000012e7e700655.jpg%401280w_1l_2o_100sh.png" alt="" srcset="">
+<script>
+    /*
+        把页面中的所有静态资源加载完成之后触发window.onload
+    */
+    // window.onload = function(){
+    //     alert(1);
+    // }
+
+
+    /*
+        DOM加载完成才触发的事件
+
+        jQ: ready()  $(function(){ })
+
+        DOMContentLoaded   高版本
+        
+
+        onreadystatechange  低版本IE都支持这个事件
+
+        在低版本IE下，document有个doScroll的方法
+        document.documentElement.doScroll('left')
+
+        这个方法在DOM没有加载出来之前是没有的，也就是说
+        调用该方法会报错，换句话来说，只要DOM记载成功
+        就有doScroll方法
+
+        try{
+            document.documentElement.doScroll('left')
+            console.log('DOM加载完成');
+        }catch(e){
+            再次调用try、catch直到进try
+        }
+
+
+    */
+
+    // document.addEventListener('DOMContentLoaded',function(){
+    //     alert(1);
+    // });
+
+    // try{}catch(){}
+
+    /*
+        在try中包裹可能会报错的代码，包裹之后不会影响下面代码执行
+        只要捕获到错误，那么会进catch
+    */
+    // let a = 5;
+    try{
+        console.log(a);
+    }catch(error){
+        a = 10;
+        console.log(error);//字符串
+    }
+    
+
+    alert(a);
+
+
+
+</script>
+</body>
+</html>

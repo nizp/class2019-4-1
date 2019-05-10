@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: khaki;
+    position: absolute;
+    left:0;
+    top:0;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    function addWheel(obj,fn){
+        //let w = window.navigator.userAgent.toLowerCase();
+        // if(w.includes('chrome')){
+        if(obj.onmousewheel === null){
+        // if('onmousewheel' in window){
+            obj.onmousewheel = whell;
+        }else{
+            obj.addEventListener('DOMMouseScroll',whell);
+        }
+
+        function whell(ev){
+            let o = true;
+            // console.log(ev.wheelDelta);
+            if(ev.wheelDelta){ //是chrome
+                o = ev.wheelDelta > 0?true:false;
+            }else{
+                o = ev.detail < 0?true:false;
+            }
+
+            //回调函数
+            fn && fn(o);
+        }
+    }
+
+
+    addWheel(document,function(o){
+        if(o){
+            box.style.left = box.offsetLeft - 35 + 'px';
+        }else{
+            let l = box.offsetLeft + 35;
+            if(l > window.innerWidth - box.clientWidth){
+                box.style.left = window.innerWidth - box.clientWidth + 'px';
+                box.style.top = box.offsetTop + 35 + 'px';
+            }else{
+                box.style.left = l + 'px';
+            }   
+        }
+    })
+
+</script>
+</body>
+</html>

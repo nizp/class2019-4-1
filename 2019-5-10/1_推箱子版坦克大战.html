@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			#box {
+				width: 100px;
+				height: 100px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				background: red;
+			}
+			.zd{
+				width:10px;
+				height:30px;
+				background: gold;
+				position:absolute;
+			}
+		</style>
+	</head>
+
+<body>
+	<!-- <div class="zd"></div> -->
+	<div id="box"></div>
+	<script>
+		/*
+				当按键的时候会停顿一下，这个停顿有助于提高用户体验
+				避免重复输入
+
+				作业:
+					按两个方向键就斜着跑。
+
+			*/
+
+		/*
+			按下的时候只是为了改变方向，定时器一上来就是开着的
+			全程只有一个定时器开着
+
+			创建一个对象
+			{
+				37:true,
+				38:true,
+				39:false,
+				40:false
+			}
+
+			Object.keys(对象) 拿到对象中的key值，并存到数组中，返回值为数组
+			Object.values(对象) 拿到对象中的value值，并存到数组中，返回值为数组
+
+
+		*/
+
+		
+
+		let timer = null;
+		let onoff = false;//假设定时器开着的
+		let obj = {
+			// 37:false,
+			// 38:false,
+			// 39:false,
+			// 40:false
+		};
+
+
+		document.onkeydown = function(ev){
+			//每次down的时候去看看定时器是否为关闭状态，true为关闭状态
+			//如果是关闭状态就开定时器
+			if(onoff){
+				//只能开一次
+				onoff = false;
+				timer = setInterval(t, 16.7);
+			}
+			//给每个键值加一个true
+			obj[ev.keyCode] = true;
+
+			if(ev.keyCode === 32){
+				// console.log(1)
+				let zd = document.createElement('div');
+				zd.className = 'zd';
+				zd.style.left = box.offsetLeft + box.clientWidth/2 - 5  + 'px';
+				zd.style.top = box.offsetTop - 30 + 'px';
+				document.body.appendChild(zd);
+				setTimeout(() => {
+					zd.style.transition = '1s';
+					zd.style.top = -30 + 'px';
+					setTimeout(()=>{
+						zd.remove();
+					},1050)
+				}, 100);
+			}
+		}
+
+		// let num = 0;
+		document.onkeyup = function(ev){
+			obj[ev.keyCode] = false;
+			console.log(obj);
+			/*
+				把对象中的value值都提取出来放到数组中
+				查看数组的每一项是否都为false,如果都
+				为false就关闭定时器并且设置关闭状态。
+			*/
+			if(Object.values(obj).every(item=>!item)){
+				clearInterval(timer);
+				onoff = true;
+			}
+			// for(let attr in obj){
+			// 	if(!obj[attr]){
+			// 		num++;
+			// 		if(num === 4){
+			// 			clearInterval(timer);
+			// 		}
+			// 	}
+			// }
+		}
+
+		let t = () => {
+			// console.log(obj);
+			if(obj[37]){
+				box.style.left = box.offsetLeft - 10 + 'px';
+			}
+			if(obj[38]){
+				box.style.top = box.offsetTop - 10 + 'px';
+			}
+			if(obj[39]){
+				box.style.left = box.offsetLeft + 10 + 'px';
+			}
+			if(obj[40]){
+				box.style.top = box.offsetTop + 10 + 'px';
+			}
+			// console.log(11111);
+		}
+		timer = setInterval(t, 16.7);
+
+
+		
+		
+	</script>
+</body>
+
+</html>

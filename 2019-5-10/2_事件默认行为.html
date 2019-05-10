@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body style="height:3000px">
+    <div>h3iihdoinjxj</div>
+    <img id="img" src="./timg.jpg" alt="" srcset="">
+<script>
+    /*
+        默认行为:
+            没有人为主动设置，浏览器默认的行为。
+
+        阻止默认行为使用:
+            可以设置布尔值来控制是否阻止默认行为
+            ev.returnValue = false;  都支持
+
+            return false;  只支持DOM0
+
+            ev.preventDefault();  DOM2支持
+
+        如果在document身上阻止默认行为，会把整个页面的默认行为都阻止掉。
+        如果想阻止某部分元素的默认行为，那么在指定的元素下阻止即可。
+
+    */    
+
+    // document.onkeydown = function(ev){
+    //     // console.log(ev);
+    //     // ev.returnValue = false;
+    //     return false;
+    // }
+
+    document.addEventListener('keydown',function(ev){
+        // ev.returnValue = false;
+        // return false;
+        ev.preventDefault();
+    });
+
+    img.onmousedown = function(ev){
+        ev.returnValue = false;
+    }
+</script>
+</body>
+</html>

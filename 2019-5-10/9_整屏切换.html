@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    overflow-y: hidden;
+}
+#box{
+    position: absolute;
+    top:0;
+    left:0;
+    transition: 1s;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    let ary = ['pink','skyblue','khaki','tomato','lightblue'];
+    let iH = window.innerHeight;
+    let iW = document.documentElement.clientWidth;//window.innerWidth;
+    let html = '';
+    ary.forEach((item,i)=>{
+        html += `<div style="background:${item};width:${iW}px;height:${iH}px"></div>`;
+    });
+
+    box.innerHTML = html;
+
+    let num = 0;
+    let onoff = true;
+    // addWheel(document,function(o){
+    //     if(o){
+    //         if(onoff){
+               
+    //             onoff = false;
+    //             num --;
+    //             if(num * iH < 0) {
+    //                 num = 0;
+    //                 onoff = true;
+    //                 return;
+    //             };
+    //             box.style.top = - num * iH + 'px';
+    //             setTimeout(() => {
+    //                 onoff = true;
+    //             }, 1005);
+    //         }
+    //     }else{
+    //         if(onoff){
+    //             onoff = false;
+    //             num ++;
+    //             if(num * iH >= iH * ary.length) {
+    //                 num = ary.length-1;
+    //                 onoff = true;
+    //                 console.log(num * iH)
+    //                 return;
+    //             }
+    //             box.style.top = - num * iH + 'px';
+    //             setTimeout(() => {
+    //                 onoff = true;
+    //             }, 1005);
+    //         }
+            
+    //     }
+    // });
+
+
+    addWheel(document,function(o){
+        if(onoff){
+            onoff = false;
+            num = o?--num:++num;
+            if(num * iH < 0) {
+                num = 0;
+                onoff = true;
+                return;
+            };
+            if(num * iH >= iH * ary.length) {
+                num = ary.length-1;
+                onoff = true;
+                console.log(num * iH)
+                return;
+            }
+            box.style.top = - num * iH + 'px';
+            setTimeout(() => {
+                onoff = true;
+            }, 1005);
+        }
+    });
+
+
+ function addWheel(obj,fn){
+        //let w = window.navigator.userAgent.toLowerCase();
+        // if(w.includes('chrome')){
+        if(obj.onmousewheel === null){
+        // if('onmousewheel' in window){
+            obj.onmousewheel = whell;
+        }else{
+            obj.addEventListener('DOMMouseScroll',whell);
+        }
+
+        function whell(ev){
+            let o = true;
+            // console.log(ev.wheelDelta);
+            if(ev.wheelDelta){ //是chrome
+                o = ev.wheelDelta > 0?true:false;
+            }else{
+                o = ev.detail < 0?true:false;
+            }
+
+            //回调函数
+            fn && fn(o);
+        }
+    }
+
+
+</script>
+</body>
+</html>

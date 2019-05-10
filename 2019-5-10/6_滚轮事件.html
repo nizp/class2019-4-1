@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body _style="height:3000px">
+<script>
+    /*
+        onscroll  滚轮事件  （页面必须要有滚动条）
+
+
+        onmousewheel  滚轮事件(只要鼠标滚轮就触发)
+
+        ev.wheelDelta 可以检测滚动的方向
+            180  为上滚轮
+            -180 为下滚轮
+
+
+        DOMMouseScroll  FF的滚轮（只能使用DOM2来进行绑定）
+
+            ev.detail  可以检测滚动的方向
+
+            -3  为上滚轮
+             3  为下滚轮
+
+
+
+        
+
+    */    
+
+    document.onmousewheel = function(ev){
+        if(ev.wheelDelta > 0){
+            alert('向上');
+        }else{
+            alert('向下');
+        }
+        console.log(ev.wheelDelta);
+    }
+
+    document.addEventListener('DOMMouseScroll',function(ev){
+        // alert('Gunlun');
+        alert(ev.detail);
+    })
+
+    // document.onscroll = function(){
+    //     console.log(1);
+    // }
+</script>
+</body>
+</html>

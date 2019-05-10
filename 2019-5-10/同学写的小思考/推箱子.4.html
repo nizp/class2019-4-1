@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: orange;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">盒子</div>
+    <script>
+        /*
+            当按键的时候会停顿一下，这个停顿有助于提高用户体验
+            避免重复输入
+            作业:按两个方向键就斜着跑。
+        */
+        let numL = 0;
+        let numT = 0;
+        let timer = null;
+        let code = false;
+        let code2 = false;
+        let code3 = false;
+        let code4 = false;
+        document.onkeydown = function (ev) {
+            clearInterval(timer);
+            timer = setInterval(() => {
+                switch (ev.keyCode) {
+                    case 39: //右
+                        numL += 10;
+                        box.style.left = numL + 'px';
+                        break;
+                    case 40: //下
+                        numT += 10;
+                        box.style.top = numT + 'px';
+                        break;
+                    case 37: //左
+                        numL -= 10;
+                        box.style.left = numL + 'px';
+                        break;
+                    case 38: //上
+                        numT -= 10;
+                        box.style.top = numT + 'px';
+                        break;
+                }
+
+                if (ev.keyCode === 37) {
+                    code = true;
+                }
+                if (ev.keyCode === 38) {
+                    code2 = true;
+                }
+                if (ev.keyCode === 39) {
+                    code3 = true;
+                }
+                if (ev.keyCode === 40) {
+                    code4 = true;
+                }
+                //左上
+                if ((ev.keyCode === 37 && code2) || (ev.keyCode === 38 && code)) {
+                    numL -= 10;
+                    numT -= 10;
+                    box.style.left = numL + 'px';
+                    box.style.top = numT + 'px';
+
+                }
+                //右上
+                if ((ev.keyCode === 38 && code3) || (ev.keyCode === 39 && code2)) {
+                    numL += 10;
+                    numT -= 10;
+                    box.style.left = numL + 'px';
+                    box.style.top = numT + 'px';
+
+                }
+
+                //左下
+
+                if ((ev.keyCode === 37 && code4) || (ev.keyCode === 40 && code)) {
+                    numL -= 10;
+                    numT += 10;
+                    box.style.left = numL + 'px';
+                    box.style.top = numT + 'px';
+
+                }
+
+
+                //右下
+
+                if ((ev.keyCode === 39 && code4) || (ev.keyCode === 40 && code3)) {
+                    numL += 10;
+                    numT += 10;
+                    box.style.left = numL + 'px';
+                    box.style.top = numT + 'px';
+                }
+            }, 22);
+        }
+
+        document.onkeyup = function (ev) {
+            if (ev.keyCode === 37) {
+                code = false;
+            }
+            if (ev.keyCode === 38) {
+                code2 = false;
+            }
+            if (ev.keyCode === 39) {
+                code3 = false;
+            }
+            if (ev.keyCode === 40) {
+                code4 = false;
+            }
+            clearInterval(timer);
+        }
+
+
+
+    </script>
+</body>
+
+</html>

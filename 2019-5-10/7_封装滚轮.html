@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        1.判断浏览器是不是chrome
+
+        2.去判断滚动的方向
+            let onoff = true;  //代理
+            xx > 0  上
+            xx < 0  上
+
+            if(你是谁?看看你是不是wheelDelta){
+                onoff = xx > 0?true:false
+            }else{
+                //说明你是detail
+                onoff = xx < 0?true:false
+            }
+
+            onoff
+    */    
+
+    function addWheel(obj,fn){
+        //let w = window.navigator.userAgent.toLowerCase();
+        // if(w.includes('chrome')){
+        if(obj.onmousewheel === null){
+        // if('onmousewheel' in window){
+            obj.onmousewheel = whell;
+        }else{
+            obj.addEventListener('DOMMouseScroll',whell);
+        }
+
+        function whell(ev){
+            let o = true;
+            // console.log(ev.wheelDelta);
+            if(ev.wheelDelta){ //是chrome
+                o = ev.wheelDelta > 0?true:false;
+            }else{
+                o = ev.detail < 0?true:false;
+            }
+
+            //回调函数
+            fn && fn(o);
+        }
+    }
+
+
+    addWheel(document,function(o){
+        // console.log(o);
+        console.log(o);
+    });
+
+
+   
+
+</script>
+</body>
+</html>
