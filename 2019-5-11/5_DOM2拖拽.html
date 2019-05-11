@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    position: absolute;
+    left:0;
+    top:0;
+    background: red;
+}
+</style>
+</head>
+<body>
+    dhw91xby78deh1dneopj
+    <div id="box"></div>
+<script>
+    box.addEventListener('mousedown',function(ev){
+        let disX = ev.pageX - this.offsetLeft;
+        let disY = ev.pageY - this.offsetTop;
+        let move = function(ev){
+            box.style.left = ev.pageX - disX + 'px';
+            box.style.top = ev.pageY - disY + 'px';
+        }
+        function up(){
+            document.removeEventListener('mousemove',move);
+            document.removeEventListener('mouseup',up);
+        }
+       
+        document.addEventListener('mousemove',move);
+        document.addEventListener('mouseup',up);
+
+        // ev.returnValue = false;
+        ev.preventDefault();
+    });
+</script>
+</body>
+</html>

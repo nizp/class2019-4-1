@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:80px;
+    height:80px;
+    background: darkgoldenrod;
+    position: absolute;
+    left:0;
+    top:0;
+}
+.active{
+    width:80px;
+    height:80px;
+    background: darkgoldenrod;
+    position: absolute;
+    left:0;
+    top:0;
+    opacity:.5;
+}
+
+</style>
+</head>
+<body id="body">
+    <div id="box"></div>
+<script>
+    /*
+        1.在按下box的时候，创建一个跟它一样一样的元素
+        2.拖动一样一样的那个元素
+        3.抬起的时候把一样一样元素的位置给按下的那个box
+        4.再删除一样一样的那个元素
+    */
+    box.onmousedown = function(ev){
+        let disX = ev.pageX - box.offsetLeft;
+        let disY = ev.pageY - box.offsetTop;
+
+        //创建一个元素
+        let createBox = document.createElement('div');
+
+        createBox.className = 'active';
+
+        //为了第二次点击的时候一样一样这个元素的位置不为0
+        //所以把box的初始位置给一样一样这个元素
+        createBox.style.left = box.offsetLeft + 'px';
+        createBox.style.top = box.offsetTop + 'px';
+
+
+        // for(let attr in getComputedStyle(box)){
+        //     createBox.style[attr] = getComputedStyle(box)[attr];
+        // }
+
+        //插入到页面
+        body.appendChild(createBox);
+
+        // console.log(createBox)
+
+
+        document.onmousemove = function(ev){
+            let l = ev.pageX - disX;
+            let t = ev.pageY - disY;
+            //移动一样一样那个元素
+            createBox.style.left = l + 'px';
+            createBox.style.top = t + 'px';
+        }
+        document.onmouseup = function(){
+            //把一样一样那个元素的位置给box
+            box.style.left = createBox.style.left;
+            box.style.top = createBox.style.top;
+            //删除一样一样那个元素
+            createBox.remove();
+            document.onmousemove = document.onmouseup = null;
+        }
+        //阻止默认行为
+        return false;
+    }
+</script>
+</body>
+</html>

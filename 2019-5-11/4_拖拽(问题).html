@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    position: absolute;
+    left:0;
+    top:120px;
+    background: red;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    /*
+        拖拽:
+            1.实现的原理
+                改变元素top值和left值
+
+            拖拽三大事件:
+                onmousedown
+                onmousemove
+                onmouseup
+
+            这3个事件写拖拽在PC上是需要嵌套的。
+
+
+        
+
+    */
+
+    let num = 0;
+    //按下的时候
+    box.onmousedown = function(ev){
+        //拿到那一小段距离（按下的位置到边界位置）
+
+        /*
+            按下的位置：
+                ev.pageX 
+                ev.pageY
+
+            元素的初始位置
+                box.offsetLeft
+                box.offsetTop
+
+            按下的位置 - 元素的初始位置 = 拿到那一小段距离
+
+            问题:
+                1.当mousemove在元素身上的时候，鼠标移动过快会导致
+                鼠标脱离元素，脱离元素就不能让元素移动
+
+                解决:
+                    把元素身上的mousemove换到document身上
+
+
+                2.当mouseup的时候如果鼠标不在元素身上，那么
+                  解除move行为也就失效了
+
+                解决:
+                    把元素身上的mouseup换到document身上
+
+                3.如果在mouseup的时候只清除move函数的行为
+                那么在document进行up的行为还会执行
+
+                解决:
+                    在清除mousemove的时候也把mouseup清除
+
+
+        */
+
+        let disX = ev.pageX - box.offsetLeft;
+        let disY = ev.pageY - box.offsetTop;
+        //为了保证移动过元素的
+        let onoff = false;
+        document.onmousemove = function(ev){
+            //只要移动过元素就设置为true
+            onoff = true;
+            //在move的过程当值就可以求出元素的位置
+
+            /*
+                移动时的坐标 - 那一小段距离 = 盒子当前的位置 
+            */
+            box.style.left = ev.pageX - disX + 'px';
+            box.style.top = ev.pageY - disY + 'px';
+        }
+
+        document.onmouseup = function(){
+            //只要移动过就进行累计
+            if(onoff){
+                num++;
+                console.log(num);
+            }
+            //在鼠标抬起的时候清除move
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+        return false;
+    }
+
+   
+
+    
+   
+
+
+</script>
+</body>
+</html>

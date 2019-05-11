@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    position: absolute;
+    left:100px;
+    top:0;
+    background: red;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    /*
+        拖拽:
+            1.实现的原理
+                改变元素top值和left值
+
+            拖拽三大事件:
+                onmousedown
+                onmousemove
+                onmouseup
+
+            这3个事件写拖拽在PC上是需要嵌套的。
+
+
+        
+
+    */
+    //存按下的坐标的
+    let l = 0;
+    let t = 0;
+
+    let ol = 0;
+    let ot = 0;
+    box.onmousedown = function(ev){
+        l = ev.pageX; //按下的坐标
+        t = ev.pageY;
+
+        //每次按下的时候去记录元素的初始距离
+        ol = box.offsetLeft;
+        ot = box.offsetTop;
+
+        box.onmousemove = function(ev){
+            //移动的坐标（ev.pageX） - 按下的坐标（l）
+            // console.log()
+            box.style.left = ol + ev.pageX - l + 'px';
+            box.style.top = ot + ev.pageY - t + 'px';
+        }
+
+        box.onmouseup = function(){
+            box.onmousemove = null;
+        }
+    }
+
+    
+
+</script>
+</body>
+</html>

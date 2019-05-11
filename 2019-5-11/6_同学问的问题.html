@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:400px;
+    height:400px;
+    border:2px solid teal;
+    /* position: relative; */
+    margin-left:100px;
+}
+#box2{
+    width:80px;
+    height:80px;
+    background: darkgoldenrod;
+    position: absolute;
+    left:0;
+    top:0;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <div id="box2"></div>
+    </div>
+<script>
+
+    /*
+        在拖拽元素的时候，要注意该元素的一个定位问题
+
+        父级要有相对定位，自己有绝对定位
+
+        如果没有相对定位，在限制范围的时候还要减去box的offsetLeft和border的尺寸
+
+    */
+    box2.onmousedown = function(ev){
+        let disX = ev.pageX - box2.offsetLeft;
+        let disY = ev.pageY - box2.offsetTop;
+
+        console.log(ev.pageX,box2.offsetLeft)
+
+        box.onmousemove = function(ev){
+            let l = ev.pageX - disX;
+            let t = ev.pageY - disY;
+            if(l < 0){
+                l = 0;
+            }else if(l > 2 + box.offsetLeft + box.clientWidth - box2.clientWidth){
+                l = 2 + box.offsetLeft + box.clientWidth - box2.clientWidth;
+            }
+            if(t < 0){
+                t = 0;
+            }else if(t > box.clientHeight - box2.clientHeight){
+                t = box.clientHeight - box2.clientHeight;
+            }
+            box2.style.left = l + 'px';
+            box2.style.top = t + 'px';
+        }
+        document.onmouseup = function(){
+            box.onmousemove = document.onmouseup = null;
+        }
+    }
+</script>
+</body>
+</html>
