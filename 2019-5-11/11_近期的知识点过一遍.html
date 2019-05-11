@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body style="height:3000px">
+<script>
+/*
+    尺寸:
+        clientWidth/clientHeight  元素的宽高（带padding不带边框）
+        offsetWidth/offsetHeight  元素的宽高（带padding带边框）
+        scrollWidth/scrollHeight  被内容撑开的高度
+
+
+    可视区的宽高
+        document.documentElement.clientWidth/document.documentElement.clientHeight
+        window.innerWidth/window.innerHeight
+
+    滚动距离
+        window.pageXOffset/window.pageYOffset  只读
+
+        window.scrollTo(x,y) 只写
+
+        document.documentElement.scrollTop/document.documentElement.scrollLeft 读写都行
+
+    绝对位置:
+        getBoundingClientRect().top/left
+
+    offsetLeft/offsetTop  当前元素的左|上外边框到定位父级的左|上的内边框的距离
+
+    offsetParent  定位父级，没有就按照body走
+
+    有滚动条的滚动事件
+        onscroll
+    没有滚动条的滚动事件
+        onmousewheel    Chrome
+            ev.wheelDelta > 0  上滚  < 0 下滚
+
+        DOMMouseScroll  FF
+            ev.detail < 0 上滚 > 0下滚
+
+    window.navigator.userAgent  查看浏览器内核信息
+
+    window.location.href  url地址
+    window.location.hash  hash值  #+后面的
+        onhashchange
+    window.location.search  查询信息  ? + #号之间的
+    window.location.reload() 刷新
+    window.location.port 端口号
+    window.location.protocol 协议
+
+    防抖:
+        高频率不触发，停下来才触发
+
+    节流:
+        每隔一段时间触发
+
+    元素身上有个classList对象
+
+        add(类名,...)  添加类名
+        remove(类名) 删除类名
+        replace(替换谁，替换成什么)替换
+        contains(类名) 布尔值
+        toggle(类名) 切换  返回值还是布尔值
+
+
+    requestAnimationFrame 动画帧  返回值为数字（编号）
+    cancelAnimationFrame(编号)  关闭动画帧
+
+    事件流(模型)
+        从window起，从上而下到达目标点(捕获阶段)
+        到达目标点(目标阶段) 不管捕获还是冒泡，执行顺序按照绑定先后顺序执行
+        从目标阶段从下而上直到window(冒泡阶段)
+    
+    DOM2事件绑定
+        ele.addEventListener('click',fn,是否捕获)
+        ele.removeEventListener('click',fn,是否捕获)
+
+    ev 在事件函数的第一个参数中默认为event对象，这个对象记录了
+    用户在触发这个事件时的一些细节信息。
+        IE/chrome  window.event
+
+        let event = ev || event;
+
+        let event = ev || window.event;
+        let event = window.event || ev;  //FF下是没有event的，如果不挂在window上会报错
+
+    ev.target  事件源（事件委托）
+
+    阻止冒泡:
+        ev.cancelBubble = true;
+        ev.stopPropagation()
+
+    阻止默认行为:
+        DOM0 
+            return false
+            ev.returnValue = false;
+
+        DOM2
+            ev.preventDefault()
+            ev.returnValue = false;
+
+    onmouseenter  都没有冒泡
+    onmouseleave  都没有冒泡  不穿透
+
+    onmousedown
+    onmousemove
+    onmouseup
+
+    onkeydown
+    onkeyup
+
+    onfocus  失焦聚焦
+    onblur
+
+    focus() 自动聚焦
+
+    select  选中
+
+    onchange 切换内容触发
+    oninput  改变文本框时触发
+    
+    oncontextmenu  右键菜单
+
+
+
+        
+
+
+        
+
+    
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+    
+
+        
+    
+
+    
+
+*/   
+
+    document.documentElement.onclick = function(){
+        console.log(document.body.scrollTop)
+    }
+</script>
+</body>
+</html>

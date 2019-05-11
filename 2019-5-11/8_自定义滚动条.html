@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:30px;
+    height:300px;
+    background: #000;
+    position: relative;
+}
+#box2{
+    width:30px;
+    height:30px;
+    background:red;
+    position: absolute;
+    left:0;
+    top:0;
+}
+#box3{
+    _width:300px;
+    _height:300px;
+    background: forestgreen;
+    position: absolute;
+    top:8px;
+    left:50px;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <div id="box2"></div>
+    </div>
+    <div id="box3"></div>
+<script>
+    /*
+        比例:
+
+            0 - 1
+
+            1/1
+            
+            box2的top / (黑色的高度 - 红色的高度) = 0到1之间的比例
+
+    */
+    box2.onmousedown = function(ev){
+        let disY = ev.pageY - box2.offsetTop;
+        
+        document.onmousemove = function(ev){
+            let t = ev.pageY - disY;
+            if(t < 0){
+                t = 0;
+            }else if(t > box.clientHeight - box2.clientHeight){
+                t = box.clientHeight - box2.clientHeight;
+            }
+
+            let scale = t / (box.clientHeight - box2.clientHeight);
+
+            box3.style.width = 300 * scale + 'px';
+            box3.style.height = 300 * scale + 'px';
+            box3.style.opacity = scale;
+            console.log(300 * scale)
+
+            box2.style.top = t + 'px';
+            
+        }
+        document.onmouseup = function(){
+            document.onmousemove = document.onmouseup = null;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:30px;
+    height:300px;
+    background: #000;
+    position: relative;
+    float: left;
+}
+#box2{
+    width:30px;
+    height:30px;
+    background:red;
+    position: absolute;
+    left:0;
+    top:0;
+}
+#box3{
+    width:300px;
+    height:300px;
+    border:1px solid #000;
+    position: relative;
+    float: left;
+    left:5px;
+    overflow: hidden;
+}
+#box4{
+    position: absolute;
+    top:0;
+    left:0;
+
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <div id="box2"></div>
+    </div>
+    <div id="box3">
+        <div id="box4">
+                4月，全世界的目光都聚焦在中国：两大主场外交活动隆重举行，庆祝人民海军建军70周年，纪念五四运动100周年等重要活动相继进行。
+
+                　　在这不平凡的“人间四月天”，习近平的重要活动格外频繁——会见33位外国政要，12次致电致信，1次考察调研……内政外交活动竟达75项之多。30天的时间里，习近平以“无缝对接”的超强节奏统揽内政外交各项工作。
+                
+                　　“中国声音”“中国方案”指引人间正道
+                
+                　　4月，轮番上演的大国外交是备受瞩目的“高光时刻”，习近平在主场外交活动中和双边会晤时发表的一系列重要讲话，向正在经历“百年未有之大变局”的世界发出响亮的中国声音，提出睿智的中国方案。
+                
+                　　25日至27日，第二届“一带一路”国际合作高峰论坛在北京举行，习近平出席高峰论坛开幕式并发表主旨演讲，这场盛会是我国2019年最重要的主场外交。
+                
+                　　38个国家的元首和政府首脑等领导人以及联合国秘书长和国际货币基金组织总裁共40位领导人出席圆桌峰会。来自150个国家、92个国际组织的6000余名外宾参加了论坛。
+                
+                　　在发表主旨演讲时，习近平表示，共建“一带一路”不仅为世界各国发展提供了新机遇，也为中国开放发展开辟了新天地。面向未来，习近平强调，要秉持共商共建共享原则，坚持开放、绿色、廉洁理念，努力实现高标准、惠民生、可持续目标，推动共建“一带一路”沿着高质量发展方向不断前进。
+                
+                　　同时，习近平郑重宣布了下阶段中国对外开放的重大举措：更广领域扩大外资市场准入；更大力度加强知识产权保护国际合作；更大规模增加商品和服务进口；更加有效实施国际宏观经济政策协调；更加重视对外开放政策贯彻落实。5方面重大举措，构成了一个完整的对外开放体系。
+                
+                　　习近平说：“只要大家齐心协力、守望相助，即使相隔万水千山，也一定能够走出一条互利共赢的康庄大道。”
+                
+                　　2019年的又一场重要主场外交接踵而至，“中国节奏”再入高潮。
+                
+                　　28日，2019年中国北京世界园艺博览会开幕，习近平出席开幕式并发表重要讲话。这是继1999年昆明世园会后，中国再次举办的国际上最高级别的园艺博览会，共有约110个国家和国际组织、120多个非官方参展方参展，刷新了世园会参展方数量的历史纪录。
+                
+                　　“地球是全人类赖以生存的唯一家园。”“建设美丽家园是人类的共同梦想。”“我们要像保护自己的眼睛一样保护生态环境，像对待生命一样对待生态环境，同筑生态文明之基，同走绿色发展之路！”
+                
+                　　在讲话中，习近平提出了保护地球生态环境5个“追求”的中国方案。面对生态环境挑战，习近平强调唯有携手合作，才能有效应对气候变化、海洋污染、生物保护等全球性环境问题，实现联合国2030年可持续发展目标。只有并肩同行，才能让绿色发展理念深入人心、全球生态文明之路行稳致远。
+        </div>
+    </div>
+<script>
+    /*
+        比例:
+
+            0 - 1
+
+            1/1
+            
+            box2的top / (黑色的高度 - 红色的高度) = 0到1之间的比例
+
+    */
+    box2.onmousedown = function(ev){
+        let disY = ev.pageY - box2.offsetTop;
+        
+        document.onmousemove = function(ev){
+            let t = ev.pageY - disY;
+            if(t < 0){
+                t = 0;
+            }else if(t > box.clientHeight - box2.clientHeight){
+                t = box.clientHeight - box2.clientHeight;
+            }
+
+            let scale = t / (box.clientHeight - box2.clientHeight);
+
+            console.log(box4.scrollHeight)
+
+            /*
+                box4的top值 = 比例 * (被内容撑开的高度 - 内容可视区的高度)
+            */
+
+            box4.style.top = - scale * (box4.scrollHeight - box3.clientHeight) + 'px';
+
+            box2.style.top = t + 'px';
+            
+        }
+        document.onmouseup = function(){
+            document.onmousemove = document.onmouseup = null;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:30px;
+    height:300px;
+    background: #000;
+    position: relative;
+    float: left;
+}
+#box2{
+    width:30px;
+    height:30px;
+    background:red;
+    position: absolute;
+    left:0;
+    top:0;
+}
+#box3{
+    width:300px;
+    height:300px;
+    border:1px solid #000;
+    position: relative;
+    float: left;
+    left:5px;
+    overflow: hidden;
+}
+#box4{
+    position: absolute;
+    top:0;
+    left:0;
+
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <div id="box2"></div>
+    </div>
+    <div id="box3">
+        <div id="box4">
+                4月，全世界的目光都聚焦在中国：两大主场外交活动隆重举行，庆祝人民海军建军70周年，纪念五四运动100周年等重要活动相继进行。
+
+                　　在，习近平提出了保护地球生态环境5个 4月，全世界的目光都聚焦在中国：两大主场外交活动隆重举行，庆祝人民海军建军70周年，纪念五四运动100周年等重要活动相继进行。
+
+                　　提出了保护地球生态环境5 4月，全世界的目光都聚焦在中国：两大主场外交活动隆重举行，庆祝人民海军建军70周年，纪念五四运动100周年等重要活动相继进行。
+
+                　　在，习近平提出了保护地球生态环境5个 4月，全世界的目光都聚焦在中国：两大主场外交活动隆重举行，庆祝人民海军建军70周年，纪念五四运动100周年等重要活动相继进行。
+
+                　　提出了保护地球生态环境5 4月，全世界的目光都聚焦在中国：两大主场外交活动隆重举行，庆祝人民海军建军70周年，纪念五四运动100周年等重要活动相继进行。
+
+                　　在，习近平提出了保护地球生态环境5个 4月，全世界的目光都聚焦在中国：两大主场外交活动隆重举行，庆祝人民海军建军70周年，纪念五四运动100周年等重要活动相继进行。
+
+                　　提出了保护地球生态环境5 4月，全世界的目光都聚焦在中国：两大主场外交活动隆重举行，庆祝人民海军建军70周年，纪念五四运动100周年等重要活动相继进行。
+
+                　　在，习近平提出了保护地球生态环境5个 4月，全世界的目光都聚焦在中国：两大主场外交活动隆重举行，庆祝人民海军建军70周年，纪念五四运动100周年等重要活动相继进行。
+
+                　　提出了保护地球生态环境5 4月，全世界的目光都聚焦在中国：两大主场外交活动隆重举行，庆祝人民海军建军70周年，纪念五四运动100周年等重要活动相继进行。
+
+                　　在，习近平提出了保护地球生态环境5个 4月，全世界的目光都聚焦在中国：两大主场外交活动隆重举行，庆祝人民海军建军70周年，纪念五四运动100周年等重要活动相继进行。
+
+                　　提出了保护地球生态环境5个“追求”的中国方案。面对生态环境挑战，习近平强调唯有携手合作，才能有效应对气候变化、海洋污染、生物保护等全球性环境问题，实现联合国2030年可持续发展目标。只有并肩同行，才能让绿色发展理念深入人心、全球生态文明之路行稳致远。
+        </div>
+    </div>
+<script>
+    /*
+       1.加滚轮
+
+       2.页面的内容是否小于内容可视区的高度，就隐藏滚动条
+
+       3.内容越多，滚动条越短，内容越少滚动条就越长
+
+    */
+
+    let b4h = box4.scrollHeight;  //box4的被内容撑开的高度
+
+    let b3h = box3.clientHeight;//内容可视区的高度
+
+    
+    //如果box4的高度小于等于可视区的高度，那么隐藏滚动条
+    if(b4h <= b3h){
+        box.style.display = 'none';
+    }
+    /*
+        内容越多，滚动条就越短，否则就越长
+
+        最小30，最长150
+
+        30 + box3高度/box4高度 * 120
+    */
+    let h = 30 + b3h/b4h * 120;
+
+    // if(h < 30){
+    //     h = 30;
+    // }else if(h > 150){
+    //     h = 150;
+    // }
+
+    box2.style.height = h + 'px';
+
+
+
+    box2.onmousedown = function(ev){
+        let disY = ev.pageY - box2.offsetTop;
+        
+        document.onmousemove = function(ev){
+            let t = ev.pageY - disY;
+            if(t < 0){
+                t = 0;
+            }else if(t > box.clientHeight - box2.clientHeight){
+                t = box.clientHeight - box2.clientHeight;
+            }
+
+            let scale = t / (box.clientHeight - box2.clientHeight);
+
+            console.log(box4.scrollHeight)
+
+            /*
+                box4的top值 = 比例 * (被内容撑开的高度 - 内容可视区的高度)
+            */
+
+            box4.style.top = - scale * (box4.scrollHeight - box3.clientHeight) + 'px';
+
+            box2.style.top = t + 'px';
+            
+        }
+        document.onmouseup = function(){
+            document.onmousemove = document.onmouseup = null;
+        }
+    }
+
+
+
+    addWheel(box,function(o){
+        let t = box2.offsetTop;
+        if(o){
+            t -= 5;
+        }else{
+            t += 5;
+        }
+
+        if(t < 0){
+            t = 0;
+        }else if(t > box.clientHeight - box2.clientHeight){
+            t = box.clientHeight - box2.clientHeight;
+        }
+
+        let scale = t / (box.clientHeight - box2.clientHeight);
+
+        box4.style.top = - scale * (box4.scrollHeight - box3.clientHeight) + 'px';
+        box2.style.top = t + 'px';
+    });
+
+    function addWheel(obj,fn){
+        //let w = window.navigator.userAgent.toLowerCase();
+        // if(w.includes('chrome')){
+        if(obj.onmousewheel === null){
+        // if('onmousewheel' in window){
+            obj.onmousewheel = whell;
+        }else{
+            obj.addEventListener('DOMMouseScroll',whell);
+        }
+
+        function whell(ev){
+            let o = true;
+            // console.log(ev.wheelDelta);
+            if(ev.wheelDelta){ //是chrome
+                o = ev.wheelDelta > 0?true:false;
+            }else{
+                o = ev.detail < 0?true:false;
+            }
+
+            //回调函数
+            fn && fn(o);
+        }
+    }
+</script>
+</body>
+</html>
