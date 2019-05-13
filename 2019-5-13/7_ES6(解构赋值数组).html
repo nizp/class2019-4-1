@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        js:
+            ECMAScript
+            DOM
+            BOM
+
+        let
+        const
+        模板字符串
+        includes
+        let regex = new RegExp(/xyz/i);
+        箭头函数
+        剩余运算符（rest 参数）
+        扩展运算符[...arr]
+        Array.from()
+        {foo:foo}-> {foo}
+        {...parent.prototype}
+        Object.assign
+        Object.keys()，Object.values()
+        [...new Set([1,2,2,3,3])]
+        class
+
+
+        解构赋值，用于对象或者数组
+
+        什么是变量:
+            把js中的数据存储到一个自定义的名字中，可以为一个数组也可以为一个对象。
+            这个名字可变
+            目的:为了复用
+
+
+        数组解构:
+            申明一个数组，把变量放到数组中，变量数组的索引就对应
+            *赋值数组*的索引.
+
+            **赋值别的数据就报错
+
+            let [a,b] = [1,2];
+
+            let [a,b,c] = [1,2];
+            c = ?  undefined
+
+            let [,,c] = [1,2,3]
+
+        变量数组中是可以设置默认值，用=设置
+
+        什么时候会用到默认值呢？
+
+        1.赋值没数据  let [a=1] = [];  1
+        2.赋值为undefined的时候 
+
+
+
+    */
+
+    //让 a=20;b=10 
+
+    // var a = 10;
+    // var b = 20;
+    // var c = a;
+
+    // a = b;
+    // b = c;
+
+    // a = a+b; //30
+    // b = a-b; //10
+    // a = a-b;//20
+
+    // var [b,a] = [10,20];
+    // console.log(a,b);
+
+
+    // let [,,third] = ["foo", "bar", "baz"];
+    // console.log(third);
+
+    // let [head, ...tail] = [1, 2, 3, 4];
+
+    // console.log(tail); //[2,3,4]
+
+    // let [x, y, ...z] = ['a'];
+
+    // console.log(x,y,z); //z为[]
+
+
+    /*
+        变量数组中是可以设置默认值，用=设置
+
+        什么时候会用到默认值呢？
+
+        1.赋值没数据  let [a=1] = [];  1
+        2.赋值为undefined的时候 
+    */
+    // let [x, y = 'b'] = ['a', null];
+    // console.log(y);
+
+
+    // function f() {
+    //     console.log('aaa');
+    // }
+
+    // let [x = f()] = [];
+    // console.log(x);
+
+
+    /*
+        []
+            数组
+            下标
+            [任意一个]
+            [1,2,3][0]=>1
+    */
+
+
+    // function f() {
+    //     console.log('aaa');
+    // }
+    // let x;
+    // if ([1][0]) {
+    //     x = f();
+    // } else {
+    //     x = [1][0];
+    // }
+    // console.log(x);
+
+    // let arr =  [1,2,3,[5,6,[7,[[[[[9]]]]]]]];
+
+    let [a,b,c,[d,e,[f,[[[[[g]]]]]]]] =  [1,2,3,[5,6,[7,[[[[[9]]]]]]]];
+
+    console.log(g);
+    // console.log(arr[3][2][1][0][0][0][0][0]);
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    // console.log(parseInt('2px'));
+    // console.log(Number.parseInt('2px'));
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body id="body">
+<script>
+    /*
+        值为对象，变量也是对象
+
+        变量对象的名字默认要是对象属性的名字
+
+        下面的a和b都是对象的属性名
+
+        let {a,b} = {
+            a:1,
+            b:2
+        }   
+
+        let {a:c,b:d} = {
+            a:1,
+            b:2
+        }   
+
+        c直接代表了a，此时访问a是会报错的，因为a的值已经给了c
+
+        访问c其实就是访问a了
+
+        改名字使用:号
+
+
+
+
+
+
+    */
+    // let {a,b} = {
+    //     a:1,
+    //     b:2
+    // }   
+
+    // let {a:c,b:d} = {
+    //     a:1,
+    //     b:2
+    // }   
+
+    // console.log(a);
+
+   
+
+    // let obj = {
+    //     a:1,
+    //     b:2
+    // }   
+    
+    // console.log(obj.a,obj.b);
+    // console.log(a,b);
+
+
+
+    // console.log(getComputedStyle(body).width)
+    // console.log(getComputedStyle(body).height)
+    // console.log(getComputedStyle(body).fontSize)
+
+
+    let {width:w,height:h,fontSize:fz} = getComputedStyle(body);
+
+    // console.log(w,h,fz);
+    
+    // console.dir(console);
+
+    let {log,dir} = console;
+
+    // log(1);
+    dir(Array);
+
+
+</script>
+</body>
+</html>

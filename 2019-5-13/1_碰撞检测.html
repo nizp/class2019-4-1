@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height: 100px;
+    background: gray;
+    position: absolute;
+    left:0;
+    top:0;
+}
+#box1{
+    width:100px;
+    height: 100px;
+    background: lightcoral;
+    position: absolute;
+    left:300px;
+    top:300px;
+}
+
+</style>
+</head>
+<body>
+    <div id="box"></div>
+    <div id="box1"></div>
+<script>
+    /*
+        九宫格检测法
+            通过4条边的比较来检测两个物体是否碰撞
+
+        逆向思维,什么时候没有碰到
+
+        假设right1为50，left2为100，现在right1 < left2
+        说明没有碰到
+    */   
+
+    class Drag {
+        constructor(id) {
+            //创建属性
+            this.box = document.getElementById(id);
+            this.disX = 0;
+            this.disY = 0;
+            this.down();
+        }
+        down(){
+            let that = this;//实例
+            //在鼠标按下的时候赋值this.disX和this.disY
+            //在事件函数中的this指向触发事件的元素，所以下面函数的this指向this.box
+            //但是this.box下是没有disX的，只有实例才有disX,所以要把this保存一份
+            //到事件中用
+            this.box.addEventListener('mousedown',function(ev){
+                that.disX = ev.pageX - this.offsetLeft;
+                that.disY = ev.pageY - this.offsetTop;
+                //因为函数放到了事件中，this会指向触发事件的元素
+                //所以在绑定之前通过bind去改变move里面的this指向-> 实例
+                that.moveFn = that.move.bind(that);
+                that.upFn = that.up.bind(that);
+                document.addEventListener('mousemove',that.moveFn);
+                document.addEventListener('mouseup',that.upFn);
+                ev.returnValue = false;
+            });
+        }
+        move(ev){
+            //box的左边
+            let l =  ev.pageX - this.disX;
+            //box的上边
+            let t = ev.pageY - this.disY;
+            //box的右边
+            let r = l + this.box.clientWidth;
+            //box的下边
+            let b = t + this.box.clientHeight;
+
+
+            //box1的左边
+            let l2 = box1.offsetLeft;
+            //box1的上边
+            let t2 = box1.offsetTop;
+            //box1的右边
+            let r2 = l2 + box1.clientWidth;
+            //box1的下边
+            let b2 = t2 + box1.clientHeight;
+
+
+
+            this.box.style.left = l + 'px';
+            this.box.style.top = t + 'px';
+
+            /*
+                赋值之后就判断是否碰撞
+            */
+            if(r < l2 || b < t2 || l > r2 || t > b2){
+                //没碰到
+                box1.style.background = 'lightcoral';
+            }else{
+                //碰到了
+                box1.style.background = 'yellow';
+            }
+
+        }
+        up(){
+            document.removeEventListener('mousemove',this.moveFn);
+            document.removeEventListener('mouseup',this.upFn);
+        }
+    }
+
+    new Drag('box');
+</script>
+</body>
+</html>

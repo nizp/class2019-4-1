@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:0;
+    height:0;
+    position: absolute;
+    left:0;
+    top:0;
+    background:rgba(0,255,255,.3);
+    /* rgba(#00FFFF ); */
+    border:1px dashed blue;
+}
+</style>
+</head>
+<body id="body">
+    <!-- <div id="box"></div> -->
+<script>
+    /*
+        在mousedown的时候把创建元素的位置求出来
+        这个位置就是鼠标的位置
+    */
+    document.onmousedown = function(ev){
+        let box = document.createElement('div');
+        box.id = 'box';
+        //存了一个按下的坐标
+        let l = ev.pageX;
+        let t = ev.pageY;
+        box.style.cssText = 'left:'+l+'px;top:'+t+'px';
+        body.append(box);
+        document.onmousemove = function(ev){
+            /*
+                move的时候去计算移动了多少距离
+
+                move的坐标 - 按下的坐标 = 移动的距离
+                
+                105 - 100 = 5px 
+            
+
+                90 - 100 = -10px 元素最小值为0，没有负数
+
+                所以我们要取绝对值
+
+
+                当按下的值比移动的值要大的时候，
+                left和top要变化
+
+                left和top值跟鼠标的坐标走
+
+                如果按下的值比移动的值要小
+                left值和top值不变(left和top值就为按下的坐标)
+
+
+                按下的坐标
+                移动的坐标
+
+                left值 = 如果按下的坐标大于移动的坐标，移动的坐标
+                left值 = 如果按下的坐标小于移动的坐标，按下的坐标
+
+
+                按下的坐标：100√   移动的坐标：105
+
+                按下的坐标：100    移动的坐标：90√
+
+                按下的坐标和移动的坐标对比，哪个小,left就为哪个
+
+            */
+            // 按下的坐标和移动的坐标对比，哪个小,left就为哪个
+            box.style.left = Math.min(l,ev.pageX) + 'px';
+             // 按下的坐标和移动的坐标对比，哪个小,top就为哪个
+            box.style.top = Math.min(t,ev.pageY) + 'px';
+            box.style.width = Math.abs(ev.pageX - l) + 'px';
+            box.style.height = Math.abs(ev.pageY - t) + 'px';
+        
+        }
+
+        document.onmouseup = function(){
+            box.remove();
+            document.onmousemove = document.onmouseup = null;
+        }
+    }
+</script>
+</body>
+</html>

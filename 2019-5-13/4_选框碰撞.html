@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height: 100px;
+    background: gray;
+    position: absolute;
+    left:0;
+    top:0;
+}
+#box1{
+    width:100px;
+    height: 100px;
+    background: lightcoral;
+    position: absolute;
+    left:300px;
+    top:300px;
+}
+#select{
+    width:0;
+    height:0;
+    position: absolute;
+    left:0;
+    top:0;
+    background:rgba(0,255,255,.3);
+    /* rgba(#00FFFF ); */
+    border:1px dashed blue;
+}
+
+</style>
+</head>
+<body id="body">
+    <div id="box1"></div>
+<script src="./tools/tools_2.0.js"></script>
+<script>
+     document.onmousedown = function(ev){
+        //每次点击页面的时候就把方块颜色初始化
+        box1.style.background = 'lightcoral';
+        let box = document.createElement('div');
+        box.id = 'select';
+        //存了一个按下的坐标
+        let l = ev.pageX;
+        let t = ev.pageY;
+        box.style.cssText = 'left:'+l+'px;top:'+t+'px';
+        body.append(box);
+        document.onmousemove = function(ev){
+
+            //设置left和top值
+            box.style.left = Math.min(l,ev.pageX) + 'px';
+            box.style.top = Math.min(t,ev.pageY) + 'px';
+            
+            //设置宽高
+            box.style.width = Math.abs(ev.pageX - l) + 'px';
+            box.style.height = Math.abs(ev.pageY - t) + 'px';
+            
+            if(tools.duang(box,box1)){
+                box1.style.background = 'yellow';
+            }else{
+                box1.style.background = 'lightcoral';
+            }
+        }
+
+        document.onmouseup = function(){
+            box.remove();
+            document.onmousemove = document.onmouseup = null;
+        }
+        return false;
+    }
+</script>
+</body>
+</html>

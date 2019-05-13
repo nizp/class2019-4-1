@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width:350px;
+            height:350px;
+            position: relative;
+            border:1px solid black;
+            float:left;
+            margin-right:100px;
+        }
+        #box img{
+            width:100%;
+            height:100%;
+        }
+        #mark{
+            width:175px;
+            height:175px;
+            background: rgba(0,0,0,0.3);
+            position: absolute;
+            left:0;
+            top:0;
+            cursor: move;
+            display: none;
+        }
+        #bigBox {
+            width:350px;
+            height:350px;
+            border:1px solid black;
+            position: relative;
+            overflow: hidden;
+            float:left;
+            display: none;
+        }
+        #bigBox img{
+            position: absolute;
+            width:700px;
+            height:700px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <img src="iphone.jpg" alt="">
+    <div id="mark"></div>
+</div>
+<div id="bigBox">
+    <img src="iphone_big.jpg" alt="" id="img">
+</div>
+<script>
+    // 1.鼠标滑入到box身上，让mark显示；
+    // 2.鼠标在box上滑动，mark跟着运动，限制范围
+    // 3.求出从0点到终点比例0-1，通过比例关联大盒子的top，left
+    // 4.鼠标滑出,让大盒子隐藏；
+
+    box.onmouseover = function(){
+        mark.style.display = 'block';
+        bigBox.style.display = 'block';
+    }
+    box.onmouseout = function(){
+        mark.style.display = 'none';
+        bigBox.style.display = 'none';
+    }
+
+    /*
+        
+    */
+    box.onmousemove = function(ev){
+        let l = ev.pageX - mark.clientWidth/2;
+        let t = ev.pageY - mark.clientHeight/2;
+        if(l < 0){
+            l = 0;
+        }else if(l > box.clientWidth-mark.clientWidth){
+            l = box.clientWidth-mark.clientWidth;
+        }
+
+        if(t < 0){
+            t = 0;
+        }else if(t > box.clientHeight-mark.clientHeight){
+            t = box.clientHeight-mark.clientHeight;
+        }
+
+        /*
+            0/175
+
+            87.5/175  = 1/2
+
+            175/175 = 1
+        */
+        let scaleX = l/(box.clientWidth-mark.clientWidth);
+        let scaleY = t/(box.clientHeight-mark.clientHeight);
+
+        // console.log(scaleX,scaleY);
+
+        /*
+            img.style.top值就等于 0-1之间的比例乘以小盒子-大盒子的尺寸
+
+            小盒子 - 大盒子就为img的top值的终点,值为负数
+
+        */
+
+        img.style.top = scaleY * (bigBox.clientHeight - img.clientHeight) + 'px'
+        img.style.left = scaleX * (bigBox.clientWidth - img.clientWidth) + 'px'
+
+        mark.style.left = l + 'px';
+        mark.style.top = t + 'px';
+    }
+
+
+
+</script>
+</body>
+</html>
