@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height: 100px;
+    background: gray;
+    position: absolute;
+    left:0;
+    top:0;
+}
+#box1{
+    width:100px;
+    height: 100px;
+    background: lightcoral;
+    position: absolute;
+    left:300px;
+    top:300px;
+}
+
+</style>
+</head>
+<body>
+    <div id="box"></div>
+    <div id="box1"></div>
+<script>
+    /*
+        事件:this在事件函数(非箭头函数)内,默认this指向触发事件元素(对象)
+
+            xxx.onclick = function(){
+                console.log(this);  //xxx
+            }
+
+            xxx.addEventListener('click',function(){
+                console.log(this); //xxx
+            })
+
+
+    */   
+
+    class Drag {
+        constructor(id) {
+            //创建属性
+            this.box = document.getElementById(id);
+            this.disX = 0;
+            this.disY = 0;
+            this.down();
+        }
+        down(){
+            let that = this;//实例
+            this.box.addEventListener('mousedown',function(ev){
+                // console.log(this);
+                that.disX = ev.pageX - this.offsetLeft;
+                that.disY = ev.pageY - this.offsetTop;
+
+                //为了让绑定和解除为一个地址。
+                // let move = function(ev){
+                //     that.move(ev);
+                // }
+
+                that.moveFn = that.move.bind(that)
+                // function(ev){
+                //     that.move(ev);
+                // }
+
+                that.upFn = function(ev){
+                    that.up(ev);
+                }
+
+                document.addEventListener('mousemove', that.moveFn);
+                document.addEventListener('mouseup',that.upFn);
+                ev.returnValue = false;
+            });
+        }
+        move(ev){
+            console.log('move了',this);
+            // return;
+            let l =  ev.pageX - this.disX;
+            let t = ev.pageY - this.disY;
+
+            this.box.style.left = l + 'px';
+            this.box.style.top = t + 'px';
+        }
+        up(ev){
+            document.removeEventListener('mousemove', this.moveFn);
+            document.removeEventListener('mouseup',this.upFn);
+        }
+    }
+
+    new Drag('box');
+</script>
+</body>
+</html>

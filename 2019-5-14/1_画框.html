@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:0;
+    height:0;
+    position: absolute;
+    left:0;
+    top:0;
+    background:rgba(0,255,255,.3);
+    /* rgba(#00FFFF ); */
+    border:1px dashed blue;
+}
+</style>
+</head>
+<body id="body">
+    <!-- <div id="box"></div> -->
+<script>
+    /*
+        1.拖拽
+        2.按下的时候创建一个div
+        3.把鼠标按下的坐标点给这个div
+
+        4.移动的距离 - 按下的距离 = 移动了多少
+            105 - 100 = 5
+
+        5.取绝对值
+        6.从右往左拉的时候，要改变left、top值
+          
+          按下100   移动200
+
+          按下100   移动50
+
+          Math.min(按下,移动)
+
+    */
+
+    document.onmousedown = function(ev){
+        let div = document.createElement('div');
+        div.id = 'box';
+        let l = ev.pageX;
+        let t = ev.pageY;
+        div.style.left = l + 'px';
+        div.style.top = t + 'px';
+        body.appendChild(div);
+
+        document.onmousemove = function(ev){
+
+            div.style.left = Math.min(l,ev.pageX) + 'px';
+            div.style.top = Math.min(t,ev.pageY) + 'px';
+            
+            div.style.width = Math.abs(ev.pageX - l) + 'px';
+            div.style.height = Math.abs(ev.pageY - t) + 'px';
+        }
+
+        document.onmouseup = function(){
+            div.remove();
+            //此时mousedown事件函数形成闭包环境，要清掉父级变量的值
+            console.dir(document.onmouseup);
+            div = l = t = document.onmousemove = document.onmouseup = null;
+        }
+    }
+</script>
+</body>
+</html>

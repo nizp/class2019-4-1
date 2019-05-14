@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button btn="0" id="btn">点击</button>
+    <!-- <div id="box"></div> -->
+
+    <!-- <ul>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+    </ul> -->
+    
+<script src="./jquery-1.11.3.js"></script>
+<script>
+    /*
+        选择器
+
+        jQuery  -> js的类库
+
+        把若干的常用方法封装起来了 
+
+        至少现在还有50%的公司在用（必选项）
+
+        https://api.jquery.com/
+        https://www.jquery123.com/
+
+        jquery是封装版js
+
+
+
+        吃的少干的多，兼容低版本1.72、方便操作DOM、封装ajax、封装了更具方法
+        还提供了接口写插件(去丰富jquery)
+
+
+        使用jq就是换种方法去写代码
+
+
+        选择器:
+            只要会css选择器，就会jquery的选择器
+
+
+        1.引入jquery
+
+        2.选择器
+            #   $(#xx)
+            .
+            标签选择器
+            属性选择器 input[type="text"]
+
+        3.操作属性
+            innerHTML    html()
+            innerText    text()
+            value        val()
+            id           attr(id,'box')
+            className    addClass   removeClass  replaceClass
+            style        css()
+            cssText      css({})
+
+
+        原生对象转JQ对象 -> $(原生对象)
+
+        jQ对象转原生 -> $(xx)[num] 加下标  || $("img").get(0);
+            
+
+
+
+        $ 就是jquery对象
+
+        
+
+
+    */    
+
+    // $('#box').css({
+    //     width:100,
+    //     height:100,
+    //     background:'red'
+    // }).click(()=>{
+    //     $('#box').animate({
+    //         width:300,
+    //         height:300
+    //     });
+    // });
+
+    // $('button[btn="0"]').click(function(){
+    //     $('#box').fadeToggle(500);
+    // });
+
+
+    // $('li:odd').css('background','red'); //奇数(从0开始)
+    // $('li:even').css('background','green');//偶数(从0开始)
+    // $('li:gt(5)').css('background','yellow')//大于某个值
+    // $('li:lt(3)').css('background','pink');//小于某个值
+
+
+
+    const btn = document.getElementById('btn');
+
+    $(btn).click(function(){
+    //    console.log($(btn).get(0))
+    console.log($(btn)[0]);
+    });
+
+    // console.dir(btn);
+
+</script>
+</body>
+</html>

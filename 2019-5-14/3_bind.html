@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        
+        函数的三种角色:
+            普通函数 function fn(){}
+            构造函数 function Fn(){}  专门构造对象
+            实例   function(){} -> 为Function实例
+
+        
+        bind:
+            改变this指向，2个参数，设置this,无数个
+
+        返回值是一个新的函数
+
+        柯里化函数:名字就是大高上（Currying）
+
+        函数嵌套函数，子函数用父函数的参数，通常子函数自己还有参数，
+        父函数返回子函数，子函数的运行结果还要和父函数的
+        参数有关联并且子函数被外界引用。
+
+        function fn(x,y){
+            console.log(x,y)
+        }
+
+        function fn(x){
+            return function(y){
+                console.log(x,y)
+            }
+        }
+
+        let f = fn('number')
+
+        let f2 = fn('string');
+
+        fn('number',5);
+
+        fn = (a) => {
+            return (b)=>{
+               return a+b;
+            }
+        } 
+        fn = a=>b=>a+b
+
+        f(5);
+        f(5);
+
+        fn('string',5);
+        f2('哈哈')
+
+
+
+        需求:
+            1.改变this
+            2.要传参
+            3.要new
+    */    
+
+    //context 就是改变this的参数
+    //Function.prototype.bind()  fn.bind()
+    //当需要在bind上写多个参数的时候，就需要剩余运算符，arg除了第一个参数以外的参数
+    Function.prototype.bind = function(context,...arg){
+        // console.log(this); //实例fn
+        let that = this;
+        function bound(...args){
+            // console.log(arg);
+            // that.call(context,...arg);
+            //合并数组arg.concat(args)
+
+            //如果是构造函数this就不能变
+            //检测this是不是bound构造出来的
+            //如果是就说明new了bound
+            if(this instanceof bound){
+                that.apply(this,[...arg,...args]);
+            }else{
+                that.apply(context,[...arg,...args]);
+            }
+            // console.log(this);
+        }
+
+        //要把fn的prototype下的方法给bound
+        if(this.prototype){
+            bound.prototype = this.prototype;
+        }
+        return bound;
+    }
+
+    function fn(a,b,c,d,e){
+        // console.log(this,a,b,c,d,e);
+        this.a = a;
+        console.log(this.aaa);
+    }
+
+    fn.prototype.aaa = 20;
+
+    //fn{a:1}
+    // fn();
+
+    let f = fn.bind(document,1,2,3,4);
+  
+    console.log(new f(5));
+</script>
+</body>
+</html>
