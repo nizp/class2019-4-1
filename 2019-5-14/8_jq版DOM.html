@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt">
+    <ul id="ul"></ul>
+<script src="./jquery-1.11.3.js"></script>
+<script>
+
+    /*
+        append 后添加
+        remove
+        prepend(content)  前添加
+
+        siblings 兄弟
+        parent
+        
+    */
+    $('#txt').keyup(function(ev){
+        if(ev.keyCode === 13){
+           let val = $('#txt')[0].value;
+        //    $('#ul').append($('<li>'+val+'</li>'));
+           $('#ul').prepend($('<li>'+val+'</li>'));
+           $('#txt').val('');
+        }
+    });
+</script>
+</body>
+</html>

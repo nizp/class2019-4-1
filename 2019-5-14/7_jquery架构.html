@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+<script>
+    /*
+        不带min为学习版，可以去看里面的代码
+
+        http://jquery.cuishifeng.cn/jQuery_selector_context.html
+    */ 
+
+    /*
+        匿名函数自执行,为了不让外界的代码影响到里面的代码(函数内的代码不受外界干扰)
+
+        但是，这样做外界就拿不到里面的函数了，所以jQ做了一件事
+        把jQuery挂在了window下
+
+
+        外界就能使用
+            return
+            把变量挂全局
+
+
+        var undefined = 10;
+        console.log(undefined);
+
+
+        无new化操作
+            不在外面new,在里面new
+
+            不new自己，new了个其他函数，这个其他函数又拥有
+            jquery函数原型下的所有方法
+
+
+        链式调用
+            $('li').css('width','200px').css('height','200px');
+
+        
+        
+
+    */
+    // (function(){
+    //     function jQuery(){
+
+    //     }
+
+    //     jQuery.prototype.trim = function(str){
+    //         return str.replace(/^\s+|\s+$/g,'');
+    //     }
+
+    //     // 把jQuery暴露到了全局
+    //     window.jQuery  = window.$ = jQuery;
+
+    // })();
+
+
+    (function(global,factory){
+        factory(global);
+        /*
+            判断是否为window环境下，如果不是undefined那么当前
+            环境就是window，否则为this
+        */
+    })(typeof window !== 'undefined'?window:this,function(global,noGlobal){
+        //noGlobal 为undefined，因为在低版本下undefined会被修改,函数不传参一定是undefined
+        
+        /*
+            如果自己调用自己，就递归了
+            如何才能让其不递归呢？
+
+
+            1.不自己调用自己就不会递归
+            2.还能使用jQuery原型上的方法
+
+
+            {
+                0:xxx,
+                1:xxx,
+                length:2
+            }
+        */
+        function jQuery(selector){
+           return new jQuery.fn(selector);
+        }
+
+        jQuery.fn = function(selector){
+            let ele = document.querySelectorAll(selector);
+            // console.log(ele);
+            //循环获取的元素，把每个元素挂在实例上
+            for(let i=0;i<ele.length;i++){
+                this[i] = ele[i];
+            }
+            this.length = ele.length;
+        }
+
+
+
+        jQuery.prototype.trim = function(str){
+            return str.replace(/^\s+|\s+$/g,'');
+        }
+
+        jQuery.prototype.css = function(){
+            let arg = Array.prototype.slice.call(arguments);
+            //如果参数为2个，就是设置，有可能是批量设置
+            if(arg.length === 2){
+                //循环this的每一项
+                for(let i=0;i<this.length;i++){
+                    //把每项的样式设置成参数值即可
+                    this[i].style[arg[0]] = arg[1];
+                }
+            }
+            return this;
+            console.log('进了css');
+        }
+
+        /*
+            让 jQuery.fn.prototype 等于 jQuery.prototype
+
+            当new jQuery.fn 这个实例时上面就有 jQuery原型下的所有方法
+
+        */
+
+        jQuery.fn.prototype = jQuery.prototype;
+
+
+        // 把jQuery暴露到了全局
+        global.jQuery  = global.$ = jQuery;
+    });
+
+    var jQuery = 10;
+
+    // var lis = new $('li');  //$是个函数名
+    var lis = $('li'); //不想在外面new
+    lis.css('background','red').css('width','200px');
+
+
+
+    // console.log(new $().trim('  123  '));
+
+
+    // console.log(new jQuery().trim('  123  '));
+
+    // $.trim('  321  ');
+
+
+
+    
+
+
+
+
+
+
+</script>
+</body>
+</html>

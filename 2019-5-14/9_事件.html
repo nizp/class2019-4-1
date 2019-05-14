@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width: 200px;
+    height: 200px;
+    background: #000;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <button>点击请求</button>
+    </div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+<script src="./jquery-1.11.3.js"></script>
+<script>
+    /*
+        jq中所有的事件都为事件绑定
+
+        click,mousedown..
+        都有on()二次封装
+
+        on('不带On的事件名','事件源元素',事件函数)  事件委托
+
+        解绑为off()
+
+        jq中的ev是二次封装的对象
+
+        ev.originalEvent  原生事件对象
+
+        事件的冒泡和事件的阻止默认行为
+            return false;
+    */    
+
+    // $('li').on('click',function(){
+    //     $(this).css('background','red');
+    // });
+
+    // $('ul').on('click','li',function(){
+    //     $(this).css('background','red');
+    // })
+
+
+    
+
+    $('#box').on('mouseover',function(ev){
+        console.log(ev);
+        $(this).css('background','red');
+
+        //在绑定click之前，解除上次click，触发的时候始终就一个
+        $('button').off('click.bbb');
+        $('button').on('click.bbb',function(){
+            console.log('请求');
+        });
+
+        $('button').on('click.aaa',function(){
+            console.log('请求2');
+        });
+    })
+    $('#box').on('mouseout',function(){
+        $(this).css('background','#000');
+    });
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        订阅模式
+        document.addEventListener('click',fn);
+
+        发布模式
+        真的点击document
+
+        let event = document.createEvent('HTMLEvents')  创建一个事件对象
+        //初始化，事件类型，是否冒泡，是否阻止浏览器的默认行为
+        event.initEvent('事件名',false,false) 初始化事件
+        element.dispatchEvent(event) 发布
+        
+    */  
+    
+    //订阅
+    document.addEventListener('上滚',function(){
+        alert(1);
+    });
+
+    document.addEventListener('上滚',function(){
+        alert('又了一下');
+    });
+
+
+
+
+
+
+
+
+
+
+    let event = document.createEvent('HTMLEvents');
+    event.initEvent('上滚',false,false);
+
+    document.onmousewheel = function(ev){
+        if(ev.wheelDelta > 0){
+            document.dispatchEvent(event);
+        }
+    }
+
+
+
+
+    
+</script>
+</body>
+</html>

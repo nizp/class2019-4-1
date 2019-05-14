@@ -60,10 +60,19 @@
             innerHTML    html()
             innerText    text()
             value        val()
-            id           attr(id,'box')
+            getAttribute|setAttribute|removeAttribute     attr(id,'box') 
             className    addClass   removeClass  replaceClass
-            style        css()
-            cssText      css({})
+            style        css('width')
+            cssText      css('height','200px')
+            prop
+
+        在JQ中一般都有这么一个特性，传一个字符串或者不传参就是获取
+
+        两个参数就是设置css('height','200px')
+
+        如果传入一个参数，这个参数还是对象，批量设置
+
+
 
 
         原生对象转JQ对象 -> $(原生对象)
@@ -105,10 +114,12 @@
 
     const btn = document.getElementById('btn');
 
-    $(btn).click(function(){
-    //    console.log($(btn).get(0))
-    console.log($(btn)[0]);
-    });
+    // $(btn).click(function(){
+    // //    console.log($(btn).get(0))
+    //     console.log($(btn)[0]);
+    // });
+
+   console.log( $('body').html() )
 
     // console.dir(btn);
 

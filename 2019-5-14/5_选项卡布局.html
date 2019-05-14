@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:200px;
+    height:50px;
+    border:1px solid #000;
+}
+#box div{
+    display: none;
+} 
+#box div.show{
+    display: block;
+}
+.active{
+    background: yellow;
+}
+
+</style>
+</head>
+<body>
+    <div id="warp">
+        <section id="box">
+            <div class="show">头条</div>
+            <div>体育</div>
+            <div>新闻</div>
+        </section>
+        <button class="active">按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+    </div>
+<script src="./jquery-1.11.3.js"></script>
+<script>
+    const btns = $('button');
+    const divs = $('#box div');
+
+    /*
+        divs.eq(数字)  div中的第某个元素，是个jquery对象
+
+        index('缩小范围')  自动去找某个元素基于父级的子级为第几个元素
+
+    */
+
+    //给所有按钮加点击事件函数
+    btns.click(function(){
+        //当点击某个按钮的时候把所有的active清空
+        btns.removeClass('active');
+        //把所有div中的show清空
+        divs.removeClass('show');
+        //当前按钮的class名变成active
+        $(this).addClass('active');
+        //让div中个对应按钮索引的div的className换成show
+        divs.eq($(this).index('button')).addClass('show');
+    });
+
+
+    // btns.click(function(){
+    //     $(this).addClass('active').siblings().removeClass('active');
+    //     divs.eq($(this).index()).addClass('show').siblings().removeClass('show');
+    // });
+
+
+
+</script>
+</body>
+</html>

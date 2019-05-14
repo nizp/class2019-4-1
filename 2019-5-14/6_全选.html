@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="all">全选</button>
+    <button id="no">不选</button>
+    <button id="reverse">反选</button>
+
+    <input type="checkbox" >
+    <input type="checkbox" >
+    <input type="checkbox" >
+    <input type="checkbox" >
+    <input type="checkbox" >
+    <input type="checkbox" >
+<script src="./jquery-1.11.3.js"></script>
+<script>
+
+    /*
+        prop 复选框使用
+
+        $('li').each(function(i,ele){
+            
+        })
+    */
+    all.onclick = function(){
+        $('input').prop('checked',true);
+    }
+    no.onclick = function(){
+        $('input').prop('checked',false);
+    }
+
+    reverse.onclick = function(){
+        $('input').each(function(i,ele){ //ele是原生对象
+            // console.log(ele)
+            //获取当前input的checked，返回布尔值
+            if( $(ele).prop('checked') ){
+                $(ele).prop('checked',false);
+            }else{
+                $(ele).prop('checked',true);
+            }
+        });
+    }
+
+
+    
+</script>
+</body>
+</html>
