@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    /*
+        创建一个事件(初始化)：
+            let ev = document.createEvent('HTMLEvents');
+            ev.init('上滚',false,false);
+
+        订阅
+        document.addEventListener('上滚',fn)
+
+        发布
+        document.dispatch(ev);
+
+        当某个条件成立的时候发布
+
+
+
+    */
+
+    // document.onclick = function(){
+    //     function fn(){
+    //         alert(1);
+    //     }
+    //     fn();
+    //     console.log('小明1');
+    //     console.log('小明2');
+    //     console.log('小红1');
+    //     console.log('小多1');
+
+    //     function fn(){
+    //         alert(2);
+    //     }
+    //     fn();
+    // } 
+    
+    // //小明
+    // document.addEventListener('click',function(){
+    //     console.log('小明1');
+    //     console.log('小明2');
+    //     function fn(){
+    //         alert(1);
+    //     }
+    //     fn();
+    // });
+
+    // // //小红
+    // document.addEventListener('click',function(){
+    //     console.log('小红1');
+    //     function fn(){
+    //         alert(2);
+    //     }
+    //     fn();
+    // });
+</script>
+</body>
+</html>

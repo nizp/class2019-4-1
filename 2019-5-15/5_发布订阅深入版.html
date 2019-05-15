@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        如何映射一个事件？
+
+        订阅
+        document.addEventListener('上滚',fn)
+        document.addEventListener('上滚',fn2)
+
+        订阅就是一个收集器，收集事件名和函数，当某个条件
+        成立的时候，批量执行函数
+
+        发布
+        document.dispatch(ev);
+
+
+        {
+            点击:[fn]
+        }
+
+        //看看这个ele下有没有区分事件的{}
+        //如果有那么就在刚才这个{}下继续添加事件以及函数
+        //没有就创建一个新的{}
+        ele.bindEvent  -> undefined || {}
+
+        第二次的时候ele.bindEvent已经为一个对象了
+        就不会走||，在以前的对象下添加事件
+        ele.bindEvent = {}
+
+
+        事件名不存在，不存在就创建一个事件和数组，进行添加函数
+        obj = {
+            
+        }
+
+        obj['点击'] -> undefined
+
+        obj = {
+            点击:[fn]
+        }
+
+
+        
+
+        obj = {
+            点击:[fn,fn2],
+            上移:[]
+        }
+
+        obj['点击']
+
+        // obj['上滚']
+
+
+        发布:
+            当某个条件成立的时候把事件名对应的数组取出来
+            循环一个一个执行    
+            [fn,fn2]
+
+            dispatch(obj,evName);
+
+
+        解除绑定:
+            removeEvent(obj,'click',fnName);
+
+            找到对应的元素的事件的指定函数，然后删除
+
+
+
+
+        
+
+    */    
+
+    // let obj = {} 
+
+    // obj.aaa = 10;
+    // obj['点击']  = [];
+    // obj['点击'].push('函数')
+
+    // console.log(obj)
+
+
+    function addEvent(ele,evName,fn){
+        //看看这个ele下有没有区分事件的{}
+        //如果有那么就在刚才这个{}下继续添加事件以及函数
+        //没有就创建一个新的{}
+        ele.bindEvent = ele.bindEvent || {};
+
+        /*
+            如果对象上已经有了绑定的事件名，那么就用
+            之前的事件名属性进行添加函数
+
+            如果没有，就创建一个事件名和对应数组
+        */
+        ele.bindEvent[evName] = ele.bindEvent[evName] || [];
+
+        //!ele.bindEvent[evName].some(e=>e===fn)
+        /*
+            fn是否为函数 && 数组中没有和fn一样的函数，才push传进来的函数
+        */
+        if(typeof fn === 'function' && !ele.bindEvent[evName].includes(fn)){
+            ele.bindEvent[evName].push(fn);
+        }
+    }
+
+
+    function dispatch(ele,evName){
+        /*
+            先看看这个元素上有没有绑定过传进来的事件
+            如果没有就return
+            如果有，抓出来循环一个一个执行
+        */
+        if(!ele.bindEvent[evName])return;
+
+        ele.bindEvent[evName].forEach(fn=>{
+            fn.call(ele);
+        });
+    }
+
+
+    function removeEvent(ele,evName,fn){
+        //先看看指定对象有没有绑定的事件名
+        //没有就return，有就循环数组删除
+        if(!ele.bindEvent[evName])return;
+
+        ele.bindEvent[evName] = ele.bindEvent[evName].filter(f=>f!==fn);
+    }
+
+    //订阅
+    addEvent(document,'点击',function(){
+        // alert(1);
+        console.log(this);
+    });
+
+    addEvent(document,'点击',fn);
+
+    function fn(){
+        alert(2);
+        removeEvent(document,'点击',fn);
+    }
+
+
+
+
+
+
+    document.onclick = function(){
+        //发布
+        dispatch(document,'点击');
+    }
+
+
+
+    console.dir(document);
+
+
+
+
+    // let arr = [];
+    // function addEvent(...arg){
+    //     /*
+    //         一个数组只能存储同一个事件的一个或多个函数
+    //         不能区分多个事件的函数。
+
+
+    //         {
+    //             '点击':[],
+    //             '上滚':[]
+    //         }
+    //     */
+    //     arr.push(arg[1]);
+    // }
+    // addEvent('点击',function(){});
+    // addEvent('上滚',function(){});
+    // addEvent('上滚',function(){});
+    // console.log(arr);
+
+</script>
+</body>
+</html>

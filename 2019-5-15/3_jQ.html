@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: red;
+    padding:5px;
+    border:1px solid #000;
+    position: absolute;
+    top:0;
+    left:0;
+}
+</style>
+</head>
+<body>
+    <div style="width:300px;position: relative">
+            <div id="box" ></div>
+    </div>
+<script src="./jquery-1.11.3.js"></script>
+<script>
+    /*
+        选择器:
+            $('#')
+            .
+            tagName
+            属性选择器 input[type="button"]
+            li:gt()
+            li:lt()
+            li:odd
+            li:even
+            li.eq(0)
+            li.get(0)
+
+        属性操作:
+            html()  html('<li></li>')
+            text()
+            val()
+            attr()
+            removeAttr()
+            prop
+            css()
+            index('设置范围')
+
+        DOM:
+            parent()
+            children
+            sibilings('设置范围')
+            $('<li></li>') 添加
+            append
+            prepend
+            remove
+
+        事件:
+            mouseover
+            mouseout
+            click
+            ....
+
+            on('事件名','事件源',function(){});
+            on('事件名',function(){});
+            off('click.aa')
+
+        
+
+    */   
+   
+    // $('#box').attr('index','0');
+    // $('#box').removeAttr('index');
+
+    // console.log($('#box').width());
+    // console.log($('#box').innerWidth());//$('#box')[0].clientWidth
+    // console.log($('#box').outerWidth());//offsetWidth
+
+    console.log($('#box').offset().top);//绝对位置
+    console.log($('#box').position().top)//相对父级的位置
+
+    console.log($(document).scrollTop());//滚动距离
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        bind(this,无限个参数)  
+            改变this指向，返回一个函数，函数才会执行
+
+        1.改变this
+        2.传参
+        3.如果是构造函数的话，this不需要被改变
+    */    
+
+    function fn(a,b,c){
+        this.a = a;
+       console.log(this);  
+    }
+
+
+    Function.prototype.bind = function(context,...arg){
+        //arg为剩余的参数集合为数组
+        let that = this;//函数实例
+        //bind返回的函数
+        function bound (...arg2){//arg2为bound的所有参数
+            //bound是不是this的构造函数，如果是，说明new了
+            //是构造函数this就不能变
+            if(this instanceof bound){
+                that.apply(this,[...arg,...arg2]);
+            }else{
+                 //让arg和arg2合并
+                that.apply(context,[...arg,...arg2]);//把数组放到apply的第二个参数上
+            }
+        }
+
+        //在new bound的时候，让bound的实例拥有fn原型上的方法
+        if(this.prototype){
+            bound.prototype = this.prototype;
+        }
+
+        return bound;
+    }
+
+    fn.prototype.aaa = 555;
+
+    // fn.bind = function(){}
+
+
+    let f = fn.bind(document,1,2);
+
+
+    
+    console.log(new f().aaa);
+
+
+
+
+    // console.log(new f(3).aaa);
+    // console.log(f);
+
+
+
+
+    //第一个需求
+    // Function.prototype.bind = function(context){
+    //     let that = this;//函数实例
+    //     //bind返回的函数
+    //     function bound (){
+    //         that.apply(context);
+    //     }
+    //     return bound;
+    // }
+
+    //第二个需求
+    // Function.prototype.bind = function(context,...arg){
+    //     //arg为剩余的参数集合为数组
+    //     let that = this;//函数实例
+    //     //bind返回的函数
+    //     function bound (...arg2){//arg2为bound的所有参数
+    //         //让arg和arg2合并
+    //         that.apply(context,[...arg,...arg2]);//把数组放到apply的第二个参数上
+    //     }
+    //     return bound;
+    // }
+
+
+</script>
+</body>
+</html>

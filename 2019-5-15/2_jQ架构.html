@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+
+    // function f(a){
+    //     a();
+    // }
+
+    // f(function(){});
+
+
+    // var undefined = 10;
+    // console.log(undefined);//10
+
+    /*
+        1.实现一个功能
+        2.解决命名冲突
+        3.挂全局，让外界访问
+        4.无new化操作
+        5.链式调用，返回this
+    */
+    
+
+    //当前代码是哪个环境
+    (function(global,factory){
+        factory(global);
+    })(this,function(global,noGlobal){
+        function jQuery (selector){
+            return new fn(selector);
+        }
+        let init = jQuery.prototype = {
+            constructor : jQuery,
+            addClass:function(...arg){
+                for(let i=0;i<this.length;i++){
+                    this[i].classList.add(arg);
+                }
+                return this;
+            }
+        }
+
+        /*
+            {0:#box,1:#box2,length:2}
+        */
+
+        let fn = init.fn = function(selector){
+            let ele = document.querySelectorAll(selector);
+            ele.forEach((ele,i)=> this[i] = ele);
+            this.length = ele.length;
+        }
+
+
+        fn.prototype = init ;
+
+
+
+        global.$ = jQuery;
+    });
+    //typeof window !== 'undefined'?window:this
+
+    
+    function jQuery(){
+        console.log(1);
+    }
+
+    // let box = new $('#box');
+    let box = $('#box');
+    console.log(box);
+    box.addClass('active').addClass('show');
+
+
+
+
+</script>
+</body>
+</html>
