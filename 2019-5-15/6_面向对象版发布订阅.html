@@ -15,7 +15,7 @@
             }
         }
         dispatch(obj,evName){
-            if(!obj.bindEvent[evName])return;
+            if(obj.bindEvent && !obj.bindEvent[evName])return;
             obj.bindEvent[evName].forEach(fn=>{
                 fn.call(obj);
             });
