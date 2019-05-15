@@ -6,6 +6,27 @@
 </head>
 <body>
 <script>
+    /*
+        document.bindEvent = {'点击':[]}
+
+
+
+        document.bindEvent['点击']
+
+       obj =  {
+            bindEvent:{
+                点击:[]
+            }
+        }
+    */
+
+    let obj =  {
+        // bindEvent:{
+        //     点击:[]
+        // }
+    }
+
+    // console.log(obj.bindEvent['点击']);
     class Pubsub {
         add(obj,evName,fn){
             obj.bindEvent = obj.bindEvent || {};
@@ -15,6 +36,7 @@
             }
         }
         dispatch(obj,evName){
+            //如果元素身上有bindEvent 并且 bindEvent也有某个事件
             if(obj.bindEvent && !obj.bindEvent[evName])return;
             obj.bindEvent[evName].forEach(fn=>{
                 fn.call(obj);

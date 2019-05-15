@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">新建文件夹</button>
+    <ul id="ul">
+        <!-- <li><input type="text" value="新建文件夹"/></li> -->
+    </ul>
+<script>
+    let arr = [
+        {
+            title:'新建文件夹',
+            id:0
+        },
+        {
+            title:'我的音乐(1)',
+            id:1
+        },
+        {
+            title:'我的视频',
+            id:2
+        }
+    ];
+
+    //<li><input type="text" value="新建文件夹"/></li>
+    
+    function render(arr){
+        let html = '';
+        arr.forEach(e=>html+=`<li><input type="text" value="${e.title}"/></li>`)
+        ul.innerHTML = html;
+    }
+
+    btn.onclick = function(){
+
+        let li = document.createElement('li');
+        let input = document.createElement('input');
+        input.value = '新建文件夹';
+
+        li.append(input);
+        ul.append(li);
+        input.select();
+
+        input.onblur = function(){
+            let v = this.value;
+            //判断一下，是否重命名了
+            let cm = arr.some(e=>e.title === v);
+            if(!cm){
+                arr.push({
+                    title:v,
+                    id:+new Date
+                });
+            }else{
+                // console.log(1)
+                // li.remove();
+                let num = 0;
+                let v2 = v;
+                //如果重名就循环数组，判断是否重名
+                //一直循环直到不重名为止
+                while(cm){
+                    //新建文件 新建文件(1)(2)
+                    //每次循环的时候都把括号给清掉
+                    v2 = v2.replace(/\(\d+\)/,'') + '('+ (++num) +')';
+                    cm = arr.some(e=>e.title === v2);
+                }
+                arr.push({
+                    title:v2,
+                    id:+new Date
+                });
+
+            }
+            render(arr);
+        }
+
+
+
+
+        // arr.push({
+        //     title:'新建文件夹',
+        //     id:+new Date
+        // });
+        // render(arr);
+    }
+
+    render(arr);
+
+
+
+
+</script>
+</body>
+</html>

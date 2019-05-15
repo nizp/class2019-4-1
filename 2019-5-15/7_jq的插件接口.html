@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" style="height:20px;width:100px;border:1px solid #000">
+        u2198huxe32189xe
+        u2198huxe32189xe
+        u2198huxe32189xe
+        u2198huxe32189xe
+        u2198huxe32189xe
+        u2198huxe32189xe
+        u2198huxe32189xe
+        u2198huxe32189xe
+    </div>
+<script src="./jquery-1.11.3.js"></script>
+<script>
+    /*
+        工具方法:$.  
+            $.ajax()
+            $.each()
+            $.isArray()
+
+        不只JQ对象能使用，还可以处理一些原生的数据
+
+        工具方法扩展:
+            $.extend({})  
+
+
+        功能方法: $('#box').css();
+            只能是jQ对象才能使用
+
+            $.fn.extend({})
+
+
+        $.extend();
+            1.浅拷贝 -> Object.assign()
+            2.深拷贝 -> deepClone
+            3.插件接口
+
+
+    */
+
+    let arr = [1,2,3,4,[5]];
+
+    // let arr2 = $.extend([],arr); //浅拷贝
+
+    let arr2 = $.extend(true,[],arr); 
+
+    arr2[4].push(5);
+
+    // console.log(arr2);
+
+    // console.log($.isArray(arr));
+
+    //去除尾空格 trimLeft
+    // $.extend({
+    //     trimLast:function(str){
+    //         return str.replace(/\s+$/g,'');
+    //     }
+    // });
+
+    // $.extend({
+    //     trimLast:function(str){
+    //         return str.replace(/\s+$/g,'呵呵');
+    //     }
+    // });
+
+    // console.log($.trimLast('   哈哈哈   '));
+
+    $.fn.extend({
+        scrollHeight:function(){
+            return this[0].scrollHeight;
+        }
+    });
+
+
+    // console.log($('#box').scrollHeight());
+    console.log($('#box')[0].scrollHeight);
+
+
+
+</script>
+</body>
+</html>

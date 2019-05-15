@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+        <div id="box" style="height:20px;width:100px;border:1px solid #000">
+            132132321
+        </div>
+<script src="./jquery-1.11.3.js"></script>
+<script>
+    /*
+        $('#box').animate({})  所有的运动都是animate二次封装的
+
+        显示隐藏
+        show()  block
+        hide()  none
+        toggle
+
+        改变高度
+        slideDown
+        slideUp
+        slideToggle
+
+        淡入淡出
+        fadeIn
+        fadeOut
+        fadeToggle
+
+
+
+    */
+
+    // $('#box').animate({
+    //     width:100,
+    //     height:200,
+    //     fontSize:50
+    // },2000,function(){
+    //     console.log('玩完');
+    // });
+
+    $(document).click(function(){
+        // $('#box').hide(1000);
+        // $('#box').slideUp(200);
+        $('#box').fadeOut(200);
+
+    });
+</script>
+</body>
+</html>

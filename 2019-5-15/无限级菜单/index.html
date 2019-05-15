@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			html {
+
+				width: 100%;
+				height: 100%;
+			}
+			body{
+				margin: 0px;
+				width: 100%;
+				height: 100%;
+			}
+			.main {
+				width: 100%;
+				height: 100%;
+				background: url(./image/bg.png) no-repeat;
+				background-size: 100% 100%;
+				overflow: hidden;
+			}
+			.logo {
+				display: block;
+				width: 200px;
+				height: 55px;
+				
+				margin: 20px auto;
+			}
+			.tree{
+				height:100%;
+				overflow: auto;
+			}
+			ul{
+				list-style: none;
+				font-size: 22px;
+				color: #8c949c;
+				font-weight: bold;
+				width:100%;
+				/* height:100%; */
+			}
+
+			ul li {
+				position: relative;
+				padding-left: 10px;
+				/* height:32px; */
+				overflow: hidden;
+			}
+
+			ul li div{
+				height: 98%;
+				/* width: 1px; */
+				border-left: 1px dotted #ccc;
+				/* position: absolute; */
+				/* left: 34px; */
+				/* top: 18px; */
+				/* margin-left :4px; */
+				line-height:32px;
+			}
+
+			ul ul{
+				display: none;
+			}
+
+			ul li span {
+				display: block;
+				line-height: 32px;
+				padding-left: 15px;
+				background: url(./image/icon.png) no-repeat left 500px;
+				width:20px;
+				height:20px;
+				float : left;
+			}
+			
+			ul li span.add {
+				background-position: 0px -32px;
+			}
+			ul li span.line {
+				background-position: 0px 11px;
+			}
+
+
+			.tree {
+				margin-left: 300px;
+			}
+
+		</style>
+<script>
+var arr = [
+	{
+		title : "第一级菜单",
+		child : [
+			{title:"第二集菜单"},
+			{title:"第二集菜单",
+			child:[
+					{title:"第三集菜单"},
+					{title:"第三集菜单",
+					child:[
+						{title:"第四集菜单"},
+						{title:"第四集菜单"},
+						{title:"第四集菜单",child:[
+							{title:"第五季菜单"}
+						]}
+					]
+					},
+					{title:"第三集菜单"}
+				]
+			},
+			{
+				title:"第二集菜单",
+				child:[
+					{title:"第三集菜单"},
+					{title:"第三集菜单"}
+				]
+			}
+		]
+	},
+	{
+		title : "第一级菜单",
+		child : [
+			{title:"第二集菜单"},
+			{title:"第二集菜单",
+			child:[
+					{title:"第三集菜单"},
+					{title:"第三集菜单",
+					child:[
+						{title:"第四集菜单"},
+						{title:"第四集菜单"},
+						{title:"第四集菜单"}
+					]
+					},
+					{title:"第三集菜单"}
+				]
+			},
+			{
+				title:"第二集菜单",
+				child:[
+					{title:"第三集菜单"},
+					{title:"第三集菜单"}
+				]
+			}
+		]
+	},
+	{
+		title:"第一集菜单",
+		child : [
+			{title:"第二集菜单"},
+			{title:"第二集菜单",
+			
+			},
+			{
+				title:"第二集菜单",
+				child:[
+					{title:"第三集菜单"},
+					{title:"第三集菜单"}
+				]
+			}
+		] 
+	}
+];
+	
+</script>
+	</head>
+	<body>
+		<div class="main">
+			<a href="#" class="logo"></a>
+			<div class="tree">
+				<ul id="oUl">
+					<!-- <li>
+						<span class="add"></span>
+						<div>第一级菜单</div>
+						<ul>
+							<li>
+								<span class="line"></span>
+								<div>第二级菜单</div>
+							</li>
+							<li>
+								<span class="line"></span>
+								<div>第二级菜单</div>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<span class="line"></span>
+						<div>第一级菜单</div>
+					</li>
+					<li>
+						<span class="line"></span>
+						<div>第一级菜单</div>
+					</li> -->
+				</ul>
+			</div>
+
+		</div>
+	</body>
+<script>
+	/*
+		add  +
+		line -
+
+		[{title,child}]
+		有child就有子级
+
+		<li>
+			<span class="add"></span>
+			<div>第一级菜单</div>
+			<ul>
+				<li>
+					<span class="line"></span>
+					<div>第二级菜单</div>
+				</li>
+			</ul>
+		</li>
+	*/
+	console.log(arr);
+
+	function render(arr){
+		//li
+		let html = '';
+		//遍历数组生成li
+		arr.forEach(item=>{
+			//数组中的每项是否有child
+			let ischild = item.child?true:false; 
+			//如果有child，span的类名就为add否则''
+			html += `
+				<li>
+					<span class="${ischild?'add':''}"></span>
+					<div>${item.title}</div>
+				`;
+			if(ischild){
+				//如果有child，就又写ul，ul下生成一堆li
+				//把子级数组传到render中
+				html += `<ul>${render(item.child)}</ul>`;
+			}
+		});
+
+		html += '</li>';
+		return html;
+	}
+
+	oUl.innerHTML = render(arr);
+
+	//点击div
+
+	oUl.onclick = function(ev){
+		if(ev.target.tagName === 'DIV'){
+			let next = ev.target.nextElementSibling;
+			let prev = ev.target.previousElementSibling;
+			if(next){
+				//如果add是true就变line，否则add
+				if(prev.classList.contains('add')){
+
+					// for(let i=0;i<uls.length;i++){
+					// 	uls[i].style.display = 'none';
+					// 	uls[i].parentNode.children[0].className = 'add';
+					// }
+
+					/*
+						点击的时候把隔壁的li中的ul关闭
+						通过当前的div找到li的父级ul
+						通过ul的children找到了包括
+						父级在内的li们
+
+						然后把div的父级(li)排除，
+						只剩下兄弟级的li
+					*/
+
+
+					next.style.display = 'block';
+					prev.classList.replace('add','line');
+
+					//li
+					let parent = ev.target.parentNode;
+					//通过div父级父级找到ul
+					let ul = ev.target.parentNode.parentNode;
+					//包括父级在内的所有li
+					let lis = ul.children;
+					//循环包括父级在内的所有li
+					// console.log(lis)
+					for(let i=0;i<lis.length;i++){
+						//把父级排除，就是兄弟级
+						if(lis[i] != parent){
+							// console.log(lis[i])
+							//关闭兄弟级下的ul
+							let uls = lis[i].getElementsByTagName('ul');
+							for(let j=0;j<uls.length;j++){
+								uls[j].style.display = 'none';
+								uls[j].parentNode.children[0].className = 'add';
+							}
+						}
+					}
+
+					/*
+						打开当前，收起兄弟
+					*/
+
+				}else{
+					next.style.display = 'none';
+					prev.classList.replace('line','add');
+				}
+			}
+		}
+	}
+
+
+
+	
+
+
+</script>
+</html>

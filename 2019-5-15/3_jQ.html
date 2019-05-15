@@ -10,7 +10,7 @@
     background: red;
     padding:5px;
     border:1px solid #000;
-    position: absolute;
+    _position: absolute;
     top:0;
     left:0;
 }
@@ -18,8 +18,10 @@
 </head>
 <body>
     <div style="width:300px;position: relative">
-            <div id="box" ></div>
+        <div id="box" ></div>
+       
     </div>
+    <button id="btn">点击</button>
 <script src="./jquery-1.11.3.js"></script>
 <script>
     /*
@@ -63,6 +65,12 @@
             on('事件名','事件源',function(){});
             on('事件名',function(){});
             off('click.aa')
+            trigger()
+
+        **  delegate 的原理
+        事件委托 ——>  $('ul').on('click','li',function(){})
+
+
 
         
 
@@ -75,10 +83,20 @@
     // console.log($('#box').innerWidth());//$('#box')[0].clientWidth
     // console.log($('#box').outerWidth());//offsetWidth
 
-    console.log($('#box').offset().top);//绝对位置
-    console.log($('#box').position().top)//相对父级的位置
+    // console.log($('#box').offset().top);//绝对位置
+    // console.log($('#box').position().top)//相对父级的位置
 
-    console.log($(document).scrollTop());//滚动距离
+    // console.log($(document).scrollTop());//滚动距离
+
+
+    $('#btn').on('click',function(){
+        alert(1);
+    });
+
+    //在移入box的时候，让btn的点击事件调用
+    $('#box').mouseover(function(){
+        $('#btn').trigger('click');
+    });
 </script>
 </body>
 </html>
