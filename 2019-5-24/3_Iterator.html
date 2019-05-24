@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+    </ul>
+<script>
+    /*
+        Iterator ,遍历器，只要数据中有Symbol.iterator就能使用for of
+    */  
+    
+    let obj = {
+        name:'林同贺',
+        age:81
+    }
+
+    /*
+        遍历接口返回一个对象，对象中有一个next方法
+        这个方法必须return对象，在这个对象下有2个属性
+        value，done
+
+        value就是for of中的attr
+        done:为true的时候不遍历
+        done:为false的时候遍历
+    */
+    obj[Symbol.iterator] = function(){
+        let keys = Object.keys(obj);//['name','age']
+        let len = keys.length; //2
+        let i = 0;
+        return {
+            next(){
+                if(i<len){
+                    return { value:{key:keys[i],val:obj[keys[i++]]}, done: false };
+                }else{
+                    return {done: true };
+                }   
+            }
+        }
+    }
+
+    let iter = obj[Symbol.iterator]();
+
+    console.log(iter);
+
+    console.log(iter.next());
+    console.log(iter.next());
+    console.log(iter.next());
+
+    // for(let attr of obj){
+    //     console.log(attr);
+    // }
+
+
+    const lis = document.getElementsByTagName('li');
+
+    // for(let ele of lis){
+    //     ele.onclick = function(){
+    //         console.log(1);
+    //     }
+    // }
+
+    // console.dir(lis);
+
+
+
+
+    Object.prototype[Symbol.iterator] = function(){
+        let keys = Object.keys(this);
+        let len = keys.length;
+        let i = 0;
+        let that = this;
+        return {
+            next(){
+                if(i < len){
+                    return {done:false,value:{key:keys[i],val:that[keys[i++]]}}
+                }else{
+                    return {done:true}
+                }
+            }
+        }
+    }
+
+
+    for(let {key,val} of obj){
+        console.log(key,val);
+    }
+    
+</script>
+</body>
+</html>

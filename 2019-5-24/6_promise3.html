@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        怎么用？
+            只要是嵌套多个回调函数就可以使用promise
+            进行异步请求的时候使用 fetch
+            
+        let p = new Promise((resolve,reject)=>{
+            resolve();
+        })
+
+        p.then(()=>{
+            执行这句话，resolve一定调用了
+        });
+    */    
+
+    let a = 10;
+
+    // setTimeout(() => {
+    //     a++;
+    //     console.log(a);           
+    // },0);
+
+
+    //理解起来感觉类似于闭包，需要自己去理解
+    // let p = new Promise((resolve,reject)=>{
+    //     setTimeout(() => {
+    //         a++;
+    //         resolve(a);           
+    //     },3000);
+    // });
+    // p.then((val)=>{
+    //     console.log(val);
+    //     a++;
+    //     console.log(a);
+    // });
+
+    /*
+        setTimeout(function(){
+
+        },1000);
+
+        fn(function(){
+            
+        })
+
+        function fn(cb){
+            cb();
+        }
+    */
+
+    // console.log(a); //让a++执行完，才执行最后的a
+
+
+
+    let p = new Promise((resolve,reject)=>{
+        setTimeout(() => {
+            a++;
+            reject(a);           
+        },3000);
+    });
+    console.log(p);
+
+
+
+    p.then((val)=>{
+        console.log(val);
+    }).catch((val2)=>{
+        console.log(val2);
+    }).finally(()=>{
+        console.log('不管成功还是失败，异步代码已经执行完，会进这个函数内');
+    });
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

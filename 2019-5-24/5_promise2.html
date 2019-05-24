@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: red;
+    position: absolute;
+    top:0;
+    left:0;
+}
+</style>
+</head>
+<body>
+    <div id="box">1234</div>
+<script src="./tools/tools_2.0.js"></script>
+<script>
+    /*
+        在没有promise的时候一样能写代码，promise只是能够让代码的可取性更强，使用起来更方便
+
+        fetch('./data.json') //发起请求
+
+        .then(e=>e.json()) // 接收返回信息
+
+        .then(data=>{   //把数据转成对象
+            console.log(data);
+        })
+
+    */
+    // function fn(callbak){
+    //     //等同于1秒钟之后，数据a返回了
+    //     setTimeout(() => {
+    //         window.a = 10;
+    //         callbak(a);
+    //     },1000);
+    // }
+
+    // fn(function(a){
+    //     console.log(a);
+    // });
+
+
+
+
+
+
+    let {startMove,PromiseStart} = tools;
+
+    //回调地狱
+
+    document.onclick = function(){
+        let p = PromiseStart({
+            obj:box,
+            json:{
+                width:200
+            },
+            durtion:500,
+        });
+
+        p.then(()=>{
+            return PromiseStart({ obj:box,
+                json:{
+                    height:500
+                },
+                durtion:500,})
+        }).then(()=>{
+            console.log('完');
+        });
+    }
+
+    // document.onclick = function(){
+    //     startMove({
+    //         obj:box,
+    //         json:{
+    //             width:200
+    //         },
+    //         durtion:500,
+    //         cb(){
+    //             startMove({
+    //                 obj:box,
+    //                 json:{
+    //                     height:500
+    //                 },
+    //                 durtion:200,
+    //                 cb(){
+    //                     startMove({
+    //                         obj:box,
+    //                         json:{
+    //                             left:200
+    //                         },
+    //                         durtion:200
+    //                     });
+    //                 }
+    //             });
+    //         }
+    //     });
+    // }
+
+
+
+
+    
+
+    
+
+   
+
+
+    
+    
+</script>
+</body>
+</html>

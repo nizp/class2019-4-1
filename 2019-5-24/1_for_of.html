@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        for of进行循环
+
+        只要数据拥有Symbol.iterator就能够使用for of
+
+    */  
+    let arr = [1,2,3,4];
+
+    // console.dir(arr);
+        
+    // for(let val of arr){
+    //     console.log(val);
+    // }
+    // for(let [key,val] of arr.entries()){
+    //     // console.log(key,val);
+    // }
+
+    // let key = arr.values();
+    // console.log(key.next().value); //1
+    // console.log(key.next().value);//2
+    // console.log(key.next().value);//3
+    // console.log(key.next().value);//4
+
+
+
+    /*
+        对象默认不能进行for of循环，因为没有遍历器。
+        以下代码会报错
+    */
+    let obj = {
+        name:'林同贺',
+        age:81
+    }
+    console.dir(obj)
+    // for(let attr of obj){
+    //     console.log(attr);
+    // }
+
+    /*
+        ES6 提供了新的数据结构 Set。它类似于数组，
+        但是成员的值都是唯一的，没有重复的值
+
+        size就等同于length
+
+        let arr = [1,2,3,4]
+        let arr2 = [2,3,4,5,6]
+    */
+    // let s = new Set([1,2,3,4,5,5]);
+    // s.add('1');
+    // s.add('1');
+    // console.log([...s]); //set{'1'}
+    // s.add([1,2,3,4,5,5])
+    // console.dir(s);
+
+    // console.log(s.has('5'));
+
+    let arr2 = [[1,2,3,4],[2,3,4,5,6]];
+
+    // let ss = new Set(arr2);
+
+    let arr3 = [];
+    /*
+        看B数组中有没有包含A数组成员的，不包含就push
+    */
+    arr2.forEach((e,i)=>{
+        let s = new Set(arr3);
+        e.forEach(j=>{
+            if(!s.has(j)){
+                arr3.push(j);
+            }
+        });
+    });
+    console.log(arr3);
+
+   
+    // for(let attr of ss){
+    //     console.log(attr.has(5))
+    // }
+
+    // console.log(ss);
+
+   
+   
+</script>
+</body>
+</html>

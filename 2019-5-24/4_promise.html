@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        从上往下依次执行的编程方式叫同步编程
+
+        代码是某个条件(事务)成立，才执行的，异步编程.
+
+        js为单线程 --- 生下来就那么设计的
+
+        执行顺序:
+            入栈 -> 主线程执行完成之后 -> 走队列 -> 微任务 -> 宏任务
+
+
+        promise解决了，让异步编程，变成同步编程，也就是让代码从上往下阅读即可。
+
+        resolve 成功
+        reject  失败
+        let p = new Promise((resolve,reject)=>{
+            resolve(1);
+            reject(2);
+        });
+
+        p.then((val)=>{
+            console.log(val)
+        },(val2)=>{
+            console.log(val2)
+        })
+
+        Promise为微任务
+
+
+
+    */
+    let a = 10;
+
+    let p = new Promise((resolve,reject)=>{
+        setTimeout(function(){
+            a ++;
+            resolve(a);
+        },2000);
+    });
+
+    /*
+        then里面的代码是默认是同步的
+    */
+    p.then((val)=>{
+        console.log(val);
+        a++;
+        console.log(a);
+    });
+
+    // console.log(a);
+
+
+
+
+
+    // setTimeout(()=>{
+    //     a ++;
+    //     console.log(a);
+    // },20);
+    // setTimeout(()=>{
+    //     a ++;
+    //     console.log(a);
+    // },0);
+   
+    // console.log(a);
+</script>
+</body>
+</html>

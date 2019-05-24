@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        当所有的图片都加载成功，才执行别的代码
+
+    */ 
+   
+    // let p1 = new Promise((resolve,reject)=>{
+    //     let img = new Image;
+    //     img.src = './img/1.png';
+    //     img.onload = function(){
+    //         resolve('./img/1.png');
+    //     }
+    //     img.onerror = function(){
+    //         reject('p1图片是坏的');
+    //     }
+    // });
+
+    // let p2 = new Promise((resolve,reject)=>{
+    //     let img = new Image;
+    //     img.src = './img/2.png';
+    //     img.onload = function(){
+    //         resolve('./img/2.png');
+    //     }
+    //     img.onerror = function(){
+    //         reject('p2图片是坏的');
+    //     }
+    // });
+    // let p3 = new Promise((resolve,reject)=>{
+    //     let img = new Image;
+    //     img.src = './img/3.png';
+    //     img.onload = function(){
+    //         resolve('./img/3.png');
+    //     }
+    //     img.onerror = function(){
+    //         reject('p3图片是坏的');
+    //     }
+    // });
+
+
+    function proPic(url){
+        return new Promise((resolve,reject)=>{
+            let img = new Image;
+            img.src = url;
+            img.onload = function(){
+                resolve(url);
+            }
+            img.onerror = function(){
+                reject(url+'图片是坏的');
+            }
+        });
+    }
+
+
+    /*
+        A: 拿到用户的级别   20秒
+
+        B: 拿到用户的电话号码  10秒
+
+        C: A + B  20秒
+    */
+
+    let p1 = proPic('img/1.png');
+    let p2 = proPic('img/2.png');
+    let p3 = proPic('img/3.png');
+
+
+    let all = Promise.all([p1,p2,p3]);
+
+    //当数组中的3个promise实例都成功，all.then才会走fulfilled
+    //只要有一个失败，all.then就走rejected
+    all.then((val)=>{
+        console.log(val);
+    }).catch((val)=>{
+        console.log(val);
+    })
+
+
+
+    // p1.then((val)=>{
+    //     console.log(val);
+    // }).catch((error)=>{
+    //     console.log(error);
+    // })
+
+
+
+
+</script>
+</body>
+</html>

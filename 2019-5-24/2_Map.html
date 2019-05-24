@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    /*
+        Map
+    */   
+   
+    // console.log(box.toString());
+    // let o = {};
+    // let ele = box;
+    // o[ele] = '哈哈';
+    // console.log(o['[object HTMLDivElement]']); 
+
+    // let m = new Map();
+    // m.set(ele,'哈哈');
+    // console.log(m.get(ele));
+
+
+    //把数组转成map对象
+    // const items = [
+    //     ['name', '张三'],
+    //     ['title', 'Author']
+    // ];
+
+    // const map = new Map();
+
+    // items.forEach(([key, value]) => map.set(key, value));
+
+    // // console.log(map.get('name'));
+
+    // console.log(map)
+
+    /*
+        写出一个方法join([1,2,3,4],[2,3,5,6])找出交集 //[2,3]
+    */
+    
+    function join(a,b){
+        let s = new Set(a);
+        return b.filter(e=>s.has(e));
+    }
+    console.log(join([1,2,3,4],[2,3,5,6])); //[2,3]
+
+
+
+
+
+</script>
+</body>
+</html>
