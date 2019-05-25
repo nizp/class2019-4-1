@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // function* fn(){
+    //     console.log(0);
+    //     yield 'hello';
+    //     console.log(1);
+    //     console.log(2);
+    //     console.log(3);
+
+
+    //     yield 'world';
+    //     return 666;
+    // }
+    // let hw = fn();
+    
+    // console.log(hw.next()); //{value:'hello',done:flase}
+    // console.log(hw.next());
+    // console.log(hw.next());
+    // console.log(hw.next());
+
+
+
+
+
+
+    // function* fn(){
+    //     console.log(111);
+    // }
+    // let f = fn();
+
+    // setTimeout(()=>{
+    //     f.next();
+    // },1000)
+
+
+
+    /*
+        {value:5,done:false}
+    */
+    // var arr = [1, [[2, 3], 4], [5, 6]];
+
+    // function * flat(a) {
+    //     var length = a.length; //数组的length
+
+    //     for (var i = 0; i < length; i++) {
+    //         var item = a[i]; //数组的每一项
+    //         if (typeof item !== 'number') {
+    //             yield *flat(item);
+    //         } else {
+    //             yield item;
+    //         }
+    //     }
+    // };
+
+    // for (var f of flat(arr)) {
+    //     console.log(f);
+    // }
+
+
+    // function*fn(){
+    //     yield 1;
+    //     yield 2;
+    //     yield 3;
+    //     return 4;
+    // }
+    // let t = fn();
+
+    // for(let attr of t){
+    //     console.log(attr);
+    // }
+
+    // console.log([...t]);
+
+
+    /*
+        yield做了2件事
+            1.给value设置值  {value:0,done:false}
+            2.给reset返回了一个undefined
+    */
+//     function* f() {
+//         for(var i = 0; true; i++) {
+//             var reset = yield i;//1
+//             console.log(reset); //undefined,true
+//             if(reset) { 
+//                 i = -1; 
+//             }
+//             //0++
+//         }
+//     }
+
+// var g = f();
+
+// console.log(g.next()) // { value: 0, done: false }
+// console.log(g.next()) // { value: 1, done: false }
+// console.log(g.next(true)) // { value: 0, done: false }
+// console.log(g.next());
+
+
+
+// function* foo(x) {
+//   var y = 2 * (yield (x + 1)); //value:6 y=2 * undefined = NaN
+//   var z = yield (y / 3);
+//     // console.log(z);
+//   return (x + y + z);
+// }
+
+// var a = foo(5);
+
+// console.log(a.next()); //value:6, y = 2 * undefined = NaN
+// console.log(a.next()); //vlaue:NaN z = undefined
+// console.log(a.next()); //5 + NaN + undefined
+
+// var b = foo(5);
+// console.log(b.next()); //value:6, y = 2 * undefined = NaN
+// console.log(b.next(12)); //value:8 z = undefined  y = 24
+// console.log(b.next(13));//5+24+13=42
+
+
+// function* dataConsumer() {
+//   console.log('Started');
+//   console.log(`1. ${yield}`); //执行了yield之后就结束了
+//   console.log(`2. ${yield}`);
+//   return 'result';
+// }
+// let genObj = dataConsumer();
+// genObj.next();
+// genObj.next('a');
+// console.log(genObj.next('b'))
+
+let a = 10;
+
+
+// function * fn(){
+//     console.log(111111);
+//     let aaa = (yield setTimeout(function(){
+//             a ++;
+//             f.next(a);
+//         },2000));
+//     console.log(aaa);
+//     a++;
+//     console.log(a);
+// }
+
+// let f = fn();
+// f.next();//为了让138-139行的代码执行
+
+
+
+// function * fn(){
+//     console.log(111111);
+//     let aaa = (yield ff().then((a)=>{
+//         f.next(a);
+//     }));
+//     console.log(aaa);
+//     a++;
+//     console.log(a);
+// }
+
+// let f = fn();
+// f.next();
+
+//把异步编程变成了同步编程
+// async function fn(){
+//     console.log(1);
+//     let aaa = await ff();
+//     console.log(aaa);
+//     a++;
+//     console.log(a);
+// }
+
+// fn();
+
+
+
+function ff(){
+    return new Promise((resolve)=>{
+        setTimeout(function(){
+            a ++;
+            resolve(a);
+        },2000)
+    });
+}
+
+
+
+
+
+
+</script>
+</body>
+</html>

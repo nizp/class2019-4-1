@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        Promise.resolve('foo')
+        // 等价于
+        new Promise(resolve => resolve('foo'))
+
+        console.log(Promise.resolve())
+
+        new Promise(resolve => resolve())
+
+        then方法一定是在Promise对象下的。
+        如果说then有return， 如果return后是promise对象
+        那么再then，是基于return后这个promise对象的
+        如果return后并不是promise对象，那么promise对象
+        往上找，
+        如果下面还有then,成功的结果为上面then中return的值
+
+
+        注意:
+            then中的return不能返回Promise实例，不然会报错(死循环)
+    */
+
+   
+
+    // Promise.resolve()
+    // .then(() => {
+    //     console.log('a');
+    //     // throw new Error('error');
+    //     return new Error('error');
+    // })
+    // .then((res)=>{
+    //     console.log('b');
+    //     console.log('then:',res);
+    // })
+    // .catch((err) =>{
+    //     console.log('c');
+    //     console.log('catch:',err);
+    // });
+
+
+
+    // const promise = Promise.resolve()
+    
+    // .then(()=>{
+    //     return promise;
+    // });
+
+    // promise.catch(console.error);
+
+
+    /*
+        如果说then中传入的值为非函数，那么会穿透
+        then最后的结果是上一个promise成功的结果
+    */
+    // Promise.resolve(1)
+    // .then(()=>Promise.resolve(3))
+    // .then(2)
+    // .then(Promise.resolve(5))
+    // .then(Promise.resolve(6))
+    // .then((res)=>{
+    //     console.log(res);
+    // });
+
+
+
+    // Promise.resolve()
+    // .then(function success(res){
+    //     throw new Error('error');
+    // },function faill(e){
+    //     console.error('fail1:',e);
+    // })
+    // .catch(function fail2(e){
+    //     console.error('fail2',e);
+    // })
+
+
+    /*
+        在then中的为微任务
+    */
+    // const promise = new Promise((resolve, reject) => {
+    //     console.log(1); //主线程
+    //     resolve();
+    //     console.log(2);//主线程
+    // });
+
+    // promise.then(() => {
+    //     console.log(3); //微任务
+    // });
+
+    // console.log(4);//主线程
+
+
+    // const promise = new Promise((resolve, reject) => {
+    //     resolve('success1');
+    //     reject('error');
+    //     resolve('success2');
+    // });
+    // promise
+    // .then((res) => {
+    //     console.log('then: ', res);//success1
+    // })
+    // .catch((err) => {
+    //     console.log('catch: ', err);
+    // });
+
+
+   
+    // Promise.resolve(1)
+    // .then((res) => {
+    //     console.log(res);//1
+    //     return 2;
+    // })
+    // .catch((err) => {
+    //     return 3;
+    // })
+    // .then((res) => {
+    //     console.log(res);//2
+    // });
+
+
+    /*
+        js是单线程，会一个函数一个函数执行，所以最后一个时间结果，比上一个要略多。
+    */
+    // const promise = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         console.log('once'); //once
+    //         resolve('success');
+    //     }, 1000);
+    // });
+
+    // const start = Date.now();//打开页面的时间
+
+    // promise.then((res) => {
+    //     console.log(res, Date.now() - start); //1秒多
+    // });
+
+    // promise.then((res) => {
+    //     console.log(res, Date.now() - start);//success 1秒多
+    // });
+
+
+    /*
+        promise的返回值，能够查看当前promise的状态
+    */
+    const promise1 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log(1);
+            resolve('success');
+        }, 1000);
+    });
+    const promise2 = promise1.then(() => {
+        // throw new Error('error!!!'); //报错
+        /*
+           return new Promise()
+
+            如果没有return，then中的函数返回值还是基于第一个promise对象
+
+            状态值为undefined
+        */
+    });
+    // console.log('promise1', promise1);//promise对象 pending
+    // console.log('promise2', promise2);//promise对象 pending
+    setTimeout(() => {
+        // console.log(2);
+        console.log('promise1', promise1);//promise对象 resolved
+        console.log('promise2', promise2);//promise对象 resolved
+    }, 2000);
+
+
+
+
+    
+    
+
+
+
+</script>
+</body>
+</html>
