@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    
+    function * fn(){
+        yield 1;
+        yield 2;
+        yield 3
+        return 4;
+    }    
+
+    let t = fn();
+
+    console.log(t);
+
+    // for(let attr of t){
+    //     console.log(attr);
+    // }
+    // let arr = [...t];
+    console.log(t.next())
+    console.log(t.next())
+    // console.log(t.next())
+    // console.log(t.next())
+
+    console.log(Array.from(t));
+    console.log(t);
+
+    // console.log(Array.from(t));
+
+    
+
+    // let arr = [1,2,3];
+
+    // console.log([...arr]);
+    // console.log([...arr]);
+
+</script>
+</body>
+</html>
