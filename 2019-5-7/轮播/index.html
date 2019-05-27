@@ -97,7 +97,9 @@
 
     let lis = document.querySelectorAll('#focus1 li');
 
+    let onoff = true;
     next.onclick = function(){
+        if(!onoff)return;
         num ++;
         nextFn();
     }
@@ -121,6 +123,7 @@
     }
 
     function nextFn(){
+        onoff = false;
         //大清洗
         lis.forEach(e=>e.className = '');
         lis[num%len].className = 'select';
@@ -140,6 +143,7 @@
                     num = banner.length/2-1;
                     swiper.style.left = - num * iW + 'px';
                 }
+                onoff = true;
             }
         })
     }

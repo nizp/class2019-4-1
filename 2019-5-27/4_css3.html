@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+li[index*="2"]{
+    background: red;
+}
+
+.fancy {
+  text-shadow: 2px 2px 3px gold;
+}
+
+p:not(.fancy) {
+  color: green;
+}
+
+:target{
+    border:2px solid tomato;
+    font-size:25px;
+}
+</style>
+</head>
+<body>
+    <!-- <ul>
+        <li index="1">1</li>
+        <li index="2">2</li>
+        <li index="1">3</li>
+        <li index="2">4</li>
+        <li index="1-132321">5</li>
+    </ul> -->
+
+    <a href="#dl1" >点击跳到段落一</a>
+    <a href="#dl2" >点击跳到段落二</a>
+
+    <p id="dl1">我是一个段落。</p>
+    <p id="dl2" class="fancy">我好看极了！</p>
+    <div>我不是一个段落。</div>
+
+
+
+<script>
+    /*
+        ele[attr^=val]   开头为"val"的元素
+            比如:
+                li[index^=1] 开头为1的元素
+
+        ele[attr$=val]   开头为"val"的元素
+        ele[attr*=val]   只要包含为"val"的元素
+        ele[attr~=val]   属性值有多个,其中有一个是val
+
+
+        :not(条件){
+            样式
+        }
+
+        把所有p元素 除了class为fancy的 字体颜色变成绿色
+        p:not(.fancy) {
+            color: green;
+        }
+
+        :target{}  当激活锚点对应的元素时，激活元素身上的target样式
+
+    */    
+
+
+</script>
+</body>
+</html>

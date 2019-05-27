@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="can" width="400" height="400"></canvas>
+<script>
+    let ca = document.getElementById('can');
+    let ctx = ca.getContext('2d');
+    let numX = 50;
+    let numY = 50;
+    let num = 0;
+    ctx.moveTo(50, 50);
+    let arr = ['red','blue','green','yellow'];
+    (function move(){
+        let timer = requestAnimationFrame(move);
+        
+        numX += 5;
+        numY += 5;
+        if(numX === 200){
+           cancelAnimationFrame(timer);
+           num = 0;
+           (function move2(){
+                let timer = requestAnimationFrame(move2);
+                numX --;
+                ctx.lineTo(numX, numY);
+                // ctx.fillStyle = 'red';
+                ctx.strokeStyle = arr[num%=arr.length];
+                num ++;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+           })()
+        }
+        ctx.lineTo(numX, numY);
+        
+        ctx.strokeStyle = arr[num%=arr.length];
+        num ++;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+    })();
+    // ctx.beginPath(0,0)
+    // ctx.lineTo(10, 200);
+   
+
+    console.dir(ctx);
+
+</script>
+</body>
+</html>

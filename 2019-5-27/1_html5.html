@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#span{
+    width:200px;
+    height:200px;
+}
+#btn{
+    width:200px;
+    height:50px;
+}
+*{
+    margin: 0;
+    padding:0;
+}
+#div1{
+    margin-top: 50px;
+    width: 100px;
+    height:100px;
+    background: red;
+    /* margin-bottom: 20px; */
+}
+#div2{
+    /* margin-top: 10px; */
+    width: 100px;
+    height:100px;
+    background: skyblue;
+}
+#box{
+    width:300px;
+    height:300px;
+    background: #ccc;
+    overflow: hidden;
+    _border:1px solid #000;
+}
+
+#ul{
+    width:300px;
+    border:5px solid #000;
+    overflow: hidden;
+    /* height:20px; */
+}
+li{
+    width:20px;
+    height:20px;
+    background: orangered;
+    float: left;
+    list-style: none;
+    margin-left:5px;
+}
+.clear{
+    clear: both;
+}
+
+.c::after{
+    content: "";
+    clear: both;
+    display: block;
+}
+</style>
+</head>
+<body>
+    <header>
+        头部
+        <nav>导航</nav>
+    </header>
+    <section>块</section>
+    <section>
+        <!-- <div></div> -->
+        <main>主体</main>
+        <figure >
+            <figurecaption>小老鼠</figurecaption>
+            <img src="./2.png" alt="">
+        </figure>
+        0<mark>1234</mark>5
+    </section>
+    <footer></footer>
+    <!-- <span id="span">12345</span>
+    <p>我是块</p>
+    <input type="button" id="btn" value="哈哈">
+    <label>
+        男:<input type="radio" name="s">
+    </label>
+    <label>
+        女:<input type="radio" name="s">
+    </label> -->
+
+
+    <!-- <div id="box"> -->
+        <!-- <div id="div1">div1</div> -->
+        <!-- <div id="div2">div2</div> -->
+    <!-- </div> -->
+
+    <div class="c"></div>
+   
+    <ul id="ul" class="c">
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <li>21</li>
+        <!-- <div class="clear"></div> -->
+    </ul>
+   
+    <div id="div2">div2</div>
+
+<script>
+
+</script>
+</body>
+</html>

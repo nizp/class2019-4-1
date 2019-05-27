@@ -86,12 +86,10 @@ function render(id){
             //     console.log(321);
             // }
         });
-
-
-        // folders.appendChild(html);
         // console.timeEnd('计时器');
-        
     }
+    console.log('树');
+    renderTree(0);
 }
 
 render(0);

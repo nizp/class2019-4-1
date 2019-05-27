@@ -36,14 +36,17 @@ treeMenu.onclick = function(ev){
     if(ev.target.tagName === 'SPAN'){
         let li = ev.target.parentNode.parentNode;
         let id = li.dataset.id*1;
-        renderChild(li,id,!li.children[0].classList.toggle('close'));
-        // console.log(1);
+        if(id){
+            renderChild(li,id,!li.children[0].classList.toggle('close'));
+            // console.log(1);
+        }
+       
     }
 }
 
 function renderChild(li,num,onoff){
     let ary = getChild(num);
-    let html = '<ul>';
+    let html = '<ul style="padding-left:5px">';
     // console.log(ary,num)
     if(ary.length && onoff){
         html += `
