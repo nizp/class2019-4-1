@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin: 0;
+    padding:0;   
+}
+#warp{
+    width:700px;
+    height:600px;
+    /* border:1px solid #000; */
+    margin: 0 auto;
+}
+#box{
+    position: relative;
+    margin: 65px 88px;
+}
+#box div{
+    width:105px;
+    height:105px;
+    background: url('./img/zf_cube1.png') no-repeat;
+    position: absolute;
+    transition: 1s;
+}
+
+</style>
+</head>
+<body>
+    <section id="warp">
+        <div id="box">
+
+        </div>
+    </section>
+    <button id="btn">下一张</button>
+<script>
+    let arr = ['./img/zf_cube1.png',
+    './img/zf_cube2.png',
+    './img/zf_cube3.png',
+    './img/zf_cube4.png',
+    './img/zf_cube5.png',
+    './img/zf_cube6.png'
+];
+
+    let html = '';
+    for(let i=0;i<6;i++){
+        for(let j=0;j<5;j++){
+            html += `<div 
+                style="left:${i*110}px;
+                top:${j*110}px;
+                background-position:-${i*110}px -${j*110}px"
+            ></div>`;
+        }
+    }
+    box.innerHTML = html;
+
+
+    let divs = document.querySelectorAll('#box div');
+    let onoff = true;
+    let num = 0;
+    warp.onclick = function(){
+
+        if(onoff){
+            divs.forEach(element => {
+                element.style.transform = `rotate(${Math.round(Math.random()*(-60-60) + 60)}deg) translate(${Math.round(Math.random()*(-100-100) + 100)}px,${Math.round(Math.random()*(-100-100) + 100)}px)`;
+            });
+        }else{
+            num ++;
+            divs.forEach(element => {
+                element.style.transform = `rotate(0deg) translate(0,0)`;
+                element.style.backgroundImage = `url(${arr[num%=arr.length]})`;
+            });
+        }
+        onoff = !onoff;
+    }
+
+    let timer = null;
+    let ii = 0;
+    btn.onclick = function(){
+        num++;
+        clearInterval(timer);
+        timer = setInterval(() => {
+            divs[ii].style.transition = '';
+            divs[ii].style.backgroundImage = `url(${arr[num%=arr.length]})`;
+            ii ++;
+            console.log(ii);
+            if(ii >= divs.length){
+                clearInterval(timer);
+                ii = 0;
+            }
+        },100);
+    }
+    
+
+    //Math.round(Math.random()*(y-x) + x)
+
+</script>
+</body>
+</html>

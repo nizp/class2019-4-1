@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    _display: none;
+    width:100px;
+    height:100px;
+    background: red;
+    transition:2s;
+    /* transition: height 500ms 2s; */
+    /* transition-property: height; */
+    /* transition-duration: 500ms; */
+    /* transition-timing-function: cubic-bezier(.94,.07,.01,1.06); */
+    /* transition-delay:3s; */
+
+    /* transition: height 1s; */
+}
+#box:hover{
+    width:300px;
+    height:300px;
+    opacity: .3;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+
+<script>
+
+    let num = 0;
+    box.addEventListener('transitionend',function(){
+        num ++;
+        if(num === 3){
+            console.log('请求');
+            num = 0;
+        }
+        
+    });
+
+    // document.onmouseover = function(){
+    //     box.style.display = 'block';
+        
+    //     setTimeout(() => {
+    //         box.style.transition = '1s';
+    //         box.style.width = '300px';
+    //         box.style.height = '300px';
+    //         box.style.opacity = .3;
+    //     });
+
+    //     // setTimeout(() => {
+    //     //     // box.style.width = '400px';
+    //     // }, 1100);
+    // }
+
+   
+</script>
+</body>
+</html>

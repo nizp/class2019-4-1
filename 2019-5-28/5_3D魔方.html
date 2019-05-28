@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+*{
+    margin: 0;
+    padding:0;
+    list-style: none;
+}
+#warp{
+    width:640px;
+    height:1138px;
+    background: url('./img/zf_cubeBg.jpg') top center no-repeat;
+    background-size:cover;
+    perspective: 1600px;
+}
+#warp:hover ul{
+    transform: scale(.5) translateY(200px) rotateX(-245deg);
+}
+
+ul{
+    transition: 1s;
+    width:510px;
+    height:510px;
+    position: relative;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+    transform: scale(.5) translateY(200px) rotateY(70deg);
+    transform-origin:255px 255px -255px;
+    /* transform:perspective(800px); */
+}
+li{
+    width:510px;
+    height:510px;
+    position: absolute;
+    top:0;
+    left:0;
+}
+li:nth-of-type(1){
+    background: url('./img/zf_cube1.png') no-repeat;
+}
+li:nth-of-type(2){
+    background: url('./img/zf_cube2.png') no-repeat;
+    top:-510px;
+    left:0;
+    transform: rotateX(90deg);
+    transform-origin: bottom;
+}
+li:nth-of-type(3){
+    background: url('./img/zf_cube3.png') no-repeat;
+    left:510px;
+    top:0;
+    transform: rotateY(90deg);
+    transform-origin: left;
+}
+li:nth-of-type(4){
+    background: url('./img/zf_cube4.png') no-repeat;
+    top:510px;
+    transform: rotateX(-90deg);
+    transform-origin: top;
+}
+li:nth-of-type(5){
+    background: url('./img/zf_cube5.png') no-repeat;
+    left:-510px;
+    transform: rotateY(-90deg);
+    transform-origin: right;
+}
+li:nth-of-type(6){
+    background: url('./img/zf_cube6.png') no-repeat;
+    transform: translateZ(-510px) rotateY(-180deg) rotateZ(180deg);
+}
+</style>
+</head>
+<body>
+    <section id="warp">
+        <ul id="ul">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </section>
+<script>
+    console.log(window.innerHeight)
+</script>
+</body>
+</html>
