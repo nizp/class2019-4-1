@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<script>
+    var desW = 640; //设计图
+    function refreshRem() {
+        let doc = document.documentElement; //html
+        // alert(doc.nodeName);
+        let winW = doc.clientWidth;
+        //设计图 / 可视区
+        let radio = desW / winW;  //开发模拟器也要640的位置上
+        
+        if (winW >= desW) {
+            //100px为了好计算  100px -> 1rem  55px -> 0.55rem
+            doc.style.fontSize = '100px';
+            return;
+        }
+        doc.style.fontSize = 100 / radio + 'px';
+    }
+    refreshRem();
+    window.addEventListener('resize', refreshRem);
+</script>
+<style>
+*{
+    margin: 0;
+    padding:0;
+}
+nav{
+    height:.55rem;
+    background: #ff852a;
+}
+h1,img{
+    width:.62rem;
+    height:.55rem;
+    float: left;
+}
+
+</style>
+</head>
+<body>
+    <section>
+        <nav>
+            <h1><img src="./img/logo.png" alt=""></h1>
+        </nav>
+    </section>
+</body>
+</html>
