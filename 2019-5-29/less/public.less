@@ -1,0 +1,208 @@
+
+//rule
+@basic:1px;
+.w(@value){ width: @value*@basic; }
+.h(@value){ height: @value*@basic; }
+.wh(@w,@h){ width: @w*@basic; height: @h*@basic; }
+.wa(){ width: auto; }
+.ha(){ height: auto; }
+
+.minw(@w){ min-width: @w*@basic; }
+.minh(@h){ min-height: @h*@basic; }
+.maxw(@w){ max-width: @w*@basic; }
+.maxh(@h){ max-height: @h*@basic; }
+
+.ovh(){ overflow: hidden; display: block; }
+.mc(){ margin-left: auto; margin-right: auto; }
+.fl(){ float: left; display: block; }
+.fr(){ float: right; display: block; }
+.fn(){ float: none; }
+.por(){ position: relative; }
+.poa(){ position: absolute; }
+.pof(){ position: fixed; }
+
+.db(){ display: block; }
+.dn(){ display: none; }
+.di(){ display: inline-block; *display: inline; *zoom: 1; }
+.dt(){ display:table; }
+.dtc(){ display: table-cell; }
+
+.fs(@value){ font-size: @value*@basic; }
+.c(@color){ color: @color; }
+.lh(@value){ line-height: @value*@basic; }
+.tc(){ text-align: center; }
+.tl(){ text-align: left; }
+.tr(){ text-align: right; }
+.ffa(){ font-family: "Arial"; }
+.fwb(){ font-weight: bold; }
+.fwn(){ font-weight: normal; }
+.fw700(){ font-weight: 700; }
+.fw400(){ font-weight: 400; }
+.fsn(){ font-style: normal; }
+.br(@r:0.11){ border-radius: @r*@basic; -webkit-border-radius: @r*@basic; -moz-border-radius: @r*@basic; -o-border-radius: @r*@basic; }
+.brh(@h){ height: @h*@basic; border-radius: @h/2*@basic; -webkit-border-radius: @h/2*@basic; -moz-border-radius: @h/2*@basic; -o-border-radius: @h/2*@basic; }
+.br5(){ border-radius: 50%; -webkit-border-radius: 50%; -moz-border-radius: 50%; -o-border-radius: 50%; }
+.br0(){border-radius: 0; -webkit-border-radius: 0; -moz-border-radius: 0; -o-border-radius: 0; }
+
+.p(@v){ padding: @v*@basic; }
+.p2(@v1,@v2){ padding: @v1*@basic @v2*@basic; }
+.p4(@v1,@v2,@v3,@v4){ padding: @v1*@basic @v2*@basic @v3*@basic @v4*@basic; }
+.pl(@value){ padding-left: @value*@basic; }
+.pr(@value){ padding-right: @value*@basic; }
+.pt(@value){ padding-top: @value*@basic; }
+.pb(@value){ padding-bottom: @value*@basic; }
+
+.m(@v){ margin: @v*@basic; }
+.m2(@v1,@v2){ margin: @v1*@basic @v2*@basic; }
+.m4(@v1,@v2,@v3,@v4){ margin: @v1*@basic @v2*@basic @v3*@basic @v4*@basic; }
+.mb(@value){ margin-bottom: @value*@basic; }
+.mt(@value){ margin-top: @value*@basic; }
+.mr(@value){ margin-right: @value*@basic; }
+.ml(@value){ margin-left: @value*@basic; }
+
+.post(@value:0){ top: @value*@basic; }
+.posb(@value:0){ bottom: @value*@basic; }
+.posl(@value:0){ left: @value*@basic; }
+.posr(@value:0){ right: @value*@basic; }
+.pos-box(@w:1,@h:1,@pos:absolute,@l:0,@t:0){
+  width: @w*@basic;
+  height: @h*@basic;
+  position: @pos;
+  left: @l*@basic;
+  top: @t*@basic;
+}
+.pos-c(@w:1,@h:1,@pos:absolute){
+  width: @w*@basic;
+  height: @h*@basic;
+  position: @pos;
+  left: 50%;
+  top: 50%;
+  margin-left: -@w/2*@basic;
+  margin-top: -@h/2*@basic;
+}
+.zi(@z){ z-index: @z; }
+
+
+.bg(@color){ background: @color; }
+.bgi(@url,@x:0,@y:0,@repeat:no-repeat) { background: url(@url) @x*@basic @y*@basic @repeat; }
+
+.bga(@red, @green, @blue, @alpha:1){
+        // @filtercolor:`(_f = function(d){ var v = (parseInt(d)|0).toString(16);return v.length<2 ? "0"+v : v;},'#'+_f(@{alpha}*255) + _f(@{red}) + _f(@{green})+ _f(@{blue}))`;
+        background: rgba(@red,@green,@blue,@alpha);
+        // -ms-filter:~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@{filtercolor}',endColorstr='@{filtercolor}')";
+        // filter:~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@{filtercolor}',endColorstr='@{filtercolor}')";
+}
+.bgr(){ background-repeat: repeat; }
+.bgrn(){ background-repeat: no-repeat; }
+.bgrx(){ background-repeat: repeat-x; }
+.bgry(){ background-repeat: repeat-y; }
+.bgf(){ background-attachment: fixed; }
+.bgs(@v1,@v2){ background-size: @v1*@basic @v2*@basic; }
+.bgsc(){ background-size: cover; }
+.bgp(@v1:0,@v2:0){ background-position: @v1*@basic @v2*@basic; }
+.bgp5(){ background-position: center; }
+.bgn(){ background: none; }
+
+.bor(@v,@c){ border: @v*@basic solid @c; }
+.sha(@v1,@v2,@v3,@c){ box-shadow: @v1*@basic @v2*@basic @v3*@basic @c; }
+.opa(@opacity: 80) { opacity: @opacity / 100; filter: ~"alpha(opacity=@{opacity})"; }
+.ell(){ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ori(@line:2){ display: -webkit-box; overflow: hidden; -webkit-line-clamp: @line; -webkit-box-orient: vertical; }
+.tra(@sec:0.3s){
+  transition: all @sec linear 0s;
+  -webkit-transition: all @sec linear 0s;
+  -moz-transition: all @sec linear 0s;
+  -o-transition: all @sec linear 0s;
+}
+
+.clear(){
+  *zoom: 1;
+  clear: both;
+  &:before,
+  &:after{
+    display: table;
+    content: "";
+  }
+  &:after{
+    clear: both;
+  }
+}
+
+/**- public -**/
+//三角
+.triangle (top,@w:5px,@color:#ccc){
+  border-style:solid dashed dashed dashed;
+  border-color:@color transparent transparent transparent;
+  border-width:@w;
+}
+.triangle (right,@w:5px,@color:#ccc){
+  border-style:dashed solid dashed dashed;
+  border-color:transparent @color transparent transparent;
+  border-width:@w;
+}
+.triangle (bottom,@w:5px,@color:#ccc){
+  border-style:dashed dashed solid dashed;
+  border-color:transparent transparent @color transparent;
+  border-width:@w;
+}
+.triangle (left,@w:5px,@color:#ccc){
+  border-style:dashed dashed dashed solid;
+  border-color:transparent transparent transparent @color;
+  border-width:@w;
+}
+.triangle (@_,@w:5px,@color:#ccc){
+  .triangle-compatible();
+}
+
+//边框附加内容
+.triangle-compatible()
+{
+    width: 0; height: 0; overflow:hidden;
+}
+
+//单独方向
+.triangle-b(@w:5px,@color:#ccc){
+  border-style:solid dashed dashed dashed;
+  border-color:@color transparent transparent transparent;
+  border-width:@w;
+  .triangle-compatible();
+}
+.triangle-l(@w:5px,@color:#ccc){
+  border-style:dashed solid dashed dashed;
+  border-color:transparent @color transparent transparent;
+  border-width:@w;
+  .triangle-compatible();
+}
+.triangle-t(@w:5px,@color:#ccc){
+  border-style:dashed dashed solid dashed;
+  border-color:transparent transparent @color transparent;
+  border-width:@w;
+  .triangle-compatible();
+}
+.triangle-r(@w:5px,@color:#ccc){
+  border-style:dashed dashed dashed solid;
+  border-color:transparent transparent transparent @color;
+  border-width:@w;
+  .triangle-compatible();
+}
+
+
+.flex_b(){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flex_a(){
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.pla(@color){
+    &::-webkit-input-placeholder{color:@color;}/*chrome、safari浏览器*/
+    &::-moz-placeholder{color:@color;}/*火狐浏览器   Mozilla Firefox 19+*/
+    &:-moz-placeholder{color:@color;}/*Mozilla Firefox 4 to 18*/
+    &:-ms-input-placeholder{color:@color;}/*ie浏览器（不包括微软的edge浏览器）*/
+}
+
+
+

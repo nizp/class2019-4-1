@@ -1,0 +1,23 @@
+
+@import './public.less';
+
+.bg(@v){
+    background:@v;
+}
+
+
+
+.box{
+    .w(100);
+    .h(100);
+    .bg(#f00);
+    border:2px solid #000;
+    // &:hover{
+    //     .bg(#0f0);
+    // }
+    &-a{
+        .wh(50,50);
+        .bg(pink);
+    }
+}
+

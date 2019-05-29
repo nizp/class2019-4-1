@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: red;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 2;
+    opacity: .5;
+}
+#a{
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 1
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+   <a id="a" href="http://www.baidu.com">点击</a>
+<script>
+    box.ontouchend = function(){
+        this.style.display = 'none';
+    }
+</script>
+</body>
+</html>

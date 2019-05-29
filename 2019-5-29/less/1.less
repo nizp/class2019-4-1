@@ -1,0 +1,99 @@
+@import './public.less';
+@bg:red;
+@rem:100px;
+@bd:background;
+@w:width;
+@h:height;
+
+
+@wh:200px;
+
+//@box和@ww是id或者class的变量
+//使用的时候用@{变量名}{}
+@box:#box;
+@ww:.ww;
+
+//id和class名字有可能一样的情况下使用
+//#@{wa}{} ，.@{wa}{}
+@wa:warp;
+
+//路径为字符串
+@url:'./img';
+
+@b5:{
+    border:5px solid gold;
+};
+
+.b(@x:1px,@c){
+    border:@x solid @c;
+};
+
+
+@{ww}{
+    color:green;
+};
+
+
+
+.@{wa}{
+    border: 1px solid #000;
+    .fl();
+};
+
+#@{wa}{
+    color:@bg;
+};
+
+
+@{box}{
+   @{w}:@wh;
+   @{h}:@wh;
+   @{bd}: @bg;
+}
+.img{
+    @{w}:@wh;
+    @{h}:@wh;
+    background: url('@{url}/0.jpg');
+    @b5();
+}
+
+
+@var:@a;
+@a:100%;
+//@var 因为box2中的域有一个@a,而@var值为@a,只会查找最近的变量
+#box2{
+    @{w}:@var;
+    @{h}:@wh*2;
+    @{bd}:@bg;
+    @a:9%;
+}
+
+//嵌套
+#box3{
+    @{w}:@wh;
+    @{h}:@wh;
+    @{bd}:@bg;
+    .b(5px,green);
+    @{ww}{
+        @{w}:@wh;
+        @{h}:50px;
+        @{bd}:yellow;
+        color:#000;
+    }
+}
+
+//循环
+.forList(@n,@i:1) when (@i =< @n ) {
+    li:nth-of-type(@{i}){
+        background:url('@{url}/@{i}.png');
+    }
+    .forList(@n,(@i+1))
+}
+.forList(5);
+
+
+
+
+
+
+

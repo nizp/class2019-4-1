@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var desW = 640; //设计图
+        function refreshRem() {
+            let doc = document.documentElement; //html
+            // alert(doc.nodeName);
+            let winW = doc.clientWidth;
+            //设计图 / 可视区
+            let radio = desW / winW;  //开发模拟器也要640的位置上
+            
+            // if (winW >= desW) {
+            //     //100px为了好计算  100px -> 1rem  55px -> 0.55rem
+            //     doc.style.fontSize = '100px';
+            //     return;
+            // }
+            doc.style.fontSize = 100 / radio + 'px';
+        }
+        refreshRem();
+        window.addEventListener('resize', refreshRem);
+    </script>
+    <link rel="stylesheet" href="./less/index.css">
+</head>
+<body>
+    <section id="warp">
+        <header>
+            <div class="boxl">
+                <div class="icon"></div>
+                <h1><img src="./img/logo.png"></h1>
+            </div>
+            <h2 class="title">新闻频道</h2>
+        </header>
+        <nav>
+            <ul>
+                <li class="active">首页</li>
+                <li>国内</li>
+                <li>国际</li>
+                <li>历史</li>
+            </ul>
+        </nav>
+        <div id="banner">
+            <ul>
+                <li>
+                    <img width="100%" src="./img/banner.jpg">
+                    <p>黎巴嫩鸡血厚数米</p>
+                </li>
+            </ul>
+        </div>
+        <ul id="list">
+            <li>
+                <h3>以“侨”架“桥” 习近平这样谈侨务工作</h3>
+                <div class="detail">
+                    <span class="news-source">央视网</span>
+                    <span class="pubtime">1小时前</span>
+                    <span class="reply">66跟贴</span>
+                </div>
+            </li>
+            <li class="listpic">
+                <div class="title">
+                    <h3>习近平6月5日至7日对俄罗斯进行国事访问</h3>
+                    <div class="detail">
+                        <span class="news-source">央视网</span>
+                        <span class="pubtime">1小时前</span>
+                        <span class="reply">66跟贴</span>
+                    </div>
+                </div>
+                <div class="news-pic">
+                    <img src="https://cms-bucket.ws.126.net/2019/05/29/d752e39f8ee7471d9c3d2b57a7d293e4.png?imageView&amp;thumbnail=234y146&amp;quality=45&amp;interlace=1&amp;enlarge=1&amp;type=webp" alt="习近平6月5日至7日对俄罗斯进行国事访问">
+                </div>
+            </li>
+        </ul>
+    </section>
+</body>
+</html>
