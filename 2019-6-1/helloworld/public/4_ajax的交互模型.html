@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <form action="/get" method="GET"> -->
+        用户名:<input type="text" id="user"/><span id="span"></span>
+        密 码:<input type="password" />
+        <!-- <input type="submit" value="提交"> -->
+        <button id="btn">提交</button>
+    <!-- </form> -->
+<script>
+    user.onblur = function(){
+        //有一部电话(IE6以上浏览器支持，只不过浏览器版本不一样，支持的属性也有异同)
+        let xhr = new XMLHttpRequest(); //创建ajax对象 
+
+        /*
+            //输入号码
+            open(请求方式,url,是否异步)  默认为true
+        */
+        xhr.open('get','/get?user='+this.value);
+
+        //发送(按绿按钮)
+        xhr.send(); //发送之后就走异步队列了，服务器会进行一些响应，响应是需要时间的，那么因为走了异步是不会影响后面的代码执行
+        
+        //等待
+        xhr.onload = function(){
+            console.log(JSON.parse(xhr.responseText));
+            console.log('响应结果');//通话
+        }
+
+        console.log(1);
+    }
+
+</script>
+</body>
+</html>

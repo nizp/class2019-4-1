@@ -10,6 +10,7 @@ let person = [
  "lintonghe",
  "zhaodan",
  "mamou",
+ "刘泉",
  "nizp"
 ];
 

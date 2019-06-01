@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">开始</button>
+    <button id="btn2">停止</button>
+    <input type="text" id="txt">
+    <p id="p"></p>
+<script>
+    let timer = null;
+    let s = 0;
+    btn.onclick = function(){
+        timer = setInterval(() => {
+            s = Math.ceil(Math.random() * 100);
+            p.innerHTML = s;
+        }, 50);
+    }
+    let arr = []; 
+    btn2.onclick = function(){
+        clearInterval(timer);
+        if(arr.some(e=>e.num==s)){
+            alert('再来一瓶');
+        }else{
+            let v = txt.value;
+            arr.push({
+                name:v,
+                num:s
+            });
+            arr.sort((a,b)=>a.num-b.num);
+            window.localStorage.setItem('数据',JSON.stringify(arr));
+            s = 0;
+            p.innerHTML = 4;
+        }
+    }
+
+
+</script>
+</body>
+</html>

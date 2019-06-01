@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <form action="/get" method="GET"> -->
+        用户名:<input type="text" id="user"/><span id="span"></span>
+        密 码:<input type="password" />
+        <!-- <input type="submit" value="提交"> -->
+        <button id="btn">提交</button>
+    <!-- </form> -->
+<script>
+    
+    user.onblur = function(){
+        var xhr = new XMLHttpRequest;
+        xhr.open('post','/post');
+
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+        //把传给后端的数据放在send中
+        xhr.send('user='+this.value);
+
+        xhr.onload = function(){
+            var data = JSON.parse(xhr.responseText);
+            span.innerHTML = data.msg;
+        }
+    }
+
+</script>
+</body>
+</html>

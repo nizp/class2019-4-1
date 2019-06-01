@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <form action="/get" method="GET"> -->
+        用户名:<input type="text" id="user"/><span id="span"></span>
+        密 码:<input type="password" />
+        <!-- <input type="submit" value="提交"> -->
+        <button id="btn">提交</button>
+    <!-- </form> -->
+<script>
+    /*
+        %E6%96%B9 方
+        %E5%BC%8F 式
+
+        encodeURI('方') 把中文转成URI编码
+        decodeURI('%E5%BC%8F')把uri转成中文
+    */
+    user.onblur = function(){
+        var xhr = new XMLHttpRequest;
+        xhr.open('get','/get?user='+encodeURI(this.value));
+        xhr.send();
+        xhr.onload = function(){
+            var data = JSON.parse(xhr.responseText);
+            span.innerHTML = data.msg;
+        }
+    }
+
+</script>
+</body>
+</html>

@@ -5,9 +5,16 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/get" method="GET">
+    <!-- <form action="/get" method="GET">
         用户名:<input type="text" name="user"/>
-        密 码:<input type="password" />
+        密 码:<input type="password" name="pw"/>
+        <input type="submit" value="提交">
+    </form> -->
+
+    <!-- post -->
+    <form action="/post" method="POST" enctype="application/x-www-form-urlencoded">
+        用户名:<input type="text" name="user"/>
+        密 码:<input type="password" name="pw"/>
         <input type="submit" value="提交">
     </form>
 <script>
