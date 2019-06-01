@@ -6,10 +6,11 @@ var router = express.Router();
   
 */
 let person = [
-  'caoyuanye',
-  'yangyating',
-  'xuyifan',
-  'liuguiqin'
+ "yuhaiyang",
+ "lintonghe",
+ "zhaodan",
+ "mamou",
+ "nizp"
 ];
 
 router.get('/', function(req, res, next) {

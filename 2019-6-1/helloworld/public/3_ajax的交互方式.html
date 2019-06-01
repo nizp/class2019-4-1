@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <form action="/get" method="GET"> -->
+        用户名:<input type="text" id="user"/><span id="span"></span>
+        密 码:<input type="password" />
+        <!-- <input type="submit" value="提交"> -->
+        <button id="btn">提交</button>
+    <!-- </form> -->
+<!-- <script src="./javascripts/jquery-3.2.1.min.js"></script> -->
+<script src="./javascripts/axios.js"></script>
+<script>
+    /*
+        action="url路径"
+        method = "请求方式"
+
+        url路径是后台给你的地址
+
+        axios
+    */
+
+
+    // user.onblur = function(){
+    //     fetch('/get?user='+this.value)
+    //     .then(d=>d.json())
+    //     .then(data=>{
+    //         // span.innerHTML = data.msg;
+    //         // console.log(data);
+    //     });
+    // }
+
+    // $('#user').blur(function(){
+    //     $.ajax({
+    //         url:'/get?user='+$(this).val(),
+    //         dataType:'json',
+    //         success:function(data){
+    //             if(data.code === 1){
+    //                 $('#span').html( data.msg );
+    //             }   
+    //         }
+    //     })
+    // });
+
+
+
+    // user.onblur = function(){
+    //     axios.get('/get?user='+this.value)
+    //     .then(data=>{
+    //         console.log(data.data);
+    //     });
+    // }
+
+
+
+</script>
+</body>
+</html>
