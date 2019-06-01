@@ -1,0 +1,24 @@
+a,input,button { -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+input,button { -webkit-appearance: none; border-radius: 0; }
+body { margin: 0; -webkit-user-select: none; }
+body * { -webkit-user-select: none; font-family: Helvetica; }
+body { -webkit-text-size-adjust: 100%; }
+h1 { margin: 0; }
+a { text-decoration: none; }
+ul { margin: 0; padding: 0; list-style: none; }
+img { vertical-align: top; }
+html,body { width: 100%; height: 100%; overflow: hidden; }
+.clearfix:after{ display:block; content:''; clear:both;}
+.clearfix{ zoom:1;}
+.fl{ float: left; display: inline-block; }
+.fr{ float: right; display: inline-block; } 
+.wrap{ width: 100%; height: 100%; background: url('../images/shouji_bj.jpg') no-repeat; background-size: 100% 100%; overflow: hidden; }
+.wrap .text{ display: block; width: 2.6rem; position: absolute; left: 50%; top: .5rem; margin-left: -1.3rem; }
+.wrap .main{ width: 12.2rem; height: 11rem; position: absolute; left: 50%; margin-left: -6.1rem; top: 4.8rem; overflow: hidden; }
+.wrap .main img{ display: block; position: absolute; transition: all .5s ease-out; -webkit-transition: all .5s ease-out; }
+.wrap .main .img1{ width: 7.1rem; top: 0; left: 2.55rem; z-index: 2; }
+.wrap .main .img2{ width: 5.4rem; top: 1.4rem; left: 0; z-index: 1; }
+.wrap .main .img3{ width: 5.4rem; top: 1.4rem; left: 6.8rem; z-index: 1; }
+.wrap .tip{ display: block; width: 6.64rem; position: absolute; left: 50%; top: 16.2rem; margin-left: -3.32rem; }
+.wrap .btn-box{ width: 9.4rem; position: absolute; top: 19rem; left: 50%; margin-left: -4.7rem; }
+.wrap .btn-box a{ display: block; width: 4.4rem; height: 1.4rem; background: url('../images/shouji_button.png') no-repeat; background-size: 100% 100%; font-size: .6rem; line-height: 1.4rem; color: white; text-align: center; }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: red;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 2;
+    opacity: .5;
+}
+#a{
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 1;
+    
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+    <input type="text" id="txt">
+<script>
+    box.ontouchend = function(ev){
+        // this.style.display = 'none';
+        console.log(ev.changedTouches[0]);
+    }
+
+    //
+    txt.ontouchend = function(ev){
+        // this.select();
+        // console.log(ev);
+        ev.stopPropagation(); //阻止冒泡焦点元素就能正常使用了
+    }
+
+    //阻止默认行为是为了点击div的时候，div隐藏不会触发input焦点行为。
+    document.ontouchend = function(){
+        return false;
+    }
+
+</script>
+</body>
+</html>

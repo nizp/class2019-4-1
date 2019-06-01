@@ -1,57 +1,54 @@
 1.准备作品链接（最少1个最多3个，超过周一我就不看了）
 
 2.准备分享(随机抽分享顺序)
-
-
-
-0: {name: "高春梅", num: 1}
+{name: "高春梅", num: 1}
 {name:李晓琳，num:2}
-1: {name: "张欢", num: 3}
+{name: "张欢", num: 3}
 {name:席超,num:4}
-2: {name: "李娅茹", num: 5}
+{name: "李娅茹", num: 5}
 {name:永梅:num:6}
 {name:刘凤华,num:7}
-3: {name: "赵丹", num: 9}
-4: {name: "荣永轶", num: 10}
-5: {name: "崔双建", num: 11}
-6: {name: "李雨来", num: 16}
-7: {name: "陈思胜", num: 19}
-8: {name: "廖一庭", num: 23}
-9: {name: "刘宏捷", num: 24}
-10: {name: "常震", num: 25}
-11: {name: "王冠", num: 27}
-12: {name: "吕阔", num: 28}
-13: {name: "刘泉", num: 30}
-14: {name: "赵星宇", num: 34}
-15: {name: "刘鑫", num: 35}
-16: {name: "郜臣臣", num: 36}
-17: {name: "宋尊", num: 37}
-18: {name: "齐岳亭", num: 40}
-19: {name: "许琦", num: 44}
-20: {name: "李鑫", num: 47}
-21: {name: "刘月", num: 48}
-22: {name: "杨志康", num: 49}
-23: {name: "吴晓娟", num: 51}
-24: {name: "王世琦", num: 52}
-25: {name: "郝晓溪", num: 56}
-26: {name: "马骅骏", num: 59}
-27: {name: "王猛磊", num: 62}
-28: {name: "续斗寅", num: 63}
-29: {name: "李云龙", num: 64}
-30: {name: "郭玥", num: 65}
-31: {name: "冯芳", num: 69}
-32: {name: "李书红", num: 74}
-33: {name: "龙海丽", num: 77}
-34: {name: "卫博晖", num: 79}
-35: {name: "张梦雅", num: 82}
-36: {name: "林同贺", num: 86}
-37: {name: "王权士", num: 88}
-38: {name: "赵志强", num: 89}
-39: {name: "多亚宁", num: 92}
-40: {name: "梁宏伟", num: 93}
-41: {name: "王旭", num: 94}
-42: {name: "梅婷", num: 95}
-43: {name: "战凤月", num: 99}
+{name: "赵丹", num: 9}
+{name: "荣永轶", num: 10}
+{name: "崔双建", num: 11}
+{name: "李雨来", num: 16}
+{name: "陈思胜", num: 19}
+{name: "廖一庭", num: 23}
+{name: "刘宏捷", num: 24}
+{name: "常震", num: 25}
+{name: "王冠", num: 27}
+{name: "吕阔", num: 28}
+{name: "刘泉", num: 30}
+{name: "赵星宇", num: 34}
+{name: "刘鑫", num: 35}
+{name: "郜臣臣", num: 36}
+{name: "宋尊", num: 37}
+{name: "齐岳亭", num: 40}
+{name: "许琦", num: 44}
+{name: "李鑫", num: 47}
+{name: "刘月", num: 48}
+{name: "杨志康", num: 49}
+{name: "吴晓娟", num: 51}
+{name: "王世琦", num: 52}
+{name: "郝晓溪", num: 56}
+{name: "马骅骏", num: 59}
+{name: "王猛磊", num: 62}
+{name: "续斗寅", num: 63}
+{name: "李云龙", num: 64}
+{name: "郭玥", num: 65}
+{name: "冯芳", num: 69}
+{name: "李书红", num: 74}
+{name: "龙海丽", num: 77}
+{name: "卫博晖", num: 79}
+{name: "张梦雅", num: 82}
+{name: "林同贺", num: 86}
+{name: "王权士", num: 88}
+{name: "赵志强", num: 89}
+{name: "多亚宁", num: 92}
+{name: "梁宏伟", num: 93}
+{name: "王旭", num: 94}
+{name: "梅婷", num: 95}
+{name: "战凤月", num: 99}
 
 
 

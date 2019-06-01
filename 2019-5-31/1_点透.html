@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: red;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 2;
+    opacity: .5;
+}
+#a{
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 1;
+    
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+    <!-- <div id="div">点击</div> -->
+   <a id="a" href="http://www.baidu.com">点击</a>
+<script>
+    /*
+
+    */
+    // box.ontouchend = function(){
+    //     this.style.display = 'none';
+    // }
+
+    
+    // box.onmouseup = function(){
+    //     console.log('up');
+    // }
+
+    box.ontouchend = function(){
+        // console.log('end');
+        // setTimeout(() => {
+        //     this.style.display = 'none';
+        // },5);
+        // this.style.display = 'none';
+        // this.style.opacity = '0';
+        // this.style.visibility = 'hidden';
+        // this.style.transform = 'translateY(-200px)';
+    }
+
+    // document.ontouchend = function(){
+    //     return false;
+    // }
+    // a.ontouchend = function(){
+    //     window.location.href = 'http://www.baidu.com';
+    // }
+
+    // div.ontouchend = function(){
+    //     window.location.href = 'http://www.baidu.com';
+    // }
+
+    // box.onclick = function(){
+    //     this.style.display = 'none';
+    // }
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: red;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 2;
+    opacity: .5;
+}
+.yb{
+    animation: yaobai 300ms infinite;
+}
+
+@keyframes yaobai {
+    0%{
+        transform:rotate(-20deg);
+    }
+    50%{
+        transform:rotate(20deg);
+    }
+    100%{
+        transform:rotate(-20deg);
+    }
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script src="./touch.js"></script>
+<script>
+    let bl = box.offsetLeft;
+    let bt = box.offsetTop;
+    touch(box,'touchan',function({disX,disY,time}){
+        
+        if(time >= 1000){
+            box.className = 'yb';
+            disX = disX - bl;
+            disY = disY - bt;
+            // console.log(bl)
+            touch(box,'mgz',function(ev){
+                let l = ev.changedTouches[0].pageX - disX;
+                let t = ev.changedTouches[0].pageY - disY;
+                
+                box.style.left = l + 'px';
+                box.style.top =  t + 'px';
+            });
+
+            touch(box,'end',function(ev){
+                bl = box.offsetLeft;
+                bt = box.offsetTop;
+                box.className = '';
+            });
+        }
+    });
+</script>
+</body>
+</html>

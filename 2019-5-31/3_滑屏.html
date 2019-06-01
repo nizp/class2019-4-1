@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+    margin: 0;
+    padding:0;
+}
+ul{
+    transition: 1s;
+}
+html,body{
+    overflow-y: hidden;
+}
+</style>
+</head>
+<body>
+    <section id="warp">
+        <ul id="ul">
+        
+        </ul>
+    </section>
+<script src="./touch.js"></script>
+<script>
+    let arr = ['red','yellow','green','gold','skyblue','pink'];
+
+    let iw = window.innerWidth;
+    let ih = window.innerHeight;
+
+    warp.style.height = ih + 'px';
+    let html = '';
+    let n = 0;
+    arr.forEach(e=>{
+        html += `<li style="height:${ih}px;background:${arr[n%=arr.length]}"></li>`
+        n++;
+    });
+    ul.innerHTML = html;
+
+    let lis = document.querySelectorAll('li');
+
+    lis.forEach(ele=>{
+        touch(ele,'touchan',function(num){
+            ele.style.opacity = 1 - num/100;
+        });
+    })
+
+    let page = 0;
+    touch(warp,'touch-t',function(){
+        // console.log('上划');
+        page ++;
+        ul.style.transform = 'translateY('+ (-page*ih) +'px)'
+    });
+
+    touch(warp,'touch',function(){
+       console.log('点击')
+    });
+
+
+
+    
+
+</script>
+</body>
+</html>

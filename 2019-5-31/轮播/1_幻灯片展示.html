@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/javascript" charset="utf-8">
+	var w = window.innerWidth;
+	document.documentElement.style.fontSize = w / 16 + 'px';
+</script>
+<style type="text/css" id="css">
+body {
+	margin: 0;
+}
+.wrap {
+	position: relative;
+	overflow: hidden;
+}
+.list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	transform: translate3d(0,0,0);
+	overflow: hidden;
+	position: relative;
+}
+.list li {
+	width:16rem;
+	float: left;
+}	
+.list img {
+	width: 100%;
+	vertical-align: top;
+}
+.nav {
+	position: absolute;
+	left: 0;
+	bottom: 5px;
+	width: 100%;
+	text-align: center;
+	height: 10px;
+}
+.nav span {
+	vertical-align: top;
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background: #ccc;
+	border-radius: 5px;
+}
+.nav .active {
+	background: red;
+}
+</style>
+</head>
+<body>
+<section class="wrap">
+	<ul class="list">
+		<li><a href="http://www.baidu.com"><img src="img/img1.jpg"/></a></li>
+		<li><a href="http://www.baidu.com"><img src="img/img2.jpg"/></a></li>
+		<li><a href="http://www.baidu.com"><img src="img/img3.jpg"/></a></li>
+		<li><a href="http://www.baidu.com"><img src="img/img4.jpg"/></a></li>
+	</ul>	
+	<nav class="nav">
+		<span class="active"></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</nav>
+</section>
+<script type="text/javascript">
+	
+
+	//https://juejin.im/post/5ad804c1f265da504547fe68
+	const ul = document.querySelector('.list');
+	const lis = ul.querySelectorAll('li');
+	const spans = document.querySelectorAll('.nav span');
+	const warp = document.querySelector('.wrap');
+	document.addEventListener('touchstart',function(ev){
+		ev.preventDefault();
+		// console.log(ev)
+	},{passive:false});
+
+	ul.innerHTML += ul.innerHTML;
+
+	let iw = warp.clientWidth;
+	let len = ul.children.length;
+	let endX = 0;
+	let x = 0;
+	let offsetL = 0;
+	let ulW = iw * len;
+
+	// console.log(iw * len)
+
+	ul.style.width = ulW + 'px';
+
+
+	ul.addEventListener('touchstart',start);
+	ul.addEventListener('touchmove',move);
+	ul.addEventListener('touchend',end);
+
+	
+
+	function start(ev){
+		//start的坐标
+		ul.style.transition = '';
+		x = ev.changedTouches[0].pageX; //按下的值
+		var now = Math.abs(Math.round(endX/iw)) ;//
+		if(now == 0){
+			offsetL = -iw*spans.length;//计算左边的位置
+			ul.style.transform = 'translateX('+ offsetL +'px)';
+		}
+		if(now == len-1){
+			offsetL = -(spans.length-1) * iw;
+			ul.style.transform = 'translateX('+ offsetL +'px)';
+		}
+	}
+	function move(ev){
+		let moveX = ev.changedTouches[0].pageX;
+		endX = offsetL + (moveX - x);
+		ul.style.transform = 'translateX('+ endX +'px)';
+	}
+	function end(){
+		/*
+			要看看，拖动坐标是否为片的一半
+			iw = 320
+		*/
+		
+		var now = Math.abs(Math.round(endX/iw));
+
+		offsetL = - now * iw;
+
+		ul.style.transition = '.5s';
+
+		ul.style.transform = 'translateX('+ offsetL +'px)';
+
+	}
+
+
+
+
+
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

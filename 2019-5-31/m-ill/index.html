@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>三生三世十里桃花</title>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+	<article class="wrap">
+		<img src="images/shouji_zi.png" alt="" class="text" />
+		<!-- 选中一人 -->
+		<section class="main" style="display: none;">
+			<img src="images/shouji_1_big.png" class="img1" alt="" />
+		</section>
+		<!-- 选中两人 -->
+		<section class="main" style="display: none;">
+			<img src="images/shouji_2_small.png" class="img2" alt="" />
+			<img src="images/shouji_３_small.png" class="img3" alt="" />
+		</section>
+		<!-- 选中三人 -->
+		<!-- 选中两人 -->
+		<section 
+			class="main" 
+			id="main" 
+			ref="main"
+			@touchstart="start"
+			@touchend="end"
+		>
+			<img 
+				v-for="(val,key) in imgs"
+				:src="val" 
+				:class="'img'+(key+1)" 
+				:alt="arr[key]"
+				:style="{
+					width:arr[key] &&  arr[key][0] +'px',
+					top:arr[key] &&  arr[key][2] +'px',
+					left:arr[key] &&  arr[key][1] +'px',
+					zIndex:arr[key] &&  arr[key][3],
+				}"
+			/>
+			{{arr[0] && arr[0][0]}}
+		</section>
+		<img src="images/shouji_jhcg.png" alt="" class="tip" />
+		<section class="btn-box">
+			<a href="javascript:;" class="fl">晒晒卡片</a>
+			<a href="javascript:;" class="fr">送给好友</a>
+		</section>
+	</article>
+<script src="./vue.js"></script>
+<script>
+	new Vue({
+		el:".wrap",
+		data:{
+			imgs:['images/shouji_1_big.png','images/shouji_2_small.png','images/shouji_３_small.png'],
+			arr:[],
+			startNumX:0,
+			endNumX:0
+		},
+		methods:{
+			start(ev){
+				this.startNumX = ev.targetTouches[0].pageX;
+				
+			},
+			end(ev){
+				let x = ev.changedTouches[0].pageX - this.startNumX;
+				// console.log(ev.changedTouches[0])
+				if(x < -20){ //向左
+					// console.log('左');
+					//最后一张要到第一张
+					this.arr.push(this.arr.shift());
+					// this.arr.pop()
+					console.log(this.arr)
+
+				}else if(x > 20){ //向右
+					console.log('右')
+					this.arr.unshift(this.arr.pop());
+				}
+			}
+		},
+		mounted(){
+			let card = this.$refs.main.querySelectorAll('img');
+			card.forEach(e=>{
+				this.arr.push([e.offsetWidth,e.offsetLeft,e.offsetTop,getComputedStyle(e).zIndex]);
+			});
+			// console.log(this.arr)
+		}
+	});
+</script>
+</body>
+</html>

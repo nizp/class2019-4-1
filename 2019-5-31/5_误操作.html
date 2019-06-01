@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style >
+.active{
+    background: yellow;
+}
+</style>
+</head>
+<body>
+    <button class="active">按钮一</button>  
+    <button>按钮二</button>  
+    <button>按钮三</button>
+    <div id="box"></div>  
+<script>
+    let btns = document.querySelectorAll('button');
+    btns.forEach((e,i)=>{
+        e.addEventListener('touchstart',function(ev){
+           this.startX = ev.changedTouches[0].pageX;
+           this.startY = ev.changedTouches[0].pageY;
+        //    console.log(this.startX,this.startY)
+        })
+        e.addEventListener('touchend',function(ev){
+            // ev.changedTouches[0].pageY;
+            let x = ev.changedTouches[0].pageX - this.startX;
+            let y = ev.changedTouches[0].pageY - this.startY;
+            
+            //误操作:如果手指移动了超过50就不让代码执行
+            if(Math.abs(x) >= 50 || Math.abs(y) >= 50){
+                return;
+            }
+           
+            btns.forEach(e=>{e.className = ''});
+                e.className = 'active';
+                box.innerHTML = i;
+            })
+    });
+
+</script>
+</body>
+</html>
