@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+</style>
+</head>
+<body>
+        用户名:<input type="text" id="un"/>
+        密 码:<input type="password" name="pw"/>
+        <input type="button" value="提交">
+<script>
+
+    un.onblur = function(){
+        //虽然IE6以上浏览器支持XMLHttpRequest对象，但是每个版本会有差距
+        var xhr = new XMLHttpRequest;
+        xhr.open('get','/get1?user='+this.value,true);//是否异步
+        
+
+        
+        //事件绑定在send之前，能够监听建立连接，也就是在异步的情况下，能够多监听一步
+        xhr.onreadystatechange = function(){
+
+            if(xhr.readyState === 4){
+
+                if(xhr.status>=200 && xhr.status <= 207 || xhr.status == 304){
+                    console.log('成功');
+                }else{
+                    console.log('请求失败');
+                }
+                // console.log(xhr.readyState);
+                // console.log(xhr.status);
+            }
+            // console.log(xhr.readyState);
+        }
+
+        xhr.send();
+
+        console.log(1);
+        
+        
+       
+        // xhr.onload = function(){
+        //    console.log(xhr.responseText);
+        // }
+    };
+
+    // console.log(Array.prototype.push);
+
+</script>
+
+    
+</body>
+</html>

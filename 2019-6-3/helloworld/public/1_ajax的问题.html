@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <form action="/get" method="GET">
+        用户名:<input type="text" name="user"/>
+        密 码:<input type="password" name="pw"/>
+        <input type="submit" value="提交">
+    </form> -->
+
+    <!-- post -->
+    <form action="/post" method="POST" enctype="application/x-www-form-urlencoded">
+        用户名:<input type="text" name="user"/>
+        密 码:<input type="password" name="pw"/>
+        <input type="submit" value="提交">
+    </form>
+<script>
+    /*
+        ajax的交互模型:
+            let xhr = new XMLHttpRequest;
+            xhr.open('get','/get?user='+this.value,true);
+            xhr.send();
+            xhr.onload = function(){
+                xhr.responseText
+            }
+
+
+        get请求:参数在url上
+
+        url -> 后端给的 '/get?user=yuhaiyang'
+
+        xhr.open('get','/s?wd=zhufeng')
+
+
+        post请求:参数在send中
+
+        需要注意的是:
+            在真实开发中，ajax请求基本上都是用第三方库来请求的
+            第三方库已经把ajax封装起来了，看不见send
+
+
+
+            http://www.baidu.com/s
+            wd:'xxx' -> {}
+
+            后台文档会写清楚是get还是post
+
+            如果文档上没有，一定要主动问
+
+            get一般用于数据展示
+            post用户、传输较大数据
+
+            $.ajax({
+                type:'post',
+                url:'http://www.baidu.com/s',
+                data:{
+                    wd:'zhufeng'
+                },
+                success:function(data){
+
+                }
+            })
+
+        
+        https://www.roobobank.com/web/v1/raiseProdAndCustNum
+
+
+        "staNum=站号&startTime=起始时间&endTime=结束时间"
+
+        "startTime": “起始时间”,
+        "endTime": “结束时间”,
+        "equipmentType": “站点类型”,
+        "orgCode": “组织机构”
+        
+    */
+
+
+
+</script>
+</body>
+</html>

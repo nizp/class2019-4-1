@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 500px;
+            height: 600px;
+            background: url("http://demo.lanrenzhijia.com/2015/canvas0115/images/guaguaka_bg.png") no-repeat 0 0;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        #box #bg2_img {
+            width: 295px;
+            height: 195px;
+            position: absolute;
+            left: 150px;
+        }
+
+        #mycan {
+            background-color: transparent;
+            top: 0px;
+            position: absolute;
+            left: 50px;
+            top: 350px;
+            z-index: 10
+        }
+
+        #myimg {
+            height: 200px;
+            width: 400px;
+            position: absolute;
+            left: 50px;
+            top: 350px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <img id="bg2_img" src="img/guaguaka_word.png">
+        <img id="myimg" src="img/2.png" alt="">
+        <canvas id="mycan" height="200" width="400"></canvas>
+    </div>
+    <script>
+        /* 实现思路：
+        1、利用canvas画出指定尺寸的画布，把图片隐藏在下面，
+           通过设置globalCompositeOperation属性值为destination-out，
+           移动时根据坐标将与canvas画布重叠的部分变为透明。
+        2、利用getImageData的方法来获取canvas的像素点信息，
+           计算已经变透明的像素点的比例，当大于50%时，让画布完全透明，图片完整显示。*/ 
+
+        let can = document.getElementById("mycan");
+        let ctx = can.getContext("2d");
+        // 画布的宽高，根据背景图来获取
+        let width = document.getElementById("mycan").offsetWidth;
+        let height = document.getElementById("mycan").offsetHeight;
+        //绘制画布
+        ctx.fillStyle = '#aaa';
+        ctx.fillRect(0, 0, 400, 200);
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.lineWidth = 60;
+        //关键--在与源不重叠的区域上保留目标。其他部分都变成透明的。
+        ctx.globalCompositeOperation = "destination-out";
+        //按住鼠标事件触发刮奖效果
+        can.onmousedown = function () {
+            //鼠标移动事件
+            can.onmousemove = function (ev) {
+                let x = ev.offsetX;
+                let y = ev.offsetY;
+                ctx.beginPath();
+                ctx.arc(x, y, 25, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.closePath();
+                handleFilledPercentage(getFilledPercentage())
+            }
+        }
+        //松开鼠标事件取消刮奖效果
+        can.onmouseup = function () {
+            can.onmousemove = null;
+        }
+
+        function getFilledPercentage() {
+            let imgData = ctx.getImageData(0, 0, width, height);
+            // imgData.data是个数组，存储着指定区域每个像素点的信息，数组中4个元素表示一个像素点的rgba值
+            let pixels = imgData.data;
+            let transPixels = [];
+            for (let i = 0; i < pixels.length; i += 4) {
+                // 严格上来说，判断像素点是否透明需要判断该像素点的a值是否等于0，
+                // 为了提高计算效率，这儿设置当a值小于128，也就是半透明状态时就可以了
+                if (pixels[i + 3] < 128) {
+                    transPixels.push(pixels[i + 3]);
+                }
+            }
+            return (transPixels.length / (pixels.length / 4) * 100).toFixed(2) + '%'
+        }
+        // 设置阈值，去除灰色涂层
+        function handleFilledPercentage(percentage) {
+            percentage = percentage || 0;
+            if (parseInt(percentage) > 50) {
+                // 当像素点的个数超过  50% 时，清空画布，显示底图
+                ctx.clearRect(0, 0, width, height);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

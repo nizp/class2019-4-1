@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">点击生成</button>
+    <ul id="ul"></ul>
+<script>
+    // btn.onclick = function(){
+    //     fetch('./data.xml')
+    //     .then(data=>data.text())
+    //     .then(d=>{
+    //         let re = new RegExp(`<person>\\s+<name>([\\u4e00-\\u9fa5]+)</name>\\s+<age>(\\d+)</age>\\s+<sex>([\\u4e00-\\u9fa5])</sex>\\s+<info>([\\u4e00-\\u9fa5。？\.\\d，,]+)</info>\\s+</person>\\s+`,'g');
+    //         let html = '';
+    //         // console.log(d.match(re))
+    //         // console.log(d.match(/^<name>[\u4e00-\u9fa5]+<\/name>$/g));
+    //         // d.replace(re,($0,$1,$2,$3,$4)=>{
+    //         //     html += `<li>我的名字叫${$1},芳龄:${$2}性别:${$3}---我想说:${$4}</li>`
+    //         //     // console.log($1,$2,$3,$4);
+    //         // });
+    //         // ul.innerHTML = html;
+    //     });
+    // }
+    
+
+    btn.onclick = function(){
+        let html = '';
+        let xhr = new XMLHttpRequest;
+        xhr.open('get','data.xml');
+        xhr.send();
+        xhr.onload = function(){
+            let d = xhr.responseXML;
+            let person = d.getElementsByTagName('person');
+            for(let ele of person){
+                let arr = [];
+                for(let i=0;i<4;i++){
+                   let {innerHTML} = ele.children[i];
+                   //在XML中的innerHTML不是都兼容的
+                   arr.push(innerHTML);
+                }
+                html += `<li>
+                    我的名字叫${arr[0]},芳龄:${ele.children[1].innerHTML}性别:${ele.children[2].innerHTML}---我想说:${ele.children[3].innerHTML}    
+                </li>`
+            }
+            ul.innerHTML = html;
+
+
+            // console.log(person)
+            // console.log(xhr.responseXML)
+        }
+    }
+</script>
+</body>
+</html>

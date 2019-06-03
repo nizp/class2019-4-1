@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#img{
+    display: none;
+}
+</style>
+</head>
+<body>
+        用户名:<input type="text" id="un" name="user"/>
+        密 码:<input type="password" name="pw"/>
+        <input type="button" value="提交">
+        <img src="./1.gif" id="img">
+<script>
+
+    un.onblur = function(){
+        img.style.display = 'block';
+        let xhr = new XMLHttpRequest;
+        xhr.open('get','/sleep?name='+this.value,true);//是否异步
+        xhr.timeout = 3000;
+        xhr.ontimeout = function(){
+            console.log('超时');
+        }
+        xhr.send();
+        xhr.onprogress = function(ev){
+            console.log(ev);
+        }
+
+        
+
+        // xhr.onload = function(){
+        //     console.log(xhr.responseText);
+        //     img.style.display = 'none';
+        // }
+        console.dir(xhr);
+    };
+
+</script>
+
+    
+</body>
+</html>
