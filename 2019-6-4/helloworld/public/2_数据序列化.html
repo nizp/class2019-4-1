@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        {
+            user:'我',
+            pw:123,
+            wd:'上庄水库绿韵翠湖农庄'
+        }
+
+        user=我&pw=123&wd=上庄水库绿韵翠湖农庄
+    */   
+   
+    let data = {
+        user:'我',
+        pw:123,
+        wd:'上庄水库绿韵翠湖农庄'
+    }
+    /*
+        [user=我,pw=123,wd=上庄水库绿韵翠湖农庄]
+    */
+    //user=我&pw=123&wd=上庄水库绿韵翠湖农庄
+
+    // let arr = [];
+    // for(let attr in data){
+    //     arr.push(attr + '=' + data[attr]);
+    // }
+    // console.log(arr.join('&'));
+
+    //user=我&pw=123&wd=上庄水库绿韵翠湖农庄
+
+
+    let str = 'user=我&pw=123&wd=上庄水库绿韵翠湖农庄';
+    let obj = {};
+
+    str.split('&').forEach(item=>{
+        let d = item.split('=');
+        obj[d[0]] = d[1];
+    });
+
+    console.log(obj);
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#img{
+    display:none;
+}
+</style>
+</head>
+<body>
+ 
+    用户名:<input type="text"  id="un"/>
+    密 码:<input type="password" name="pw"/>
+    <input type="button" value="提交">
+    <img id="img" src="./1.gif" width="100" >
+   
+<script>
+    /*
+        浏览器对url的缓存:
+            第一次的url和第二次的url如果一样，那么请求的缓存
+            在IE低版本下url的缓存较严重。
+
+        解决:
+            只要让前后2次的url不一样就行了
+
+        /get?user=我&time=3y2813621836263724
+
+
+        
+    */
+
+    un.onblur = function(){
+        ajax({
+            created(){
+                img.style.display = 'block';
+            },
+            unmount(){
+                img.style.display = 'none';
+            },
+            url:'data.xml',
+            // method:'get',
+            // data:{
+            //     user:this.value,
+            //     pass:'123'
+            // },
+            dataType:'a',
+            success:function(data){
+                console.log(data);
+            }
+        });
+    }
+
+
+    function ajax(json){
+        var opt = {
+            dataType:'json',
+            url:'',  //请求地址
+            data:{}, //请求的参数
+            success:function(){}, //成功
+            method:'get', //请求方式
+            timeout:0,//设置超时时间
+            ontimeout:function(){},//超时之后干什么事
+            fail:function(){},//失败以后干嘛
+            created:function(){},//当ajax请求的时候
+            unmount:function(){}//当ajax请求完毕
+        }
+        // Object.assign(opt,json); //有配置走配置，没配置走默认
+
+        for(var j in json){
+            opt[j] = json[j];
+        }
+
+        var xhr = new XMLHttpRequest;
+
+        opt.created();
+
+        xhr.ontimeout = opt.ontimeout;
+
+        /*
+            {
+                user:我,
+                now:12345489463
+            }
+        */
+        opt.data['now'] = +new Date;
+
+
+        var arr = [];
+        for(var attr in opt.data){
+            arr.push(attr +'='+ opt.data[attr]);
+        }
+        var str = arr.join('&');
+
+        // str = str + '&now='+new Date;
+
+    //    console.log(str);
+
+        if(opt.method === 'get'){
+            xhr.open('get',opt.url + '?' + str);
+            xhr.timeout = opt.timeout;
+            xhr.onreadystatechange = ready;
+            xhr.send();
+        }else if(opt.method === 'post'){
+            xhr.open('post',opt.url);
+            xhr.timeout = opt.timeout;
+            xhr.setRequestHeader('Content-Type','application/x-www-from-urlencoded');
+            xhr.onreadystatechange = ready;
+            xhr.send(str);
+        }
+        
+        function ready(){
+            if(xhr.readyState === 4){
+                if(xhr.status >= 200 && xhr.status <=207 || xhr.status === 304){
+                    if(opt.dataType === 'json'){
+                        opt.success(new Function('','return'+xhr.responseText)());
+                    }else if(opt.dataType === 'xml'){
+                        opt.success(xhr.responseXML);
+                    }else{
+                        opt.success(xhr.responseText);
+                    }
+                    
+                }else{
+                   opt.fail(xhr.status);
+                }
+                opt.unmount();
+            }
+        }
+        
+    }
+
+
+</script>
+</body>
+</html>
