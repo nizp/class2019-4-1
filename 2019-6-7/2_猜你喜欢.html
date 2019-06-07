@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+.active{
+    background:yellow;
+}
+#box ul{
+    width:200px;
+    border:1px solid #000;
+    list-style:none;
+    _display: none;
+}
+#box ul li{
+    padding:5px;
+}
+#box ul.show{
+    display: block;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <input type="button" value="猜你喜欢" id="xh">
+        <div id="div">
+        </div>
+        <ul id="ul"></ul>
+    </div>
+<script>
+    //数据
+    let obj = {
+        "电影":['哥斯拉','调音师','无间道','葫芦娃','复联4'],
+        "音乐":['七里香','咖啡','暗香','窗外','小微'],
+        "电视剧":['亮剑','西游记','红楼梦','水浒传','刘老根']
+    }
+
+    //获取对象的key值，存到一个数组中（一会要用数组的方法）
+    let arr = Object.keys(obj);
+
+    //才打开页面的时候先去获取一下cookie中是否有xihuan的数据
+    let xharr = getCookie('xihuan');
+    //如果有就显示猜你喜欢这个按钮
+    if(xharr){
+        xh.style.display = 'block';
+        xh.onclick = function(){
+            //[音乐,电影]
+            xharr = JSON.parse(getCookie('xihuan'));//点击的时候获取最新的数据
+            let concatArr = [];
+            //把浏览过的数据都放到一个数组中
+            xharr.forEach(item=>{
+                concatArr.push(...obj[item])
+            });
+
+           console.log(concatArr)
+           //随机数组并且截取出5个放到render中
+           //渲染随机猜你喜欢
+            render(concatArr.sort((a,b)=>Math.random() - .5).slice(0,5));
+
+        }
+    }else{
+        //如果没有数据就隐藏
+        xh.style.display = 'none';
+    }
+
+
+    //生成按钮
+    arr.forEach((e,i)=>{
+        let btn = document.createElement('button');
+        btn.innerHTML = e;
+        if(i===0){
+            btn.className = 'active';
+            //默认把第一组数据渲染到页面
+            render(obj[arr[0]]);
+        }
+
+
+        //重点就是点击按钮去记录用户的行为，通过用户的行为去有针对的推送数据给用户
+        btn.onclick = function(){
+            //按钮切换
+           let btns = document.querySelectorAll('button');
+           btns.forEach((ee,ii)=>ee.className = '');
+           this.className = 'active';
+
+           //点击按钮的时候把cookie获取出来['电影','音乐']
+           let xharr = getCookie('xihuan');
+        //    console.log(!!xharr)
+            //如果没有设置过cookie，xharr为空数组
+            if(xharr){
+                xharr = JSON.parse(xharr)
+            }else{
+                xharr = [];
+            }
+
+            //如果数组中不包含点击的内容，那么就把点击的内容push到数组中
+            if(!xharr.includes(e)){
+                xharr.push(e);
+                //存cookie
+                setCookie('xihuan',JSON.stringify(xharr));
+            }
+
+        //    console.log(xharr);
+
+           render(obj[arr[i]]);
+        }
+
+        div.appendChild(btn);
+    });
+
+
+    function render(arr){
+        let html = '';
+        arr.forEach(ele=>{
+            html += '<li>'+ ele +'</li>'
+        });
+        ul.innerHTML = html;
+    }
+
+
+    // document.cookie = 'hh='+ JSON.stringify({name:1});
+
+
+
+    function setCookie(...arg){
+        if(arg.length === 2){
+            document.cookie = arg[0] +'='+arg[1];
+            return;
+        }
+        if(arg.length === 3){
+            if(typeof arg[2] === 'string'){
+                document.cookie = arg[0] +'='+arg[1] + '; Expires='+new Date(arg[2]);
+                return;
+            }
+            if(typeof arg[2] === 'number'){
+                let data = new Date(); //当前的时间
+                let sd = new Date;
+                sd.setDate(data.getDate() + arg[2]);
+                document.cookie = arg[0] +'='+arg[1] + '; Expires='+ sd;
+            }
+        }
+    }
+
+
+    //['zhufeng=123']   -> ['zhufeng','123']
+    function getCookie(val){
+        let ary = document.cookie.split('; ');
+        let v = '';
+        ary.forEach(item=>{
+            let ary2 = item.split('=');
+            if(ary2[0] === val){
+                v = ary2[1];
+                return;
+            }
+        })
+        //console.log(ary);
+        return v;
+    }
+
+
+
+
+
+</script>
+</body>
+</html>

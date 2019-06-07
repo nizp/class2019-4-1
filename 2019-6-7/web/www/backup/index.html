@@ -1,0 +1,95 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="/public/css/weibo.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="nArea">
+    <!--留言-->
+    <div class="takeComment">
+        <textarea name="textarea" class="takeTextField" id="text"></textarea>
+        <div class="takeSbmComment">
+            <input type="button" id="submit" class="inputs" value=""/>
+            <span>(可按 Enter 回复)</span>
+        </div>
+    </div>
+    <!--已留-->
+    <div class="commentOn">
+        <div class="messList" id="div1" style="height:502px">
+            <!--<div class="reply">
+                <p class="replyContent">卫士，新款卫士将推出总共14种车身式样。其中， XS旅行款车型售价为32295英镑(约33.6万元)。</p>
+                <p class="operation">
+                    <span class="replyTime">2018-09-08 16:37:60</span>
+                    <span class="handle">
+                        <a href="javascript:;" class="top">0</a>
+                        <a href="javascript:;" class="down_icon">0</a>
+                        <a href="javascript:;" class="cut">删除</a>
+                    </span>
+                </p>
+            </div>-->
+        </div>
+        <div class="page" id="page">
+            <a href="#" class="active">1</a>
+            <a href="#" >2</a>
+        </div>
+    </div>
+</div>
+<script>
+
+
+    //一上来或者刷新时请求数据，渲染页面
+
+    fetch('http://localhost:88/api/weibo?act=get&page=1')
+    .then(e=>e.json())
+    .then(d=>{
+        render(d);
+    });
+
+
+
+
+    //点击添加
+    submit.onclick = function(){
+        /*
+            1.点击添加的时候要请求数据，把输入的内容存到数据库
+            2.再请求一遍某页数据，然后渲染
+        */
+
+        fetch('http://localhost:88/api/weibo?act=add&content='+text.value)
+        .then(e=>e.json())
+        .then(d=>{
+            if(d.code === 0){
+                fetch('http://localhost:88/api/weibo?act=get&page=1')
+                .then(e=>e.json())
+                .then(d=>{
+                    render(d);
+                });
+            }
+        });
+        text.value = '';
+        // render(data)
+    }
+
+
+    function render(data){
+        let html = '';
+        data.forEach(item=>{
+            html += `<div class="reply">
+                    <p class="replyContent">${item.content}</p>
+                    <p class="operation">
+                        <span class="replyTime">2018-09-08 16:37:60</span>
+                        <span class="handle">
+                            <a href="javascript:;" class="top">0</a>
+                            <a href="javascript:;" class="down_icon">0</a>
+                            <a href="javascript:;" class="cut">删除</a>
+                        </span>
+                    </p>
+                </div>`
+        });
+        div1.innerHTML = html;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="author" content="Reddy.Huang"/>
+    <link rel="stylesheet" href="/public/css/reset.css">
+    <link rel="stylesheet" href="/public/css/register.css">
+    <title>Title</title>
+    <style>
+        h2 {
+            display: none;
+        }
+        #info{
+          display: none;
+        }
+    </style>
+</head>
+<body>
+<h2 id="userInfo">欢迎回来,<span id="user"></span></h2>
+<div class="form-wrapper">
+    <div class="banner"></div>
+    <form id="form">
+        <div class="item-wrapper"><label for="username">登陆名</label><input type="text" name="username" id="username" value=""></div>
+        <div class="item-wrapper"><label for="password">密码</label><input type="password" name="password" id="password" value=""></div>
+        <input type="button" value="登陆" id="submit">
+        <input type="button" value="注册" id="register">
+    </form>
+    <p id="info" >请输入信息</p>
+</div>
+<script src="./axios_dev.js"></script>
+<script>
+    //点击注册
+    register.onclick = function(){
+        //使用post请求注册接口
+        axios.post('/api/user/register',{
+                username:username.value,
+                password:password.value
+        })
+        .then((data)=>JSON.parse(data))
+        //data.json()
+        .then(d=>{
+            // console.log(d);
+            if(d.code === 1){
+                // console.log('失败');
+                info.innerHTML = '失败';
+                info.style.display = 'block';
+            }else if(d.code === 0){
+                // console.log('成功');
+                info.innerHTML = '恭喜注册成功';
+                info.style.display = 'block';
+                let num = 3;
+                let timer = setInterval(() => {
+                    info.innerHTML = '('+num+'s)带你去一个神秘的地方!';
+                    num --;
+                    if(num < 0){
+                        clearInterval(timer);
+                        num = 3;
+                        window.location.href="http://localhost:88";
+                    }
+                }, 1000);
+            }
+            console.log(d);
+        });
+    }
+
+
+
+    submit.onclick = function(){
+        quest('/api/user/login',{username:username.value,password:password.value})
+        .then(d=>{
+            if(d.code === 0){
+                info.innerHTML = '恭喜登录成功';
+                info.style.display = 'block';
+                let num = 3;
+                let timer = setInterval(() => {
+                    info.innerHTML = '('+num+'s)带你去一个神秘的地方!';
+                    num --;
+                    if(num < 0){
+                        clearInterval(timer);
+                        num = 3;
+                        window.location.href="http://localhost:88";
+                    }
+                }, 1000);
+            }else if(d.code === -3){
+                info.innerHTML = '登录失败';
+                info.style.display = 'block';
+            }
+        });
+       
+    }
+
+
+    function quest(url,obj){
+        return axios.post(url,obj)
+        .then(data=>JSON.parse(data))
+    }
+
+</script>
+</body>
+</html>

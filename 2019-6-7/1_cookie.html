@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        cookie
+            缓存
+
+        设置cookie跟你去在document上设置一个自定义的属性一样，
+        只不过这个自定义属性名必须为cookie,这个cookie能被客户端修改和查看
+    */
+//    document.name = 'haha';
+
+//    document.cookie = 'name=haha';
+//    document.cookie = 'name2=hehe';
+
+//    console.log(document.cookie);
+
+
+
+    // document.cookie = 'name=haha; Expires='+new Date('2019-6-7 15:55:00');
+
+
+    // getCookie(key)
+    // setCookie(key,val)
+    // removeCookie(key,val)
+    // clear()
+
+    function setCookie(...arg){
+        if(arg.length === 2){
+            document.cookie = arg[0] +'='+arg[1];
+            return;
+        }
+        if(arg.length === 3){
+            if(typeof arg[2] === 'string'){
+                document.cookie = arg[0] +'='+arg[1] + '; Expires='+new Date(arg[2]);
+                return;
+            }
+            if(typeof arg[2] === 'number'){
+                let data = new Date(); //当前的时间
+                let sd = new Date;
+                sd.setDate(data.getDate() + arg[2]);
+                document.cookie = arg[0] +'='+arg[1] + '; Expires='+ sd;
+            }
+        }
+    }
+
+
+    //['zhufeng=123']   -> ['zhufeng','123']
+    function getCookie(val){
+        let ary = document.cookie.split('; ');
+        let v = '';
+        ary.forEach(item=>{
+            let ary2 = item.split('=');
+            if(ary2[0] === val){
+                v = ary2[1];
+                return;
+            }
+        })
+        //console.log(ary);
+        return v;
+    }
+
+    //设置一个过期的时间，就死亡
+    function removeCookie(...arg){
+        setCookie(arg[0],arg[1],-1);
+    }
+
+    
+
+    // setCookie('zhufeng','001','2019-6-7 16:20:00')
+    setCookie('name','林xx',30000);
+
+    console.log(getCookie('name'));
+
+    removeCookie('zhufeng2','002');
+
+
+    // let sd = new Date();
+
+    // console.dir(sd)
+
+
+    
+
+</script>
+</body>
+</html>
