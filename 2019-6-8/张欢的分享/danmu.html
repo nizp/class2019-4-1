@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #wrapper {
+          height: 400px;
+          width: 700px;
+          margin: 0 auto;
+          position: relative;
+          overflow: hidden;
+          background: url(1.jpg);
+          background-size: 100%;
+          
+          color: #ffffff82;
+          /* color: black; */
+          font-size: 14px;
+          text-shadow: 1px 1px #000;
+        }
+        .right {
+          position: absolute;
+          visibility: hidden;
+          white-space: nowrap;
+          /*left: 700px;*/
+          transform: translateX(700px);
+        }
+        .left {
+          position: absolute;
+          white-space: nowrap;
+          user-select: none;
+          transition: transform 7s linear; /* 时间相同 越长的弹幕滑动距离越长 所以越快~ */
+        }
+        input {
+          position: absolute;
+          bottom: 10px;
+          left: 150px;
+          width: 300px;
+          height: 26px;
+        }
+    
+        button {
+          position: absolute;
+          bottom: 8px;
+          left: 476px;
+          width: 100px;
+          height: 38px;
+          border-radius: 10px;
+          font-size: 16px;
+        }
+      </style>
+</head>
+<body>
+    <div id="wrapper">
+        <input type="text">
+        <button>发&nbsp;&nbsp;送</button>
+      </div>
+      <script>
+      /*
+      首先是弹幕的位置，是要从最右滑到最左，为了防止随机高度弹幕会覆盖的问题，设置了通道。
+      每一个通道是从左到右的一条，高度固定，这样不同通道的弹幕不会相互覆盖。
+
+      设置10条弹幕通道，每个通道有一个DOM池，每一次发射弹幕就从DOM池中拿出一个DOM从右滑到左边直到消失，
+      然后再放回DOM池，当DOM池为空时就不能再通过该通道发射弹幕了，通过这种方式来限制最大同屏弹幕数。
+
+      弹幕滑动就是简单设置CSS属性  transition 实现。开始使用 left 改变弹幕的位置，后来改为 transform ，性能会提高很多。
+
+      因为通过 transition 设置了弹幕滑动的时间，而这个时间固定的，距离弹幕最左出现到最右消失，
+      也就是“屏幕宽度+弹幕长度”，所以： 弹幕越长，速度越快 。这样的话，后面特别长的弹幕就有可能超过前面比较短的弹幕
+ 
+
+      最后设置一个弹幕池，设置一个定时器不停的去弹幕池拿弹幕，当DOM空闲且有未发射弹幕时就发射弹幕。
+
+      
+      */
+        
+      /**
+       * 设置 弹幕DOM池 每一个通道最多六条弹幕
+      **/
+      
+      const MAX_DM_COUNT = 6;
+      const CHANNEL_COUNT = 10;
+      
+      let domPool = [];
+      //预设弹幕
+      let danmuPool = [
+        '前方大量弹幕来袭，请做好准备！', '233333333', '2333333', 
+        '2333333', '23333', '23333333333', '23333', '2333333', '2333333',
+        '富强 ','民 主','文明','和 谐',' 自由','平等','公正','法治','爱国','敬业','诚信','友善'
+      ];
+      let hasPosition = [];
+      
+      /**
+       * 做一下初始化工作
+       */
+      function init() {
+        let wrapper = document.getElementById('wrapper')
+        // 先new一些span 重复利用这些DOM
+        for (let j = 0; j < CHANNEL_COUNT; j++) {
+          let doms = [];
+          for (let i = 0; i < MAX_DM_COUNT; i++) {
+            // 要全部放进wrapper
+            let dom = document.createElement('span');
+            wrapper.appendChild(dom);
+            // 初始化dom的位置 通过设置className
+            dom.className = 'right';
+            // DOM的通道是固定的 所以设置好top就不需要再改变了
+            dom.style.top = j * 20 + 'px';
+            // 放入改通道的DOM池
+            doms.push(dom);
+            // 每次到transition结束的时候 就是弹幕划出屏幕了 将DOM位置重置 再放回DOM池
+            dom.addEventListener('transitionend', () => {
+              dom.className = 'right';
+              // dom.style.transition = null;
+              // dom.style.left = null;
+              dom.style.transform = null;
+      
+              domPool[j].push(dom);
+            });
+          }
+          domPool.push(doms);
+        }
+        // hasPosition 标记每个通道目前是否有位置
+        for (let i = 0; i < CHANNEL_COUNT; i++) {
+          hasPosition[i] = true;
+        }
+      }
+      
+      /**
+       * 获取一个可以发射弹幕的通道 没有则返回-1
+       */
+      function getChannel() {
+        for (let i = 0; i < CHANNEL_COUNT; i++) {
+          if (hasPosition[i] && domPool[i].length) return i;
+        }
+        return -1;
+      }
+      
+      /**
+       * 根据DOM和弹幕信息 发射弹幕
+       */
+      function shootDanmu(dom, text, channel) {
+        console.log('biu~ [' + text + ']');
+        dom.innerText = text;
+        // 如果为每个弹幕设置 transition 可以保证每个弹幕的速度相同 这里没有保证速度相同
+        // dom.style.transition = `transform ${7 + dom.clientWidth / 100}s linear`;
+      
+        // dom.style.left = '-' + dom.clientWidth + 'px';
+        // 设置弹幕的位置信息 性能优化 left -> transform
+        dom.style.transform = `translateX(${-dom.clientWidth}px)`;
+        dom.className = 'left';
+        
+        hasPosition[channel] = false;
+        // 弹幕全部显示之后 才能开始下一条弹幕
+        // 大概 dom.clientWidth * 10 的时间 该条弹幕就从右边全部划出到可见区域 再加1秒保证弹幕之间距离
+        setTimeout(() => {
+          hasPosition[channel] = true;
+        }, dom.clientWidth * 10 + 1000);
+      }
+      
+      window.onload = function() {
+      
+        init();
+      
+        // 为input和button添加事件监听
+        let btn = document.getElementsByTagName('button')[0];
+        let input = document.getElementsByTagName('input')[0];
+        btn.addEventListener('click', () => {
+          input.value = input.value.trim();
+          if (input.value) danmuPool.push(input.value);
+        })
+        input.addEventListener('keyup', (e) => {
+          if (e.key === 'Enter' && (input.value = input.value.trim())) {
+            danmuPool.push(input.value);
+          }
+        })
+        // 每隔1ms从弹幕池里获取弹幕（如果有的话）并发射
+        setInterval(() => {
+          let channel;
+          if (danmuPool.length && (channel = getChannel()) != -1) {
+            let dom = domPool[channel].shift();
+            let danmu = danmuPool.shift();
+            shootDanmu(dom, danmu, channel);
+          }
+        }, 1);
+      
+      }
+       
+      </script>
+</body>
+</html>

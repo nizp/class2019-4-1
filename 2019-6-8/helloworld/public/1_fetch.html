@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#img{
+    display:none;
+}
+</style>
+</head>
+<body>
+ 
+    用户名:<input type="text"  id="un"/>
+    密 码:<input type="password" name="pw"/>
+    <input type="button" value="提交">
+<script>
+    /*
+        get:
+            fetch(url)
+            .then(d)
+    */
+   un.onblur = function(){
+        // fetch('/get?user='+this.value)
+        // .then(e=>{
+        //     return e.json();
+        // })
+        // .then((d)=>{
+        //     console.log(d);
+        // })
+
+
+        // {} -> 'key=val&key=val\'
+
+        console.log(''+ new URLSearchParams({user:'tony',pass:123}))
+
+      
+       
+        fetch('/post',{
+            method:'post',
+            body: JSON.stringify({user:this.value}), //'user='+this.value,
+            headers:{
+                'content-type':'application/x-www-form-urlencoded'
+            }
+        }).then(d=>d.json())
+        .then(d=>{
+            console.log(d);
+        });
+   }
+</script>
+</body>
+</html>

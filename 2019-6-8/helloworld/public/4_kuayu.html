@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#img{
+    display:none;
+}
+</style>
+</head>
+<body>
+ 
+    用户名:<input type="text"  id="un"/>
+    密 码:<input type="password" name="pw"/>
+    <input type="button" value="提交">
+<script>
+   
+   //80
+   un.onblur = function(){
+      let xhr = new XMLHttpRequest;
+    //   xhr.open('get','http://localhost:8080/kuayu?user='+this.value);
+    // xhr.open('get','http://www.baidu.com');
+    xhr.open('get','/proxy'); //当做另一个服务器文件，这个文件和当前的服务器是同域
+      xhr.onload = function(){
+        // console.log(xhr.responseText);
+        document.write(xhr.responseText);
+      }
+      xhr.send();
+   }
+</script>
+</body>
+</html>

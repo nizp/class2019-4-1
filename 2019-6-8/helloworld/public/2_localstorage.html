@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="head">
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+</head>
+<body>
+<script>
+    // localStorage.setItem('name','哈哈哈');
+
+    // console.log(localStorage.getItem('name'))
+
+
+    let val = localStorage.getItem('style');
+    let st = document.createElement('style');
+    //没有style属性的时候就走请求
+    if(!val){
+        // let link = document.createElement('link');
+        // link.rel = 'stylesheet';
+        // link.href = 'http://localhost/1.css';
+        // link.id = '1_css';
+        // head.appendChild(link);
+
+        fetch('/1.css')
+        .then(d=>d.text())
+        .then(d=>{
+            setTimeout(() => {
+                //走的异步
+                st.innerHTML = d;
+                head.appendChild(st);
+            }, 3000);
+            localStorage.setItem('style',d);
+        });
+    }else{
+        //走的同步
+        st.innerHTML = val; 
+        head.appendChild(st);
+    }
+    // head.appendChild(st);
+
+
+    console.log()
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1">1改变</button>
+<script>
+    btn1.onclick = function(){
+        localStorage.setItem('name','haha');
+    }
+
+    window.onstorage = function(){
+        console.log(1);
+    }
+</script>
+</body>
+</html>

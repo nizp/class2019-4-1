@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		body,
+		h1 {
+			margin: 0;
+		}
+
+		ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		input {
+			outline: none;
+		}
+
+		table {
+			border-collapse: collapse;
+			border: #bbb;
+		}
+
+		body {
+			width: 100%;
+			height: 100%;
+			/*background: url(img/2.jpg) no-repeat;*/
+		}
+
+		.tBody {
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			margin-top: 30px;
+			padding: 20px 30px 40px;
+			background-color: rgba(255, 255, 255, .6);
+		}
+
+		.title {
+			text-align: center;
+			color: #fca113;
+			text-shadow: 0 0 2px #fcf913;
+			line-height: 50px;
+		}
+
+		table {
+			background-color: #fff;
+		}
+
+		th {
+			background-color: #ddd;
+		}
+
+		tr {
+			height: 30px;
+		}
+
+		ul {
+			padding: 5px 0;
+			width: 600px;
+			text-align: center;
+		}
+
+		td {
+			text-align: center;
+		}
+
+		td input {
+			margin: 0 2px;
+		}
+
+		li {
+			padding: 5px 0;
+			overflow: hidden;
+		}
+
+		label {
+			display: inline-block;
+		}
+
+		input[type="text"] {
+			border: 1px solid #ccc;
+			width: 80px;
+			height: 20px;
+		}
+
+		/*.active {
+	background-color: #f7cb75;
+}*/
+		/*#tab tbody tr:hover {
+	background-color: #f7cb75;
+}*/
+	</style>
+</head>
+
+<body>
+	<section class="tBody">
+		<h1 class="title"></h1>
+		<ul id="header">
+			<li class="addPre">
+				<label>商品名称： <input type="text" id="pname" /></label>
+                <label>商品热度: <input type="text" id="hot" /></label>
+                <label>商品价格： <input type="text" id="price" /></label>
+                <label>上架时间: <input type="text" id="time" /></label>
+                <label>图片地址: <input type="text" id="pic" /></label>
+                
+                <input type="button" value="添加" id="add" />
+			</li>
+			<li>
+				<input type="button" value="批量删除" id="rm" />
+			</li>
+		</ul>
+		<table id="tab" width="800" align="center" border="1">
+			<thead>
+				<th>全选<input type="checkbox" id="checkAll"></th>
+				<th index="id">编号</th>
+				<th>商品</th>
+				<th index="price">价格</th>
+                <th>热度</th>
+                <th>时间</th>
+                <th>操作</th>
+			</thead>
+			<tbody>
+				<!-- <tr>
+				<td><input type="checkbox"></td>
+				<td>1</td>
+				<td>露露</td>
+				<td>12</td>
+				<td>
+					<input type="button" value="删除">
+					<input type="button" value="上移">
+					<input type="button" value="下移">
+				</td>
+			</tr> -->
+
+			</tbody>
+		</table>
+	</section>
+</body>
+<script src="./json/data.js"></script>
+<script>
+	const tbody = document.getElementsByTagName('tbody')[0];
+	const addName = document.querySelector('.addPre #name');
+	const addAge = document.querySelector('.addPre #age');
+	let onOff = true;
+	//	渲染数据
+	function render(data) {
+		let html = '';
+		data.forEach((item) => {
+			html += `
+			<tr>
+				<td><input class="check" type="checkbox" ${item.checked ? 'checked' : ''}></td>
+				<td>${item.id}</td>
+				<td>${item.title}</td>
+                <td>${item.price}</td>
+                <td>${item.hot}</td>
+                <td>${item.time}</td>
+				<td class = "btns">
+					<input type="button" value="删除">
+					<input type="button" value="上移">
+					<input type="button" value="下移">
+				</td>
+			</tr>
+			`
+		});
+		tbody.innerHTML = html;
+		del();
+		check();
+		
+		//	隔行变色
+		function changeColor() {
+			let trs = document.getElementsByTagName('tr');
+			for (let i = 0; i < trs.length; i++) {
+				trs[i].style.background = i % 2 ? '#ccc' : 'yellow';
+			}
+		}
+		changeColor();
+
+		//	判断是否全选
+		if (data.every((item) => item.checked === true)) {
+			checkAll.checked = true;
+			onOff = false;
+		} else {
+			checkAll.checked = false;
+			onOff = true;
+		}
+	}
+	render(data);
+
+	//	添加内容
+	add.onclick = function () {
+        let pv = pname.value.trim();
+        let hv = hot.value.trim();
+        let priv = price.value.trim();
+        let tv = time.value.trim();
+        let pcv = pic.value.trim();
+        if(pv && hv && priv && tv && pcv){
+            data.unshift({
+                img:pcv,
+                id:+new Date,
+                title:pv,
+                time:tv,
+                price:priv,
+                hot:hv
+            });
+            localStorage.setItem('data',JSON.stringify(data))
+            alert('添加成功');
+        }else{
+            alert('请正确填写信息');
+        }
+
+	}
+
+	//	单选
+	function check() {
+		const checks = document.querySelectorAll('.check');
+		for (i = 0; i < checks.length; i++) {
+			checks[i].onclick = function () {
+				let id = this.parentNode.parentNode.children[1].innerText;
+				data.forEach((item) => {
+					if (item.id == id) {
+						item.checked = item.checked ? false : true;
+					}
+				});
+				render(data);
+			}
+		}
+
+	}
+	//	全选
+	checkAll.onclick = function () {
+		if (onOff) {
+			data.forEach((item) => item.checked = true);
+		} else {
+			data.forEach((item) => item.checked = false);
+		}
+		onOff = !onOff;
+		render(data);
+	}
+
+	//删除	上移	下移
+	function del() {
+		const btns = document.querySelectorAll('.btns');
+		for (i = 0; i < btns.length; i++) {
+			btns[i].onclick = function (ev) {
+				let id = this.parentNode.children[1].innerText;
+				let index = 0, move = '';
+				data.forEach((item, i) => { if (item.id == id) index = i });
+				if (ev.target.value === '删除') {
+					data = data.filter((item) => item.id != id);
+				} else if (ev.target.value === '上移') {
+					if (index > 0) {
+						move = data.splice(index, 1)[0];
+						data.splice(--index, 0, move);
+					}
+				} else if (ev.target.value === '下移') {
+					if (index < data.length - 1) {
+						move = data.splice(index, 1)[0];
+						data.splice(++index, 0, move);
+					}
+				}
+				render(data);
+			}
+		}
+	}
+
+	//	批量删除
+	rm.onclick = function () {
+		data = data.filter((item) => item.checked === false);
+		render(data);
+		checkAll.checked = false;
+		onOff = true;
+	}
+
+</script>
+
+</html>
