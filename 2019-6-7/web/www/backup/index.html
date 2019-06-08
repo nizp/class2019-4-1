@@ -1,95 +1,101 @@
-﻿<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link href="/public/css/weibo.css" rel="stylesheet" type="text/css"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="author" content="Reddy.Huang"/>
+    <link rel="stylesheet" href="/public/css/reset.css">
+    <link rel="stylesheet" href="/public/css/register.css">
+    <title>Title</title>
+    <style>
+        h2 {
+            display: none;
+        }
+        #info{
+          display: none;
+        }
+    </style>
 </head>
 <body>
-<div class="nArea">
-    <!--留言-->
-    <div class="takeComment">
-        <textarea name="textarea" class="takeTextField" id="text"></textarea>
-        <div class="takeSbmComment">
-            <input type="button" id="submit" class="inputs" value=""/>
-            <span>(可按 Enter 回复)</span>
-        </div>
-    </div>
-    <!--已留-->
-    <div class="commentOn">
-        <div class="messList" id="div1" style="height:502px">
-            <!--<div class="reply">
-                <p class="replyContent">卫士，新款卫士将推出总共14种车身式样。其中， XS旅行款车型售价为32295英镑(约33.6万元)。</p>
-                <p class="operation">
-                    <span class="replyTime">2018-09-08 16:37:60</span>
-                    <span class="handle">
-                        <a href="javascript:;" class="top">0</a>
-                        <a href="javascript:;" class="down_icon">0</a>
-                        <a href="javascript:;" class="cut">删除</a>
-                    </span>
-                </p>
-            </div>-->
-        </div>
-        <div class="page" id="page">
-            <a href="#" class="active">1</a>
-            <a href="#" >2</a>
-        </div>
-    </div>
+<h2 id="userInfo">欢迎回来,<span id="user"></span></h2>
+<div class="form-wrapper">
+    <div class="banner"></div>
+    <form id="form">
+        <div class="item-wrapper"><label for="username">登陆名</label><input type="text" name="username" id="username" value=""></div>
+        <div class="item-wrapper"><label for="password">密码</label><input type="password" name="password" id="password" value=""></div>
+        <input type="button" value="登陆" id="submit">
+        <input type="button" value="注册" id="register">
+    </form>
+    <p id="info" >请输入信息</p>
 </div>
+<script src="./axios_dev.js"></script>
 <script>
+    //点击注册
+    register.onclick = function(){
+        //使用post请求注册接口
+        axios.post('/api/user/register',{
+                username:username.value,
+                password:password.value
+        })
+        .then((data)=>JSON.parse(data))
+        //data.json()
+        .then(d=>{
+            // console.log(d);
+            if(d.code === 1){
+                // console.log('失败');
+                info.innerHTML = '失败';
+                info.style.display = 'block';
+            }else if(d.code === 0){
+                // console.log('成功');
+                info.innerHTML = '恭喜注册成功';
+                info.style.display = 'block';
+                let num = 3;
+                let timer = setInterval(() => {
+                    info.innerHTML = '('+num+'s)带你去一个神秘的地方!';
+                    num --;
+                    if(num < 0){
+                        clearInterval(timer);
+                        num = 3;
+                        window.location.href="http://localhost:88";
+                    }
+                }, 1000);
+            }
+            console.log(d);
+        });
+    }
 
 
-    //一上来或者刷新时请求数据，渲染页面
 
-    fetch('http://localhost:88/api/weibo?act=get&page=1')
-    .then(e=>e.json())
-    .then(d=>{
-        render(d);
-    });
-
-
-
-
-    //点击添加
     submit.onclick = function(){
-        /*
-            1.点击添加的时候要请求数据，把输入的内容存到数据库
-            2.再请求一遍某页数据，然后渲染
-        */
-
-        fetch('http://localhost:88/api/weibo?act=add&content='+text.value)
-        .then(e=>e.json())
+        quest('/api/user/login',{username:username.value,password:password.value})
         .then(d=>{
             if(d.code === 0){
-                fetch('http://localhost:88/api/weibo?act=get&page=1')
-                .then(e=>e.json())
-                .then(d=>{
-                    render(d);
-                });
+                info.innerHTML = '恭喜登录成功';
+                info.style.display = 'block';
+                let num = 3;
+                let timer = setInterval(() => {
+                    info.innerHTML = '('+num+'s)带你去一个神秘的地方!';
+                    num --;
+                    if(num < 0){
+                        clearInterval(timer);
+                        num = 3;
+                        window.location.href="http://localhost:88";
+                    }
+                }, 1000);
+            }else if(d.code === -3){
+                info.innerHTML = '登录失败';
+                info.style.display = 'block';
             }
         });
-        text.value = '';
-        // render(data)
+       
     }
 
 
-    function render(data){
-        let html = '';
-        data.forEach(item=>{
-            html += `<div class="reply">
-                    <p class="replyContent">${item.content}</p>
-                    <p class="operation">
-                        <span class="replyTime">2018-09-08 16:37:60</span>
-                        <span class="handle">
-                            <a href="javascript:;" class="top">0</a>
-                            <a href="javascript:;" class="down_icon">0</a>
-                            <a href="javascript:;" class="cut">删除</a>
-                        </span>
-                    </p>
-                </div>`
-        });
-        div1.innerHTML = html;
+    function quest(url,obj){
+        return axios.post(url,obj)
+        .then(data=>JSON.parse(data))
     }
+
 </script>
 </body>
 </html>
