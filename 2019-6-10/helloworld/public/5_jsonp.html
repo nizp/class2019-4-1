@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="head">
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#img{
+    display:none;
+}
+</style>
+</head>
+<body>
+    <input type="text"  id="un"/>
+    <ul id="ul"></ul>
+<script>
+
+    /*
+        https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1462,21099,18560,29135,29237,28518,29098,29139,28832,28585,26350&wd=风扇&req=2&csor=2&pwd=f&cb=jQuery1102011445205219084276_1559985547580&_=1559985547584
+    
+        课后思考，创建了很多的script标签在页面中真的好吗？
+
+        尝试自己封装一个jsonp
+    */
+
+    //script标签是可以支持跨域的，能够尽量去解析js代码
+
+    //在全局定义了一个fn函数等待被调用
+    function fn(data){
+        console.log(data);
+        if(data.g){
+            let html = '';
+            data.g.forEach(e=>{
+                html += '<li>'+ e.q +'</li>'
+            })
+            ul.innerHTML = html;
+        }
+        
+    }
+   
+    un.onkeyup = function(){
+        let oS = document.createElement('script');
+        // oS.src = 'qq.exe';
+        // oS.src = 'http://localhost:8080/jsonp?callback=fn';
+        oS.src = 'https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1462,21099,18560,29135,29237,28518,29098,29139,28832,28585,26350&wd='+this.value+'&req=2&csor=2&pwd=f&cb=fn'
+        head.appendChild(oS);
+        //上面这三句话等同于下面的一句，函数调用。
+        // fn([1,2,3,4])
+    }
+</script>
+<!-- <script src="qq.exe"></script> -->
+</body>
+</html>

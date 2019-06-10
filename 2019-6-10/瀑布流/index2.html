@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .ul_box{
+            margin: 0 auto;
+            border:2px solid #000;
+            position: relative;
+        }
+
+        .ul_box li{
+            width: 200px;
+            _min-height: 200px;
+            position: absolute;
+            left:0;
+            top:0;
+            transition: 500ms;
+        }
+        h3{
+            font-size: 14px;
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+
+        }
+    </style>
+</head>
+
+<body>
+    <ul class='ul_box'>
+       
+    </ul>
+<script>
+    /*
+        1.动态计算当前可视区能放多少个图片
+        2.拿到top和left的数组
+        3.请求数据，把数据生成DOM放到ul中，给位置
+    */
+    let picW = 200;
+    let pad = 10;
+    let iW = document.body.clientWidth;
+    let len = Math.floor(iW/(picW+pad)); //一页有多少个图片
+
+    const ul_box = document.querySelector('.ul_box');
+    ul_box.style.width = (picW + pad) * len - pad +'px';
+
+
+    let arrT = [];
+    let arrL = [];
+    let onOff = false;
+
+    for(let i=0;i<len;i++){
+        arrT[i] = 0;
+        arrL[i] = i * (picW + pad)
+    }
+
+    // console.log(arrT,arrL);
+
+    render();
+
+    //滚动增加图片
+    onscroll = function(){
+        // console.log(arrT);
+        let {m} = MIndex();
+        if(!onOff){
+            if(window.innerHeight + window.pageYOffset > m){
+                console.log('要加载')
+                render();
+            }
+        }
+    }
+
+
+    onresize = function(){
+        iW = document.body.clientWidth;
+        len = Math.floor(iW/(picW+pad)); //一页有多少个图片
+
+        if(len > 8){
+            len = 8;
+        }else{
+            len = 4;
+        }
+        ul_box.style.width = (picW + pad) * len - pad +'px';
+        arrT.length = arrL.length = 0;
+        for(let i=0;i<len;i++){
+            arrT[i] = 0;
+            arrL[i] = i * (picW + pad)
+        }
+
+        let lis = document.querySelectorAll('li');
+
+        lis.forEach(ele=>{
+            let {index} = MIndex();
+            ele.style.left = arrL[index] + 'px';
+            ele.style.top = arrT[index] + 'px';
+            arrT[index] += ele.scrollHeight + 34; 
+        });
+    }
+    function render(){
+        if(onOff)return;
+        onOff = true;
+        fetch('./data.json')
+        .then(d=>d.json())
+        .then(data=>{
+            // console.log(data);
+
+            for(let item of data){
+                let li = document.createElement('li');
+                let img = document.createElement('img');
+                let h3 = document.createElement('h3');
+                img.src = item.src;
+                h3.innerHTML = item.title;
+
+                img.onload = function(){
+                    // console.log(i.height,i.width);
+                    //设置比例图片的高度
+                    let iH = picW * img.height / img.width;
+
+                    img.style.height = iH;
+
+                // console.log(img.height)
+
+                    li.append(img);
+                    li.append(h3);
+
+                    let {index} = MIndex();
+                    li.style.left = arrL[index] + 'px';
+                    li.style.top = arrT[index] + 'px';
+
+                    arrT[index] += iH + 24 + 10;
+
+                    ul_box.append(li);
+                }
+            }
+        
+            onOff = false;
+        });
+    }
+
+    function MIndex(){
+        //找最小
+        let m = Math.min(...arrT);
+        //通过最小值找到该值的索引
+        let index = arrT.findIndex(e=>e===m);
+        return {
+            m,index
+        };
+    }
+
+    /*
+         <li>
+            <img src="./img/1.png" alt="">
+            <h3>这个是个title</h3>
+        </li>
+    */
+
+
+
+
+
+</script>
+</body>
+
+</html>

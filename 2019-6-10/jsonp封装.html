@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="head">
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt"/>
+    <ul id="ul"></ul>
+<script>    
+    
+
+    txt.onkeyup = function(){
+        let v = this.value;
+        jsonp({
+            url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+            data:{
+                wd:v,
+                json:1
+            },
+            callback:'cb',
+            success:function(data){
+                let html = '';
+                data.s.forEach(item=>{
+                    html += `<li>${item}</li>`
+                });
+                ul.innerHTML = html;
+
+                console.dir(window);
+            }
+        });
+    }
+
+    
+    /*
+        https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=&json=1&cb=fn
+    */
+
+
+    function jsonp(json){
+        let fnName = 'jQuery_'+ (Date.now());
+        window[fnName] = function (data){
+           json.success (data);
+        //    delete window[fnName];
+            window[fnName] = null;
+        }
+
+        //动态创建都异步
+        let oS = document.createElement('script');
+        // oS.src = json.url + '?' +new URLSearchParams(json.data) + '&'+json.callback+'='+fnName;
+        json.data[json.callback] = fnName; 
+        oS.src = json.url + '?' +new URLSearchParams(json.data);
+        head.appendChild(oS);
+        oS.remove();
+    }
+
+
+</script>
+</body>
+</html>

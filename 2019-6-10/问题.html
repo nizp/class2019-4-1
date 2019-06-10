@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="head">
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        1.怎么开服务
+            前后(后台就需要web服务器)台交互
+            helloworld是一个web服务，能通过localhost访问数据或者是页面
+
+            服务器文件必须在服务器环境下才能运行
+
+            www.baidu.com -> www.baidu.com/index.html
+
+            未来上班有99.9%的开发内容都在服务器上
+
+        2.回调，jsonp
+            1.全局定义一个函数
+            2.请求过来的数据必须为函数名+括号的
+
+            function fn(data){
+                console.log(data);
+            }
+
+            fn([1,2,3]);
+
+            script src="http://www.baidu.com"
+
+
+
+        
+
+        3.建立白名单
+
+            目前测试只有设置*才有效
+
+    */    
+</script>
+
+<script>
+    // var a = 10;
+    // function fn(b){
+    //     alert(b);
+    // }
+    
+</script>
+<script>
+    // var b = 20;
+    // fn(b);
+    // alert(a);
+</script>
+<script>
+    function fn(data){
+        console.log(data);
+    }
+</script>
+<script>
+    document.onclick = function(){
+        let oS = document.createElement('script');
+        oS.src = 'http://localhost:8080/jsonp?callback=fn';
+        head.appendChild(oS);
+        //fn([1,2,3]);
+    }
+</script>
+
+</body>
+</html>
