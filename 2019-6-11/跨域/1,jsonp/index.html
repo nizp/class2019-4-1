@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSONP</title>
+</head>
+<body>
+    <!--  
+        JSONP原理：
+        1、利用了script标签的src的属性，src的属性是非同源策略，可以访问不同服务器或端口下的数据；
+        2、给这个src的路径拼接一个callback的属性，callback=fn；当数据通过http传输给服务器；
+            服务器会把数据放进callback传进的函数的参数里
+        3、服务器把处理的数据和函数通过http传给客户端，当客户端接受到之后，让fn进行执行。
+
+        JSONP是常见的一种跨域解决方式，实现非同源下的数据请求
+      
+    -->
+    <script>
+        
+         function jsonp({ url, params, cb}) {
+            return new Promise((resolve, reject) => {
+                let script = document.createElement('script');
+                //声明一个全局的函数
+                window[cb] = function (data) {
+                    resolve(data);
+                    document.body.removeAttribute(script);//用完在给删掉
+                };
+                params = { ...params, cb }; //wd=b&cb=show
+                let arrs = [];//序列化
+                for (let key in params) {
+                    arrs.push(`${key}=${params[key]}`);
+                }
+                script.src = `${url}?${arrs.join('&')}`;//在src后拼接url、params、cb
+                document.body.appendChild(script);//添加到页面
+            })
+        }
+        //只能发送get请求 不支持post  put delete
+        //不安全 xss攻击 不采用
+        jsonp({
+            url:'http://localhost:3002/say',
+            params:{wd:'can i help you?'},
+            cb:'show'
+        }).then(data=>{
+            console.log(data);
+        })
+    </script>
+</body>
+</html>
