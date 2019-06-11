@@ -3,8 +3,16 @@
 <head id="head">
   <meta charset="utf-8">
   <title></title>
+<style>
+#box{
+  width:100px;
+  height:100px;
+  background: red;
+}
+</style>
 </head>
 <body>
+  <div id="box"></div>
   <input type="text" id="txt"/>
 <script>
   txt.onblur = function(){
@@ -22,15 +30,21 @@
     });
   }
 
+  //
+
+  // let str = '{code:1,mas:'+'用户名'+'xx}'
+
+  let str = '{code:1,mas:"用户名xx"}';
+
 
 
 
 function jsonp(json){
-        let opt = {
-          callback:'callback',
-          url:'',
-          data:{},
-        }
+        // let opt = {
+        //   callback:'callback',
+        //   url:'',
+        //   data:{},
+        // }
         let fnName = json.fname || 'jQuery_'+ (Date.now());
         window[fnName] = function (data){
            json.success (data);

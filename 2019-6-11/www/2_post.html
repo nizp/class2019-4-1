@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    fetch('/post',{
+        body:'user=xiaoqiang',
+        method:'post',
+        headers:{
+            'Content-Type':'application/x-www-form-urlencoded'
+        }
+    }).then(e=>e.json())
+    .then(d=>{
+        console.log(d);
+    });
+
+
+</script>
+</body>
+</html>

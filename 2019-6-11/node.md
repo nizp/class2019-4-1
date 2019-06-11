@@ -1,3 +1,4 @@
+
 # node
 
 ### 服务器语言
@@ -17,25 +18,27 @@
 
 后台管理（vue全家桶、react全家桶） + node + 数据库
 
+
+
 ### 通过node更好的去理解前端做的事情
 > Node.js是基于Chrome的V8 JavaScript引擎构建的JavaScript运行环境
 
 ### node的优势
-> 单线程
-> 事件驱动
-> 非阻塞I/O
+- 单线程
+- 事件驱动
+- 非阻塞I/O
 
 
 ### npm 全球最大的包管理平台（下载资源、学习平台）
 
-### node的模块化管理
+**node的模块化管理**
 
 > 通过require('http')引入文件 如果不写路径说明要么node中，要么在node_modules中,否则要加路径如require('./3')
 
 
 > 通过module.exports = {key:value} 去导出
 
-### 写一个人生中第一个服务器
+**写一个人生中第一个服务器**
 ```
 const http = require('http'); //引包
 
@@ -64,6 +67,31 @@ app.listen(80);
     ary.find(e=>e==1) -> 1
 ```
 
+````
+    xxx.com?user=abc&pass=123&cb=fn&wd=警察叔叔
+```
+### fs - FileSystem 文件管理
+
+- const fs = require('fs');
+
+```
+到www目录下找1.txt文件
+fs.readFile('./www/1.txt',(error,data)=>{
+    if(error){
+        console.log('404');
+    }else{
+        console.log(data.toString())
+    }
+})
+
+也可以用readFileSync
+try {
+    let data = fs.readFileSync('./www/2.txt');
+    console.log(data);
+} catch (error) {
+    console.log('404');
+}
+```
 
 
 
