@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head id="head">
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+  <input type="text" id="txt"/>
+<script>
+  txt.onblur = function(){
+    jsonp({
+      url:"http://localhost",
+      data:{
+        user:this.value
+      },
+      callback:'cb',
+      //xx?cb=xx
+      success:function(data){
+        console.log(data);
+      },
+      // fname:'fn'
+    });
+  }
+
+
+
+
+function jsonp(json){
+        let opt = {
+          callback:'callback',
+          url:'',
+          data:{},
+        }
+        let fnName = json.fname || 'jQuery_'+ (Date.now());
+        window[fnName] = function (data){
+           json.success (data);
+        //    delete window[fnName];
+            window[fnName] = null;
+        }
+
+        //动态创建都异步
+        let oS = document.createElement('script');
+        // oS.src = json.url + '?' +new URLSearchParams(json.data) + '&'+json.callback+'='+fnName;
+        json.data[json.callback] = fnName; //cb=jquery_231231
+        oS.src = json.url + '?' +new URLSearchParams(json.data);
+        document.querySelector('head').appendChild(oS);
+        oS.remove();
+    }
+
+</script>
+</body>
+</html>
