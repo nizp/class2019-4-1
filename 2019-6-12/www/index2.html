@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+   用户名:<input type="text" id="t1"/>
+    密 码:<input type="password" id="t2"/>
+    <button id="btn">注册按钮</button>
+<script>
+
+
+    // fetch('/user',{
+    //     body:'name=haha',
+    //     method:'post',
+    //     headers:{
+    //         'Content-Type':'application/x-www-form-urlencoded'
+    //     }
+    // })
+
+
+    t1.onblur = function(){
+        let v1 = t1.value;
+        if(v1){
+            fetch('/user/getname',{
+                body:'user='+v1,
+                method:'post',
+                headers:{
+                    'Content-Type':'application/x-www-form-urlencoded'
+                }
+            })
+            .then(e=>e.json())
+            .then(d=>{
+                if(d.code === 1){
+                    t1.style.border = '1px solid red';
+                }else if(d.code === 0){
+                    t1.style.border = '1px solid green';
+                }
+            })
+        }
+    }
+
+
+    btn.onclick = function(){
+        let v1 = t1.value.trim();
+        let v2 = t2.value.trim();
+        if(v1 && v2){
+            let xhr = new XMLHttpRequest;
+            xhr.open('post','/user');
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+            xhr.send('user='+v1+'&pass='+v2);
+            xhr.onload = function(){
+                // console.log(xhr.readyState);
+                // console.log(typeof xhr.responseText,xhr.responseText);
+                let data = JSON.parse(xhr.responseText);
+                if(data.code === 1){
+                    alert('用户名已占用');
+                }else if(data.code === 2){  
+                    alert('请正确填写用户名或密码');
+                }else if(data.code === 0){
+                    alert('注册成功');
+                    window.location.href = './list.html';
+                }
+
+            }
+        }else{
+            alert('请填写内容!');
+        }
+    }
+
+</script>
+</body>
+</html>
