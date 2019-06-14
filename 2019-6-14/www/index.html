@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+<style>
+*{
+    margin: 0;
+    padding:0;
+    list-style: none;
+}
+#ul{
+    width:100px;
+    border:1px solid #000;
+}
+.active{
+    color:red;
+}
+</style>
+</head>
+<body>
+    <ul id="ul">
+        {% for key,val in data %}
+            {% if key === 0 %}
+                <li class="active">{{val}}</li>
+            {% else %}
+                <li>{{val}}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+<script>
+    /*
+        以前 服务器渲染，前后端没有分离 -> 切图写静态页面
+
+        SSR
+    */
+    // let arr = [1,2,3,4];    
+    // ul.innerHTML = arr.map(ele=>'<li>'+ele+'</li>').join('');
+</script>
+</body>
+</html>

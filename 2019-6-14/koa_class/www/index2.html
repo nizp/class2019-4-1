@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <link rel="stylesheet" href="css/index.css">
+<style>
+#list img{
+    /* opacity: 0; */
+    transition: 1s;
+}
+</style>
+</head>
+<body>
+<div class="content">
+    <div class="header">
+        <span>排序</span>
+        <a href="javascript:;" kk="time">上架时间
+            <i class="up"></i>
+            <i class="down"></i>
+        </a>
+        <a href="javascript:;" kk="hot">热度
+            <i class="up"></i>
+            <i class="down"></i>
+        </a>
+        <a href="javascript:;" kk="price">价格
+            <i class="up"></i>
+            <i class="down"></i>
+        </a>
+    </div>
+    <ul id="list">
+        <!-- <li>
+            <img src="img/1.jpg" alt="">
+            <span>华为畅享7（香槟金）</span>
+            <span>2018-01-01</span>
+            <span>1</span>
+            <span>992</span>
+        </li> -->
+    </ul>
+</div>
+<script src="json/data.js"></script>
+<script>
+
+    function render(data){
+        let html = '';
+        data.forEach(item=>{
+            let img = item.img.includes('http')?item.img:'./'+item.img;
+            html += `
+                <li>
+                    <img src="${img}" alt="${item.title}">
+                    <span>${item.title}</span>
+                    <span>${item.time}</span>
+                    <span>${item.id}</span>
+                    <span>${item.price}</span>
+                </li>
+            `;
+        });
+
+        list.innerHTML = html;
+    }
+
+
+    let v = localStorage.getItem('data');
+    //本地有没有数据，没有走src的data
+    if(!v){
+        render(data);
+    }else{
+        //有就走本地
+        data = JSON.parse(localStorage.getItem('data'));
+        if(data.length){
+            render(data);
+        }
+    }
+    
+    window.onstorage = function(){
+        data = JSON.parse(localStorage.getItem('data'));
+        if(data.length){
+            render(data);
+        }
+    }
+
+</script>
+</body>
+</html>
