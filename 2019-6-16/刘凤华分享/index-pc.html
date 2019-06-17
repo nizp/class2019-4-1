@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: "宋体";
+
+
+        }
+
+        body {
+            position: relative;
+            background: url('timg.gif');
+        }
+
+        .warp {
+            margin: 0 auto;
+            width: 100%;
+            overflow: hidden;
+            color: #ffffff;
+            position: relative;
+            /* width: 300px; */
+            height: 600px;
+        }
+
+        header {
+            width: 100%;
+            height: 100px;
+            font-size: 40px;
+            letter-spacing: 10px;
+            line-height: 100px;
+            text-align: center;
+            background-color: #000000;
+            position: fixed;
+            z-index: 999;
+            box-shadow: 0 140px 140px #000000;
+
+        }
+
+        #up {
+            width: 100%;
+            height: 20%;
+            background: #000000;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 9;
+            _box-shadow: 0 140px 140px #000000;
+        }
+
+        #down {
+            width: 100%;
+            height: 20%;
+            background: #000000;
+            position: absolute;
+            bottom: 1%;
+            left: 0;
+            z-index: 9;
+            box-shadow: 0 -140px 140px #000000;
+        }
+
+
+
+        #lyric {
+            width: 100%;
+            padding-top: 120px;
+            line-height: 40px;
+            letter-spacing: 6px;
+            transition-duration: 600ms;
+            text-align: center;
+            height: 600px;
+            _overflow: hidden;
+            font-size: 30px;
+            color: #999;
+            position: relative;
+            z-index: 1;
+        }
+
+        #lyric .lineHigh {
+            /*高亮行*/
+            color: #ffffff;
+            font-size: 34px;
+            transition: 200ms;
+        }
+
+        #audio {
+            position: absolute;
+            left: 50%;
+            margin-left: -150px;
+            z-index: 999;
+            box-shadow: 0 -50px 40px #000000;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="warp">
+        <header>
+            儿时
+        </header>
+        <div id='up'></div>
+        <!-- 歌词 -->
+        <ul id="lyric"></ul>
+
+        <!-- LRC歌词 -->
+        <textarea id="lrc_content" cols="30" style="display: none">
+
+            [00:00.60]刘昊霖 - 儿时
+            [00:01.60]词：唐映枫
+            [00:02.60]曲：刘昊霖
+            [00:16.40]铁道旁赤脚追晚霞
+            [00:20.95]玻璃珠铁盒英雄卡
+            [00:25.31]玩皮筋迷藏石桥下
+            [00:29.77]姥姥又纳鞋坐院坝
+            [00:34.48]铁门前篮筐银杏花
+            [00:38.93]茅草屋可有住人家
+            [00:43.41]放学路打闹嘻嘻哈
+            [00:47.92]田埂间流水哗啦啦
+            [00:52.41]我们就一天天长大
+            [00:56.88]甜梦中大白兔黏牙
+            [01:01.45]也幻想神仙科学家
+            [01:06.05]白墙上泥渍简笔画
+            [01:10.66]我们就一天天长大
+            [01:15.17]四季过老梧桐发芽
+            [01:19.63]沙堆里有宝藏和塔
+            [01:24.60]长板凳搭起一个家
+            [01:46.92]日子总慢得不像话
+            [01:51.43]叶落满池塘搬新家
+            [01:55.89]二十寸彩电皮沙发
+            [02:00.44]五点半大风车动画
+            [02:04.94]晚饭后纳凉星夜下
+            [02:09.51]萤火虫微风弯月牙
+            [02:14.17]大人聊听不懂的话
+            [02:18.57]鬼怪都躲在床底下
+            [02:23.17]我们就一天天长大
+            [02:27.73]记忆里有雨不停下
+            [02:32.24]蝉鸣中闷完了暑假
+            [02:36.68]新学年又该剪头发
+            [02:41.18]我们就一天天长大
+            [02:45.57]也开始憧憬和变化
+            [02:49.88]曾以为自己多伟大
+            [02:54.75]写了诗不敢递给她
+            [02:59.30]我们就一天天长大
+            [03:03.86]听磁带偶遇榕树下
+            [03:08.32]白衬衫黄昏木吉他
+            [03:13.24]年少不经事的脸颊
+            [03:53.74]还以为自己多伟大
+            [03:58.51]写了诗不敢递给她
+            [04:07.31]小小诗不敢递给她
+        </textarea>
+
+    </section>
+    <!-- <div id='down'></div> -->
+    <!-- 播放器 -->
+    <audio id="audio" controls preload="auto">
+        <source src="./刘昊霖 - 儿时.mp3" type="audio/mpeg">
+    </audio>
+
+
+
+
+    <script>
+        /**
+         * 1、lrc格式歌词解析成对象   
+         *      [00:16.40]铁道旁赤脚追晚霞=> ms[{t: "16.400", c: "铁道旁赤脚追晚霞"}]
+         * 
+         * 2、把js对象的歌词部分渲染到页面  <li>铁道旁赤脚追晚霞</li>
+         *      
+         * 3、监听播放器audio的timeupdate事件，播放器在播放时会持续触发监听事件执行（大概200到300毫秒）
+         *      获取播放器当前时间（audio.currentTime）
+         *    监听事件：实现文字与音频同步滚动播放，并且当前歌词文字高亮显示
+         * 
+         * 4、监听播放器的ended事件，播放结束时回滚歌词
+         *         
+        */
+
+        //把lrc解析为js对象
+        var oLRC = {
+            ms: [] //歌词数组{t:时间,c:歌词}
+        };
+        var lrc = document.getElementById("lrc_content").innerHTML;
+        console.log(lrc);
+
+        function createLrcObj(lrc) {
+            if (lrc.length == 0) return;
+            var lrcs = lrc.split('\n'); //用回车拆分成数组
+            console.log(lrcs);
+            for (var i in lrcs) { //遍历歌词数组
+                lrcs[i] = lrcs[i].replace(/(^\s*)|(\s*$)/g, ""); //去除前后空格
+                console.log(lrcs[i]); //[00:00.60]刘昊霖 - 儿时
+                var t = lrcs[i].substring(lrcs[i].indexOf("[") + 1, lrcs[i].indexOf("]")); //取[]间的内容
+                console.log(t);  //00:00.60
+                var s = t.split(":"); //分离:前后文字
+                console.log(s); //["00", "01.60"]
+                var arr = lrcs[i].match(/\[(\d+:.+?)\]/g); //提取时间字段，可能有多个
+                console.log(arr);//["[00:00.60]"]
+                var start = 0;
+                for (var k in arr) {
+                    start += arr[k].length; //计算歌词开始位置
+                }
+                console.log(start);//10
+
+                var content = lrcs[i].substring(start); //获取歌词内容  [00:00.60]刘昊霖 - 儿时  从第10位开始截取
+                console.log(content); //刘昊霖 - 儿时
+                console.log(arr);
+                for (var k in arr) {
+                    var t = arr[k].substring(1, arr[k].length - 1); //取[]间的内容
+                    console.log(t); //00:00.60
+                    var s = t.split(":"); //分离:前后文字
+                    console.log(s);//["00", "00.60"]
+                    console.log(s[0], s[1]) //00 00.60
+                    oLRC.ms.push({ //对象{t:时间,c:歌词}加入ms数组
+                        //toFixed() 方法可把 Number 四舍五入为指定小数位数的数字
+                        t: (parseFloat(s[0]) * 60 + parseFloat(s[1])).toFixed(3),
+                        c: content
+                    });//{t: "34.480", c: "铁门前篮筐银杏花"}
+
+                }
+            }
+            oLRC.ms.sort(function (a, b) { //按时间顺序排序
+                return a.t - b.t;
+            });
+            console.log(oLRC);
+        }
+        createLrcObj(lrc);
+
+        //渲染歌词
+        function showLRC() {
+            var s = "";
+            for (var i in oLRC.ms) { //遍历ms数组，把歌词加入列表
+                s += '<li>' + oLRC.ms[i].c + '</li>';
+            }
+            document.getElementById("lyric").innerHTML = s;
+        }
+        showLRC();
+
+
+
+        var lineNo = 0, //当前行
+            c_pos = 6, //C位
+            offset = -40; //滚动距离（等于行高）
+        audio = document.getElementById("audio"), //播放器
+            ul = document.getElementById("lyric"); //歌词容器列表
+
+        //高亮显示歌词当前行及文字滚动控制，行号为lineNo
+        function lineHigh() {
+            var lis = ul.getElementsByTagName("li"); //歌词数组
+            if (lineNo > 0) {
+                lis[lineNo - 1].removeAttribute("class"); //去掉上一行的高亮样式
+            }
+            lis[lineNo].className = "lineHigh"; //高亮显示当前行
+
+            //文字滚动
+            if (lineNo > c_pos) {
+                ul.style.transform = "translateY(" + (lineNo - c_pos) * offset + "px)"; //整体向上滚动一行高度
+            }
+        }
+
+
+
+        //监听播放器的timeupdate事件，实现文字与音频播放同步
+        audio.ontimeupdate = function () {
+            if (lineNo == oLRC.ms.length)
+                return;
+            var curTime = audio.currentTime; //播放器时间
+           
+            if (parseFloat(oLRC.ms[lineNo].t) <= curTime) {
+                lineHigh(); //高亮当前行
+                lineNo++;
+            }
+        };
+
+        //滚回到开头，用于播放结束时
+        function goback() {
+            document.querySelector("#lyric .lineHigh").removeAttribute("class");
+            ul.style.transform = "translateY(0)";
+            lineNo = 0;
+        }
+        //监听播放器的ended事件，播放结束时回滚歌词
+        audio.onended = function () {
+            goback(); //回滚歌词
+        };
+    </script>
+</body>
+
+</html>

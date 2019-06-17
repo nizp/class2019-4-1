@@ -1,0 +1,170 @@
+@import './public.less';
+*{
+    .m(0);
+    .p(0);
+    list-style: none;
+}
+@url:'../img';
+#warp{
+    
+}
+header{
+    .mt(.23);
+    .clear();
+}
+.boxl{
+    .w(1.1);
+    .h(.3);
+    .fl();
+}
+.icon{
+    .w(.18);
+    .h(.3);
+    background: url('../img/jt.png') center center no-repeat;
+    background-size:contain;
+    .ml(.27);
+    .fl();
+}
+h1{
+    .fr();
+    .w(.58);
+    .h(.3);
+    img{
+        .w(.58);
+        .h(.29);
+        display: block;
+    }
+}
+
+.title{
+    .w(4.25);
+    .h(.32);
+    .fl();
+    .fs(.25);
+    .tc();
+    // margin:0 auto;
+}
+nav{
+    .h(.76);
+    .bg(#f5f7f9);
+    .mt(.2);
+    .ovh();
+    ul{
+        .mt(.2);
+    }
+    li{
+        .tc();
+        .fs(.28);
+        .w(.7);
+        .h(.5);
+        .fl();
+        .ml(.3);
+        &::after{
+            content: "";
+            border-bottom:.04rem solid #f5f7f9;
+            .mt(.16);
+            display: block;
+            .w(.26);
+            .ml(.2);
+        }
+    }
+    li.active{
+        .c(#ee1a1a);
+        &::after{
+            content: "";
+            border-bottom:.04rem solid #ee1a1a;
+            //  #ee1a1a;
+            display: block;
+            .w(.26);
+            .mt(.16);
+            .ml(.2);
+        }
+    }
+}
+
+#banner{
+    .w(6.4);
+    .h(3.16);
+    .bg(skyblue);
+    ul{
+
+    }
+    li{
+        .w(6.4);
+        .fs(.3);
+        .fl();
+        .h(3.16);
+        .por();
+        img{
+            .h(3.16);
+        }
+        p{
+            .w(6.4);
+            .h(.65);
+            .poa();
+            .posb(0);
+            .lh(.65);
+            text-indent: .25rem;
+            .c(#fff);
+            background:linear-gradient(to top,rgba(0,0,0,1),rgba(255,255,255,.4));
+        }
+    }
+}
+
+#list{
+    li{
+        // .h(1.76);
+        border-bottom:.01rem solid #f6f8fa;
+        .p(0.08);
+        h3{
+            font-weight: normal;
+            max-height: 0.9rem;
+            overflow: hidden;
+            line-height: 0.45rem;
+            font-size: 0.34rem;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 2;
+            word-break: break-word;
+        }
+    }
+    .detail{
+        color: #b4b4b4;
+        line-height: 0.34rem;
+        height: 0.34rem;
+        margin-top: 0.15rem;
+        font-size: 0;
+        letter-spacing: 0;
+        overflow: hidden;
+        span{
+            font-size: 0.24rem;
+            margin-right: 0.12rem;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    }
+    li.listpic{
+        .title{
+            .fl();
+            h3{
+                text-align: left;
+            }
+        }
+        .detail{
+            .tl();
+        }
+       
+        .news-pic{
+            .w(2);
+            .h(1.26);
+            .fr();
+            img{
+                .w(2);
+                .h(1.26);
+            }
+        }
+    }
+}

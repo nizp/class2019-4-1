@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+.active{
+    color:red;
+}
+</style>
+</head>
+<body>
+    <div id="page"></div>
+<script>
+    /*
+        总页数
+        当前页数       
+        一页显示多少个页码  
+    */
+
+    /*
+        问题:
+            1.如果总数没有5个，那么就显示总页数。
+            2.当前页如果大于等于总页数 - 页码个数一半的时候，页码数字不继续累加
+
+            3.当前页如果小于总页数 - 页码个数一半的时候，页码数字继续累加
+                (obj.num+1) - Math.floor(obj.len/2)+i
+
+                当前的页数 -  显示页数的一半 + i
+                6 - 2 = 4 + i -> 4,5,6,7,8              
+
+    */
+    let obj = {
+        count:8,
+        num:0,
+        len:5
+    }
+    function setPage(){
+        page.innerHTML = '';
+        obj.len = obj.count < obj.len?obj.count:obj.len;
+        if(obj.num <= Math.floor(obj.len/2)){
+
+            for(let i=0;i<obj.len;i++){
+                let a = document.createElement('a');
+                a.href = 'javascript:;';
+                a.innerHTML = '['+ (i+1) +']';
+                if(i === obj.num){
+                    a.className = 'active';
+                }
+                a.onclick = function(){
+                    obj.num = i;
+                    setPage(); 
+                    console.log(obj.num)
+                }
+                page.appendChild(a);
+            }
+
+        }else{
+            /*
+                2,3,4,5,6
+
+                obj.num - Math.floor(obj.len/2)
+
+                3 - 2 + 1
+                
+                
+                6 -> 
+                    2,3,4,5,6
+
+                obj.num = 6
+                obj.count - Math.floor(obj.len/2)
+                总页码 - 一半
+
+                6 - 2 = 4    5
+
+                if(5 > 4){
+                    2,3,4,5,6
+
+                    6 -> 2
+
+                    
+                    obj.count - obj.len + 1
+
+                    6 - 5 + 1
+                }else{
+                    
+                }
+
+            */
+
+            for(let i=0;i<obj.len;i++){
+                let a = document.createElement('a');
+                a.href = 'javascript:;';
+                
+                if(obj.num >= obj.count - Math.floor(obj.len/2)){
+                    if(obj.num == (obj.count - obj.len)+i){
+                        a.className = 'active';
+                    }
+                    a.innerHTML = '['+ ((obj.count - obj.len + 1) + i) +']' ;
+                    console.log(1)
+                    a.onclick = function(){
+                        obj.num = ((obj.count - obj.len ) + i)
+                        console.log(obj.num);
+                        setPage();
+                    }
+
+                }else{
+                    if(obj.num == ((obj.num) - Math.floor(obj.len/2)+i)){
+                        a.className = 'active';
+                    }
+                    console.log(2)
+                    a.innerHTML = '['+ ((obj.num+1) - Math.floor(obj.len/2)+i) +']' 
+                    a.onclick = function(){
+                        obj.num = ((obj.num) - Math.floor(obj.len/2)+i);
+                        console.log(obj.num);
+                        setPage();
+                    }
+                }
+                
+                page.appendChild(a);
+            }
+        }
+        
+    }
+    setPage();
+
+</script>
+</body>
+</html>

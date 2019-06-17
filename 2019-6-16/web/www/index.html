@@ -1,0 +1,230 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="/public/css/weibo.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="nArea">
+    <!--留言-->
+    <div class="takeComment">
+        <textarea name="textarea" class="takeTextField" id="text"></textarea>
+        <div class="takeSbmComment">
+            <input type="button" id="submit" class="inputs" value=""/>
+            <span>(可按 Enter 回复)</span>
+        </div>
+    </div>
+    <!--已留-->
+    <div class="commentOn">
+        <div class="messList" id="div1" style="height:502px">
+            <!--<div class="reply">
+                <p class="replyContent">卫士，新款卫士将推出总共14种车身式样。其中， XS旅行款车型售价为32295英镑(约33.6万元)。</p>
+                <p class="operation">
+                    <span class="replyTime">2018-09-08 16:37:60</span>
+                    <span class="handle">
+                        <a href="javascript:;" class="top">0</a>
+                        <a href="javascript:;" class="down_icon">0</a>
+                        <a href="javascript:;" class="cut">删除</a>
+                    </span>
+                </p>
+            </div>-->
+        </div>
+        <div class="page" id="page">
+            <!-- <a href="#" class="active">1</a>
+            <a href="#" >2</a> -->
+        </div>
+    </div>
+</div>
+<script>
+
+
+    // console.log()
+    //保证cookie为一个数组，要么是空数组要么是点击过数组 
+    let cookie = getCookie('cookieId')?JSON.parse(getCookie('cookieId')):[];
+
+    //一上来或者刷新时请求数据，渲染页面
+
+    function getDate(num=1){
+        fetch('http://localhost:88/api/weibo?act=get&page='+num)
+        .then(e=>e.json())
+        .then(d=>{
+            console.log(d);
+            render(d);
+        });
+    }
+    getDate();
+
+    let pageIndex = 0; //当前页
+    //获取页码
+    function getPageNum(){
+        fetch('http://localhost:88/api/weibo?act=get_page_count')
+        .then(e=>e.json())
+        .then(({code,count})=>{
+            if(code === 0){
+                page.innerHTML = '';
+                for(let i=0;i<count;i++){
+                    let a = document.createElement('a');
+                    if(i === pageIndex){
+                        a.className = 'active';
+                    }
+                    a.href = 'javascript:;';
+                    a.innerHTML = i+1;
+                    a.onclick = function(){
+                        getDate(i+1);
+                        pageIndex = i;
+                    }
+                    page.appendChild(a);
+                }
+            }
+            console.log(code,count);
+        });
+    }
+
+    getPageNum();
+
+
+
+
+
+
+    //点击添加
+    submit.onclick = function(){
+        /*
+            1.点击添加的时候要请求数据，把输入的内容存到数据库
+            2.再请求一遍某页数据，然后渲染
+        */
+
+        fetch('http://localhost:88/api/weibo?act=add&content='+text.value)
+        .then(e=>e.json())
+        .then(d=>{
+            if(d.code === 0){
+                fetch('http://localhost:88/api/weibo?act=get&page=1')
+                .then(e=>e.json())
+                .then(d=>{
+                    render(d);
+                });
+            }
+        });
+        text.value = '';
+        // render(data)
+    }
+
+    //回车功能
+    text.onkeyup = function(ev){
+        if(ev.keyCode === 13){
+            submit.onclick();
+        }
+    }
+
+    //点赞
+    /*
+        1.要拿到点击的id
+        2.看看今天的点的id中（[31321,321321,1123212]）有没有这个id
+            有这个id说明点过了
+            没有就进行请求
+
+        cookieId = [123,123,4343,1321];
+    */
+    div1.onclick = function(ev){
+        if(ev.target.classList.contains('top')){
+            // alert(11);
+            // ev.target.innerHTML = ++ ev.target.innerHTML; 
+            let id = ev.target.parentNode.dataset.id;
+            if(cookie.includes(id)){
+                alert('不好意思,今天已经点过了');
+            }else{
+                fetch('/api/weibo?act=like&id='+id)
+                .then(e=>e.json())
+                .then(d=>{
+                    if(d.code === 0){
+                        ev.target.innerHTML = ++ ev.target.innerHTML;
+                        cookie.push(id);
+                        setCookie('cookieId',JSON.stringify(cookie),1); 
+                        alert('恭喜你成功,明天再来哟!');
+                    }
+                    // console.log(d);
+                })
+            }
+        }else if(ev.target.classList.contains('down_icon')){
+            let id = ev.target.parentNode.dataset.id;
+            if(cookie.includes(id)){
+                alert('不好意思,今天已经点过了');
+            }else{
+                fetch('/api/weibo?act=dislike&id='+id)
+                .then(e=>e.json())
+                .then(d=>{
+                    if(d.code === 0){
+                        ev.target.innerHTML = ++ ev.target.innerHTML;
+                        cookie.push(id);
+                        setCookie('cookieId',JSON.stringify(cookie),1); 
+                        alert('恭喜你成功,明天再来哟!');
+                    }
+                    // console.log(d);
+                })
+            }
+        }else if(ev.target.classList.contains('cut')){
+            let id = ev.target.parentNode.dataset.id;
+            fetch('/api/weibo?act=del&id='+id)
+            .then(e=>e.json())
+            .then(d=>{
+                if(d.code === 0){
+                    getDate();
+                }
+            });
+        }
+    }
+
+
+    function getCookie(key){
+        let ary = document.cookie.split('; ');
+        for(let item of ary){
+            let arr = item.split('=');
+            if( arr[0] === key ){
+                return arr[1];
+            }
+        }
+        return null;
+    }
+
+    function setCookie(key,val,time){
+        if(time){
+            //; expires=
+            if(typeof time === 'string'){//设置一个未来的时间
+                document.cookie = key + '=' + val + '; expires='+new Date(time);
+            }else if(typeof time === 'number'){
+                let newT = new Date();
+                newT.setDate(new Date().getDate()+time);
+                document.cookie = key + '=' + val + '; expires='+ newT;
+            }
+            let nowDate = new Date;
+
+        }else{
+            document.cookie = key + '=' + val;
+        }
+    }
+
+
+
+
+    function render(data){
+        let html = '';
+        data.forEach(item=>{
+            html += `<div class="reply">
+                    <p class="replyContent">${item.content}</p>
+                    <p class="operation">
+                        <span class="replyTime">2018-09-08 16:37:60</span>
+                        <span class="handle" data-id=${item.id}>
+                            <a href="javascript:;" class="top">${item.like}</a>
+                            <a href="javascript:;" class="down_icon">${item.dislike}</a>
+                            <a href="javascript:;" class="cut">删除</a>
+                        </span>
+                    </p>
+                </div>`
+        });
+        div1.innerHTML = html;
+        getPageNum();
+    }
+</script>
+</body>
+</html>

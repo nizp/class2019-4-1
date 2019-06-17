@@ -1,0 +1,170 @@
+/**- public -**/
+* {
+  margin: 0rem;
+  padding: 0rem;
+  list-style: none;
+}
+header {
+  margin-top: 0.23rem;
+  *zoom: 1;
+  clear: both;
+}
+header:before,
+header:after {
+  display: table;
+  content: "";
+}
+header:after {
+  clear: both;
+}
+.boxl {
+  width: 1.1rem;
+  height: 0.3rem;
+  float: left;
+  display: block;
+}
+.icon {
+  width: 0.18rem;
+  height: 0.3rem;
+  background: url('../img/jt.png') center center no-repeat;
+  background-size: contain;
+  margin-left: 0.27rem;
+  float: left;
+  display: block;
+}
+h1 {
+  float: right;
+  display: block;
+  width: 0.58rem;
+  height: 0.3rem;
+}
+h1 img {
+  width: 0.58rem;
+  height: 0.29rem;
+  display: block;
+}
+.title {
+  width: 4.25rem;
+  height: 0.32rem;
+  float: left;
+  display: block;
+  font-size: 0.25rem;
+  text-align: center;
+}
+nav {
+  height: 0.76rem;
+  background: #f5f7f9;
+  margin-top: 0.2rem;
+  overflow: hidden;
+  display: block;
+}
+nav ul {
+  margin-top: 0.2rem;
+}
+nav li {
+  text-align: center;
+  font-size: 0.28rem;
+  width: 0.7rem;
+  height: 0.5rem;
+  float: left;
+  display: block;
+  margin-left: 0.3rem;
+}
+nav li::after {
+  content: "";
+  border-bottom: .04rem solid #f5f7f9;
+  margin-top: 0.16rem;
+  display: block;
+  width: 0.26rem;
+  margin-left: 0.2rem;
+}
+nav li.active {
+  color: #ee1a1a;
+}
+nav li.active::after {
+  content: "";
+  border-bottom: .04rem solid #ee1a1a;
+  display: block;
+  width: 0.26rem;
+  margin-top: 0.16rem;
+  margin-left: 0.2rem;
+}
+#banner {
+  width: 6.4rem;
+  height: 3.16rem;
+  background: skyblue;
+}
+#banner li {
+  width: 6.4rem;
+  font-size: 0.3rem;
+  float: left;
+  display: block;
+  height: 3.16rem;
+  position: relative;
+}
+#banner li img {
+  height: 3.16rem;
+}
+#banner li p {
+  width: 6.4rem;
+  height: 0.65rem;
+  position: absolute;
+  bottom: 0rem;
+  line-height: 0.65rem;
+  text-indent: .25rem;
+  color: #fff;
+  background: linear-gradient(to top, #000000, rgba(255, 255, 255, 0.4));
+}
+#list li {
+  border-bottom: .01rem solid #f6f8fa;
+  padding: 0.08rem;
+}
+#list li h3 {
+  font-weight: normal;
+  max-height: 0.9rem;
+  overflow: hidden;
+  line-height: 0.45rem;
+  font-size: 0.34rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  word-break: break-word;
+}
+#list .detail {
+  color: #b4b4b4;
+  line-height: 0.34rem;
+  height: 0.34rem;
+  margin-top: 0.15rem;
+  font-size: 0;
+  letter-spacing: 0;
+  overflow: hidden;
+}
+#list .detail span {
+  font-size: 0.24rem;
+  margin-right: 0.12rem;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+#list li.listpic .title {
+  float: left;
+  display: block;
+}
+#list li.listpic .title h3 {
+  text-align: left;
+}
+#list li.listpic .detail {
+  text-align: left;
+}
+#list li.listpic .news-pic {
+  width: 2rem;
+  height: 1.26rem;
+  float: right;
+  display: block;
+}
+#list li.listpic .news-pic img {
+  width: 2rem;
+  height: 1.26rem;
+}

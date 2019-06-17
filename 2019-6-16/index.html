@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">12345</div>
+<script>
+    fetch('/api?orgid=bc97556b69a34ec2b885c6db0eab9acf&orgName=&loginType=0&curRoleId=2&groupId=811fa6641f974b9ab2855268ff59b27f')
+    .then(e=>e.json())
+    .then(d=>{
+        console.log(d);
+    })
+</script>
+</body>
+</html>
