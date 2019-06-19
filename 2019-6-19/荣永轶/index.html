@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        *{padding:0;margin:0;}
+        a{text-decoration:none;}
+        html,body{height:100%;width:100%;background:black;}
+        ul{position:relative;width:990px;list-style:none;background:white;display: flex;flex-direction:row;justify-content: space-around;margin:50px auto;border-radius:10px;}
+        ul  li{position: relative;flex:1;text-align:center;}
+        ul  li a{font-size:18px;color:#333;padding:10px 0;display: block;}
+        .cloud{position:absolute;left:32px;top:0;bottom:0;margin:auto;width:83px;height:42px;background:url('images/cloud.gif');}
+        div{
+            margin: 0 auto;
+            width: 1400px;
+            height: 800px;
+        }
+      </style>
+</head>
+<body>
+    <ul>
+        <span class="cloud"></span>
+        <li><a href="javascript:viod(0)">首页</a></li>
+        <li><a href="javascript:viod(0)">电视剧</a></li>
+        <li><a href="javascript:viod(0)">最新电影</a></li>
+        <li><a href="javascript:viod(0)">新闻头条</a></li>
+        <li><a href="javascript:viod(0)">八卦娱乐</a></li>
+        <li><a href="javascript:viod(0)">军事热点</a></li>
+    </ul> 
+    <div id="box"></div>   
+</body>
+<script type="text/javascript">
+    //获得类为cloud的标签，
+     var pic=document.getElementsByClassName('cloud')[0];
+     //获得所有的 li 标签
+     var liList=document.getElementsByTagName('li');
+     //定义向右的移动初始距离
+     var liLeft=32;
+     //定义缓慢动画的初始值
+     var header=32;
+     //用于定义当鼠标点击时的初始位置
+     var currentLeft=32;
+     for(var i=0;i<liList.length;i++){
+         //鼠标放上事件
+         liList[i].onmouseover=function(){
+             //获取目标距离
+            liLeft = this.offsetLeft+this.offsetWidth/2-pic.offsetWidth/2;
+            console.log(liLeft)
+         }
+         //鼠标移除事件
+          liList[i].onmouseout=function(){
+             //当鼠标移除某个li的时候把目标距离改为初始状态
+            liLeft=currentLeft;
+         }
+         //鼠标点击事件
+         liList[i].onclick=function(){
+            // box.style.background = url('\./images.(i+1).jpg')
+             currentLeft=this.offsetLeft+this.offsetWidth/2-pic.offsetWidth/2;
+         }
+     }
+     //定义缓慢动画
+     setInterval(function(){
+         header = header + (liLeft-header)/10;
+         pic.style.left = header + 'px';
+     },20);
+</script>
+</html>
