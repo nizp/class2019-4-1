@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+    <!-- PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> -->
+<!-- <html xmlns="http://www.w3.org/1999/xhtml"> -->
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>崔双健</title>
+    <style type="text/css">
+        * {
+            -moz-user-select: none;
+            border: 0px;
+        }
+
+        #tips {
+            width: 850px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            background: #999999;
+            color: #FFFFFF;
+            text-align: center;
+            margin: auto;
+            font-size: 14px;
+        }
+    </style>
+    <script type="text/javascript">
+        var Is_Mouse_Down = false
+        var Is_First = 1
+        function Create(evt) {
+            evt = evt ? evt : window.event
+            console.log(evt.target)
+            console.log(window.event)
+            if (Is_Mouse_Down) {
+                if (evt.ctrlKey) {
+                    Clean(evt)
+                }
+                else {
+                    Write(evt)
+                }
+            }
+        }
+        function Write(evt) {
+            evt = evt ? evt : window.event
+            var Obj_Nian = document.createElement("DIV")
+            Obj_Nian.style.position = "absolute"
+            Obj_Nian.style.left = evt.clientX - 10 + "px"
+            Obj_Nian.style.top = evt.clientY - 10 + "px"
+            switch (Is_First) {
+                case 1: Obj_Nian.innerHTML = "香"; break;
+                case 2: Obj_Nian.innerHTML = "香"; break;
+                case 3: Obj_Nian.innerHTML = "欢"; break;
+                case 4: Obj_Nian.innerHTML = "迎"; break;
+                case 5: Obj_Nian.innerHTML = "你"; break;
+                case 6: Obj_Nian.innerHTML = "来"; break;
+                case 7: Obj_Nian.innerHTML = "珠"; break;
+                case 8: Obj_Nian.innerHTML = "峰"; break;
+                case 9: Obj_Nian.innerHTML = "培"; break;
+                case 10: Obj_Nian.innerHTML = "训"; break;
+                default: Obj_Nian.innerHTML = "Error"; break;
+            }
+            Is_First += 1
+            if (Is_First == 10) {
+                Is_First = 1
+            }
+            Color_Nian = "RGB(" + Math.floor(Math.random() * 100) + "%," + Math.floor(Math.random() * 100) + "%," + Math.floor(Math.random() * 100) + "%)"
+            Obj_Nian.style.color = Color_Nian
+            document.body.appendChild(Obj_Nian)
+        }
+        function Clean(evt) {
+            evt = evt ? evt : window.event
+            evt.srcObj = evt.srcElement ? evt.srcElement : evt.target
+            if (evt.srcObj.tagName == "DIV" && (evt.srcObj.innerHTML == "香" || evt.srcObj.innerHTML == "香" || evt.srcObj.innerHTML == "欢" || evt.srcObj.innerHTML == "迎" || evt.srcObj.innerHTML == "你" || evt.srcObj.innerHTML == "来" || evt.srcObj.innerHTML == "珠" || evt.srcObj.innerHTML == "峰" || evt.srcObj.innerHTML == "培" || evt.srcObj.innerHTML == "训")) {
+                evt.srcObj.innerHTML = ""
+            }
+        }
+        document.onmousedown = function () { Is_Mouse_Down = true }
+        document.onmousemove = Create
+        document.onmouseup = function () { Is_Mouse_Down = false } 
+    </script>
+</head>
+
+<body onselectstart="javascript:return false">
+    <div id="tips">提示：按住鼠标左键不放，在页面中拖动即可写字 ; 同时按住ctrl和鼠标左键不放，在页面中拖动即可把字擦去</div>
+</body>
+
+</html>
