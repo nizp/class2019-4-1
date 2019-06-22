@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    let state = '';
+    function then(){
+        let arr = [];//订阅池
+        function resolve(){
+            state = 'haha'; 
+            // console.log('执行了')
+            arr.forEach(e=>{  //发布
+                console.log(e);
+            });
+        }
+
+        setTimeout(() => {
+            resolve();
+        }, 1000);
+
+        console.log(state)
+        if(state == 'haha'){
+            console.log('then里面的代码');
+        }
+        //当状态还没改变的时候订阅内容
+        if(state == ''){
+            arr.push('then里面的代码2')
+        }
+        
+        
+    }
+   
+    then();
+
+    
+</script>
+</body>
+</html>

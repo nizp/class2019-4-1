@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">按钮</button>
+<script>
+    /*
+        promise解决异步编程的问题的
+
+        回调地狱:
+            startmove({
+                cb(){
+                    startmove({
+                        cb(){
+                            startmove({
+                                cb(){
+
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+
+            startomve()
+
+            .then(()=>{
+                startomve()
+            })
+
+            .then(()=>{
+                startomve()
+            })
+
+    */    
+
+    
+    // btn.onclick = function(){
+    //     console.log(a);
+    // }
+
+    /*
+        三种状态:
+            pending     等待
+            fulfilled   成功
+            rejected    失败
+
+        一旦状态发生改变，状态就会凝固
+        
+    */
+
+    // let a = 10;
+
+    // let p = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         a++;
+    //         // reject(a);
+    //         // console.log(b);
+    //         resolve(a);
+           
+    //     },0);
+    //     // throw Error('错误');
+    // })
+
+    // p.then((data)=>{
+    //     console.log('succ',data);
+    // },()=>{
+    //     console.log('faul');
+    // }).then((data2)=>{
+    //     console.log(data2);
+    // });
+    // console.log(a);
+    
+    
+    new Promise(function(resolve,reject){
+        // throw Error('123');
+        setTimeout(() => {
+            resolve(1);
+        }, 1000);
+        
+        // reject(2);
+    })
+    .then(function(succ){  //onfulfilled
+        console.log(succ)
+        return 200;
+    })
+    .then((data)=>{
+        // console.log(data)
+        throw Error('错误')
+    })
+    .then((d)=>{
+        console.log(d);
+    },(error)=>{
+        console.log('错了',error)
+    })
+    // .then(function(succ){
+    //     console.log('succ',succ);
+    // }).then((data)=>{
+    //     console.log(data)
+    // })
+
+    
+
+
+
+
+   
+    
+
+</script>
+</body>
+</html>

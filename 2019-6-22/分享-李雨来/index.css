@@ -1,0 +1,44 @@
+*{
+    margin:0;
+    padding:0;
+}
+.wrapper{
+    position: relative;
+    width:900px;
+    height:500px;
+    margin:50px auto;
+    border:1px solid #000;
+}
+.wrapper .start{
+    width:100px;
+    height:30px;
+    background-color:#ccc;
+    color:#333;
+    padding:5px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    margin:20px auto;
+}
+.wrapper .imgBox{
+    position: relative;
+    width:300px;
+    height:300px;
+    border:1px solid #000;
+    box-sizing: border-box;
+    margin:30px auto;
+}
+.wrapper img{
+    position: absolute;
+    right:0;
+    top:0;
+    width:200px;
+    height:200px;
+}
+.wrapper .imgCell{
+    position: absolute;
+    box-shadow: 0 0 8px #fff;
+    border-radius:4px;
+    background: url('./index.jpg');
+    cursor: move;
+}

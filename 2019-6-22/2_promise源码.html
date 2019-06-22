@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    class MyPromise {
+        constructor(exception){
+            this.state = 'pending'; //等待状态
+            this.value;
+            this.reason;
+
+            //记录，订阅成功或者失败的函数
+            this.fulfilledCallbacks = [];
+            this.rejectedCallbacks = [];
+            //成功执行的函数
+            let resolve = (value) => {
+                
+                //如果状态是为pending才能执行成功的代码，保证从pending到某个状态，状态是凝固的
+                if(this.state === 'pending'){
+                    // console.log('一秒之后');
+                    this.state = 'fulfilled'; //只要是成功就把状态变为fulfilled
+                    this.value = value;
+                    this.fulfilledCallbacks.forEach(fn=>fn());
+                }
+            }
+            //失败执行的函数
+            let reject = (reason) => {
+                //如果状态是为pending才能执行失败的代码，保证从pending到某个状态，状态是凝固的
+                if(this.state === 'pending'){
+                   
+                    this.state = 'rejected';//只要是失败就把状态变为rejected
+                    this.reason = reason;
+                    this.rejectedCallbacks.forEach(fn=>fn());
+                }
+            }
+            //promise调用的函数
+
+            //如果new Promise内的函数为报错，那么直接进reject
+            try {
+                exception(resolve,reject);
+                // console.log(this.state);
+            } catch (error) {
+                reject(error);
+            }
+           
+            // console.log(this.state)
+        }
+
+        then(onfulfilled,onrejected){
+            let p2;
+            p2 = new MyPromise((resolve,reject)=>{
+                    //成功就调用第一个参数，并且把值(this.value||this.reason)传到函数中
+               
+                if(this.state === 'fulfilled'){
+                    try {
+                        let x = onfulfilled(this.value);
+                        resolve(x);
+                    } catch (error) {
+                        reject(error);
+                    }
+                }
+                if(this.state === 'rejected'){
+                    try {
+                        let x = onrejected(this.reason);
+                        reject(x);
+                    } catch (error) {
+                        reject(error);
+                    }
+                }
+
+                if(this.state === 'pending'){
+                    this.fulfilledCallbacks.push(()=>{
+                        try {
+                            let x = onfulfilled(this.value);
+                            resolve(x);
+                        } catch (error) {
+                            reject(error);
+                        }
+                    });
+
+                    // console.log(this.fulfilledCallbacks)
+                    this.rejectedCallbacks.push(()=>{
+                        try {
+                                let x = onrejected(this.reason);
+                                reject(x);
+                        } catch (error) {
+                                reject(error);
+                        }
+                    });
+                }  
+          })
+          return p2;
+        }
+    }
+
+    new MyPromise(function(resolve,reject){
+        // throw Error('123');
+        setTimeout(() => {
+            resolve(100); //内置的resolve
+          
+        }, 1000);
+       
+        // reject(2);
+    })
+    .then(function(succ){  //onfulfilled
+        console.log(succ)
+        return 200;
+    })
+    .then((data)=>{
+        // console.log(data)
+        throw Error('错误')
+    })
+    .then((d)=>{
+        console.log(d);
+    },(error)=>{
+        console.log('错了',error)
+    });
+
+</script>
+</body>
+</html>
