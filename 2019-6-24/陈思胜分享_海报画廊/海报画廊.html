@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>海报画廊</title>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		body{
+			/*background-image: url(images/bg.jpg);*/
+			background-color: #fff;
+			color: #555;
+			font-family: 'Avenir Next','微软雅黑';
+			font-size: 14px;
+			-webkit-font-smoothing:antialiased;
+		}
+		.wrap{
+			width: 100%;
+			height: 600px;
+			position: absolute;
+			top:50%;
+			margin-top: -300px;
+			background-color: #333;
+			overflow: hidden;
+
+			-webkit-perspective: 800px;
+		}
+		.photo{
+			width: 260px;
+			height: 320px;
+			left: 50%;
+			top:50%;
+			margin: -160px 0 0 -130px;
+			position: absolute;
+			z-index: 1;
+			box-shadow: 0 0 1px rgba(0,0,0,0.01);
+			-webkit-transition: all .8s;
+		}
+		.photo .side{
+			width: 100%;
+			height: 100%;
+			background-color: #eee;
+			position: absolute;
+			top: 0;
+			right: 0;
+			padding: 20px;
+			box-sizing: border-box;
+		}
+		.photo .side-front{
+			
+		}
+		.photo .side-front .image{
+			width: 100%;
+			height: 250px;
+			line-height: 250px;
+			overflow: hidden;
+		}
+		.photo .side-front .image img{
+			width: 100%;
+		}
+		.photo .side-front .caption{
+			text-align: center;
+			font-size: 16px;
+			line-height: 50px;
+		}
+		.photo .side-back{
+			
+		}
+		.photo .side-back .desc{
+			color: #666;
+			font-size: 14px;
+			line-height: 1.5em;
+		}
+		.photo-center{
+			width: 260px;
+			height: 320px;
+			left: 50%;
+			top: 50%;
+			margin: -160px 0 0 -130px;
+			z-index: 999;
+		}
+		.photo-wrap{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+
+			-webkit-transform-style: preserve-3d;
+			-webkit-transform-origin: 0% 50%;
+			-webkit-transition: all .8s;
+		}
+		.photo-wrap .side-front{
+			-webkit-transform: rotateY(0deg);
+		}
+		.photo-wrap .side-back{
+			-webkit-transform: rotateY(180deg);
+		}
+		.photo-wrap .side{
+			-webkit-backface-visibility: hidden;
+		}
+
+
+		.photo-front .photo-wrap{
+			/*-webkit-transform: rotateY(0deg);*/
+			-webkit-transform: translate(0px,0px) rotateY(0deg);
+		}
+		.photo-back .photo-wrap{
+			/*-webkit-transform: rotateY(180deg);*/
+			-webkit-transform: translate(260px,0px) rotateY(180deg);
+		}
+		/*控制按钮样式*/
+		.nav{
+			width: 60%;
+			height: 30px;
+			line-height: 30px;
+			position: absolute;
+			bottom: 20px;
+			left: 20%;
+			z-index:999;
+			text-align: center;
+		}
+		/*普通导航按钮样式*/
+		.nav .i{
+			width: 30px;
+			height: 30px;
+			display: inline-block;
+			cursor: pointer;
+			background: #aaa;
+			text-align: center;
+			border-radius: 50%;
+			
+			-webkit-transition: all 0.6s;
+			-webkit-transform: scale(.48);
+
+			/*图标字体,默认样式*/
+			font-family: 'icomoon' !important;
+			speak: none;
+			font-style: normal;
+			font-weight: normal;
+			font-variant: normal;
+			text-transform: none;
+			line-height: 1;
+
+			/* Better Font Rendering =========== */
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+		.nav .i:before{
+			content: "\e965";
+			display: inline-block;
+			line-height: 30px;
+			text-align: center;
+			color: #fff;
+			opacity: 0;
+		}
+		/*选中样式*/
+		.nav .i_current{
+			-webkit-transform: scale(1);
+		}
+		.nav .i_current:before{
+			opacity: 1;
+		}
+		/*背面样式*/
+		.nav .i_back{
+			-webkit-transform: rotateY(-180deg);
+			background: #555;
+		}
+	</style>
+</head>
+<body onselectstart="return false">
+	<!-- 改写视图，为模板字符串 -->
+	<div id="warp" class="wrap">
+		<!-- 负责平移，旋转 -->
+		<!-- 模板：格式为{{...}}，实质是字符串，会被解析引擎展开成可以识别的字符串文本 -->
+		<div class="photo photo-front" onclick="turn(this)" id="photo_{{index}}">
+			<!-- 负责翻转 -->
+			<div class="photo-wrap">
+				<div class="side side-front">
+					<p class="image"><img src="images/{{img}}" alt="海报画廊"></p>
+					<p class="caption">{{caption}}</p>
+				</div>
+				
+				<div class="side side-back">
+					<p class="desc">{{desc}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="./js/data.js"></script>
+	<script type="text/javascript">
+		//通用函数
+		function g(selector){
+			// 第0个起,第一个字符串
+			var method = selector.substr(0,1) =='.' ? 'getElementsByClassName':'getElementById';
+			return document[method](selector.substr(1));
+		}
+
+		//随机数发生器 0-20 random([min,max])
+		function random(range){
+			var max = Math.max(range[0], range[1]);
+			var min = Math.min(range[0], range[1]);
+
+			var diff = max - min;
+			var number = Math.floor(Math.random() * diff + min);
+			return number;
+		}
+
+		//4.输出所有海报
+		var data = data;
+		function addPhotos(){
+			var template = g('#warp').innerHTML;
+			console.log(template);
+			var html = [];
+			var nav = [];
+
+			for(var s in data){
+				console.log(s);			
+				//替换关键字
+				var _html = template
+				.replace('{{index}}',s)
+				.replace('{{img}}',data[s].img)
+				.replace('{{caption}}',data[s].caption)
+				.replace('{{desc}}',data[s].desc);
+				html.push(_html);
+				// 生产若干个控制按钮
+				nav.push('<span id="nav_' + s + '" class="i"  onclick = "turn(g(\'#photo_' + s + '\'))"></span>')
+			}
+			html.push('<div class="nav">' + nav.join('') + '</div>');
+			//输出到页面，数组到字符串
+			g('#warp').innerHTML = html.join('');
+
+			rsort(random([0,data.length]));
+		}
+
+		addPhotos();
+
+		//计算左右分区的范围
+		function range(){
+			var range = {
+				left:{
+					x:[],
+					y:[]
+				},
+				right:{
+					x:[],
+					y:[]
+				}
+			};
+
+			var warp = {
+				w:g("#warp").clientWidth,
+				h:g("#warp").clientHeight
+			};
+
+			var photo = {
+				w:g(".photo")[0].clientWidth,
+				h:g(".photo")[0].clientHeight
+			};
+
+			range.warp = warp;
+			range.photo = photo;
+
+			range.left.x = [ 0-photo.w , warp.w/2-photo.w ];
+			range.left.y = [ 0-photo.h , warp.h ];
+
+			range.right.x = [ warp.w/2+photo.w/2 , warp.w ];
+			range.right.y = range.left.y;
+
+			return range;
+		}
+
+		//排序海报
+		function rsort(n){
+			// 得到所有海报内容
+			var _photo = g(".photo");
+			var photos = [];
+
+			//初始化所有海报样式
+			for(s = 0 ; s < _photo.length ; s++){
+				//复原所有样式
+				_photo[s].className = _photo[s].className.replace(/\s*photo-center\s*/," ");
+				_photo[s].className = _photo[s].className.replace(/\s*photo-front\s*/," ");
+				_photo[s].className = _photo[s].className.replace(/\s*photo-back\s*/," ");
+				_photo[s].className += 'photo-front';//实现翻转
+				_photo[s].style.left="";
+				_photo[s].style.top="";
+				_photo[s].style['-webkit-transform']='rotate(0deg) scale(1.3)';
+
+				//转化为数组
+				photos.push(_photo[s]);
+			}
+
+			var photo_center = g("#photo_"+n);
+			photo_center.className +=" photo-center ";
+			//从数组中删除中间海报
+			photo_center = photos.splice(n,1)[0];
+
+			//剩下海报分为左右两个部分
+			var photo_left = photos.splice(0,Math.ceil(photos.length/2));
+			var photo_right = photos;
+			//分配海报
+			var ranges = range();
+			//左边
+			for(var s in photo_left){
+				var photo = photo_left[s];
+				//位置
+				photo.style.left = random(ranges.left.x) + 'px';
+				photo.style.top = random(ranges.left.y) + 'px';
+				//角度
+				photo.style['-webkit-transform'] = 'rotate('+random([-150,150])+'deg) scale(1)';
+			}
+			//右边
+			for(var s in photo_right){
+				var photo = photo_right[s];
+				photo.style.left = random(ranges.right.x) + 'px';
+				photo.style.top = random(ranges.right.y) + 'px';
+
+				photo.style['-webkit-transform'] = 'rotate('+random([-150,150])+'deg) scale(1)';
+			}
+
+			//按钮对应样式,控制按钮
+			var navs = g('.i');
+			for (var i = 0; i < navs.length; i++) {
+				navs[i].className = navs[i].className.replace(/\s*i_current\s*/,' ');
+				navs[i].className = navs[i].className.replace(/\s*i_back\s*/,' ');
+			}
+			g('#nav_'+n).className += ' i_current ';
+		}
+
+		//1.点击翻面控制
+		function turn(elem){
+			var cls = elem.className;
+			var n = elem.id.split('_')[1];
+			//是否是中间图片，n是数值图片是后面的索引
+			if( !/photo-center/.test(cls) ){
+				return rsort(n);
+			}
+
+			//如果是正面就加上类名i-back变成反面
+			if(/photo-front/.test(cls)){
+				cls = cls.replace(/photo-front/, 'photo-back');
+				g('#nav_'+n).className += 'i_back';
+			}
+			else{
+				cls = cls.replace(/photo-back/, 'photo-front');
+				g('#nav_'+n).className = g('#nav_'+n).className.replace(/\s*i_back\s*/, ' ');
+			}
+			return elem.className = cls;
+		}
+	</script>
+</body>
+</html>
