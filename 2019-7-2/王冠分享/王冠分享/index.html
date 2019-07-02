@@ -1,0 +1,381 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>键盘打字练习游戏代码</title>
+
+<link rel="stylesheet" href="css/keyboard.css" />
+
+<script src="js/jquery-1.12.3.js"></script>
+<script src="js/one.js"></script>
+<script src="js/two.js"></script>
+<!--sass样式-->
+
+</head>
+<body>
+	<div>
+		<!--渲染键盘 S-->
+		<div class="keyboard">
+			<!--显示键盘练习按钮 S-->
+			<div class="promptArea ">
+				<ul>
+				</ul>
+			</div>
+			<!--显示键盘练习按钮 E-->
+			<!--效率显示区 S-->
+			<div class="efficiencyPrompt">
+				<ul>
+					<li>时间：<span class="time">0时0分0秒</span></li>
+					<li>正确率：<span class="accuracy">--</span>%</li>
+					<li>完成率：<span class="percentageComplete">--</span>%</li>
+					<li>选择练习模式：
+						<select class="schemaChanges" >
+							<option value="0">键盘布局</option>
+							<option value="1">键位课程</option>
+						</select>
+					</li>
+				</ul>
+			</div>
+			<!--效率显示区 E-->
+			
+			<!--键盘区域S-->
+			<div class="keyboardArea">
+				<!--第一排键盘 S-->
+				<ul>
+					<li keyCode="192">
+						<span>~</span>
+						<span>`</span>
+					</li>
+					<li keyCode="49">
+						<span>!</span>
+						<span>1</span>
+					</li>
+					<li keyCode="50">
+						<span>@</span>
+						<span>2</span>
+					</li>
+					<li keyCode="51">
+						<span>#</span>
+						<span>3</span>
+					</li>
+					<li keyCode="52">
+						<span>$</span>
+						<span>4</span>
+					</li>
+					<li keyCode="53">
+						<span>%</span>
+						<span>5</span>
+					</li>
+					<li keyCode="54">
+						<span>^</span>
+						<span>6</span>
+					</li>
+					<li keyCode="55">
+						<span>&</span>
+						<span>7</span>
+					</li>
+					<li keyCode="56">
+						<span>*</span>
+						<span>8</span>
+					</li>
+					<li keyCode="57">
+						<span>(</span>
+						<span>9</span>
+					</li>
+					<li keyCode="48">
+						<span>)</span>
+						<span>0</span>
+					</li>
+					<li keyCode="189">
+						<span>_</span>
+						<span>-</span>
+					</li>
+					<li keyCode="187">
+						<span>+</span>
+						<span>=</span>
+					</li>
+					<li class="width20"  keyCode="8">
+						<span>backspace</span>
+					</li>
+				</ul>
+				<!--第一排键盘 E-->
+				<!--第二排键盘 S-->
+				<ul class="specialEffects0">
+					<li class="width15" keyCode="9">
+						<span>Tab</span>
+					</li>
+					<li keyCode="81">
+						<span>Q</span>
+					</li>
+					<li keyCode="87">
+						<span>W</span>
+					</li>
+					<li keyCode="69">
+						<span>E</span>
+					</li>
+					<li keyCode="82">
+						<span>R</span>
+					</li>
+					<li keyCode="84">
+						<span>T</span>
+					</li>
+					<li keyCode="89">
+						<span>Y</span>
+					</li>
+					<li keyCode="85">
+						<span>U</span>
+					</li>
+					<li keyCode="73">
+						<span>I</span>
+					</li>
+					<li keyCode="79">
+						<span>O</span>
+					</li>
+					<li keyCode="80">
+						<span>P</span>
+					</li>
+					<li keyCode="219">
+						<span>{</span>
+						<span>[</span>
+					</li>
+					<li keyCode="221">
+						<span>}</span>
+						<span>]</span>
+					</li>
+					<li class="width15 enterBoard"  keyCode="13">
+						<span></span>
+					</li>
+				</ul>
+				<!--第二排键盘 E-->
+				<!--第三排键盘 S-->
+				<ul>
+					<li class="width18" keyCode="20">
+						<span>Caps Lock</span>
+					</li>
+					<li keyCode="65">
+						<span>A</span>
+					</li>
+					<li keyCode="83">
+						<span>S</span>
+					</li>
+					<li keyCode="68">
+						<span>D</span>
+						
+					</li>
+					<li keyCode="70">
+						<span>F</span>
+						<span class="keySign">_</span>
+					</li>
+					<li keyCode="71">
+						<span>G</span>
+					</li>
+					<li keyCode="72">
+						<span>H</span>
+					</li>
+					<li keyCode="74">
+						<span>J</span>
+						<span class="keySign">_</span>
+					</li>
+					<li keyCode="75">
+						<span>K</span>
+					</li>
+					<li keyCode="76">
+						<span>L</span>
+					</li>
+					<li keyCode="186">
+						<span>:</span>
+						<span>;</span>
+					</li>
+					<li keyCode="222">
+						<span>"</span>
+						<span>'</span>
+					</li>
+					<li keyCode="220">
+						<span>|</span>
+						<span>\</span>
+					</li>
+					<li class="width12 enterBoard enterDown" keyCode="13">
+						<span>Enter</span>
+					</li>
+				</ul>
+				<!--第三排键盘 E-->
+				<!--第四排键盘 S-->
+				<ul class="specialEffects1">
+					<li class="width275" keyCode="16">
+						<span>shift</span>
+					</li>
+					<li keyCode="90">
+						<span>Z</span>
+					</li>
+					<li keyCode="88">
+						<span>X</span>
+					</li>
+					<li keyCode="67">
+						<span>C</span>
+					</li>
+					<li keyCode="86">
+						<span>V</span>
+					</li>
+					<li keyCode="66">
+						<span>B</span>
+					</li>
+					<li keyCode="78">
+						<span>N</span>
+					</li>
+					<li keyCode="77">
+						<span>M</span>
+					</li>
+					<li keyCode="188">
+						<span><</span>
+						<span>,</span>
+					</li>
+					<li keyCode="190">
+						<span> > </span>
+						<span>.</span>
+					</li>
+					<li keyCode="191">
+						<span>?</span>
+						<span>/</span>
+					</li>
+					<li class="width275" keyCode="16">
+						<span>shift</span>
+					</li>
+				</ul>
+				<!--第四排键盘 E-->
+			</div>
+			<!--键盘区域 E-->
+		</div>
+		<!--渲染键盘 E-->
+		
+	</div>
+	
+</body>
+<script>
+	$(function(){
+		var keyJson="",//获取所有的数据
+		ready=0,//初始化
+		keyArrayNum=0,//获取总分组数
+		isComplete=false,//判断是否已经完成练习
+		keyArray=[];//每一组的数组
+		var accuracy=0,//正确率
+		clickKeyNum=0,//点击键盘次数，用于计算正确率
+		percentageComplete=0,//完成率
+		totalNums=0,//所有数据的条数，用于计算完成率
+		correctkeynNum=0,//正确点击键盘次数，用于计算正确率，和完成率
+		isSound=true,//音效开关
+		time="",//计算时间
+		timeStart=0;//初始化时间为0
+		
+		schemaChanges(0);
+		/*练习模式的改变改变数据*/
+		$(".schemaChanges").change(function(){
+			keychange=$(this).val();
+			schemaChanges(keychange);
+		})
+		function schemaChanges(keyNumber){
+			/*初始化数据*/
+			ready=0,percentageComplete=0,clickKeyNum=0,accuracy=0,correctkeynNum=0,timeStart=0,isComplete=false,keyArray=[];//初始化所有参数，保证所有的数据重新计算
+			clearInterval(time);//关闭计时器，保证新的计时效果
+			/*获取不同的练习模式的数据*/
+			if(keyNumber==0){
+				data=oneArray;
+			}else{
+				data=TwoArray;
+			}
+			/*数据初始化，keyJson这个变量最初设置的时候时用于处理复杂的json格式，现在数据格式并不复杂，可以不使用*/
+			keyJson=data;
+			keyArrayNum=keyJson.length;//获取总分组数
+			for(var i in keyJson){
+				totalNums+=keyJson[i].length;//获取所有数据条数，用于计算完成量
+			};
+			/*虽然数据都初始化了，需要将页面展示也初始化*/
+			$(".time").html("0时0分0秒");
+			$(".accuracy").html("--");
+			$(".percentageComplete").html("--");
+			/*清空上一次的键盘输入效果*/
+			$(".keyboard ul>li").removeClass("active");
+			$(".keyboard ul>li").removeClass("errorKey");
+			/*初始化最上面的键盘练习按钮*/
+			typingPractice(ready);
+		}
+		
+		/*初始化键盘打字区域*/
+		function typingPractice(readyNum){
+			$(".promptArea").html("");
+			$(".promptArea").append($("<ul></ul>"));
+			for(var j in keyJson[readyNum]){
+				/*原本想直接用keyCode组建json数据，但是，每一个都去寻找对应的keycode工程量有点大，所以就用charCodeAt对比，有条件的可以创建keycode的json数据，*/
+				var promptAreaLi=$("<li prompCode="+keyJson[readyNum][j].charCodeAt(0)+">"+keyJson[readyNum][j]+"</li>");
+				$(".promptArea>ul").append(promptAreaLi);
+				keyArray.push(keyJson[readyNum][j].charCodeAt(0));//由于用键盘
+			}
+			$(".promptArea>ul>li:first-child").addClass("waitPractice");
+		}
+		/*定义时间函数*/
+		function timeFunc(){
+			clearInterval(time);
+			time=setInterval(function(){
+				timeStart++;
+				var minute=0,hour=0,second=0;//时分秒的处理
+				second=timeStart%60;
+				if(timeStart>=60){
+					minute=Math.floor(timeStart/60);
+				}
+				if(minute>=60){
+					hour=Math.floor(minute/60);
+				}
+				$(".time").html(hour+"时"+minute+"分"+second+"秒");
+			},1000)
+		}
+		/*console.log(keyJson);*/
+		/*开始记录键盘事件*/
+		$(document).keydown(function(event){
+			if(clickKeyNum<=0){
+				timeFunc();
+			}
+			clickKeyNum++;
+			$(".keyboard ul>li").removeClass("active");
+			$(".keyboard ul>li").removeClass("errorKey");
+			var e = event || window.event || arguments.callee.caller.arguments[0];
+			//判断是否完成，完成之后取消键盘点击特效
+			if(isComplete){
+				return false;
+			}
+			/*键盘输入值与已存的组数据对比效果*/
+		  	if(e.key.charCodeAt(0)==keyArray[0]){
+		  		$("[keyCode="+e.keyCode+"]").addClass("active");//输入正确的键盘输入效果
+		  		keyArray.shift();//删除第一个数据，保持一直对比的时第一个数据
+		  		correctkeynNum++;
+		  		percentageComplete=((correctkeynNum/totalNums)*100).toFixed(2); /*计算完成率*/
+  				$('.percentageComplete').html(percentageComplete);
+  				accuracy=((correctkeynNum/clickKeyNum)*100).toFixed(2); /*计算正确率*/
+		  		$(".accuracy").html(accuracy);
+		  		
+		  		//当数组为最后一个时，更换一组数据，直到最后一组
+		  		if(keyArray.length>0){
+		  			$(".promptArea .waitPractice").removeClass("waitPractice").addClass("correctKey").next("li").addClass("waitPractice");
+		  		}else{
+		  			ready++;//比较数据组数，最后一组时需要提示完成
+		  			if(ready>=keyArrayNum){
+		  				alert("您已完成练习！");
+		  				$(".promptArea .waitPractice").removeClass("waitPractice").addClass("correctKey").next("li").addClass("waitPractice");
+		  				$(".promptArea").append($("<p>你已完成练习，键盘点击效果已封锁，请切换练习模式或者使用浏览器刷新之后继续操作！</p>"));
+		  				
+		  				isComplete=true;//当完成之后，点击键盘将不会再有特效
+		  				clearInterval(time);//清除定时器，免得持续计时
+		  				return;
+		  			}
+		  			typingPractice(ready);
+		  		}
+		  	}else{
+		  		$("[keyCode="+e.keyCode+"]").addClass("errorKey");
+		  		accuracy=((correctkeynNum/clickKeyNum)*100).toFixed(2); /*计算正确率*/
+		  		$(".accuracy").html(accuracy);
+		  	}
+		});
+	})
+</script>
+</div>
+</html>

@@ -1,0 +1,246 @@
+@charset "UTF-8";
+* {
+  padding: 0;
+  margin: 0; }
+
+.keyboard {
+  width: 854px;
+  margin: 30px auto;
+  overflow: hidden; }
+  .keyboard .keyboardArea {
+    position: relative;
+    /*开机特效区*/ }
+    .keyboard .keyboardArea > ul {
+      position: relative;
+      margin-bottom: 10px; }
+      .keyboard .keyboardArea > ul > li {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        border: 1px solid #a0913d;
+        background: #000;
+        color: #a0913d;
+        border-radius: 3px;
+        vertical-align: top;
+        list-style: none;
+        text-align: center;
+        display: inline-block;
+        animation: moveBgShadow 0.5s 2s forwards;
+        -moz-animation: moveBgShadow 0.5s 2s forwards;
+        -webkit-animation: moveBgShadow 0.5s 2s forwards;
+        -o-animation: moveBgShadow 0.5s 2s forwards;
+        overflow: hidden;
+            /*:after{
+                content: "";
+                position: absolute;
+                width: 2px;
+                height: 83px;
+                top: -17px;
+                left: -32px;
+                transform: rotate(40deg);
+                background: $lineHeight;
+                box-shadow: 0px 0px 16px $lineHeightShadow;
+
+                animation:moveLineHight 2s 1;
+                -moz-animation:moveLineHight 2s 1; 
+                -webkit-animation:moveLineHight 2s 1; 
+                -o-animation:moveLineHight 2s 1; 
+            }*/ }
+        .keyboard .keyboardArea > ul > li > span {
+          display: block;
+          overflow: hidden; }
+        .keyboard .keyboardArea > ul > li .keySign {
+          box-shadow: 0px 20px 1px #a0913d;
+          border: 1px solid #a0913d;
+          height: 1px;
+          width: 8px;
+          position: absolute;
+          bottom: 10px;
+          left: 50%;
+          margin-left: -4px; }
+      .keyboard .keyboardArea > ul .active {
+        background: #00ff21;
+        border-color: #00ff21; }
+      .keyboard .keyboardArea > ul .errorKey {
+        background: #ff0021;
+        border-color: #ff0021; }
+    .keyboard .keyboardArea .specialEffects0:before {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 70px;
+      left: -400px;
+      top: -10px;
+      background: #fff;
+      box-shadow: 0px 0px 16px #d0d0d0;
+      background-image: -webkit-linear-gradient(right, #a0913d, #f0da5c);
+      opacity: 1;
+      animation: moveSpecialEffects0 1s 1;
+      -moz-animation: moveSpecialEffects0 1s 1;
+      -webkit-animation: moveSpecialEffects0 1s 1;
+      -o-animation: moveSpecialEffects0 1s 1; }
+    .keyboard .keyboardArea .specialEffects1:before {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 70px;
+      left: 860px;
+      top: -10px;
+      background: #fff;
+      box-shadow: 0px 0px 16px #d0d0d0;
+      background-image: -webkit-linear-gradient(left, #a0913d, #f0da5c);
+      opacity: 1;
+      animation: moveSpecialEffects1 1s 1;
+      -moz-animation: moveSpecialEffects1 1s 1;
+      -webkit-animation: moveSpecialEffects1 1s 1;
+      -o-animation: moveSpecialEffects1 1s 1; }
+  .keyboard .keyboardArea:before {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: #fff;
+    box-shadow: 0px 0px 16px #a0913d;
+    background-image: -webkit-radial-gradient(#a0913d, #f0da5c);
+    top: 50%;
+    left: 50%;
+    margin: -0px -0px;
+    border-radius: 50%;
+    animation: moveSpecialEffects2 1.2s 1 .7s;
+    -moz-animation: moveSpecialEffects2 1.2s 1 .7s;
+    -webkit-animation: moveSpecialEffects2 1.2s 1 .7s;
+    -o-animation: moveSpecialEffects2 1.2s 1 .7s; }
+
+@keyframes moveSpecialEffects0 {
+  0% {
+    left: -400px;
+    width: 400px; }
+  55% {
+    left: 27px;
+    width: 400px; }
+  100% {
+    left: 427px;
+    width: 0px; } }
+@keyframes moveSpecialEffects1 {
+  0% {
+    left: 860px;
+    width: 400px; }
+  55% {
+    left: 427px;
+    width: 400px; }
+  100% {
+    left: 427px;
+    width: 0px; } }
+@keyframes moveSpecialEffects2 {
+  0% {
+    width: 1px;
+    height: 1px; }
+  10% {
+    width: 100px;
+    height: 70px;
+    opacity: 1;
+    margin: -35px -50px; }
+  100% {
+    width: 1200px;
+    height: 800px;
+    opacity: 0.5;
+    margin: -400px -600px; } }
+@keyframes moveBgShadow {
+  0% {
+    box-shadow: none; }
+  100% {
+    box-shadow: 5px 5px 5px #a0913d; } }
+.width12 {
+  width: 60px !important;
+  line-height: 50px; }
+
+.width13 {
+  width: 65px !important;
+  line-height: 50px; }
+
+.width14 {
+  width: 70px !important;
+  line-height: 50px; }
+
+.width15 {
+  width: 75px !important;
+  line-height: 50px; }
+
+.width16 {
+  width: 80px !important;
+  line-height: 50px; }
+
+.width17 {
+  width: 85px !important;
+  line-height: 50px; }
+
+.width18 {
+  width: 90px !important;
+  line-height: 50px; }
+
+.width20 {
+  width: 100px !important;
+  line-height: 50px; }
+
+.width275 {
+  width: 131.25px !important;
+  line-height: 50px; }
+
+.enterBoard {
+  border-radius: 3px 3px 0 3px !important; }
+
+.enterDown {
+  height: 61px !important;
+  vertical-align: bottom;
+  position: relative;
+  top: -11px;
+  margin-bottom: -11px;
+  border-top: 1px solid transparent !important;
+  border-radius: 0 0 3px 3px !important; }
+
+.promptArea {
+  margin-bottom: 30px;
+  position: relative; }
+  .promptArea > ul {
+    text-align: center; }
+    .promptArea > ul > li {
+      position: relative;
+      width: 50px;
+      height: 50px;
+      border: 1px solid #a0913d;
+      background: #000;
+      color: #a0913d;
+      border-radius: 3px;
+      vertical-align: top;
+      list-style: none;
+      text-align: center;
+      display: inline-block;
+      animation: moveBgShadow 0.5s 2s forwards;
+      -moz-animation: moveBgShadow 0.5s 2s forwards;
+      -webkit-animation: moveBgShadow 0.5s 2s forwards;
+      -o-animation: moveBgShadow 0.5s 2s forwards;
+      overflow: hidden;
+      margin: 0 4px; }
+    .promptArea > ul .correctKey {
+      background: #00ff21;
+      border-color: #00ff21; }
+    .promptArea > ul .waitPractice {
+      background: #00c2ff;
+      border-color: #00c2ff; }
+  .promptArea > p {
+    color: red;
+    height: 60px;
+    line-height: 60px;
+    position: absolute;
+    top: 0;
+    width: 99%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5); }
+
+.efficiencyPrompt {
+  text-align: left;
+  margin-bottom: 20px; }
+  .efficiencyPrompt > ul > li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 10px; }
