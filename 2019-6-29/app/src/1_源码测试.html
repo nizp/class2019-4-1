@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function createStore (reducer,initState){
+        if(typeof reducer !== 'function'){
+            throw new Error('reducer必须要是个函数');
+        }
+        let currentReducer = reducer;
+        let currentState = initState; //可变的数据
+        let currentListener = []; //订阅池，订阅监听函数的
+        function getState(){
+            return currentState;
+        }
+
+        
+        function isObject(obj){
+            if(typeof obj !== 'object' || obj === null){
+                return false;
+            }
+            return  Object.getPrototypeOf(obj) === Object.prototype;
+        }
+
+
+        function dispatch(action){
+            if(!isObject(action)){
+                throw new Error('action必须是个纯对象');
+            }
+            //调用dispatch的目的就是改变当前的状态
+            
+            currentState = currentReducer(currentState,action);
+            currentListener.forEach(fn=>fn());
+            return action;
+            /*
+                state=0
+                dispatch({type:'ADD'})
+                reducer(0,{'add'})
+                function reducer(state=0,{type:'add'}){
+                    if(action.type === 'add'){
+                        return 0 + 1
+                    }
+                    return state
+                }
+                getState()=>currentState 1
+            */
+
+        }
+
+        /*
+            subscribe(()=>{
+
+            })
+        */
+        function subscribe(listener){
+            currentListener.push(listener);
+            return function (){
+                let index = currentListener.indexOf(listener);
+                currentListener.splice(index,1);
+            }
+        }
+        dispatch({type:'@_@~~'}); //一上来调用一次reducer，保证currentState有状态值
+
+        return {
+            getState,
+            dispatch,
+            subscribe
+        }
+    }   
+
+    function reducer(state=0,action){
+        switch (action.type) {
+            case 'ADD':
+                return state + 1;
+            default:
+                return  state
+        }
+    }
+    let store = createStore(reducer);
+
+    console.log(store.getState());
+
+    let unsubscribe = store.subscribe(()=>{
+        console.log(store.getState());
+    })
+    
+    setTimeout(() => {
+        unsubscribe();
+    }, 3000);
+    document.onclick = function(){
+        store.dispatch({type:'ADD'});
+    }
+
+    
+    // store.dispatch({type:'ADD'});
+
+    
+    
+</script>
+</body>
+</html>
