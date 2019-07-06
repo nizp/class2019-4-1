@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+.box{
+    width:200px;
+    height:200px;
+    background: red;
+}
+.box2{
+    width:100px;
+    height:100px;
+    background: yellow;
+}
+</style>
+</head>
+<body>
+    <div class="root">
+       <!-- <button
+            v-on:click="++num"
+       >{{num}}</button> -->
+       <!-- <div @mousedown.prevent="">231231</div> -->
+        <input type="text" @keyup.13="fn"/>
+        <div 
+            class="box"
+            @click="fn1"
+        >
+            <div 
+                class="box2"
+                @click.stop="fn2"
+            ></div>
+       </div>
+        <input 
+            type="text" 
+            v-for="(val,key) in arr" 
+            :value="val"
+            @keyup.13="fn(key,$event)"
+        />
+    </div>
+<script src="./vue.js"></script>
+<script>
+
+    new Vue({
+        el:'.root',
+        data:{
+            num:0,
+            arr:[1,2,3]
+        },
+        methods: {
+            fn(key,ev){
+                console.log(key);
+                console.log(ev.target.value)
+            },
+            fn1(){
+                console.log('box')
+            },
+            fn2(){
+                console.log('box2')
+            }
+        },
+    })
+    
+</script>
+</body>
+</html>

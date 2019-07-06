@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="root">
+        <p>{{num}}</p>
+        <button 
+            @click="++num"
+        >按钮{{num}}</button>
+        <!-- <div v-if="color=='red'">123</div>
+        <p v-else-if="color=='blue'">哈哈</p>
+        <div v-else>321</div> -->
+
+        <!-- <div v-show="color=='red'">12321321</div> -->
+
+        <!-- <div v-text="num"></div> -->
+        <div v-html="dom"></div>
+    </div>
+<script src="./vue.js"></script>
+<script>
+
+    let v = new Vue({
+        el:'.root',
+        //等同于设置this.state
+        data:{
+            num:456,
+            b:true,
+            color:'red',
+            dom:'<div>哈哈</div>'
+        }
+    });
+
+    // setTimeout(() => {
+    //     v.num = 789;
+        
+    // }, 2000);
+</script>
+</body>
+</html>

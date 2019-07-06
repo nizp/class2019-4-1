@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+.box2{
+    border:1px solid #000;
+}
+</style>
+</head>
+<body>
+
+    <div id="box">
+        <div>
+            {{arr}} 
+            <!-- <input 
+                type="checkbox" 
+                :checked="all"
+            /> -->
+            <input 
+                type="checkbox" 
+                v-model="all"
+            />
+        </div>
+        <ul>
+            <li v-for="(val,key) in arr">
+                <input type="checkbox" v-model="arr[key]"/>
+            </li>
+        </ul>
+    </div>
+<script src="./vue.js"></script>
+<script>
+    new Vue({
+        el:'#box',
+        data:{
+           
+            arr:[true,true,false]
+        },
+        //render
+        computed:{
+            /*
+                代码一上来先执行一次，然后只要数据发生变化就触发
+            */
+            // all(){
+            //     console.log('会更新');
+            //     //return的结果要跟data中的数据相关联，它会自动监听你使用的数据
+            //     return this.arr.every(item=>item)
+            // }
+            all:{//all就是get的返回值
+                get(){
+                    // console.log(1)
+                    //get就去显示all的布尔值
+                    return this.arr.every(item=>item);
+                },
+                set(val){
+                    //当点击切换all这个checkbox的时候，就等同于修改了
+                    //all
+                    
+                    // set改变this.arr
+                    this.arr = this.arr.map(item=>{
+                        item = val;
+                        return item;
+                    });
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

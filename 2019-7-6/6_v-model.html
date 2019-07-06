@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+.box2{
+    border:1px solid #000;
+}
+</style>
+</head>
+<body>
+
+    <div id="box">
+        <input type="text" v-model="val"/>
+        {{val}}
+        <p>{{val}}</p>
+        <!-- <input type="text" v-model.number="val"/> -->
+        <!-- <input type="checkbox" v-model="checked">{{checked}} -->
+
+        <span>林同贺</span><input type="checkbox" value="林同贺" v-model="arr">
+        <span>于海洋</span><input type="checkbox" value="于海洋" v-model="arr">
+        <span>王旭</span><input type="checkbox" value="王旭" v-model="arr">
+        {{arr}}
+    </div>
+<script src="./vue.js"></script>
+<script>
+    new Vue({
+        el:'#box',
+        data:{
+           val:'123',
+           checked:true,
+           arr:[]
+        }
+    });
+</script>
+</body>
+</html>
