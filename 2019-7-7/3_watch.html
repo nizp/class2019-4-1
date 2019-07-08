@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <button @click="++a">{{a}}</button> -->
+        <input type="text" v-model="val" @keyup.13="fnUp"/>
+        <ul>
+            <li v-for="(val,key) in ary">
+                <span>{{val.txt}}</span>
+                <input type="checkbox" v-model="val.checked" />
+            </li>
+        </ul>
+        {{ary}}
+    </div>
+<script src="./vue.js"></script>
+<script>
+
+    function getItem(ary){//获取数据
+        let data = localStorage.getItem(ary) || JSON.stringify([
+                {
+                    checked:false,
+                    id:0,
+                    txt:'哈哈'
+                },
+                {
+                    checked:false,
+                    id:1,
+                    txt:'呵呵'
+                }
+            ]);
+        return JSON.parse(data);
+    }
+    function setItem(key,val){
+        localStorage.setItem(key,JSON.stringify(val))
+    }
+
+    // console.log(getItem('ary'))
+
+
+    new Vue({
+        el:'#app',
+        data:{
+            // a:0
+            val:'',
+            ary:getItem('ary')
+        },
+        methods:{
+            fnUp(){
+                this.ary.unshift({
+                    id:+new Date,
+                    checked:false,
+                    txt:this.val
+                });
+                this.val = '';
+            }
+        },
+        watch: {
+            // a(val, oldVal){
+            //     console.log(val,oldVal);
+            // }
+            // ary(){
+            //     setItem('ary',this.ary)
+            //     console.log(111)
+            // }
+            ary:{
+                handler(){
+                    setItem('ary',this.ary)
+                },
+                deep:true
+            }
+        },
+    })
+</script>
+</body>
+</html>

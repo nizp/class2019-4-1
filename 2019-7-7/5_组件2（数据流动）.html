@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <button @click="++num">父级{{num}}</button>
+        </div>
+        <hr />
+        <ppa :pn="num"></ppa>
+    </div>
+<script src="./vue.js"></script>
+<script>
+    const ppa = {
+        template:`
+            <div>
+                <button @click="++n">按钮{{pn}}</button>
+                <div>子组件{{n}}</div>
+            </div>
+        `,
+        // props:['pn'],
+        // props:{
+        //     pn:String
+        // },
+        // props:{
+        //     pn:[String,Number]
+        // },
+        props:{
+            pn:{
+                type:[String,Number],
+                // default:100,
+                required:true
+            }
+        },
+        data(){
+            return {
+                n:10
+            }
+        }
+    }
+
+    Vue.component('ppa',ppa);
+
+    new Vue({
+        el:'#app',
+        data:{
+            num:0
+        }
+    });
+
+   
+
+</script>
+</body>
+</html>

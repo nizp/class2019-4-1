@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <section class="todoapp">
+        <div>
+            <header class="header" >
+                <h1>todos</h1>
+                <input 
+                    class="new-todo" 
+                    placeholder="请输入内容" 
+                    v-model="val"
+                    @keyup.13="add"
+                >
+            </header>
+            <section class="main">
+                <input class="toggle-all" type="checkbox" v-model="all">
+                <ul class="todo-list">
+                    <li :class="val.checked?'completed':''" v-for="(val,key) in filterAry">
+                        <div class="view">
+                            <input class="toggle" type="checkbox" v-model="val.checked">
+                            <label>{{val.txt}}</label>
+                            <button class="destroy"></button>
+                        </div>
+                        <!-- <input class="edit" value="多多对对对"> -->
+                    </li>
+                </ul>
+            </section>
+            <footer class="footer">
+	            <span class="todo-count">
+	            	<strong>{{wnum}}</strong>
+	            	<span>条未选中</span>
+                </span>
+                <ul 
+                    class="filters"
+                >
+                    <li>
+                        <a 
+                            href="#/all" 
+                            :class="router=== '#/all'?'selected':''"
+                            @click="router = '#/all'"
+                        >全部</a>
+                    </li>
+                    <li>
+                        <a 
+                            href="#/unchecked" 
+                            @click="router = '#/unchecked'"
+                            :class="router=== '#/unchecked'?'selected':''"
+                        >未选中</a>
+                    </li>
+                    <li>
+                        <a 
+                            href="#/checked"
+                            @click="router = '#/checked'"
+                            :class="router=== '#/checked'?'selected':''"
+                        >已选中</a>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+    </section>
+<script src="../../vue.js"></script>
+<script>
+    new Vue({
+        el:'.todoapp',
+        data:{
+            val:'',
+            router:'#/all',
+            ary:[
+                {
+                    id:0,
+                    txt:'哈哈',
+                    checked:true
+                },
+                {
+                    id:1,
+                    txt:'呵呵',
+                    checked:false
+                }
+            ]
+        },
+        methods:{
+            add(){
+                this.ary.unshift({
+                    id:+new Date,
+                    txt:this.val,
+                    checked:false
+                })
+                this.val = '';
+            }
+        },
+        computed:{
+            all:{
+                get(){
+                    // console.log(1111)
+                    console.log(this.ary.every(item=>item.checked))
+                    return this.ary.every(item=>item.checked);
+                },
+                set(val){
+                    this.ary = this.ary.map(item=>{
+                        item.checked = val;
+                        return item;
+                    })
+                }
+            },
+            wnum(){
+                return this.ary.filter(item=>!item.checked).length
+            },
+            filterAry(){
+                let {router} = this;
+                return this.ary.filter(item=>{
+                    switch(router){
+                        case '#/all':
+                            return item;
+                        case '#/unchecked':
+                            return !item.checked
+                        case '#/checked':
+                            return item.checked
+                    }
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>

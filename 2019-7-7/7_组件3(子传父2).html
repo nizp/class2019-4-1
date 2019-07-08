@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button
+            @click="add"
+        >父级按钮</button>
+        <p>父组件{{num}}</p>
+        <hr />
+
+        <!-- 绑定叫做addcnum的自定义的事件，这个事件绑定getchildfn（2） -->
+        <ppa 
+            :nn="num"
+            
+            @add-cnum="getchildfn"
+        ></ppa>
+
+    </div>
+<script src="./vue.js"></script>
+<script>
+    
+    const ppa = {
+        props:['nn'],
+        data(){
+            return {
+                cnum:this.nn
+            }
+        },
+        template:`
+            <div>
+                <button
+                   @click="clickFn"
+                >子组件的按钮{{cnum}}</button>    
+            </div>
+        `,
+        methods:{
+            clickFn(){
+                ++this.cnum;
+                //定义一个叫做addcnum的事件，第二个之后的参数就是绑定父函数的参数
+                this.$emit('add-cnum',this.cnum);//this.cnum就是getchildfn的参数(3)
+            }
+        }
+    }
+
+    Vue.component('ppa',ppa);
+
+    new Vue({
+        el:'#app',
+        data:{
+            num:0
+        },
+        methods:{
+            add(){
+                ++ this.num ;
+            },
+            //父级定义的方法，这个方法接收一个参数，让this.num等于传进来的参数 (1)
+            getchildfn(val){
+                this.num = val;
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

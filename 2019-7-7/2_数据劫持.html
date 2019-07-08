@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    let obj = {
+        num:2
+    }    
+
+    let v = 1;
+    //去设置属性
+    Object.defineProperty(obj,'n',{
+        // value:0,
+        get(){
+            // console.log('拦截获取'); //读操作
+           return v;
+        },
+        set(val,old){ //写属性的时候进行拦截
+            console.log(val);
+            v = val;
+        }
+        // writable:true, //是否能够修改这个属性，默认为不能修改
+        // enumerable:true,//n这个属性是否能被枚举
+        // configurable:true,//是否能被删除
+    });
+
+    console.log(obj.n);
+    obj.n = 10;
+
+
+
+
+    
+
+</script>
+</body>
+</html>
