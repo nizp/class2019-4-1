@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button 
+            @click="++num"
+        >点击</button>
+        <div>{{num | todou | even}}</div>
+    </div>
+<script src="./vue.js"></script>
+<script>
+
+    Vue.filter('todou',function(val){
+        // console.log(val);
+        return val < 10?'0'+val:''+val;
+    });
+
+    Vue.filter('even',function(val){
+        // console.log(val);
+        return val % 2;
+    });
+
+    new Vue({
+        el:'#app',
+        data:{
+            num:0
+        },
+        computed:{
+            toDou(){
+                return this.num < 10?'0'+this.num:''+this.num;
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .codes {
+            width: 400px;
+            height: 400px;
+            background-color: ;
+            margin: 100px auto;
+            font-family: Microsoft YaHei;
+            position: relative;
+        }
+
+        .codes p {
+            width: 100%;
+            height: 30px;
+            font-size: 16px;
+            line-height: 30px;
+            color: #fff;
+            text-align: center;
+            background-color: tomato;
+            border-radius: 4px;
+        }
+
+        .progress {
+            width: 100%;
+            height: 36px;
+            background-color: tomato;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            z-index: 1;
+        }
+
+        .tip {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            position: relative;
+            top: 0;
+            left: 0;
+            background-color: tomato;
+            border-left: 1px solid #fff;
+            border-right: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            border-radius: 1.3px;
+            font-style: normal;
+            text-align: center;
+            line-height: 36px;
+            color: #fff;
+            z-index: 2;
+        }
+
+        .tip.on {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            position: relative;
+            top: 0;
+            left: 0;
+            background-color: skyblue;
+            border-left: 1px solid #fff;
+            border-right: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            border-radius: 1.3px;
+            font-style: normal;
+            text-align: center;
+            line-height: 36px;
+            color: #fff;
+            z-index: 2;
+        }
+
+        .tip:after {
+            content: " ";
+            display: block;
+            width: 0px;
+            height: 0px;
+            border-top: 18px solid tomato;
+            border-left: 18px solid #fff;
+            border-right: 18px solid #fff;
+            border-bottom: 18px solid #fff;
+            position: relative;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            background-color: tomato;
+        }
+
+        .tip.on:after {
+            content: " ";
+            display: block;
+            width: 0px;
+            height: 0px;
+            border-top: 18px solid skyblue;
+            border-left: 18px solid #fff;
+            border-right: 18px solid #fff;
+            border-bottom: 18px solid #fff;
+            position: relative;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            background-color: tomato;
+        }
+
+        .clip {
+            width: 100%;
+            height: 36px;
+            background-color: tomato;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        .codes input {
+            display: block;
+            width: 100%;
+            height: 60px;
+            margin-top: 42px;
+            border-radius: 4px;
+            position: relative;
+            top: 46px;
+        }
+
+        .codes span {
+            display: none;
+            width: 100%;
+            height: 30px;
+            position: relative;
+            top: 40px;
+            line-height: 30px;
+            text-align: center;
+            color: #fff;
+            background-color: tomato;
+            border-radius: 4px;
+            transition: 1s;
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            margin: 18px 0;
+            width: 100%;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            animation: 0.2s;
+            box-shadow: ;
+            background: tomato;
+            border-radius: 1.3px;
+            border: 0.2px solid tomato;
+        }
+
+        input[type=range].ok::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            animation: 0.2s;
+            box-shadow: ;
+            background: #333;
+            border-radius: 1.3px;
+            border: 0.2px solid #333;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            border: 1px solid tomato;
+            height: 20px;
+            width: 20px;
+            border-radius: 3px;
+            background: #fff;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -6px;
+        }
+
+        input[type=range].ok::-webkit-slider-thumb {
+            border: 1px solid #333;
+            height: 20px;
+            width: 20px;
+            border-radius: 3px;
+            background: #ffffff;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -6px;
+        }
+
+        input[type=range]:focus::-webkit-slider-runnable-track {
+            background: tomato;
+        }
+
+        input[type=range].ok:focus::-webkit-slider-runnable-track {
+            background: #333;
+        }
+
+        input[type=range]::-moz-range-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            animation: 0.2s;
+            box-shadow: ;
+            background: tomato;
+            border-radius: 1.3px;
+            border: 0.2px solid tomato;
+        }
+
+        input[type=range].ok::-moz-range-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            animation: 0.2s;
+            box-shadow: ;
+            background: #333;
+            border-radius: 1.3px;
+            border: 0.2px solid #333;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            border: 1px solid tomato;
+            height: 20px;
+            width: 20px;
+            border-radius: 3px;
+            background: #ffffff;
+            cursor: pointer;
+        }
+
+        input[type=range].ok::-moz-range-thumb {
+            border: 1px solid #333;
+            height: 20px;
+            width: 20px;
+            border-radius: 3px;
+            background: #ffffff;
+            cursor: pointer;
+        }
+
+        input[type=range]::-ms-track {
+            width: 100%;
+            height: 8.4px;
+            cursor: pointer;
+            animation: 0.2s;
+            background: transparent;
+            border-color: transparent;
+            border-width: 16px 0;
+            color: transparent;
+        }
+
+        input[type=range]::-ms-tooltip {
+            display: none;
+        }
+
+        input[type=range]::-ms-fill-lower {
+            background: tomato;
+            border: 0.2px solid tomato;
+            border-radius: 2.6px;
+        }
+
+        input[type=range].ok::-ms-fill-lower {
+            background: #333;
+            border: 0.2px solid #333;
+            border-radius: 2.6px;
+        }
+
+        input[type=range]::-ms-fill-upper {
+            background: tomato;
+            border: 0.2px solid tomato;
+            border-radius: 2.6px;
+        }
+
+        input[type=range].ok::-ms-fill-upper {
+            background: #333;
+            border: 0.2px solid #333;
+            border-radius: 2.6px;
+        }
+
+        input[type=range]::-ms-thumb {
+            border: 1px solid tomato;
+            height: 20px;
+            width: 20px;
+            border-radius: 3px;
+            background: #ffffff;
+            cursor: pointer;
+        }
+
+        input[type=range].ok::-ms-thumb {
+            border: 1px solid #333;
+            height: 20px;
+            width: 20px;
+            border-radius: 3px;
+            background: #ffffff;
+            cursor: pointer;
+        }
+
+        input[type=range]:focus::-ms-fill-lower {
+            background: tomato;
+        }
+
+        input[type=range].ok:focus::-ms-fill-lower {
+            background: #333;
+        }
+
+        input[type=range]:focus::-ms-fill-upper {
+            background: tomato;
+        }
+
+        input[type=range].ok:focus::-ms-fill-upper {
+            background: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="codes">
+        <p>拖动验证</p>
+        <div class="progress">
+            <div class="clip"></div>
+            <div class="tip">0</div>
+        </div>
+        <input type="range" max="1000" min="0" value="0" step="1">
+        <span></span>
+    </div>
+    <script>
+        var p = document.getElementsByTagName("p")[0];
+        var clip = document.getElementsByClassName("clip")[0];
+        var tip = document.getElementsByClassName("tip")[0];
+        var input = document.getElementsByTagName("input")[0];
+        var span = document.getElementsByTagName("span")[0];
+        var obj = {
+            p: p,
+            clip: clip,
+            tip: tip,
+            input: input,
+            span: span
+        };
+
+        function Demo() {
+            //是否可提交
+            this.sub = false;
+            //当前值
+            this.val = 0;
+            //p默认的文字
+            this.pht = "拖动验证";
+            //错的颜色
+            this.nocol = "tomato";
+            //对的颜色
+            this.okcol = "skyblue";
+            //拖动成功后几秒有效 
+            this.setTime = 5;
+            //随机的最小值
+            this.low = 0;
+            //随机的最大值
+            this.high = 1000;
+            //每次点击获取的随机值
+            this.ran = 0;
+            //可接受的误差值
+            this.bias = 10;
+
+
+            //随机数方法
+            this.random = function (max, min) {
+                var min = arguments[1] || 0;
+                return Math.floor(Math.random() * (max - min) + 1 + min);
+            };
+        }
+        Demo.prototype.down = function (obj) {
+            var self = this;
+            obj.input.addEventListener("mousedown", function () {
+                //每次点击都取一个随机数
+                self.ran = self.random(self.low, self.high);
+                //确定移动的位置，并取一定的范围
+                obj.p.innerHTML = "拖动到" + (self.ran - self.bias) + "与" + (self.ran + self.bias) + "之间";
+                obj.clip.style.display = "block";
+                obj.clip.style.backgroundColor = "skyblue";
+                obj.clip.style.clip = "rect(0px," + (((self.ran / 1000) * (400 - 36)) + 36) + "px,36px," + (((self.ran / 1000) * (400 - 36))) + "px)";
+                self.move(obj);
+            }, false);
+        };
+        Demo.prototype.move = function (obj) {
+            var self = this;
+            obj.input.addEventListener("mousemove", function () {
+                self.val = obj.input.value;
+                obj.tip.innerHTML = self.val;
+                obj.tip.style.left = self.val / 1000 * 364 + "px";
+                //判断是否移动到了指定位置
+                if (self.val <= self.ran + self.bias && self.val >= self.ran - self.bias) {
+                    obj.tip.className = "tip on";
+                } else {
+                    obj.tip.className = "tip";
+                }
+            }, false);
+        };
+        Demo.prototype.up = function (obj) {
+            var self = this;
+            obj.input.addEventListener("mouseup", function () {
+                //判断是否移动到了指定的范围
+                if (self.val <= self.ran + self.bias && self.val >= self.ran - self.bias) {
+                    obj.tip.className = "tip on";
+                    obj.span.style.display = "block";
+                    obj.span.innerHTML = "验证成功，" + self.setTime + "秒有效！";
+                    self.sub = true;
+                    //正确开启定时器，时间到了之后返回起点
+                    setTimeout(function () {
+                        self.sub = false;
+                        obj.input.value = 0;
+                        obj.tip.innerHTML = obj.input.value;
+                        obj.tip.style.left = 0 + "px";
+                        obj.tip.className = "tip";
+                        obj.clip.style.display = "none";
+                        obj.p.innerHTML = self.pht;
+                        obj.span.style.display = "none";
+                    }, self.setTime * 1000);
+                //失败直接返回起点
+                } else {
+                    self.val = 0;
+                    obj.input.value = self.val;
+                    obj.tip.innerHTML = self.val;
+                    obj.tip.style.left = 0 + "px";
+                    obj.tip.className = "tip";
+                    obj.clip.style.display = "none";
+                    obj.p.innerHTML = self.pht;
+                    setTimeout(function () {
+                        //解决浏览器不自动返回到0
+                        obj.input.value = 0;
+                    }, 100);
+                }
+            });
+        };
+        var x = new Demo();
+        x.down(obj);
+        x.up(obj);
+    </script>
+</body>
+
+</html>
