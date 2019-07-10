@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>别踩白块</title>
+    <style type="text/css">
+        #score{
+            text-align: center;
+        }
+        h2{
+            text-align: center;
+        }
+        div{
+            margin: 0 auto;
+            width: 100px;
+            height: 100px;
+        }
+        #main{
+            width: 400px;
+            height: 400px;
+            background: white;
+            border: 2px solid gray;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        #con{
+            width: 100%;
+            height: 400px;
+            position: relative;
+            top: -100px;
+            border-collapse: collapse;
+        }
+        .row{
+            height: 100px;
+            width: 100%;
+        }
+        .cell{
+            height: 100px;
+            width: 100px;
+            float: left;
+        }
+        .black{
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <h2>分数</h2>
+    <h2 id="score">0</h2>
+    <div id="main">
+        <div id="con"></div>
+    </div>
+</body>
+</html>
+<script>
+    // 获取到大盒子部分
+    let main = document.querySelector("#main");
+    // 获取到分数部分
+    let score = document.querySelector("#score");
+    // 获取到小盒子部分
+    let con = document.querySelector("#con");
+    // 初始化计时器
+    let clock = null;
+    // 初始速度为 4
+    let speed = 4;
+
+    // 创建div方法
+    function createDiv(className){
+        // 创建一个div标签
+        let div = document.createElement('div');
+        // 传进来的类名为新建div的类名
+        div.className = className;
+        return div;
+    }
+
+    // 初始化 
+    function init(){
+        // 创建4个类名为row的div 也就是一行小方块
+        for(let i = 0; i < 4; i++){
+            createRow();
+        }
+    }
+
+    // 创建行的小方块的方法
+    function createRow(){
+        // 创建类名为row的div
+        let row = createDiv('row');
+        // 把创建列的小方块的方法调用保存下来
+        let arr = createCell();
+        // 把类名为row的div放进小盒子里面
+        con.appendChild(row);
+
+        for(let i = 0; i < 4; i++){
+            // 生成4列小方块放进每一行中
+            row.appendChild(createDiv(arr[i]));
+        }
+        // 如果小盒子没有小方块时
+        if(con.firstChild == null){
+            // 把行的小方块放进小盒子里面
+            con.appendChild(row);
+        }else{
+            // 新建的每一行都自上而下的生成
+            con.insertBefore(row,con.firstChild);
+        }
+    }
+
+    // 创建列的小方块方法 
+    function createCell(){
+        // 数组中放的4个列的小方块的类名
+        let temp = ['cell','cell','cell','cell'];
+        // 随机取出0-3的随机数
+        let i = Math.floor(Math.random()*4);
+        // 设定取出的随机数为索引 加上黑色小块的样式
+        temp[i] = 'cell black';
+        return temp;
+    }
+
+    // 加速的方法
+    function speedup(){
+        // 从初始速度4开始，每次都加2，比如速度是4,6,8,10...
+        speed += 2;
+        // 当速度到20时，游戏通关
+        if(speed == 20){
+            alert('你超神了！');
+        }
+    }
+
+    // 计分的方法
+    function scoreFn(){
+        // 把分数取整 并且重新打印到页面上
+        let newScore = parseInt(score.innerHTML) + 1;
+        score.innerHTML = newScore;
+        // 每十行加下速度
+        if(newScore % 10 == 0){
+            speedup();
+        }
+    }
+
+    // 点击大盒子时，判断是否点击黑块
+    main.onclick = function(ev){
+        judge(ev);
+    }
+
+    // 判断是否点击黑块的方法
+    function judge(ev){
+        // 如果点击了黑块
+        if(ev.target.className.indexOf('black') != -1){
+            // 让黑块变白块
+            ev.target.className = 'cell';
+            // 在事件源的父级定义pass,表明此行的黑块已经被点击
+            ev.target.parentNode.pass = 1;
+            // 执行计分的方法
+            scoreFn();
+        }
+    }
+
+    //删除某行的方法 
+    function delRow(){
+        // 当小盒子中的行数为6时
+        if(con.childNodes.length == 6){
+            // 删除最后一行
+            con.removeChild(con.lastChild);
+        }
+    }
+
+    // 每30毫秒执行一次move方法
+    clock = window.setInterval('move()',30);
+    
+    // 让黑块动起来
+    function move(){
+        // 获取到小盒子的top值
+        let top = parseInt(window.getComputedStyle(con)['top']);
+        // 先让小盒子的top值为0
+        if(speed + top >0){
+            top = 0;
+        }else{
+            // 不大于0 第二次进 把初始化的速度重新给小盒子的top
+            top += speed;
+        }
+        // 设定小盒子的top值
+        con.style.top = top +'px';
+        // 当小盒子的top值为0时
+        if(top === 0){
+            // 创建一行小方块
+            createRow();
+            // 让小盒子的top值为-100px
+            con.style.top = '-100px';
+            // 删除当前行
+            delRow();
+        }else if( top == (-100 + speed)){
+            // 获取到小盒子的所有的子节点
+            let rows = con.childNodes;
+            // 当最下面一行的小方块到底的时候
+            if((rows.length == 5) && (rows[rows.length - 1].pass !== 1)){
+                // 游戏结束
+                fail();
+            }
+        }
+    }
+    
+    // 游戏结束
+    function fail(){
+        // 清除定时器
+        clearInterval(clock);
+        // 页面得分显示部分
+        alert('你的最终得分为'+parseInt(score.innerHTML));
+    }
+
+    init();
+
+    
+
+
+
+    
+
+    
+
+
+
+
+</script>
