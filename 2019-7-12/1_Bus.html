@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box1{
+    width:100px;
+    height:100px;
+    border:1px solid #000;
+}
+#box2{
+    width:100px;
+    height:100px;
+    border:1px solid #000;
+}
+</style>
+</head>
+<body>
+    <div id="app">
+        <box1></box1>
+        <box2></box2>
+    </div>
+<script src="./vue.js"></script>
+<script>
+
+    const Bus = new Vue(); //实例就是事件车，事件车里面有,$on和$emit
+
+
+    const box1 = {
+        template:`<div id="box1" @click="cr" ref="b1">{{num}}</div>`,
+        created(){
+            /*
+                绑定事件,事件干的事情
+            */
+            Bus.$on('change-red',(color)=>{
+                this.$refs.b1.style.background = color;
+            });
+        },
+        data(){
+            return {
+                num:0,
+                color:'red'
+            }
+        },
+        methods:{
+            cr(){
+                //事件车事件触发
+                Bus.$emit('change-red',this.color)
+            }
+        }
+    }
+    const box2 = {
+        template:'<div id="box2" @click="cr2" ref="b2">{{num}}</div>',
+        created(){
+            Bus.$on('change-red',(color)=>{
+                this.$refs.b2.style.background = color;
+            })
+        },  
+        data(){
+            return {
+                num:0
+            }
+        },
+        methods:{
+            cr2(){
+                // Bus.$emit('change-green','green');
+                Bus.$emit('change-red','red');
+            }
+        }
+    }
+
+    // Vue.component('box1',box1);
+
+    new Vue({
+        el:'#app',
+        data:{
+            red:'red'
+        },
+        components:{
+            box1,
+            box2
+        }
+    })
+</script>
+</body>
+</html>

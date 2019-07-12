@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        reduce:数据的一个方法
+
+        能够返回出每次数组中累积的值
+    */
+    let arr = [{num:0},{num:1},{num:2}];
+
+    let nn = arr.reduce((prev,now)=>{
+        // console.log(prev.num)
+        return {num:prev.num + now.num};
+    });
+
+    console.log(nn.num)
+
+    // let num = 0;
+    // arr.forEach(n=>num+=n);
+    // console.log(num);
+
+</script>
+</body>
+</html>
