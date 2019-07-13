@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <div id="box">1</div>
+    <input type="button" value="上一个"/>
+    <input type="button" value="下一个"/>
+<script>
+    /*
+        history
+            浏览器历史记录
+
+            可以使用浏览器的前进后退,需要服务器才能正常使用
+    
+    */
+
+    const btns = document.querySelectorAll('button');
+    const btns2 = document.querySelectorAll('input');
+
+    btns.forEach((ele,i)=>{
+        ele.onclick = function(){
+            history.pushState({
+                num:ary[i]
+            }, null, 'http://127.0.0.1:5500/history.html/'+i);
+            // console.log(ary);
+            box.innerText = ary[i];
+        }
+    });
+
+
+    btns2.forEach((ele,i)=>{
+        ele.onclick = function(){
+            if(i===0){
+                history.go(-1);
+            }   
+            if(i===1){
+                history.go(1);
+            }   
+        }
+    })
+
+
+    onpopstate = function(ev){
+        // console.log(ev.state);
+        box.innerText = ev.state.num;
+    }
+
+
+    let ary = [1,2,3];
+   
+</script>
+</body>
+</html>

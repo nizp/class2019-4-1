@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div v-model="num" id="box" v-for=""></div>
+<script>
+
+    
+
+    // console.dir(box.getAttribute('v-model'))
+
+    // document.createDocumentFragment
+
+    const data = {
+        num:0
+    }
+    console.log(data[getAttribute('v-model')])
+    function getAttribute(name){
+        for(let attr of box.attributes){
+            if(attr.nodeName === name){
+               return attr.value;
+            }
+        }
+    }
+
+
+    /*
+        直接this  
+
+        点谁是谁  直接放到事件上
+        window 
+            全局
+            单纯函数名 + 括号
+            回调函数
+            匿名函数自执行
+            定时器中的this
+
+        对象前的主
+            obj.xxx
+            obj['xxx']
+            Fn.prototype.fn()
+        实例
+            new this就实例
+        箭头函数
+            找上级域
+        定时器
+            window
+        严格模式this
+            "use strict"
+            undefined
+
+        react中的自定义方法this
+            默认走undefined
+
+        
+
+    
+    */
+
+    // document.onclick = (function fn(){
+    //     console.log(this);
+    //     return function fn2(){
+    //         console.log(this)
+    //     }
+    // })();
+
+
+    // function fn(f){ 
+    //     f();
+    // }
+
+    // let obj = {};
+    // function fn(){
+    //     console.log(this);
+    // }
+
+    // obj.fn = fn;
+
+    // setTimeout(obj.fn(),30);
+    
+
+    // for (var i = 0; i < 5; i++) {
+    //     setTimeout(() => {
+    //         console.log(i);   
+    //     });
+    // }
+
+
+    // for (var i = 0; i < 5; i++) {
+    //     (function(i) {
+    //         setTimeout(function() {
+    //             console.log(i);
+    //         }, i * 1000);
+    //     })(i);
+    // }
+    
+
+
+    // for (var i = 0; i < 5; i++) {
+    //     (function() {
+    //         setTimeout(function() {
+    //             console.log(i);
+    //         }, i * 1000);
+    //     })(i);
+    // }
+
+    // for (var i = 0; i < 5; i++) {
+    //     setTimeout((function(i) {
+    //         console.log(i);
+    //     })(i), i * 1000);
+    // }
+</script>
+</body>
+</html>
