@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    用户名:<input type="text" id="user" />
+    密码:<input type="password" id="pass" />
+    <button id="btn">注册</button>
+    
+    <hr />
+    <input type="text" id="searchVal"/>
+    <button id="search">高级查询</button>
+    <button id="rank">充值:提高权限</button>
+    <ul id="list">
+
+    </ul>
+    
+<script>
+
+
+    let rank = 1;//权限
+
+    btn.onclick = function(){
+        const uv = user.value;
+        const pv = pass.value;
+        fetch('/add',{
+            method:'post',
+            body:new URLSearchParams({user:uv,pass:pv}).toString(),
+            headers:{
+                'Content-Type':'application/x-www-form-urlencoded'
+            }
+        }).then((data)=>{
+            rank = data.rank;
+            console.log(data);
+        });
+    }
+
+
+    search.onclick = function(){
+        if(rank > 0){
+            //某个级别有多少人
+            ///getList?search=number
+
+            fetch('/getList?search='+searchVal.value)
+            .then(d=>d.json()).
+            then((data)=>{
+                console.log(data)
+                if(data.code === 0){
+                    let html = '';
+
+                    data.msg.forEach(ele=>{
+                        html += '<li>'+ ele.user +'</li>'
+                    })
+
+                    list.innerHTML = html;
+                }
+                // console.log(data)
+            })    
+            
+        }else{
+            alert('请充值')
+        }
+    }
+
+
+</script>
+</body>
+</html>
