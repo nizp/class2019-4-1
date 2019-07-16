@@ -11,19 +11,28 @@
     用户名:<input type="text" id="user" />
     密码:<input type="password" id="pass" />
     <button id="btn">注册</button>
+    <button id="btn2">登录</button>
     
     <hr />
     <input type="text" id="searchVal"/>
     <button id="search">高级查询</button>
-    <button id="rank">充值:提高权限</button>
+    <button id="rankBtn">充值:提高权限</button>
     <ul id="list">
 
     </ul>
     
 <script>
 
+    let rank = 0;//权限
+    let id = null;
 
-    let rank = 1;//权限
+    fetch('/setcookie').then(e=>e.json())
+    .then(d=>{
+        if(d.code === 0){
+            rank = d.msg.rank;
+            id = d.msg.id;
+        }
+    });
 
     btn.onclick = function(){
         const uv = user.value;
@@ -36,7 +45,36 @@
             }
         }).then((data)=>{
             rank = data.rank;
+            id = data._id;
             console.log(data);
+        });
+    }
+
+
+    btn2.onclick = function(){
+        const uv = user.value;
+        const pv = pass.value;
+        fetch('/login',{
+            method:'post',
+            body:new URLSearchParams({user:uv,pass:pv}).toString(),
+            headers:{
+                'Content-Type':'application/x-www-form-urlencoded'
+            }
+        }).
+        then(e=>e.json()).
+        then((data)=>{
+            if(data.code === 0){
+                rank = data.data.rank;
+                id = data.data._id;
+            }
+
+            if(data.code === 2){
+                alert(data.msg);
+            }
+
+
+           
+            // console.log(data);
         });
     }
 
@@ -49,13 +87,13 @@
             fetch('/getList?search='+searchVal.value)
             .then(d=>d.json()).
             then((data)=>{
-                console.log(data)
+                // console.log(data)
                 if(data.code === 0){
                     let html = '';
 
                     data.msg.forEach(ele=>{
                         html += '<li>'+ ele.user +'</li>'
-                    })
+                    });
 
                     list.innerHTML = html;
                 }
@@ -67,6 +105,25 @@
         }
     }
 
+
+    //点击充值
+    rankBtn.onclick = function(){
+        if(id){
+            fetch('/rank',{
+                method:'post',
+                body:''+new URLSearchParams({id}),
+                headers:{
+                    'Content-Type':'application/x-www-form-urlencoded'
+                }
+            }).then(e=>e.json())
+            .then(d=>{
+                rank = d.rank;
+            })
+        }else{
+            alert('请登录再充值');
+        }
+        
+    }
 
 </script>
 </body>

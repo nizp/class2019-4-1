@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>日历 - 插件</title>
+
+<style>
+* {
+    padding:0;
+    margin:0;
+    font-size:12px;
+}
+.fl {
+    float:left;
+}
+.fr {
+    float:right;
+}
+.dn {
+    display:none;
+}
+/*日历 begin*/
+.data_box{
+    width:260px; 
+}
+.showDate{
+    width:248px;
+    height:30px;
+    line-height:30px;
+    padding:0 5px;
+    border:1px solid #e1e1e1;
+    color:#999;
+    display:block;
+    cursor:pointer;
+}
+.show_mn{
+    text-align:center;
+    padding:0 20px;
+}
+.sel_date{
+    margin-top:10px;
+    border:1px solid #999;
+    padding:3px;
+}
+.data_table{
+    width:100%;
+    margin-top:10px;
+}
+.data_table td{
+    text-align:center;
+    cursor:pointer;
+    height:24px;
+    font-size:14px;
+}
+.data_table td.active{
+    color:#fff;
+    background-color:#999;
+}
+.data_table td.hover{
+    color:blue;
+}
+.showDate2{
+    width:35px;
+    padding:3px 5px;
+    color:#999;
+    border:1px solid #e1e1e1;
+    text-align:center;
+}
+.showDate2.active{
+    border:1px solid #c50000; 
+}
+.prev_m,.next_m{
+    width:10px;
+    height:22px;
+    display:block;
+    background-color:#0094ff;
+    color:#fff;
+    cursor:pointer;
+    text-align:center;
+    font: bold 12px/22px "宋体";
+}
+
+.prev_y,.next_y{
+    width:18px;
+    height:22px;
+    display:block;
+    background-color:#0094ff;
+    color:#fff;
+    cursor:pointer;
+    text-align:center;
+    font: bold 12px/22px "宋体";
+    margin:0 5px;
+}
+/*日历 end*/
+</style>
+</head>
+<body>
+<div class="clearfix dome3_box">
+    <!--日历 begin-->
+    <div class="data_box" id="data_box">
+        <span  class="showDate" >点击选择日期</span>
+        <div class="sel_date dn">
+            <div class="clearfix">
+                <span class="prev_y fl"><<</span><span class="prev_m fl"><</span>
+                <span class="next_y fr">>></span><span class="next_m fr">></span>
+                <div class="show_mn">
+                    <input type="text" class="showDate2 year" value="选择年份" />
+                    <span class="ml5 mr5">年</span>
+                    <input type="text" class="showDate2 month" value="选择月份" />
+                    <span class="ml5">月</span>
+                </div>              
+            </div>
+            <table class="data_table">
+                <thead>
+                    <tr>
+                        <td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td>1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--日历 end-->
+</div>
+<script>
+    /*
+        1.点击选择框，让日期框显示，渲染日期框页面
+        2.点击数字，先获取到年份框和月份框里的内容，并将年月日显示到选择框中
+        3.点击年份框/月份框，可以自行输入年份/月份，如果输入的年份/月份不满足设定的条件会弹框提醒
+        4.点击切换月份按钮时，将从1-31的数字紧跟着重新排布到页面中，并将上一个月份的31天清除，日期会紧跟上个月结束的那天自行排布
+        5.点击年份按钮的时候将年份框的数字加加或减减
+        6.每次失焦后都将当前选中的日期放到选择框内
+        7.再次点击选择框显示日期框时需重新渲染一遍日期框，并将上次选择的日期天数加上active类名进行特殊显示
+    */ 
+    let RiQi = {
+        getByClass: function (oPare, cla) {
+            // 通过data_box拿到元素里面包含所有的标签
+            let oChild = oPare.getElementsByTagName("*");
+            let arr = [];    // 用来放符合条件的标签类名
+            // 循环data_box
+            for (let i = 0; i < oChild.length; i++) {
+                // 将所有的标签类名用空格切割一下
+                let arrCla = oChild[i].className.split(" ");
+                let j;
+                for (let j in arrCla) {
+                    // 判断切割后的数组中的第j项是否等于传进来的类名
+                    if (arrCla[j] == cla) {
+                        // 等于的话把拿到的所有的标签中的第i个放到数组中
+                        arr.push(oChild[i]);
+                        break;
+                    }
+                }
+            }
+            return arr;
+        }
+    }
+    // 选中后的日期显示在选择框
+    function showDate(option) {
+        this.obj = document.getElementById(option.id);
+    }
+    // 渲染页面的方法
+    showDate.prototype.init = function () {
+        let that = this;  // 存this  this是showDate
+        // 通过调用getByClass获取标签元素
+        that.dateText = RiQi.getByClass(that.obj, "showDate")[0];  // 页面显示框
+        that.dateBox = RiQi.getByClass(that.obj, "sel_date")[0];   // 隐藏起来的日期选择框
+        that.yearBox = RiQi.getByClass(that.obj, "year")[0];    // 年份显示框
+        that.mnBox = RiQi.getByClass(that.obj, "month")[0];    // 月份显示框
+        // console.log(that.dateText,that.dateBox,that.yearBox,that.mnBox)
+        that.dataTable = RiQi.getByClass(that.dateBox, "data_table")[0];   // 星期和日期表
+        that.tbody = that.dataTable.tBodies[0];   // 日期表
+        that.td = that.tbody.getElementsByTagName("td");   // 每一天的数字 1 2 3 ....
+        that.prevM = RiQi.getByClass(that.dateBox, "prev_m")[0];   // 左单箭头  减月份用的
+        that.nextM = RiQi.getByClass(that.dateBox, "next_m")[0];   // 右单箭头  加月份用的
+        that.prevY = RiQi.getByClass(that.dateBox, "prev_y")[0];   // 左双箭头  减年份用的
+        that.nextY = RiQi.getByClass(that.dateBox, "next_y")[0];   // 右双箭头  加年份用的
+        // console.log(that.dataTable,that.tbody,that.td,that.prevM,that.nextM,that.prevY,that.nextY)
+        //显示日历  点击选择框出现日历
+        that.dateText.onclick = function () {
+            that.changeDefault(this);  // 调用清空选择框初始值函数
+            that.show();  // 调用显示日历的方法函数
+        }
+
+        //点击空白 隐藏日历
+        document.onclick = function (event) {
+            event = event || window.event;
+            let Target = event.target || event.srcElement;
+            that.hide(event, Target, this);  // 调用隐藏方法
+        }
+        //点击选择日期
+        for (let i = 0; i < that.td.length; i++) {
+            // 给每个日期数字添加点击事件
+            that.td[i].onclick = function () {
+                let newDd = this.innerHTML;   // 点击的数字  1 2 3 ...
+                let newYear = parseInt(that.yearBox.value, 10);   // 当前的年份  2019
+                let newMn = parseInt(that.mnBox.value, 10);   // 当前的月份   7
+                if (newDd.match(/^\s{0}$/g)) {  //如果td有值;
+                    return false;
+                }
+                // 如果年月其中一个为NaN，年份小于1900，大于2099，月份小于1，大于12，直接返回
+                if (isNaN(newYear) || isNaN(newMn) || newYear < 1900 || newYear > 2099 || newMn < 1 || newMn > 12) {  //如果td有值;
+                    //alert("请填写正确的年和月！");
+                    return false;
+                }
+                // 将选择的日期，月份，年份以xx年xx月xx日的形式放到选择框里
+                that.dateText.innerHTML = newYear + "年" + newMn + "月" + newDd + "日";
+                that.dateBox.className += " ";
+                that.dateBox.className += "dn";  // 然后给dateBox加一个类名将日期框隐藏起来
+            }
+            // 鼠标移入到每个td上的时候加类名，显示样式
+            that.td[i].onmouseover = function () {
+                if (this.className.indexOf("hove") == -1) {
+                    this.className += " hover";
+                }
+            }
+            // 鼠标移出的时候清除类名
+            that.td[i].onmouseout = function () {
+                this.className = this.className.replace("hover", "")
+            }
+        }
+        //点击切换月份
+        that.prevM.onclick = that.nextM.onclick = function () {
+            that.changeMn(this);  // 调用切换月份的函数
+            return this;
+        }
+        //年份的箭头添加点击事件
+        that.prevY.onclick = that.nextY.onclick = function () {
+            that.changeYr(this);   // 点击的时候调用改变年份的函数
+            return this;
+        }
+        // 年份框和月份框内容重新输入
+        that.yearBox.onkeyup = that.mnBox.onkeyup = function () {
+            // 点击年份框和月份框的时候排除不是数字的内容
+            this.value = this.value.replace(/\D/g, "");
+            // 获取到自行输入的年份和月份
+            let year = parseInt(that.yearBox.value, 10);
+            let month = parseInt(that.mnBox.value, 10);
+            // 年份框里year需要为number,1900<=year<=2099
+            // 月份框里month需要为number,1<=month<=12
+            if (!isNaN(year) && year <= 2099 && year >= 1900 && !isNaN(month) && month <= 12 && month >= 1) {
+                that.showAllDay(year, month - 1);  // 满足条件时填充当月的所有日期
+            }
+            // 点击的需要是年份框,1900<=year<=2099
+            if (this == that.yearBox && year >= 1900 && year <= 2099) {
+                // 满足条件调用聚焦方法
+                that.mnBox.focus();
+            } else if (this == that.mnBox && (month < 1 || month > 12)) {    // 点击的需要是月份框,1<=month<=12
+                if (this.value.slice(0, 1) > 1) { //如果第一位大于1
+                    this.value = this.value.slice(0, 1);  // 赋值给月份框
+                } else if (month > 12) { //如果月份大于12
+                    this.value = 12;   // 文本显示12
+                }
+                // 将新的年份和月份重新赋值
+                year = parseInt(that.yearBox.value, 10);
+                month = parseInt(that.mnBox.value, 10);
+                that.showAllDay(year, month - 1);
+            }
+        }
+        // 年份框添加失焦事件
+        that.yearBox.onblur = function () {
+            let year = parseInt(this.value, 10);
+            // 判断年份是否满足条件
+            if (year < 1900 || year > 2099 || isNaN(year)) {
+                // 如果满足条件，聚焦的时候弹框提示，并将文字清除
+                this.focus();
+                alert("请输入正确年份！");
+                this.value = "";
+            }
+        }
+        // 月份框添加聚焦事件
+        that.mnBox.onfocus = function () {
+            let year = parseInt(that.yearBox.value, 10);
+            // 判断年份是否满足条件
+            if (isNaN(year)) {
+                // 如果满足条件，年份框聚焦
+                that.yearBox.focus();
+            }
+        }
+        // 月份框添加失焦事件
+        that.mnBox.onblur = function () {
+            // 获取到月份和年份
+            let month = parseInt(this.value, 10);
+            let year = parseInt(that.yearBox.value, 10);
+            // 判断月份是否满足条件
+            if (month < 1 || month > 12 || isNaN(month)) {
+                // 如果满足条件，弹框提示，并将文字清除
+                alert("请输入正确月份！");
+                this.value = "";
+            }
+        }
+    }
+    //点击切换月份
+    showDate.prototype.changeMn = function (obj) {
+        let that = this;
+        // 获取到自行输入的年份和月份
+        let NewMn = parseInt(that.mnBox.value, 10);
+        let newYear = parseInt(that.yearBox.value, 10);
+        // 判断月份和年份格式是否正确
+        if (isNaN(NewMn) || isNaN(newYear)) {
+            // 如果不正确弹框提醒
+            alert("请填写正确的年和月！");
+            return false;
+        }
+        // 判断点击的是否是加符号
+        if (obj == that.nextM) {
+            // 如果是，月份增加
+            NewMn++;
+        } else {
+            // 如果不是，月份减少
+            NewMn--;
+        }
+        // 判断月份是否小于1
+        if (NewMn < 1) {
+            // 小于1的时候将月份赋值12，同时年份-1
+            NewMn = 12;
+            newYear -= 1;
+        } else if (NewMn > 12) {   // 判断月份是否大于12
+            // 大于12的时候将月份赋值1，同时年份+1
+            NewMn = 1;
+            newYear += 1;
+        }
+        // 改变月份后月份框里显示新的月份
+        that.mnBox.value = NewMn;
+        that.showNow(newYear, NewMn);
+    }
+    //点击切换年份
+    showDate.prototype.changeYr = function (obj) {
+        let that = this;
+        let NewMn = parseInt(that.mnBox.value, 10);
+        console.log(NewMn)
+        let newYear = parseInt(that.yearBox.value, 10);
+        if (isNaN(NewMn) || isNaN(newYear)) {  // 当填写的年份和月份不是数字的时候
+            alert("请填写正确的年和月！");   // 弹框提醒
+            return false;
+        }
+        // 判断点击的是否是加符号
+        if (obj == that.nextY) {
+            // 如果是，年份增加
+            newYear++;
+        } else {
+            // 如果不是，年份减少
+            newYear--;
+        }
+        if (newYear < 1900) {  // 最小年份为1900
+            newYear = 1900;
+        } else if (newYear > 2099) {  // 最大年份2099
+            newYear = 2099;
+        }
+        that.mnBox.value = NewMn;
+        that.showNow(newYear, NewMn);  // 刷新日期
+    }
+    //文本框 清空初始值
+    showDate.prototype.changeDefault = function (obj) {
+        let that = this;
+        let deVal = obj.innerHTML;// 文本框的初始内容
+        let regExp = /^\s{0,}$/g;  // 匹配0,
+        // 如果点击选框的时候文本内容条件成立
+        if (deVal == "点击选择日期") {
+            // 就清空文本框
+            obj.innerHTML = "";
+            // 填充上选择的日期
+            that.showNow();
+        } else if (deVal.match(regExp) === null && that.dateBox.className.indexOf("dn") != -1) {
+            //如果显示的是非空字符
+            let dayArr = deVal.match(/[0-9]{1,4}/g);  // 检索数字，返回的是自行选中的年月日的数组
+            that.showNow(dayArr[0], dayArr[1], dayArr[2]); //刷新日期
+        }
+    }
+    //文本框 还原初始值
+    showDate.prototype.changeDefault2 = function (obj) {
+        let that = this;
+        let deVal = obj.innerHTML;
+        // 如果失焦的时候文本框里没有文字
+        if (deVal.match(/^\s{0}$/)) {
+            // 就显示初始值
+            obj.innerHTML = "点击选择日期";
+        }
+    }
+    //显示日历  调用show方法
+    showDate.prototype.show = function () {
+        let that = this;
+        // 判断点开日期框的时候默认显示的td类名是否包含dn
+        if (that.dateBox.className.indexOf("dn") != -1) {
+            let cls = that.dateBox.className;
+            // 如果成立，将元素类名dn替换成空字符串
+            that.dateBox.className = cls.replace("dn", "");
+        }
+    }
+    //隐藏日历   调用hide方法
+    showDate.prototype.hide = function (event, Target, obj) {
+        let that = this;
+        let oPare = Target.parentNode;   // 找到父元素
+        let isChild = true; //默认是子元素
+        // 判断点击框和obj是否相等
+        if (oPare == obj || Target == obj) {
+            isChild = false;
+        } else {
+            // 当两个不相等的时候
+            loop: while (oPare != that.obj) {
+                // oPare赋值为它的父级
+                oPare = oPare.parentNode;
+                if (oPare == obj) {
+                    isChild = false;
+                    break loop;
+                }
+            }
+        }
+        // 判断子元素是否为false并且日期框的类名是否含有dn
+        if (!isChild && that.dateBox.className.indexOf("dn") == -1) {
+            // 如果是给隐藏的框的类名加一个dn
+            that.dateBox.className += " ";
+            that.dateBox.className += "dn";
+            that.changeDefault2(that.dateText);
+        }
+
+    }
+    //填充年、月
+    showDate.prototype.showNow = function (yr, mn, date) {   // 传进来的参数分别是选中的时候的年月日
+        let that = this;
+        let now = new Date();  // 设置一个现在的日期
+        let year = yr || now.getFullYear();  // 没有选中的年份，就自动为本来显示的年份
+        let month = mn - 1 || now.getMonth();  // 月份需要-1，没有选中的月份，就自动为本来显示的月份
+        let dd = date || now.getDate();  // 没有选中的天数，就自动为本来显示的默认天数
+        //填充 年 和 月
+        that.yearBox.value = year;
+        that.mnBox.value = mn || now.getMonth() + 1;
+        //填充日期
+        that.showAllDay(year, month, dd);
+    }
+    //填充当月的所有日期
+    showDate.prototype.showAllDay = function (Yr, Mn, Dd) {
+        let that = this;
+        let arr31 = [1, 3, 5, 7, 8, 10, 12];   // 这几个月都是每个月31天
+        let is31 = true;
+        let newDd = new Date();  //根据传入的数值生成新的日期
+        Dd = Dd ? Dd : newDd.getDate();  // 打开日期选择框的时候是否有默认的日期，没有就显示当前的日期
+        newDd.setFullYear(Yr, Mn, Dd);   // 调整过的日期的毫秒
+        // 将自动选中的年月日分别定义为新的变量
+        let year = newDd.getFullYear(),  // 本地时间的年份
+            month = newDd.getMonth(),  // 本地时间的月份
+            dd = newDd.getDate();  // 月份的某一天
+        let firstD = new Date();
+        firstD.setFullYear(year, month, 1);    // 调整过的日期的毫秒
+        let firstDay = firstD.getDay();  // 一周中的某一天的数字
+        let str31 = arr31.join(",");  // 用逗号分隔数组
+        let regExp = eval("/" + (month + 1) + ",|," + (month + 1) + ",|," + (month + 1) + "/g");
+        let dayLen = 31;   // 定义一个月的初始值为31天
+        //判断每个月有多少天，如果填的月份在字符串中检索不到
+        if (str31.search(regExp) == -1) {
+            // 就将月份的初始值改为30天
+            dayLen = 30;
+        }
+        // 如果月份框里的月份为2月份
+        if(that.mnBox.value === '2'){
+            // 天数初始值变为28天
+            dayLen = 28;
+        }
+        //清空日期
+        for (let i = 0; i < that.td.length; i++) {
+            that.td[i].innerHTML = "";
+            that.td[i].className = that.td[i].className.replace("active", "");
+        }
+        // 在前面点击下一个月的时候先将所有的日期清空，再根据当前的月份进行填充日期，渲染页面
+        //如果有31天
+        for (let j = 0; j < dayLen; j++) {
+            that.td[j + firstDay].innerHTML = j + 1;  // 一个月的所有天数
+            // 有选中的天数，每个月中有那么一天的类名包含active的返回值==-1
+            if (j + 1 == dd && that.td[j + firstDay].className.indexOf("active") == -1) {
+                // 如果有清空所有的类名，给选中的天数加上active类名
+                that.td[j + firstDay].className += " ";
+                that.td[j + firstDay].className += "active";
+            }
+        }
+    }
+
+    //重新渲染页面
+    window.onload = function () {
+        let showDate1 = new showDate({ id: "data_box" });
+        showDate1.init();  // 调用渲染方法函数
+    }
+
+</script>
+</body>
+</html>

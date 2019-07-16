@@ -60,6 +60,55 @@ conn.on('connected',()=>{
         });
     });
 
+    app.post('/rank',(req,res)=>{
+        let {id} = req.body;
+        
+        UserModel.findById({_id:id},(err,data)=>{
+            if(data){
+                data.rank = ++ data.rank;
+                data.save((err,dd)=>{
+                    // console.log()
+                    res.json({
+                        code:0,
+                        id:dd._id,
+                        rank:dd.rank,
+                        user:dd.user
+                    })
+                });
+                // console.log(data);
+            }  
+        })
+    });
+
+
+    app.post('/login',(req,res)=>{
+        let {user,pass} = req.body;
+        UserModel.findOne({user,pass},{pass:0},(err,data)=>{
+            if(err){
+                res.json({
+                    code:1,
+                    msg:'登录失败'
+                });
+                return;
+            }
+
+            if(data){
+                res.json({
+                    code:0,
+                    data
+                });
+            }else{
+                res.json({
+                    code:2,
+                    msg:'用户名或密码错误'
+                });
+            }
+        });
+    });
+
+
+
+
     app.get('/getList',(req,res)=>{
         let {search} = req.query;
         UserModel.find({rank:search},{user:1,_id:0},function(err,data){
@@ -71,6 +120,8 @@ conn.on('connected',()=>{
             res.json({code:0,msg:data});
         })
     });
+
+
 
 
 

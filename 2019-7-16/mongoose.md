@@ -67,6 +67,19 @@
         const d = await UserModel.create({user:'xxx',pass:123})
     })()
 
+
+    4.
+        let arr = []
+
+        for(let i=0;i<1000;i++){
+            arr.push({
+                user:zf+i,
+                pass:123
+            })
+        }
+
+        UserModel.create(arr)
+
     在创建数据的时候，如果骨架中没有添加这个数据字段，那么这项数据是不会成功添加进数据库的，骨架中有数据字段只能减少不能增多，比如:
 
         UserModel.create({user:'xxx',pass:123,age:12})
