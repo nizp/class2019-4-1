@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    // [['热门1','热门2'],['华语1','华语2']]
+    /*
+        {
+            热门:[],
+            华语:[],
+            欧美:[]
+        }
+    */
+
+    let ary =  [
+    {
+    "classid": 88,
+    "classname": "热门歌手",
+    "imgurl": "http://mobileimg.kugou.com/billImage/150/26-11.jpg"
+    },
+    {
+    "classid": 1,
+    "classname": "华语男歌手",
+    "imgurl": "http://mobileimg.kugou.com/billImage/150/26-1.jpg"
+    },
+    {
+    "classid": 2,
+    "classname": "华语女歌手",
+    "imgurl": "http://mobileimg.kugou.com/billImage/150/26-2.jpg"
+    },
+    {
+    "classid": 3,
+    "classname": "华语组合",
+    "imgurl": "http://mobileimg.kugou.com/billImage/150/26-3.jpg"
+    },
+    {
+    "classid": 4,
+    "classname": "日韩男歌手",
+    "imgurl": "http://mobileimg.kugou.com/billImage/150/26-4.jpg"
+    },
+    {
+    "classid": 5,
+    "classname": "日韩女歌手",
+    "imgurl": "http://mobileimg.kugou.com/billImage/150/26-5.jpg"
+    },
+    {
+    "classid": 6,
+    "classname": "日韩组合",
+    "imgurl": "http://mobileimg.kugou.com/billImage/150/26-6.jpg"
+    },
+    {
+    "classid": 7,
+    "classname": "欧美男歌手",
+    "imgurl": "http://mobileimg.kugou.com/billImage/150/26-7.jpg"
+    },
+    {
+    "classid": 8,
+    "classname": "欧美女歌手",
+    "imgurl": "http://mobileimg.kugou.com/billImage/150/26-8.jpg"
+    },
+    {
+    "classid": 9,
+    "classname": "欧美组合",
+    "imgurl": "http://mobileimg.kugou.com/billImage/150/26-9.jpg"
+    },
+    {
+    "classid": 10,
+    "classname": "华语超级歌手",
+    "imgurl": "http://mobileimg.kugou.com/billImage/150/26-9.jpg"
+    }
+];
+
+let obj = {}
+/*
+    循环数组看看对象上有没有这个属性，没有这个属性说明是第一次循环到
+    那么就创建一个数组然后把这个属性对应的值存到数组中，如果有这个属性
+    就在刚才的数组中push对应的数据
+*/
+ary.forEach((item,i)=>{
+    let str = item.classname.substr(0,2);//华语、欧美
+    obj[str] = obj[str] || [];
+    obj[str].push(item);
+
+    // if(obj[str]){
+    //     obj[str].push(item);
+    // }else{
+    //     obj[str] = [];
+    //     obj[str].push(item)
+    // }
+});
+
+console.log(obj);
+
+
+
+</script>
+</body>
+</html>

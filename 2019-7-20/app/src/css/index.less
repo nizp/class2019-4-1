@@ -1,0 +1,166 @@
+@basic:1rem;
+.m(@v){
+    margin:@v*@basic;
+}
+.p(@v){
+    padding:@v*@basic;
+}
+.ft(@v){
+    font-size:@v*@basic;
+}
+.w(@v){
+    width:@v*@basic;
+}
+.h(@v){
+    height:@v*@basic;
+}
+.bg(@v){
+    background: @v;
+}
+.mb(@value){ margin-bottom: @value*@basic; }
+.mt(@value){ margin-top: @value*@basic; }
+.mr(@value){ margin-right: @value*@basic; }
+.ml(@value){ margin-left: @value*@basic; }
+
+.fl(){
+    float: left;
+}
+.fr(){
+    float: right;
+}
+.tc(){
+    text-align: center;
+}
+.lh(@v){
+    line-height: @v*@basic;
+}
+.co(@v){
+    color: @v;
+}
+.bb(@v1,@v2){
+    border-bottom: @v1*@basic solid @v2;
+}
+.ma(@v){
+    margin: @v*@basic auto;
+}
+.oh(){
+    overflow: hidden;
+}
+
+
+*{
+    .m(0);
+    .p(0);
+    list-style: none;
+    .ft(.12);
+    text-decoration:none;
+}
+header{
+    .w(7.5);
+    .h(1.04);
+    .bg(#2ca2f9);
+    position:absolute;
+    top:0;
+    left:0;
+    h1{
+        .ft(0);
+        .w(2.35);
+        .h(1.04);
+        .ml(.22);
+        .fl;
+        .lh(1.04);
+        .tc;
+        img{
+            .w(2.35);
+            vertical-align: middle;
+            display: inline-block;
+        }
+    }
+    .search{
+        .w(.55);
+        .fr;
+        .lh(1.04);
+        .tc;
+        .mr(.22);
+        img{
+            .w(.55);
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+    }
+}
+nav{
+    .h(1.02);
+    .bg(#fff);
+    .w(7.5);
+    .ma(0);
+    .oh;
+    position:absolute;
+    top:1.04rem;
+    left:0;
+
+}
+.nav li{
+    .fl;
+    .w(1.78);
+    .h(.96);
+    .tc;
+    .lh(.96);
+    .bb(.06,#fff);
+    a{
+        .ft(.4);
+        .co(#000);
+        display:inline-block;
+        width:100%;
+    }
+}
+.nav li a.router-link-exact-active{
+    .bb(.06,#2ca2f9);
+}
+
+.body_box{
+    .bg(#f8f8f8);
+    position: absolute;
+    top:2.08rem;
+    left:0;
+    right:0;
+    bottom:0;
+    overflow: auto;
+}
+.body{
+    .w(7.32);
+    .ma(.1);
+}
+.banner{
+    .w(7.32);
+    .oh;
+    img{
+        .w(7.32);
+    }
+}
+.list li{
+    .h(1.32);
+    .bb(.02,#e5e5e5);
+    .bg(#fff);
+    p{
+        .h(1.32);
+        .ft(.32);
+        .lh(1.32);
+        .ml(.26);
+        .fl;
+        .w(6);
+        .oh();
+    }
+    img{
+        .fr;
+        .w(.44);
+        .mt(.46);
+        .ml(.15);
+    }
+}
+
+
+
+// 第二个页面
+

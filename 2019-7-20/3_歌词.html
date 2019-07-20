@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+.active{
+    color:coral;
+}
+</style>
+</head>
+<body>
+
+    <ul id="ul">
+
+    </ul>
+
+    <audio src="./风语咒.m4a" id="au" autoplay></audio> 
+<script>
+    /*
+        http://m.kugou.com/app/i/krc.php?cmd=100&keyword=风语咒&hash=382656E087183CE4E605A7ED4B820419&timelength=246
+    */ 
+    
+
+    //跨域，用不了
+    // fetch('http://m.kugou.com/app/i/krc.php?cmd=100&keyword=风语咒&hash=382656E087183CE4E605A7ED4B820419&timelength=246')
+    // .then(e=>e.text())
+    // .then(d=>{
+    //     console.log(d);
+    // })
+
+
+    /*
+        obj = {
+            geci:['霍尊 - 风语咒','作词：方文山'],
+            time:['00:00.27','00:00.98']
+        }
+    */
+    let str = `
+    [00:00.27]霍尊 - 风语咒
+    [00:00.98]作词：方文山
+    [00:01.18]作曲：霍尊
+    [00:01.33]制作人：郑伟
+    [00:01.54]编曲：郑伟、霍尊
+    [00:01.79]弦乐编配：田汨
+    [00:02.04]合音：霍尊、葛琪璘
+    [00:02.34]笛子：屠化冰
+    [00:02.54]吉他：王山
+    [00:02.75]弦乐总监：刘辉
+    [00:02.95]人声录制：霍尊工作室studio
+    [00:03.35]器乐录制：董谦 KYM studio
+    [00:03.66]混音：赵靖 Big J studio
+    [00:04.17]母带制作：赵靖 Big J studio
+    [00:05.69]发行公司：听见时代
+    [00:30.21]小镇石板引了绿
+    [00:33.59]蒲公英落了地
+    [00:36.73]一派写意的景色溶入画里
+    [00:42.88]宁静中谁倾听
+    [00:46.16]那远方不安的消息
+    [00:50.75]一场狂风骤雨正来袭
+    [00:58.04]这一句风语咒
+    [01:01.12]你为了我守候
+    [01:04.10]乱世中风语咒
+    [01:07.68]以爱抵御冷漠
+    [01:10.36]我舍身风语咒
+    [01:13.60]为你不再沉默
+    [01:18.81]你人间守护
+    [01:20.63]我不哭 不认输
+    [01:22.59]那家人是 不倒的树
+    [01:25.61]爱是我们世代承传的信物
+    [01:31.43]你人间守护
+    [01:33.25]我不哭 不认输
+    [01:35.27]驭风而起 侠岚江湖
+    [01:38.30]此生因为你红尘不虚渡
+    [01:46.62]引人羡慕
+    [02:01.89]这山腰引了野溪
+    [02:05.04]落花也入了泥
+    [02:08.19]我回忆里的故事被风刮起
+    [02:14.57]风声传来耳语
+    [02:17.70]而村外耸立着峭壁
+    [02:22.33]隐约有种不详的神秘
+    [02:29.53]这一句风语咒
+    [02:32.77]你为了我守候
+    [02:35.55]乱世中风语咒
+    [02:38.84]以爱抵御冷漠
+    [02:41.97]我舍身风语咒
+    [02:45.35]为你不再沉默
+    [02:52.05]你人间守护
+    [02:53.81]我不哭 不认输
+    [02:55.99]爱与正义 永不落幕
+    [02:58.82]我们一抹微笑后选择宽恕
+    [03:04.53]你人间守护
+    [03:06.40]我不哭 不认输
+    [03:08.64]爱从来不轻易说出
+    [03:11.55]缘分在手中 却紧紧握住
+    [03:19.84]一读再读
+    [03:32.64]一生一路
+    [03:50.74]小镇石板引了绿
+    [03:54.13]蒲公英落了地
+    `;
+    // console.log()
+
+
+    const au = document.getElementById('au');
+
+    
+    
+    let obj = {
+        geci:[],
+        time:[]
+    }
+
+    // console.log()
+    // let arr = [];
+    str.split('\n').forEach(e=>{
+        let s = e.trim();
+        if(s){
+            let ary = s.split(']');
+            obj.geci.push(ary[1]); //歌词
+            
+            let arr2 = ary[0].split('[')[1].split(':');
+
+            //歌曲对应的时间(秒)
+            obj.time.push((arr2[0]*1)*60+arr2[1]*1)
+
+            // console.log((arr2[0]*1)*60+arr2[1]*1,'s:'+s);
+        }
+    });
+
+    let html = '';
+    obj.geci.forEach(e=>{
+        html += '<li>'+ e +'</li>'
+    });
+
+    ul.innerHTML = html;
+
+    let li = document.getElementsByTagName('li');
+    au.ontimeupdate = function(){
+        for(let i=0;i<obj.time.length;i++){
+            if(au.currentTime <= obj.time[i] && li[i-1]){
+                li[i-1].className = 'active';
+                break;
+            }
+        }
+        // console.log(au.currentTime)
+    }
+
+    console.log(obj);
+
+
+
+    // str.replace(//gm,($0)=>{
+    //     console.log($0)
+    // }) 
+
+
+    
+</script>
+</body>
+</html>
