@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>app</title>
+    <script>
+      ;(function anonymous() {
+          function computed() {
+              let HTML = document.documentElement,
+                  winW = HTML.clientWidth,
+                  desW = 750;
+              if (winW >= desW) {
+                  HTML.style.fontSize = '100px';
+                  return;
+              }
+              HTML.style.fontSize = winW / 750 * 100 + 'px'; //=>HTML中单独编写的代码尽量不要出现{}等操作，例如：ES6模板字符串，否则WEBPACK编译失败
+          }
+          computed();
+          window.addEventListener('resize', computed, false);
+      })();
+  </script>
+  </head>
+  <body>
+    
+    <div id="app"></div>
+
+    <!-- built files will be auto injected -->
+  </body>
+</html>

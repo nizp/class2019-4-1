@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    
+   
+
+
+    let ary = [1,2,3];
+
+    Array.prototype.mypush = function(...arg){
+        let len = this.length;
+        for(let i=0;i<arg.length;i++){
+            this[len+i] = arg[i];
+        }
+        return this.length;
+    }
+
+    /*
+        splice(2) 从第几位截取到最后
+        splice(0,2) 从第几位起截取几个
+        什么都不传返回一个数组
+    */
+    Array.prototype.mysplice = function(){
+        let ary = [];
+        for(let i=0;i<this.length;i++){
+            ary[i] = this[i];
+        }
+        return ary;
+    }
+
+
+
+
+    var obj = {
+        '2': 3,
+        '3': 4,
+        'length': 2,
+        'splice': Array.prototype.mysplice,
+        // 'mypush': Array.prototype.mypush
+    }
+
+    // obj.mypush(1);
+    // obj.push(2)
+    console.log(obj);
+
+
+    // console.log(obj[4]);
+
+
+    // ary.mypush(5,6,7);
+
+    // console.log(ary);
+
+    
+</script>
+</body>
+</html>

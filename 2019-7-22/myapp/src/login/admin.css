@@ -1,0 +1,65 @@
+body,html{
+    overflow: hidden;
+}
+.login-bg{
+    _width: 1264px;
+    height: 100vh;
+    background: url(../img/bg.png) no-repeat center;
+    background-size: cover;
+    overflow: hidden;
+}
+.login{
+    width: 380px;
+    height: 380px;
+    margin: 120px auto 0 auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius:4px; 
+}
+.login .message{
+    line-height: 30px;
+    margin: 10px 0 0 -58px;
+    padding: 18px 10px 10px 60px;
+    font-size: 14px;
+    color: #fff;
+    background: #189F92;
+    margin-top: 10px;
+}
+.login .dark{
+    display: block;
+    width: 18px;
+    height: 10px;  
+    margin: 0 0 0 -58px;
+    background: url(../img/aiwrap.png) no-repeat center;
+}
+.login .layui-form .username{
+    width: 332px;
+    height: 48px;
+    border-radius: 3px;
+    border: 1px solid #DCDEE0;
+    font-size: 14px;
+    padding: 0 23px;
+    margin-top: 30px;
+}
+.login .layui-form .password{
+    width: 332px;
+    height: 48px;
+    font-size: 14px;
+    border-radius: 3px;
+    border: 1px solid #DCDEE0;
+    padding: 0 23px;
+}
+.login .layui-form .record{
+    width: 380px;
+    height: 48px;
+    font-size: 14px;
+    background: #189F92;
+    border-radius: 3px;
+    border: 1px solid #189F92;
+    color:#fff;
+    cursor: pointer;
+}
+.login .layui-form .hr15{
+    height: 10px;
+    border: none;
+}
