@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            /* width: 50%; */
+            height: 50%;
+        }
+
+        .table tr td {
+            vertical-align: middle
+        }
+    </style>
+    <!-- 引入别人的css -->
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="app">
+
+        <h1>{{name}}</h1>
+        <table class='table table-striped table-bordered text-center text-justify'>
+            <thead>
+                <tr>
+
+                    <!-- th  td 兄弟 all-->
+                    <th>全选<input type="checkbox" v-model="all"></th>
+                    <th>商品</th>
+                    <th></th>
+                    <th></th>
+                    <th>单价</th>
+                    <th>数量</th>
+                    <th>小计</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 我们要循环展示 tr -->
+                <tr v-for="(item,i) in ary">
+                    <!-- isSelect是数据里的是否true -->
+                    <td><input type="checkbox" v-model="item.isSelect"></td>
+                    <td><img :src="item.pic" alt="图片"></td>
+                    <td>{{item.tetle}}</td>
+                    <td>{{item.desc}}</td>
+                    <td>{{item.price|money}}</td>
+                    <!-- 商品的数量 -->
+                    <td><input type="number" v-model="item.count" min=0></td>
+                    <!-- 商品的小价 -->
+                    <td>{{item.count*item.price|money}}</td>
+                    <td><button type="button" class="btn btn-danger" @click="rm(i)">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='8'>
+                        <button type="button" class="btn btn-danger" @click="deltAll">清空购物车</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8">总价:{{total|money}}</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</body>
+
+</html>
+<script src="./node_modules/vue.js"></script>
+<script src="./node_modules/axios/dist/axios.min.js"></script>
+<script>
+    //写一个全局过滤器
+    Vue.filter('money', function (val) {
+        return '￥' + (val / 100).toFixed(2)
+    })
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "京东购物车",
+            ary: []
+        },
+        //计算属性很强大total方法，all都依赖与数组
+        computed: {
+            total() {
+                //和底下的total是一样的
+                let t = 0;//存一个总价的变量
+                this.ary.map(item => {
+                    //看看每一项有没有勾上了
+                    if (item.isSelect) {
+                        //勾上了以后每一个的数量*每一个价格，总价的时候要加等，因为不止一个数据
+                        t += item.count * item.price
+                    }
+                })
+                return t
+            },
+            //因为计算属性里的名字不能和变量重名
+            //all依赖于数组中的每一个isSelect
+            all: {
+                get() {
+                    //只要isSelect是true就是true否则就是false
+                    return this.ary.every(item => item.isSelect)
+                },
+                set(val) {
+                    console.log(val);
+                    this.ary.map((item) => {
+                        item.isSelect = val
+                    })
+                }
+            },
+        },
+        created() {
+            //一进页面就执行的函数,这个函数适合数据请求 
+            this.getDate()
+        },
+        methods: {
+            getDate() {
+                //请求数据渲染数据
+                axios.get('../data.json').then((data) => {
+                    //console.log(data.data);
+                    this.ary = data.data
+                    //console.log(data.data)
+                }).catch((err) => {
+                    //  console.log(err);
+                })
+
+            },
+            //删除数据吗，向后台请求删除数据，如果后台同意那就删除
+            rm(obj, n) {
+                //axios.get()
+                this.ary.splice(n, 1)
+                //当数组发生改变的时候，把改变后的数组放到localStorage中
+                localStorage.setItem('lhl', JSON.stringify(this.ary))
+            },
+            deltAll() {
+                this.ary = []
+            },
+
+        },
+    })
+</script>

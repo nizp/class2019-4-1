@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt">
+<script>
+    /*
+        ES6的新语法？ 
+
+        解构赋值、let、const、()=>{}、class、...、import export
+
+        for of、generator、promise、async、await、``、symbol、Set、Map
+
+        symbol.Iterator、proxy.....
+
+        symbol.Iterator = function(){
+            return {
+                next(){
+                    return {
+                        val:xx,
+                        done:true
+                    }
+                }
+            }
+        }
+
+    */    
+
+    // let [x=y,y=1] = [,5];
+
+    // function fn(){
+    //     alert(1);
+    // }
+    // let obj = {
+    //     fn:function(){
+    //         alert(2);
+    //     },
+    //     x:5,
+    //     y:6
+    // }
+
+    // let {fn:fn2,x} = obj;
+
+    // fn();
+
+    // console.log(x);
+
+
+    /*
+        客户端和JS通信的方式
+
+        浏览器 -> V8引擎
+
+        js引擎:
+            事件引擎
+                onclick
+            渲染引擎(GPU)
+                如何把html放到页面，被浏览器展示
+            执行引擎 -
+                主线程
+                任务队列
+    */
+
+    
+    // let obj = {
+
+    // }
+
+    // let v = '123';
+
+    // Object.defineProperty(obj,'val',{
+    //     get(){
+    //         return v
+    //     },
+    //     set(val){
+    //         v = val;
+    //         txt.value = v;
+    //     }
+    // })
+
+
+    // txt.oninput = function(){
+    //     obj.val = this.value;
+
+    //     console.log(v);
+    // }
+
+    // txt.value = obj.val;
+
+
+    // var str =  'abc123';
+    // var num = parseInt(str);
+    // if(num == NaN){
+    //     alert(NaN);
+    // }else if(num==123){
+    //     alert(123)
+    // }else if(typeof num == 'number'){
+    //     alert('number');
+    // }else{
+    //     alert('str');
+    // }
+    
+    //A:NaN,B:123,C:number（√）,D:str   
+
+    // var a = 'abc' + 123 +  456;
+    
+    // console.log(a); //'abc123456';
+
+    // console.log('456'-'123'); //333
+
+    // var a = 1;
+    // var b = '2';
+    // var c = a>b?(a<b?a:b):(a==b?a:b);
+    // console.log(c);
+
+    // console.log('12' > '5');//同是字符串，就按字符串比较，如果一个是数字一个是字符串，那么会转成数字比较
+
+    //先转成2进制,按照符号位去比较，如果2者都为1就是1否则是0
+    // console.log(5&3);//1
+    // 5-101  3-11     001->把结果转10进制
+
+    // console.log(8&6); //1000  110    0000  0
+
+    // console.log(7&5);//5  //101  111    101->5
+
+
+    // for(var i=0;i<10;i++){
+    //     alert(i);//0
+    //     break;
+    // }
+    // alert(i);//0
+
+
+    // for(var i=0;i<10;i++){
+    //     continue;
+    //     alert(i);
+    // }
+    // alert(i);
+
+
+    //arguments实参的集合
+    // function fun(a,b,c){
+    //     var l = arguments.length;
+    //     var num = 0;
+    //     for(var i=0;i<l;i++){
+    //         num += arguments[i];
+    //     }
+    //     alert(num);
+    // }
+    // fun(1,2,3);//6
+    // fun(1,2,3,4);//10
+
+    
+    // /(\d[a-zA-Z])+|([a-zA-Z]\d)+/
+
+
+    // function fun(){
+    //     this.a = 0;
+    //     this.b = function(){
+    //         alert(this.a);
+    //     }
+    // }
+    // fun.prototype = {
+    //     b:function(){
+    //         this.a = 20;
+    //         alert(this.a);
+    //     },
+    //     c:function(){
+    //         this.a = 30;
+    //         alert(this.a);
+    //     }
+    // }
+    // var my_fun = new fun();
+    // my_fun.b();//0
+    // my_fun.c();//30
+
+    
+    // var n = 0;
+    // function a(){
+    //     var n = 10;
+    //     function b(){
+    //         n ++;
+    //         alert(n);//11
+    //     }
+    //     b();
+    //     return b;
+    // }
+    // // a();//11
+    // var c = a();
+    // c();//12
+    // alert(n);//0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</script>
+</body>
+</html>

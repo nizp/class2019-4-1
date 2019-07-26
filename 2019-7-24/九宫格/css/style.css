@@ -1,0 +1,44 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    width: 300px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.cubes {
+    overflow: hidden;
+    margin-left: -15px;
+}
+
+.cubes>div {
+    float: left;
+    width: 90px;
+    height: 90px;
+    background-color: #f40;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+
+.btn {
+    display: block;
+    width: 296px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border: 2px solid #f40;
+    color: #f40;
+}
+
+.btn:hover {
+    background-color: #f40;
+    color: #fff;
+}

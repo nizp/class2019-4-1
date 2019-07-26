@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            /* width: 50%; */
+            height: 50%;
+        }
+
+        .table tr td {
+            vertical-align: middle
+        }
+    </style>
+    <!-- 引入别人的css -->
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <div id="app">
+
+        <h1>{{name}}</h1>
+        <table class='table table-striped table-bordered text-center text-justify'>
+            <thead>
+                <tr>
+                    {{ary}}
+                    <!-- th  td 兄弟 -->
+                    <th>全选<input type="checkbox" v-model="all" @change="checkedAll"></th>
+                    <th>商品</th>
+                    <th></th>
+                    <th></th>
+                    <th>单价</th>
+                    <th>数量</th>
+                    <th>小计</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 我们要循环展示 tr -->
+                <tr v-for="(item,i) in ary">
+                    <!-- isSelect是数据里的是否true -->
+                    <td><input type="checkbox" v-model="item.isSelect" @change="checkedOne"></td>
+                    <td><img :src="item.pic" alt="图片"></td>
+                    <td>{{item.tetle}}</td>
+                    <td>{{item.desc}}</td>
+                    <td>{{item.price|money}}</td>
+                    <!-- 商品的数量 -->
+                    <td><input type="number" v-model="item.count" min=0></td>
+                    <!-- 商品的小价 -->
+                    <td>{{item.count*item.price|money}}</td>
+                    <td><button type="button" class="btn btn-danger" @click="rm(i)">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='8'>
+                        <button type="button" class="btn btn-danger" @click="deltAll">清空购物车</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8">总价:{{total|money}}</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</body>
+
+</html>
+<script src="./node_modules/vue.js"></script>
+<script src="./node_modules/axios/dist/axios.min.js"></script>
+<script>
+    //写一个全局过滤器
+    Vue.filter('money', function (val) {
+        return '￥' + (val / 100).toFixed(2)
+    })
+
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "京东购物车",
+            ary: [],
+            // all: false,
+        },
+        computed: {
+            total: function () {
+                let t = 0;
+                this.ary.forEach(item => {
+                    //看看每一项有没有isSelect勾上了
+                    if (item.isSelect) {
+                        //勾上了以后每一个的数量*每一个价格
+                        t += item.count * item.price
+                    }
+                })
+                return t
+            },
+            all: {
+                get() {
+
+                },
+                set() {
+
+                }
+            }
+        },
+        created() {
+            //一进页面就执行的函数,这个函数适合数据请求
+            //所以在它里调用
+            this.getDate()
+        },
+        methods: {
+            getDate() {
+                //请求数据渲染数据
+                axios.get('../data.json').then((data) => {
+                    //console.log(data.data);
+                    this.ary = data.data
+                    //console.log(data.data)
+                }).catch((err) => {
+                    //  console.log(err);
+                })
+                //1.拿到数据后因为后台发过来的数据每一条都是显示的勾选转态，所以让input全选数据显示勾上
+                this.all = this.ary.every(item => item.isSelect)
+                // let xhr = new XMLHttpRequest
+                // xhr.open('get', './data.json')
+                // xhr.send()
+                // xhr.onload = function () {
+                //     var data = JSON.parse(xhr.responseText)
+                //this.ary = data
+                //     console.log(data);
+                // }
+            },
+            //iselest全选和全不选
+            checkedAll() {
+                this.ary.forEach(item => {
+                    item.isSelect = this.all
+
+                });
+            },
+            //单个input单选和反选
+            checkedOne() {
+                this.all = this.ary.every(item => item.isSelect)
+            },
+            //删除数据吗，向后台请求删除数据，如果后台同意那就删除
+            rm(obj, n) {
+                //axios.get()
+                this.ary.splice(n, 1)
+            },
+            deltAll() {
+                this.ary = []
+            },
+        }
+    })
+</script>

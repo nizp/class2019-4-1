@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .mask {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            top: 0;
+            left: 0;
+        }
+
+        .content {
+            width: 400px;
+            height: 300px;
+            background: #fff;
+            position: absolute;
+            left: 50%;
+            margin-left: -200px;
+            top: 20%;
+        }
+
+        .content header {
+            font-size: 30px;
+            text-align: center
+        }
+
+        .content main {
+            box-sizing: border-box;
+            padding: 20px;
+        }
+
+        .content footer {
+            position: absolute;
+            bottom: 20px;
+            width: 80%;
+            text-align: right
+        }
+    </style>
+    <style>
+        .qqq button {
+            font-size: 20px
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <button @click='flag = true'>显示</button>
+        <model v-show='flag' @cancel='cancel' @sure='sure' :show-cancel='false' :show_sure='false'></model>
+        <model v-show='flag2' title='是否确定取消' content='' @cancel='cancel2' @sure='sure2' class1='qqq'></model>
+    </div>
+</body>
+
+</html>
+<template id='model'>
+    <div class='mask' :class="class1">
+        <div class="content">
+            <header>{{title}}</header>
+            <main>{{content}}</main>
+            <footer>
+                <button @click='no'>取消</button>
+                <button @click='ok'>确定</button>
+            </footer>
+        </div>
+    </div>
+</template>
+
+<script src="./node_modules/vue.js"></script>
+<script>
+    let model = {
+        template: "#model",
+        props: {
+            title: {
+                default: '默认标题'
+            },
+            content: {
+                default: '默认content'
+            },
+            class1: {
+                default: ''
+            },
+
+        },
+        methods: {
+            no() {
+                this.$emit('cancel')
+            },
+            ok() {
+                this.$emit('sure')
+            }
+        },
+    }
+
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: "弹框",
+            flag: false,
+            flag2: false
+        },
+        methods: {
+            cancel() {
+                // 第一个弹框的取消事件  ： 让第二个弹框显示
+                this.flag2 = true;
+            },
+            sure() {
+                this.flag = false
+            },
+            cancel2() {
+                // 第二个弹框的取消事件
+                // this.flag = true
+                this.flag2 = false;
+            },
+            sure2() {
+                // 第二个弹框的确定事件
+                this.flag = false;
+                this.flag2 = false
+            }
+        },
+        components: {
+            model
+        }
+    })
+</script>
