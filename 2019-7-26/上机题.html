@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // subject_type_name拿出来组成一个新的数组该如何实现？
+
+    //接口地址是 subject—list
+    
+    /*
+        {
+            err:0,
+            msg:'',
+            data:{
+                list:[
+                    {
+                        id:0,
+                        s_name:'哈哈',
+                        s_type:[
+                            {
+                                id:1,
+                                s_t_name:'听力'
+
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    */
+
+    // fetch('subject-list').then(d=>d.json()).then(data=>{
+    //     data.data.list.forEach(item=>{
+    //         item.s_type.forEach(item2=>{
+    //             conole.log(item2.s_t_name)
+    //         })
+    //     })
+    // })
+
+
+    // const data = {
+    //         err:0,
+    //         msg:'',
+    //         data:{
+    //             list:[
+    //                 {
+    //                     id:0,
+    //                     s_name:'哈哈',
+    //                     s_type:[
+    //                         {
+    //                             id:1,
+    //                             s_t_name:'听力'
+
+    //                         }
+    //                     ]
+    //                 }
+    //             ]
+    //         }
+    //     }
+
+    //     data.data.list.forEach(item=>{
+    //         item.s_type.forEach(item2=>{
+    //             console.log(item2.s_t_name)
+    //         })
+    //     });
+
+
+
+
+    
+    
+</script>
+</body>
+</html>

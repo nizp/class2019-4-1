@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*
+    输出alert输出结果
+*/    
+var str = 'abc123';
+var num = parseInt(str);
+if(num == NaN){
+    alert(NaN);
+}else if(num == 123){
+    alert(123);
+}else if(typeof num == 'number'){
+    alert('number');
+}else{
+    alert('str');
+}
+
+/*
+    分别写出下列表达式的值和数据类型
+*/
+var a = 1,b = '2',
+c = a>b?(a<b?a:b):(a==b?a:b);
+console.log(c);
+
+/*
+    结果
+*/
+function fun(){
+    this.a = 0;
+    this.b = function(){
+        alert(this.a);
+    }
+}
+fun.prototype = {
+    b:function(){
+        this.a = 20;
+        alert(this.a);
+    },
+    c:function(){
+        this.a = 30;
+        alert(this.a);
+    }
+}
+var my_fun = new fun();
+my_fun.b();
+my_fun.c();
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

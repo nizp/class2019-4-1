@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+body{
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items:center; 
+}
+#box{
+    width: 100px;
+    height:100px;
+    background: red;
+}
+/* .a{
+    margin:0 auto;
+} */
+/* .a{
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-left:-50px;
+    margin-top:-50px;
+} */
+/* .a{
+    
+    position: absolute;
+    top:calc(50% - 50px);
+    left:calc(50% - 50px);
+}  */
+ 
+
+</style>
+</head>
+<body>
+    <div id="box" class="a"></div>
+<script>
+    /*
+        事件对象:
+            1.事件函数的第一个参数   FF、chrome
+            2.window.event  IE、chrome   在IE下event为低版本为null
+
+        ev || window.event -> window.event || ev
+    */    
+
+    // console.log(event);
+    // document.documentElement.onclick = function(ev){
+    //     console.log(event);
+    // }
+
+
+    // cookie的属性
+
+    //domain表示的是cookie所在的域，默认为请求的地址，如网址为www.jb51.net/test/test.aspx，那么domain默认为www.jb51.net。
+    //path表示cookie所在的目录，asp.net默认为/，就是根目录
+
+    /*
+        200：成功
+        301：永久重定向  xiao.com -> 跳到mi.com
+        302：临时重定向  抓取数据时候，有些数据是不让爬的
+        304：缓存
+        400：大范围（别的4xx不适用时）的客户端错误
+        404：无法在服务器上找到资源
+        500 ： 服务器报错
+    */
+
+    // 简述ajax的原理？
+
+    // xhr = new XMLHttpRequest  创建ajax对象
+
+    //get/post/put/delete
+    // xhr.open('请求方式',url,是否异步)
+
+    // xhr.onreadystatechange = function(){
+        // if(xhr.readyState == 4){
+            //第五步:0-4
+            // 0:请求未初始化
+            // 1:服务器建立链接
+            // 2:请求已接收
+            // 3:请求处理中
+            // 4:请求已完成
+
+        // }
+    // }
+
+    // xhr.send()
+
+    // ajax->跨域->CORS,JSONP->服务器代理(proxy)  问ajax就是这套
+
+
+    // 你知道有哪些方法可以提高网站的性能？
+
+    /*
+        雪碧图,减小图片的体积，减少HTTP请求
+        图片懒加载（延迟加载）
+        把静态资源cdn（即内容分发网络）上
+        上线打包压缩
+        异步
+        缓存
+        ....
+    */
+
+
+    // 空元素，就是单标签元素
+    //<br /><hr />....
+
+
+    // html5有什么新特性
+
+    /*
+        新添加了一些语义化标签
+            header
+            nav
+            footer
+            section
+            audio
+            video
+            canvas
+            svg
+            geolocation
+        
+        localStorage
+        sessionStorage
+        webwork
+        ....
+    */
+
+    // eval:尽量把string转成js能运行的代码
+
+    // null和undefined
+
+    /*
+        空地址代表一个空对象指针，在typof中属于对象类型（尚未存在的对象）
+
+        使用以后都没有值了，比如把之前有的值赋值为null对象地址
+        这个时候浏览器垃圾回收机制会自动回收这个变量。
+
+        let timer;
+            在typof中属于未定义类型
+
+        当前没有，将来有可能会有。
+
+
+        null == undefined
+
+
+
+    */
+
+    function fn(a,b){
+        console.log(this,a,b);
+        return a+b;
+    }
+
+    // Function.prototype.mycall = function(ctx){
+        
+    //     ctx = (ctx!=null && ctx !=undefined)?Object(ctx):window;
+
+    //     // ctx.fn
+    //     ctx.fn = this;
+
+    //     let arr = [];
+
+    //     for(let i=1;i<arguments.length;i++){
+    //         arr.push('arguments['+ i +']');
+    //     }
+    //     let r = ctx.fn(arr);//eval('ctx.fn('+ arr +')');
+    //     delete ctx.fn;
+    //     return r;
+    // }
+
+
+    // Function.prototype.mycall = function(ctx,...args){
+    //     ctx = (ctx !== undefined && ctx !== null)?Object(ctx):window;
+    //     ctx.fn = this; //实例是this，ctx下有个fn的方法，要保证fn一定是存在（ctx必须是一个引用类型才能保证fn是有效存在的）
+    //     //ctx.fn(); fn是一个ctx下的方法，调用ctx.fn,this就是.前面的ctx，正好ctx又是第一个传进来的参数，这样一来this就被修改
+    //     let r = ctx.fn(...args);
+    //     delete ctx.fn;
+    //     return r;
+    // }
+
+    // console.log(fn.mycall(5,1,2));
+
+    Function.prototype.myapply = function(ctx,ary){
+        ctx = (ctx !== undefined && ctx !== null)?Object(ctx):window;
+
+        //如果ary不是数组，就抛出异常。
+        if(!Array.isArray(ary)){
+            throw Error('arguments[1] is not Array')
+        }
+
+        ctx.fn = this;
+
+        let r = ctx.fn(...ary);
+
+        delete ctx.fn;
+
+        return r;
+    }
+
+    // fn.myapply(document,1,2)
+
+    // fn.apply(document,1,2)
+
+
+    // console.log(fn.mycall(document,1,2));
+
+
+    /*
+            cookies           sessionStorage        localStorage
+    
+    体积    每个域几十个        5M                      5M
+
+生命周期    默认浏览器关闭(expries去设置)      默认浏览器关闭          永不清除
+
+    其他                                            可以使用onstorage事件
+    */   
+
+
+
+    /*
+        函数套函数，子函数调用父函数的参数或者变量，子函数被外界所引用
+        此时父级形成闭包环境，父级身上的参数或者变量不会被浏览器垃圾回收机制
+        所回收，当打印父级的返回值的时候，在scopes下有一个叫Closure
+
+
+        可以减少全局污染和代码冗余，使代码能够更加精简，达到高内聚，低耦合的效果。
+
+
+
+        for(var i=0;i<10;i++){
+            (function(index){
+                btn[index].onclick = function(){
+                    console.log(index)
+                }
+            })(i)
+        }
+
+
+        for(var i=0;i<10;i++){
+            btn[i].onclick = (function(index){
+                return function(){
+                    console.log(index)
+                }
+            })(i)
+        }
+
+
+    */
+    
+    // function fn(){
+    //     let a = 0;
+    //     function f(){
+    //         console.log(++a);
+    //     }
+    //     return f;
+    // }
+
+    // let aa = fn()
+    // aa();
+    // aa();
+    // aa();
+    // console.dir(fn());
+
+
+    /*
+        angular:
+            MVVM,双向数据绑定、依赖注入、组件化、语义化标签 背景谷歌
+
+        vue:
+            MVVM、双向数据绑定、组件化、语义化标签 尤玉溪
+
+        React:
+            V  组件化、虚拟DOM、state状态、JSX能够语义化标签  facebook
+
+
+        vue传递属性:
+            <ppa num="1"></ppa>
+            <ppa :num1="parentnum"></ppa>
+
+            ppa:{
+                props:['num','num1']
+            }
+
+        react传递属性:
+            <PPa num="1">
+
+            PPa:
+                render(){
+                    this.props.num
+                }
+
+
+        vue传递方法:
+            <ppa @changefn="parentfn">
+
+            pp:{
+                methods:{
+                    add(){
+                        this.$emit('changefn');
+                    }
+                }
+            }    
+
+
+        react传递方法:
+            <PPa parentfn="this.add"/>
+            PPa:
+                render(){
+                    this.props.parentfn()
+                }
+
+    兄弟:
+            vue:
+                const eventBus = new Vue();
+
+                component1
+
+                import eventBus form './eventBus';
+                created(){
+                    eventBus.$on('haha',(color)=>{
+                        this.c = color;
+                    })
+                }
+
+
+                component2
+                mounted(){
+                    bb.onclick = function(){
+                        eventBus.$emit('haha','red')
+                    }
+                }
+
+    
+            react:
+                const ThemeContext = React.Context();
+
+                <ThemeContext.Provider value="1">
+                    <PPa></PPa>
+                </ThemeContext.Provider>
+
+
+                <PPa />
+                    class PPa extends Component{
+                        static contextType = ThemeContext;
+                        render(){
+                            console.log(this.context);
+                        }
+                    }
+
+                render(){
+                    return(
+                        <ThemeContext.Consumer>
+                            {
+                               (val)=>(
+                                   <div>{val}</div>
+                               )
+                            }
+                        </ThemeContext.Consumer>
+                    )
+                }
+
+
+            
+
+
+
+    浏览器渲染机制:
+            当浏览器接收到服务器传的页面字符串的时候，浏览器要先把（解析过程是从上到下同步解析）标签传成元素
+            '<div>' ->  DIVElement  形成一个DOM-Tree,为了能让用户提前看到页面中
+            元素，那么会按需加载DOM，碰到style会去解析css(CSS-Tree),然后CSSTree + DOMTree
+            等于renderTree（在这个过程中会计算最终元素显示在页面的体积、位置、是否显示）
+            最后把这个结果渲染到页面。
+
+            回流:
+                元素的位置或者大小发生变化、DOM增删改的时候，都会导致页面的局部甚至全局重新布局。
+
+            重绘:
+                非几何样式发生变化的时候（背景色、字体颜色）会重新绘制这个元素
+
+            回流一定会导致重绘，重绘不一定回流
+
+
+    
+    JSONP:
+        window.fn = function (data){
+            console.log(data);
+        }
+
+        const oS = document.createElement('script');
+        oS.src = 'xxx?callbcak=fn';
+        head.append(oS)
+
+        fn({})
+
+
+    今天是周几？
+        console.log(['周天',1,2,3,4,5,6][new Date().getDay()])
+    
+
+    去重:
+        [...new Set([1,1,1,2,3,4,4])];
+                
+    */
+
+    let arr = [1,1,1,2,3,4,4];
+    
+    // for(let i=0;i<arr.length;i++){
+    //     for(let j=i+1;j<arr.length;j++){
+    //         if(arr[i] == arr[j]){
+    //             arr.splice(j,1)
+    //             j--;
+    //         }
+    //     }
+    // }
+    // console.log(arr);
+
+    // let ary = [];
+    // for(let i=0;i<arr.length;i++){
+    //     if(!ary.includes(arr[i])){
+    //         ary.push(arr[i]);
+    //     }
+    // }
+    // console.log(ary);
+
+
+    // var test = (function fn(a){
+    //     this.a = a;
+    //     return function(b){
+    //         return this.a + b;   //window.a = 1
+    //     }
+    // }(function(a,b){    
+    //     return a;
+    // }(1,2)));
+
+    // console.log(test(4));
+
+
+
+
+
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
