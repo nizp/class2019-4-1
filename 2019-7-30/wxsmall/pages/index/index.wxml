@@ -1,0 +1,27 @@
+<!--index.wxml-->
+<!-- <view class="container">
+    <text>{{ num }}</text>
+    <button
+      bindtap="getval"
+      hover-class="active"
+    >按钮</button>
+     <icon type="success" size="40"/>
+     <progress percent="80" active="true"  show-info />
+    <input 
+      type='text' 
+      class="b"
+      bindinput="changeval"
+      placeholder="请输入内容"/>
+    
+</view> -->
+
+<form bindsubmit="formSubmit" >
+  <view>
+    <input class="b" name="aaa" placeholder="请输入内容" />
+    <input class="b" name="bbb" placeholder="请输入内容" />
+  <button form-type="submit">Submit</button>
+  </view>
+</form>
+
+
+

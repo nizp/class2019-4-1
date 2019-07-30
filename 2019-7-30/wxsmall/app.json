@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/haha/haha",
+    "pages/hd/hd"
+  ],
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text":"首页"
+    },{
+      "pagePath": "pages/haha/haha",
+      "text": "哈哈页"
+    },{
+      "pagePath": "pages/hd/hd",
+      "text": "HD页"
+    }]
+  },
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#999",
+    "navigationBarTitleText": "hahah",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json"
+}

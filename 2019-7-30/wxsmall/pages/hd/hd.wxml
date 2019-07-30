@@ -1,0 +1,22 @@
+<view>
+  <view>{{hd}}</view>
+
+  <view>
+    <checkbox 
+      bindtap="all" 
+      checked="{{checked}}" ></checkbox>
+      
+  </view>
+    
+
+
+  <view wx:for="{{ary}}" wx:for-index="i" wx:key="id">
+    <checkbox 
+      checked="{{item.checked}}"
+      bindtap="click"
+      data-index="{{i}}"
+    ></checkbox>
+    <text>{{item.txt}} {{i}}</text>
+  </view>
+
+</view>

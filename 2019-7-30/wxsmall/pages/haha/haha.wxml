@@ -1,0 +1,9 @@
+<!-- <view>
+  <view class="box" bindtouchmove="fn">
+    <view class="box2" catchtap='fn2'></view>
+    <view class="box2" bindlongpress='fn2'></view>
+    
+  </view>
+</view> -->
+
+<view class="box3"></view>
