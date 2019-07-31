@@ -1,0 +1,43 @@
+<view class="todo">
+  <input 
+    class="txt" 
+    type="text" 
+    value="{{val}}"
+    placeholder="添加新任务"
+    bindconfirm="changeval"
+  />
+
+  <view class="listbox">
+    <view 
+      class="list"
+      wx:for="{{ary2}}"  
+      wx:key="item.id"
+    >
+      <view class="l1">
+         <checkbox 
+            checked="{{item.checked}}"
+            bindtap="checkedFn"
+            data-id="{{item.id}}"
+          ></checkbox>
+         <text class="{{item.checked?'active':''}}">{{item.txt}}</text>
+      </view>
+      <icon  
+        data-id="{{item.id}}"
+        bindtap="remove"
+        type="cancel" class="remove"></icon >
+    </view>
+    
+  </view>
+
+  <view class="footer">
+      <view 
+        class="{{index==state?'selected':''}}" 
+        wx:for="{{selects}}"
+        bindtap="selectfn" 
+        data-index="{{index}}"
+        wx:key="{{index}}" 
+      >{{item}}</view>
+
+  </view>
+
+</view>

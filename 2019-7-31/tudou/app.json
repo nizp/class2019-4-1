@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/fanqie/fanqie"
+  ],
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "多选",
+      "iconPath": "./img/dx1.png",
+      "selectedIconPath": "./img/dx2.png"
+    },{
+      "pagePath": "pages/fanqie/fanqie",
+      "text": "番茄",
+      "iconPath": "./img/fq1.png",
+      "selectedIconPath": "./img/fq2.png"
+    }]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}
