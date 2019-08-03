@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+   // function fn(a,b,...cx){
+   //      // let arr = [];
+   //      // for(let i=0;i<arguments.length;i++){
+   //      //     if(i >= 2){
+   //      //         arr.push(arguments[i]);
+   //      //     }
+   //      // }
+   //     console.log(cx);
+   //  //    console.log( Array.from(arguments).slice(2))
+   // }
+   // fn(1,2,3,4,5)
+
+   // let obj = {
+   //    age:30
+   // }
+
+   // for(let attr in obj){
+   //    console.log(obj['name'].aaa)
+   // }
+
+
+   // console.log(["1", "2", "3"].map((string,index));
+
+   // var ary = [0,1,2];
+   // ary[10] = 10;
+
+   // console.log(ary); //empty为空
+   // console.log(ary.filter(function(x) {
+   //    console.log(x)
+   //    return x === undefined
+   // }));
+
+
+   // [typeof null, null instanceof Object].forEach(item=>console.log(item));
+
+
+
+   // function foo(x) {//x=2
+   //    var tmp = 3;
+   //    return function (y) {//10
+   //       alert(x + y + (++tmp));//16
+   //    }
+   // }
+   // var bar = foo(2); 
+   // bar(10);
+
+//    (function(){...})()
+//   (function(x){
+// 	  console.log(x);
+//   })(12345)
+
+   // let p = function(){
+   //    return new Promise((resolve, reject) => {
+   //       setTimeout(() => {
+   //          resolve('ok');
+   //          // console.log(111)
+   //       }, 2000);
+   //    });
+   // }
+
+
+   // async function fn(){
+   //    let sc = await p();
+   //    console.log(sc)
+   //    let a = 123;
+   //    console.log(a);
+   // } 
+   // fn()
+
+
+   var n = 2; //window.n = 8   
+   var obj = {
+         n: 3,
+         fn: (function (n) { //闭包  5  6 7 
+            //this为window
+            n *= 2;
+            this.n += 2;  
+            var n = 5;
+            return function (m) {//3  3
+               this.n *= 2;  //obj.n = 6 
+               console.log(m + (++n));  //3+6   9    3+7  10
+            }
+         })(n)//2   8
+   }
+
+   var fn = obj.fn;
+
+   fn(3);//this为window
+
+   obj.fn(3);
+
+   console.log(n, obj.n);//8,6
+
+
+
+   
+
+
+
+</script>
+</body>
+</html>
